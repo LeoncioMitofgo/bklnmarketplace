@@ -1,0 +1,41 @@
+# Dependencias
+node_modules/
+.pnpm-store/
+.pnp
+.pnp.*
+
+# Certificados y claves
+*.pem
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Build y tests
+/build
+/coverage
+/playwright-report/
+/test-results/
+*.tsbuildinfo
+
+# Variables de entorno: nunca al repo (la plantilla .env.example sí)
+.env
+.env.*
+!.env.example
+
+# Vercel
+.vercel
+
+# Supabase CLI
+supabase/.branches
+supabase/.temp
+supabase/.env
+
+# Sistema y logs
+.DS_Store
+Thumbs.db
+*.log
+
+# Claude Code: ajustes locales de cada máquina
+.claude/settings.local.json

@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+/*
+ * Tokens de la identidad "Atlántico" (docs/IDENTIDAD.md, D-031).
+ * La paleta por defecto de Tailwind se desactiva: en los componentes solo existen estos colores.
+ */
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-primary: #0b4f8a;
+  --color-primary-hover: #083a66;
+  --color-accent: #f2662b; /* Publicar y Premium. Siempre con texto oscuro (text-text). */
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
+  --color-bg: #ffffff;
+  --color-surface: #f3f6fa;
+  --color-border: #d8dee6;
+  --color-placeholder: #e3e9f1;
+  --color-success: #15803d;
+  --color-danger: #b91c1c;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --radius-control: 12px;
+  --radius-card: 14px;
+}
+
+/* Plus Jakarta Sans 800 solo para títulos y precios (D-032); la carga next/font en el layout. */
+@theme inline {
+  --font-display: var(--font-jakarta), system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-bg text-text font-sans antialiased;
+  }
+
+  h1,
+  h2 {
+    @apply font-display;
+  }
+
+  /* 16 px mínimo en campos: evita el zoom automático de iOS (IDENTIDAD §4). */
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1em);
+  }
+}

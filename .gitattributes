@@ -1,0 +1,7 @@
+# Saltos de línea LF en todo el repo (Biome y Vercel los esperan), aunque se trabaje en Windows.
+* text=auto eol=lf
+*.ico binary
+*.png binary
+*.jpg binary
+*.webp binary
+*.woff2 binary

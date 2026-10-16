@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "siteName": "BKLN Marketplace",
+    "title": "BKLN Marketplace · Compra y vende en Guinea Ecuatorial",
+    "description": "Anuncios de todo tipo en Guinea Ecuatorial: vehículos, inmuebles, móviles, hogar, moda y servicios. Habla con el vendedor sin dar tu número."
+  },
+  "brand": {
+    "logoLabel": "BKLN Marketplace"
+  },
+  "price": {
+    "perMonth": "{price}/mes",
+    "negotiable": "Negociable",
+    "onRequest": "A consultar"
+  },
+  "comingSoon": {
+    "eyebrow": "Muy pronto",
+    "title": "Compra y vende en Guinea Ecuatorial",
+    "body": "Estamos preparando BKLN Marketplace: anuncios de todo tipo, chat con los vendedores sin dar tu número y tiendas para negocios.",
+    "cities": "Malabo, Bata y todo el país",
+    "footer": "Un proyecto de BKLN Software & Systems · Malabo"
+  }
+}

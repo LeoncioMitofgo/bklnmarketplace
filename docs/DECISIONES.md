@@ -1,0 +1,65 @@
+# Registro de decisiones — BKLN Marketplace
+
+Formato: `D-NNN · fecha · decisión · motivo`. Cuando se resuelva una pendiente, se pasa a "Tomadas" con un número nuevo.
+Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enlaza la nueva.
+
+---
+
+## Pendientes
+
+_Ninguna decisión de negocio pendiente (2026-10-16)._
+
+## Tomadas
+
+- **D-001 · 2026-10-16** · Producto: clasificados **generalista tipo Jiji** (C2C + B2C) con perfiles de vendedor tipo Vinted. **Web mobile first**, sin app nativa por ahora. · Lo pide el mercado de GE; es más rápido validar con una web.
+- **D-002 · 2026-10-16** · **Pagos y entregas fuera de la plataforma** en v1. La arquitectura no debe impedir pagos in-app en el futuro. · Reduce complejidad y requisitos regulatorios en la validación.
+- **D-003 · 2026-10-16** · **Una sola cuenta** para comprar y vender. · Es lo que hacen Jiji y Vinted; menos fricción.
+- **D-004 · 2026-10-16** · **Catálogo 100 % público sin cuenta**; chatear, publicar y favoritos requieren cuenta, y tras el login se vuelve al punto de origen. · Evita spam y permite notificar las respuestas.
+- **D-005 · 2026-10-16** · Contacto: **chat interno siempre + WhatsApp/llamar opcional por vendedor**, visible solo con sesión. El teléfono nunca es público. · Equilibra el control de la plataforma con la realidad de un mercado que vive en WhatsApp.
+- **D-006 · 2026-10-16** · **Premium = plan único mensual** para vendedores. Pago fuera de la app y **activación manual por admin** con fecha de fin. · Es lo más simple para validar; los niveles y los destacados sueltos se evaluarán más adelante.
+- **D-007 · 2026-10-16** · Mercado inicial **solo Guinea Ecuatorial**, **XAF**, **español** con i18n preparado para francés. · Foco.
+- **D-008 · 2026-10-16** · **Moderación a posteriori**: publicación inmediata + reportes + auto‑ocultado por umbral + contenido prohibido. · La revisión previa frena la publicación y no escala.
+- **D-009 · 2026-10-16** · **Empleo fuera del MVP** (fase 2). · Es otro tipo de producto (salario, candidaturas).
+- **D-010 · 2026-10-16** · Convención de idioma: UI, documentación y commits en **español**; código en **inglés**; URLs públicas en español. · Mercado hispanohablante y código estándar.
+- **D-011 · 2026-10-16** · El stack se decide **después** de cerrar el alcance. · Petición explícita del cliente.
+- **D-012 · 2026-10-16** · **Registro**: nombre visible, nombre de usuario, teléfono, email y contraseña, todos obligatorios. **Login**: usuario, email o teléfono + contraseña. Sin SMS en el MVP: teléfono "no verificado"; email confirmado obligatorio para publicar; recuperación de contraseña por email. Reglas en ALCANCE §5.7. · El teléfono es el identificador preferido en GE; el email es el canal gratuito de recuperación y notificaciones; se evita el coste de SMS.
+- **D-013 · 2026-10-16** · Valores iniciales validados: Normal 10 anuncios / 6 fotos / 30 días; Premium 200 / 15 / 60 días; auto‑ocultado a los 3 reportes. Configurables. · Validado por el cliente.
+- **D-014 · 2026-10-16** · Listas iniciales de ciudades (ALCANCE §5.6) y categorías (§6) aceptadas; se editan desde el admin. · Validado por el cliente.
+- **D-015 · 2026-10-16** · **Stack**: Next.js (App Router) + TypeScript, Tailwind + shadcn/ui, Supabase (Postgres + RLS, Auth, Realtime, Storage, pg_cron), Resend, next-intl, Zod, Sentry, Vercel Web Analytics, Vitest + Playwright, pnpm + Biome. Sin ORM ni monorepo. Detalle en [ARQUITECTURA.md](ARQUITECTURA.md). · Preferencia de BKLN validada contra los requisitos: SSR ligero, tiempo real, push, imágenes y coste.
+- **D-016 · 2026-10-16** · **Región única: Londres** (Supabase `eu-west-2`, funciones de Vercel `lhr1`). · Medido desde Malabo: Londres 135 ms y la más estable; Ciudad del Cabo 291 ms porque el tráfico sale por Europa.
+- **D-017 · 2026-10-16** · **Hosting: Vercel.** Hobby en desarrollo y Pro al lanzar. · Integración nativa con Next.js y URLs de prueba por rama; Hobby no permite uso comercial.
+- **D-018 · 2026-10-16** · **Entornos:** proyecto Supabase **dev en la nube** (Free, Londres), que también usan las previews de Vercel, y proyecto **prod** aparte (Pro). Sin Docker local; migraciones SQL escritas a mano y aplicadas con la CLI. · Elección del cliente frente a Supabase local con Docker.
+- **D-019 · 2026-10-16** · **Imágenes:** variantes WebP (grande ≤ 1600 px + miniatura ≤ 480 px) generadas en el móvil y servidas directamente desde Storage, sin optimizador en servidor. · Ahorra datos y coste, y elimina el EXIF.
+- **D-020 · 2026-10-16** · **Verificación de email propia** (confirmación de Supabase Auth desactivada + tokens + Resend). · Supabase solo permite bloquear el login hasta confirmar o no confirmar nada; D-012 pide cuenta usable al momento y email confirmado para publicar.
+- ~~**D-021 · 2026-10-16** · Precio de Premium: 5.000 FCFA al mes; 33.000 FCFA al año; otros periodos a precio mensual.~~ Sustituida por D-022.
+- **D-022 · 2026-10-16** · **Precios de Premium** con descuento proporcional a la duración (45 % el año): 1 mes 5.000 FCFA · 3 meses 13.300 FCFA (11,25 %) · 6 meses 23.250 FCFA (22,5 %) · 12 meses 33.000 FCFA (45 %). Van en la configuración de planes. · Decisión del cliente; el precio de 3 meses (13.312,5) se redondea a la centena.
+- **D-023 · 2026-10-16** · **Pago de Premium en el MVP: en efectivo, en la oficina de BKLN.** El admin registra el cobro con número de recibo. La transferencia bancaria y Rosa Money (mobile money) se integrarán en la app más adelante (fase 3). · Decisión del cliente. El registro de activaciones guarda el método, así que se podrán admitir los demás sin rediseñar.
+- **D-024 · 2026-10-16** · El proyecto Supabase **dev** queda en **Irlanda (`eu-west-1`)**; **producción irá en Londres (`eu-west-2`)**, como dice D-016. · Segunda medición (20 muestras): medianas parecidas (Irlanda 162 ms, Londres 151 ms), pero Irlanda tiene picos mucho peores (el 10 % más lento pasa de 369 ms, frente a 167 ms en Londres). Para desarrollar da igual; en producción manda la estabilidad.
+- **D-025 · 2026-10-16** · **Pagos de Premium (amplía D-023):** en Malabo, efectivo en la oficina (BKLN Software & Systems, Banapa; de lunes a viernes de 8:00 a 16:00 y sábados de 11:00 a 14:00); fuera de Malabo, envío por agencia de envío de dinero a nombre de **BKLN Marketplace**, con el código compartido por WhatsApp al +240 555 220 846. Si una agencia exige un nombre legal o un documento distinto, se cambia en la configuración. El admin lo comprueba y activa; cada referencia es única. Estos datos van en la configuración. · Decisión del cliente, para cubrir a los vendedores de fuera de Malabo sin esperar a la fase 3.
+- **D-026 · 2026-10-16** · **Nombre: BKLN Marketplace. Dominio: `bklnmarketplace.com`** (registrado en Hostinger; los DNS se gestionan allí). · Decisión del cliente.
+- **D-027 · 2026-10-16** · **Modelo de datos del MVP** en [MODELO-DATOS.md](MODELO-DATOS.md):
+  - Datos públicos y privados del usuario en tablas separadas.
+  - El estado del anuncio solo cambia por RPC.
+  - Premium se calcula con `premium_until`.
+  - Las reglas críticas se aplican en la base de datos.
+  - La configuración vive en `plans`, `plan_prices` y `app_settings`.
+  · Pensado para que RLS proteja el teléfono y para que las reglas no dependan de la interfaz.
+- **D-028 · 2026-10-16** · **Inmuebles con subcategorías separadas** para venta y alquiler, como Jiji, en lugar del atributo "Operación". Modifica D-014. · Es más simple de filtrar y el "/mes" lo decide la subcategoría. Decisión del cliente.
+- **D-029 · 2026-10-16** · **Mínimo una foto para publicar** en todas las categorías. · Los anuncios sin foto apenas reciben mensajes. Decisión del cliente.
+- **D-030 · 2026-10-16** · **Borrar la cuenta conserva, anonimizados, los mensajes enviados a otros** ("Usuario eliminado"), además de los cobros de Premium. Todo lo demás se borra. · Así la otra persona conserva su historial y borrar la cuenta no borra las pruebas de una estafa. Decisión del cliente.
+- **D-031 · 2026-10-16** · **Identidad visual: dirección A "Atlántico"**: azul `#0B4F8A` + naranja `#F2662B` (siempre con texto oscuro) y un símbolo que mezcla burbuja de chat y etiqueta. Detalle en [IDENTIDAD.md](IDENTIDAD.md). · Transmite confianza, clave con el pago fuera de la app, y se distingue de Jiji, que es verde. Decisión del cliente entre tres direcciones.
+- **D-032 · 2026-10-16** · **Tipografía:** Plus Jakarta Sans 800 **solo en títulos y precios**, alojada en nuestro servidor y en un único peso; el resto, con la fuente del sistema. · Unos 20–25 KB una sola vez a cambio de personalidad. Decisión del cliente.
+- **D-033 · 2026-10-16** · **Wireframes v1** (13 pantallas, en el lienzo):
+  - Publicar en 4 pasos.
+  - "Ver más" en lugar de scroll infinito.
+  - El admin se puede usar desde el móvil.
+
+  · Ahorra datos y simplifica. Quedan abiertos a comentarios en el lienzo.
+- **D-034 · 2026-10-16** · **Next.js 16 con Cache Components y Partial Prefetching:**
+  - Las páginas públicas se sirven como una estructura estática desde la CDN.
+  - Lo que depende de la sesión va dentro de un `<Suspense>`.
+  - La sesión se refresca en `src/proxy.ts`, y solo si hay cookies de Supabase.
+
+  · Es el mecanismo de caché por etiquetas de Next 16 y reduce viajes de red (ARQUITECTURA §1).
+- **D-035 · 2026-10-16** · **Los datos de referencia van en una migración, no en `seed.sql`:** planes, precios, ajustes, ciudades, categorías y atributos. `seed.sql` queda para datos de prueba. · Producción también los necesita.
+- **D-036 · 2026-10-16** · **Mientras no exista el proyecto Supabase de producción, el despliegue de producción de Vercel apunta al proyecto dev.** Antes del lanzamiento hay que cambiar sus variables. · De momento solo se publica una página estática, sin datos reales.
