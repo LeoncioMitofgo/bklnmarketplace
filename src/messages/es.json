@@ -20,7 +20,8 @@
     "search": "Buscar",
     "publish": "Publicar",
     "messages": "Mensajes",
-    "profile": "Perfil"
+    "profile": "Perfil",
+    "messagesUnread": "Mensajes, {count, plural, one {# sin leer} other {# sin leer}}"
   },
   "price": {
     "perMonth": "{price}/mes",
@@ -144,7 +145,12 @@
     "phone": "Teléfono",
     "phonePrivate": "Solo lo ves tú.",
     "signOut": "Cerrar sesión",
-    "favorites": "Mis favoritos"
+    "favorites": "Mis favoritos",
+    "whatsappTitle": "Botón de WhatsApp en tus anuncios",
+    "whatsappOn": "Activado: quien haya entrado en su cuenta ve un botón de WhatsApp en tus anuncios. Tu número no aparece en la página; solo se usa al pulsar el botón.",
+    "whatsappOff": "Desactivado: solo te pueden escribir por el chat de BKLN. Si lo activas, quien haya entrado en su cuenta podrá escribirte también por WhatsApp.",
+    "whatsappEnable": "Activar el botón de WhatsApp",
+    "whatsappDisable": "Desactivar el botón de WhatsApp"
   },
   "profile": {
     "loading": "Cargando perfil…",
@@ -488,5 +494,102 @@
     "title": "No se ha podido cargar",
     "body": "Puede que se haya cortado la conexión. Comprueba tu red y vuelve a intentarlo.",
     "retry": "Reintentar"
+  },
+  "chat": {
+    "metaTitle": "Mensajes",
+    "deletedUser": "Usuario eliminado",
+    "deletedListing": "Anuncio eliminado",
+    "unavailableListing": "Anuncio no disponible",
+    "listingStatus": {
+      "active": "Disponible",
+      "sold": "Vendido",
+      "paused": "Pausado",
+      "expired": "Caducado",
+      "draft": "No publicado",
+      "under_review": "No disponible",
+      "blocked": "No disponible",
+      "deleted": "Anuncio eliminado"
+    },
+    "whatsappText": "Hola, te escribo por tu anuncio en BKLN Marketplace: {title} {url}",
+    "contact": {
+      "chat": "Chatear",
+      "whatsapp": "WhatsApp",
+      "opening": "Abriendo…",
+      "edit": "Editar mi anuncio"
+    },
+    "inbox": {
+      "title": "Mensajes",
+      "loading": "Cargando tus mensajes…",
+      "tabs": {
+        "todos": "Todos",
+        "comprando": "Comprando",
+        "vendiendo": "Vendiendo"
+      },
+      "empty": {
+        "todos": "Aún no tienes mensajes. Cuando escribas a un vendedor o alguien te escriba por un anuncio, la conversación aparecerá aquí.",
+        "comprando": "Todavía no has escrito a ningún vendedor.",
+        "vendiendo": "Todavía nadie te ha escrito por tus anuncios."
+      },
+      "explore": "Ver anuncios",
+      "you": "Tú: {text}",
+      "photo": "📷 Foto",
+      "yourListing": "Tu anuncio · {title}",
+      "yesterday": "Ayer",
+      "unread": "{count, plural, one {# mensaje sin leer} other {# mensajes sin leer}}"
+    },
+    "conversation": {
+      "back": "Volver a mensajes",
+      "menu": "Más opciones",
+      "viewProfile": "Ver perfil",
+      "block": "Bloquear a {name}",
+      "unblock": "Desbloquear a {name}",
+      "responds": "Suele responder en {time}",
+      "responseTime": {
+        "minutes": "{count} min",
+        "hours": "{count} h",
+        "days": "{count, plural, one {# día} other {# días}}"
+      },
+      "older": "Ver mensajes anteriores",
+      "today": "Hoy",
+      "yesterday": "Ayer",
+      "seen": "Visto",
+      "sending": "Enviando…",
+      "retry": "Reintentar",
+      "photoAlt": "Foto de la conversación",
+      "uploading": "Subiendo la foto… {percent} %",
+      "addPhoto": "Enviar una foto",
+      "placeholder": "Escribe un mensaje",
+      "send": "Enviar",
+      "safety": "Por tu seguridad: no pagues nada por adelantado, queda en un lugar público y revisa el producto antes de pagar.",
+      "blockedByMe": "Has bloqueado a esta persona. Desbloquéala desde el menú de arriba para volver a escribiros.",
+      "blockedMe": "No puedes responder a esta conversación.",
+      "recipientDeleted": "Esta persona ha borrado su cuenta.",
+      "start": "Escribe tu primer mensaje al vendedor o elige una de estas preguntas:",
+      "quick": {
+        "available": "Hola, ¿sigue disponible?",
+        "price": "¿Cuál es el último precio?",
+        "where": "¿Dónde se puede ver?"
+      },
+      "ownListing": "Este anuncio es tuyo. Cuando alguien te escriba, lo verás en Mensajes.",
+      "goToMine": "Ir a Mis anuncios",
+      "notAvailable": "Este anuncio ya no está disponible."
+    },
+    "errors": {
+      "not_authenticated": "Tienes que entrar en tu cuenta.",
+      "account_restricted": "Tu cuenta está restringida y no puede enviar mensajes ahora mismo.",
+      "listing_not_available": "Este anuncio ya no está disponible.",
+      "own_listing": "No puedes escribirte en tu propio anuncio.",
+      "user_blocked": "No podéis escribiros: hay un bloqueo entre vosotros.",
+      "conversation_not_found": "Esta conversación no existe.",
+      "recipient_deleted": "Esta persona ha borrado su cuenta.",
+      "message_empty": "Escribe un mensaje.",
+      "message_too_long": "El mensaje es demasiado largo: como mucho 2000 caracteres.",
+      "image_invalid": "La foto no se ha subido bien. Vuelve a intentarlo.",
+      "photo_unreadable": "No hemos podido leer esta foto. Prueba con otra.",
+      "chat_rate_limited": "Vas muy rápido. Espera un momento y vuelve a intentarlo.",
+      "whatsapp_unavailable": "Este vendedor no tiene WhatsApp disponible.",
+      "offline": "No hay conexión. Tu mensaje sigue aquí: vuelve a intentarlo cuando tengas red.",
+      "unexpected": "Algo ha fallado. Inténtalo de nuevo."
+    }
   }
 }

@@ -4,6 +4,7 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { ChevronRightIcon, ClockIcon, EyeIcon, HeartIcon, MapPinIcon } from "@/components/icons";
+import { ContactBar } from "@/components/listings/contact-bar";
 import { FavoriteButton } from "@/components/listings/favorite-button";
 import { Gallery } from "@/components/listings/gallery";
 import { ListingCard } from "@/components/listings/listing-card";
@@ -23,8 +24,8 @@ import { priceLabel } from "@/lib/listings/price";
 import { getPublicListing, getSimilarListings, type PublicListing } from "@/lib/listings/public";
 import { siteUrl } from "@/lib/site";
 
-// Ficha de anuncio (wireframe 04). Pública y cacheada; lo que depende de la sesión (favorito)
-// va en su propio <Suspense>. El chat y el botón de WhatsApp llegan en la fase 1.4.
+// Ficha de anuncio (wireframe 04), a pantalla completa con la barra de contacto abajo.
+// Pública y cacheada; lo que depende de la sesión (favorito, WhatsApp) va en su propio <Suspense>.
 
 const SIMILAR_LIMIT = 6;
 const overlayButton =
@@ -79,7 +80,7 @@ export async function generateMetadata({
 
 export default function ListingPage({ params }: PageProps<"/anuncio/[slug]">) {
   return (
-    <main className="flex flex-col pb-6">
+    <main className="flex flex-col pb-28">
       <Suspense fallback={<ListingSkeleton />}>
         <ListingContent params={params} />
       </Suspense>
@@ -248,7 +249,12 @@ async function ListingContent({ params }: Pick<PageProps<"/anuncio/[slug]">, "pa
         ) : null}
       </div>
 
-      {listing.status === "active" ? <ViewTracker listingId={listing.id} /> : null}
+      {listing.status === "active" ? (
+        <>
+          <ViewTracker listingId={listing.id} />
+          <ContactBar listingId={listing.id} code={listing.code} sellerId={listing.user_id} />
+        </>
+      ) : null}
       <ProductJsonLd listing={listing} url={url} categoryName={category?.name} />
     </>
   );

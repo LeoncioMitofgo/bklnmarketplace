@@ -32,6 +32,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export const viewport: Viewport = {
   themeColor: "#0b4f8a", // --color-primary (IDENTIDAD §3)
+  // Con el teclado abierto, la página se encoge: la caja de texto del chat queda a la vista.
+  interactiveWidget: "resizes-content",
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {

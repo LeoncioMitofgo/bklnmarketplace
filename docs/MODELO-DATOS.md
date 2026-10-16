@@ -219,8 +219,8 @@ Lleva también `is_active boolean`, para retirar una modalidad sin borrarla.
 | `id` | `uuid` PK | |
 | `listing_id` | `uuid` null | → `listings`, `on delete set null` |
 | `buyer_id`, `seller_id` | `uuid` null | → `profiles`, `on delete set null` (§11). Deben ser distintos |
-| `last_message_at` | `timestamptz` | Ordena la bandeja |
-| `last_message_preview` | `text` | Primeros 100 caracteres, o "📷 Foto" |
+| `last_message_at` | `timestamptz` null | Ordena la bandeja. Null hasta el primer mensaje: la bandeja no muestra conversaciones vacías |
+| `last_message_preview` | `text` null | Primeros 100 caracteres; null si el último mensaje fue solo una foto (la interfaz pone "📷 Foto") |
 | `last_sender_id` | `uuid` null | |
 | `buyer_last_read_at`, `seller_last_read_at` | `timestamptz` null | No leídos = mensajes del otro posteriores a mi última lectura |
 | `created_at` | `timestamptz` | |
@@ -358,9 +358,11 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
 
 ### 5.5 Mensajería
 - **`start_conversation(listing_id)`**: devuelve la conversación existente o crea una nueva. Comprueba que el anuncio está activo, que quien escribe no es el vendedor, que su cuenta está activa, que no hay bloqueo en ninguno de los dos sentidos y el límite de conversaciones nuevas por hora (más estricto para cuentas nuevas).
-- **Enviar un mensaje** es un `insert` directo con RLS: tiene que ser participante, con la cuenta activa y sin bloqueo entre los dos. Un trigger actualiza `last_message_*` y emite el evento de Realtime (§8).
+- **`send_message(conversation_id, body, image_path)`**: los usuarios no insertan en `messages` directamente (D-048). Comprueba que quien escribe participa, que la otra persona no ha borrado la cuenta, que no hay bloqueo, el tamaño del texto, que la foto está en la carpeta de la conversación y existe en Storage, y el límite `messages_per_minute`. Un trigger actualiza `last_message_*` (y la lectura de quien envía) y emite los eventos de Realtime (§8).
 - **`mark_conversation_read(id)`** y **`unread_count()`** sirven para los contadores de no leídos.
-- **`get_whatsapp_contact(listing_id)`**: devuelve el teléfono del vendedor solo si quien pregunta tiene sesión y la cuenta activa, el vendedor tiene `show_whatsapp`, no hay bloqueo y no ha superado el límite diario de consultas, para evitar que se recolecten teléfonos.
+- **`my_conversations(role, conversation_id, limit)`**: la bandeja, o una conversación, con la otra persona, el anuncio y su estado aunque ya no sea público, los no leídos, cuándo leyó la otra persona y los bloqueos. Es `security definer` y solo devuelve conversaciones propias.
+- **`listing_whatsapp_enabled(listing_id)`** dice si mostrar el botón. **`whatsapp_contact(listing_id)`** devuelve el teléfono del vendedor solo al pulsarlo: hace falta sesión y la cuenta activa, que el vendedor tenga `show_whatsapp` y que no haya bloqueo, y hay un límite diario (`whatsapp_reveals_per_day`) para evitar que se recolecten teléfonos (D-050).
+- Los límites de ritmo del chat (`conversations_per_hour`, más estricto en cuentas nuevas, y `messages_per_minute`) están en `app_settings.rate_limits`.
 
 ### 5.6 Denuncias
 - Trigger `after insert` en `reports`: si se alcanza el umbral, el anuncio pasa a `under_review`.
@@ -411,9 +413,9 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
 
 ## 8. Realtime
 
-- Un trigger en `messages` emite cada mensaje a dos canales privados: `conversation:{id}` (la conversación abierta) y `user:{recipient_id}` (bandeja y no leídos).
-- Las políticas de `realtime.messages` solo dejan suscribirse a las conversaciones propias y a `user:{auth.uid()}`.
-- Un **Database Webhook** sobre `messages` llama a `/api/webhooks/new-message` para enviar la notificación push.
+- Un trigger en `messages` emite con `realtime.send` (privado) el mensaje a `conversation:{id}` (evento `message`) y un aviso a `user:{destinatario}` (evento `inbox`). `mark_conversation_read` emite `read` en `conversation:{id}`.
+- La política de `realtime.messages` (`extension = broadcast`) solo deja recibir de las conversaciones propias y de `user:{auth.uid()}`. No hay política de insert: los clientes no pueden emitir.
+- La notificación push la enviará la Server Action que envía el mensaje (pendiente, segunda parte de 1.4).
 
 ## 9. Índices principales
 

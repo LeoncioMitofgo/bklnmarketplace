@@ -38,6 +38,39 @@ export type Database = {
         }
         Relationships: []
       }
+      blocks: {
+        Row: {
+          blocked_id: string
+          blocker_id: string
+          created_at: string
+        }
+        Insert: {
+          blocked_id: string
+          blocker_id?: string
+          created_at?: string
+        }
+        Update: {
+          blocked_id?: string
+          blocker_id?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blocks_blocked_id_fkey"
+            columns: ["blocked_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blocks_blocker_id_fkey"
+            columns: ["blocker_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       categories: {
         Row: {
           has_condition: boolean
@@ -155,6 +188,81 @@ export type Database = {
           sort_order?: number
         }
         Relationships: []
+      }
+      conversations: {
+        Row: {
+          buyer_id: string | null
+          buyer_last_read_at: string | null
+          created_at: string
+          id: string
+          last_message_at: string | null
+          last_message_preview: string | null
+          last_sender_id: string | null
+          listing_id: string | null
+          seller_id: string | null
+          seller_last_read_at: string | null
+        }
+        Insert: {
+          buyer_id?: string | null
+          buyer_last_read_at?: string | null
+          created_at?: string
+          id?: string
+          last_message_at?: string | null
+          last_message_preview?: string | null
+          last_sender_id?: string | null
+          listing_id?: string | null
+          seller_id?: string | null
+          seller_last_read_at?: string | null
+        }
+        Update: {
+          buyer_id?: string | null
+          buyer_last_read_at?: string | null
+          created_at?: string
+          id?: string
+          last_message_at?: string | null
+          last_message_preview?: string | null
+          last_sender_id?: string | null
+          listing_id?: string | null
+          seller_id?: string | null
+          seller_last_read_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversations_buyer_id_fkey"
+            columns: ["buyer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "conversations_last_sender_id_fkey"
+            columns: ["last_sender_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "conversations_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listing_cards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "conversations_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "conversations_seller_id_fkey"
+            columns: ["seller_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       email_verification_tokens: {
         Row: {
@@ -383,6 +491,48 @@ export type Database = {
           {
             foreignKeyName: "listings_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          body: string | null
+          conversation_id: string
+          created_at: string
+          id: number
+          image_path: string | null
+          sender_id: string | null
+        }
+        Insert: {
+          body?: string | null
+          conversation_id: string
+          created_at?: string
+          id?: never
+          image_path?: string | null
+          sender_id?: string | null
+        }
+        Update: {
+          body?: string | null
+          conversation_id?: string
+          created_at?: string
+          id?: never
+          image_path?: string | null
+          sender_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "messages_sender_id_fkey"
+            columns: ["sender_id"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
@@ -668,10 +818,21 @@ export type Database = {
       }
     }
     Functions: {
+      chat_assert_can_write: { Args: { p_user_id: string }; Returns: undefined }
+      chat_rate_limit: {
+        Args: {
+          p_key: string
+          p_scope: string
+          p_user_id: string
+          p_window_seconds: number
+        }
+        Returns: undefined
+      }
       check_rate_limit: {
         Args: { p_key: string; p_max: number; p_window_seconds: number }
         Returns: boolean
       }
+      compute_response_times: { Args: never; Returns: undefined }
       consume_email_verification_token: {
         Args: { p_token_hash: string }
         Returns: string
@@ -702,6 +863,10 @@ export type Database = {
       find_banned_term: { Args: { p_text: string }; Returns: string }
       generate_listing_code: { Args: never; Returns: string }
       is_admin: { Args: never; Returns: boolean }
+      is_blocked_between: {
+        Args: { p_a: string; p_b: string }
+        Returns: boolean
+      }
       is_premium: { Args: { p_user_id: string }; Returns: boolean }
       is_reserved_username: { Args: { p_username: string }; Returns: boolean }
       listing_assert_can_activate: {
@@ -743,7 +908,44 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      listing_whatsapp_enabled: {
+        Args: { p_listing_id: string }
+        Returns: boolean
+      }
+      mark_conversation_read: {
+        Args: { p_conversation_id: string }
+        Returns: undefined
+      }
       mark_listing_sold: { Args: { p_listing_id: string }; Returns: undefined }
+      my_conversations: {
+        Args: { p_conversation_id?: string; p_limit?: number; p_role?: string }
+        Returns: {
+          blocked_by_me: boolean
+          blocked_me: boolean
+          cover_format: string
+          cover_path: string
+          id: string
+          last_message_at: string
+          last_message_preview: string
+          last_sender_is_me: boolean
+          listing_category_id: number
+          listing_city_id: number
+          listing_code: string
+          listing_id: string
+          listing_is_negotiable: boolean
+          listing_price_xaf: number
+          listing_status: Database["public"]["Enums"]["listing_status"]
+          listing_title: string
+          other_display_name: string
+          other_id: string
+          other_is_premium: boolean
+          other_last_read_at: string
+          other_response_time_minutes: number
+          other_username: string
+          role: string
+          unread_count: number
+        }[]
+      }
       my_favorites: {
         Args: { p_limit?: number }
         Returns: {
@@ -802,7 +1004,31 @@ export type Database = {
           total_count: number
         }[]
       }
+      send_message: {
+        Args: {
+          p_body?: string
+          p_conversation_id: string
+          p_image_path?: string
+        }
+        Returns: {
+          body: string | null
+          conversation_id: string
+          created_at: string
+          id: number
+          image_path: string | null
+          sender_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "messages"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       set_listing_cover: { Args: { p_image_id: string }; Returns: undefined }
+      start_conversation: { Args: { p_listing_id: string }; Returns: string }
+      unread_count: { Args: never; Returns: number }
+      whatsapp_contact: { Args: { p_listing_id: string }; Returns: string }
     }
     Enums: {
       account_status: "active" | "suspended" | "banned"

@@ -109,5 +109,5 @@ Reglas:
 **Diferencias con los wireframes al implementar la 1.3 (catálogo):**
 - 01 Inicio: "Recientes" de todo el país, sin selector de ciudad (D-044).
 - 02 y 03: el botón de la hoja de filtros dice "Ver resultados", sin el número (D-045). El total de resultados aparece encima de la lista.
-- 04 Ficha: el corazón de favorito y el botón de compartir van sobre la foto. La barra fija con WhatsApp y Chatear y el enlace "Denunciar" llegan con 1.4 y 1.5.
+- 04 Ficha: el corazón de favorito y el botón de compartir van sobre la foto. La barra fija con WhatsApp y Chatear llegó con 1.4 (la ficha va sin barra inferior, D-049); el enlace "Denunciar" llega con 1.5.
 - Tarjetas: sin corazón de favorito en los listados (D-042).

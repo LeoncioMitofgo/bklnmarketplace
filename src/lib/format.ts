@@ -64,3 +64,69 @@ export function responseTimeParts(minutes: number): {
   if (minutes < 60 * 24) return { unit: "hours", count: Math.round(minutes / 60) };
   return { unit: "days", count: Math.round(minutes / (60 * 24)) };
 }
+
+// ─── Fechas del chat (hora de Malabo) ────────────────────────────────────────
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+const clockFormatter = new Intl.DateTimeFormat("es-ES", {
+  timeZone: TIME_ZONE,
+  hour: "2-digit",
+  minute: "2-digit",
+  hourCycle: "h23",
+});
+const dayKeyFormatter = new Intl.DateTimeFormat("en-CA", {
+  timeZone: TIME_ZONE,
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+const weekdayFormatter = new Intl.DateTimeFormat("es-ES", {
+  timeZone: TIME_ZONE,
+  weekday: "short",
+});
+const shortDateFormatter = new Intl.DateTimeFormat("es-ES", {
+  timeZone: TIME_ZONE,
+  day: "numeric",
+  month: "short",
+});
+const longDateFormatter = new Intl.DateTimeFormat("es-ES", {
+  timeZone: TIME_ZONE,
+  day: "numeric",
+  month: "long",
+});
+
+/** "10:42" */
+export function formatClock(date: Date | string): string {
+  return clockFormatter.format(new Date(date));
+}
+
+/** Día de calendario en Malabo, "2026-10-17": sirve para agrupar mensajes por día. */
+export function dayKey(date: Date | string): string {
+  return dayKeyFormatter.format(new Date(date));
+}
+
+/** Días de calendario entre `date` y `now` en Malabo: 0 hoy, 1 ayer… */
+export function calendarDaysAgo(date: Date | string, now: Date | number): number {
+  return Math.round((Date.parse(dayKey(new Date(now))) - Date.parse(dayKey(date))) / DAY_MS);
+}
+
+/**
+ * Hora de la bandeja (wireframe 10): hoy "10:42", ayer (lo traduce quien la pinta),
+ * esta semana "lun", antes "12 oct".
+ */
+export function inboxTime(
+  date: Date | string,
+  now: Date | number,
+): { kind: "today" | "yesterday" | "week" | "older"; text: string } {
+  const days = calendarDaysAgo(date, now);
+  if (days <= 0) return { kind: "today", text: formatClock(date) };
+  if (days === 1) return { kind: "yesterday", text: "" };
+  if (days < 7)
+    return { kind: "week", text: weekdayFormatter.format(new Date(date)).replace(".", "") };
+  return { kind: "older", text: shortDateFormatter.format(new Date(date)).replace(".", "") };
+}
+
+/** Separador de día del chat: "17 de octubre" (hoy y ayer los traduce quien lo pinta). */
+export function formatLongDate(date: Date | string): string {
+  return longDateFormatter.format(new Date(date));
+}

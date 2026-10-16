@@ -79,10 +79,14 @@
 - [ ] Probar en el móvil el inicio, la búsqueda, los filtros, la ficha y los favoritos (lo hace el usuario)
 
 ### 1.4 Contacto
-- [ ] Chat en tiempo real por anuncio (texto e imagen)
-- [ ] Bandeja de mensajes, no leídos, bloquear, reportar
-- [ ] Botón WhatsApp/llamar opcional (solo con sesión)
-- [ ] Notificaciones: push web + email de respaldo
+- [x] Chat en tiempo real por anuncio, con texto y fotos, "Visto", borrador guardado y respuestas rápidas en el primer mensaje (2026-10-17, D-048)
+- [x] Bandeja `/mensajes` (Todos, Comprando y Vendiendo), no leídos en la bandeja y en la barra inferior, y bloquear desde la conversación (2026-10-17). Reportar pasa a 1.5, junto con la tabla de denuncias
+- [x] Barra fija de la ficha con Chatear y WhatsApp opcional, solo con sesión. El teléfono se pide al pulsar y tiene un tope diario (2026-10-17, D-049 y D-050). Se activa en Mi cuenta
+- [x] Tiempo de respuesta del vendedor (pg_cron diario) en la conversación, la ficha y el perfil (2026-10-17)
+- [x] Probado de extremo a extremo (2026-10-17): 51 comprobaciones de base de datos y tiempo real, y 23 con dos navegadores móviles a la vez (comprador y vendedora)
+- [ ] Notificaciones push web (segunda parte de 1.4): hacen falta las claves VAPID en Vercel
+- [ ] Email de respaldo por mensajes sin leer (cuando se configure Resend)
+- [ ] Probar el chat en el móvil entre dos cuentas (lo hace el usuario)
 
 ### 1.5 Confianza y moderación
 - [ ] Reportes con auto‑ocultado por umbral

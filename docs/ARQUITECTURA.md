@@ -138,9 +138,13 @@ Criterios:
 4. Las imágenes huérfanas (sin anuncio a las 24 h) se borran con un cron que usa la API de Storage.
 
 ### 5.3 Chat y notificaciones
-- Una `conversation` por (anuncio, comprador). Los `messages` llevan texto o imagen y su estado de lectura.
-- **Tiempo real:** un trigger con `realtime.broadcast_changes` emite cada mensaje a un canal privado por conversación y a otro canal por usuario (para la bandeja y los no leídos). La autorización se hace con RLS sobre `realtime.messages`.
-- **Push:** al insertarse un mensaje, un Database Webhook llama a `/api/webhooks/new-message` (protegida con secreto), que envía la notificación push al destinatario. Las suscripciones caducadas (respuesta 410) se borran.
+- Una `conversation` por (anuncio, comprador). Los `messages` llevan texto o foto. Se crean y se envían con RPC (`start_conversation`, `send_message`), que aplican bloqueos, cuenta activa y límites de ritmo (D-048).
+- La conversación se crea al enviar el primer mensaje desde `/mensajes/anuncio/<código>`, no al abrir la página, para que la precarga de enlaces no cree conversaciones vacías.
+- **Tiempo real:** un trigger sobre `messages` llama a `realtime.send`. Emite el mensaje al canal privado `conversation:{id}` y un aviso ligero al canal `user:{destinatario}` (bandeja y no leídos). `mark_conversation_read` emite el "Visto". La autorización se hace con RLS sobre `realtime.messages`.
+- El cliente pasa el token de la sesión (`realtime.setAuth()`) antes de suscribirse. Cada vez que queda suscrito, también al reconectar, se pone al día: la conversación pide los mensajes posteriores al último que tiene y la bandeja se refresca.
+- Fotos del chat: se comprimen en el móvil, se suben a una URL firmada del bucket privado `chat-images` y se ven con URLs firmadas de 1 hora.
+- El contador de no leídos de la barra inferior se pide con una Server Action al cargar y al navegar (como mucho cada 20 s), y al momento cuando el chat avisa de un cambio. Así las páginas públicas no cargan el cliente de Realtime.
+- **Push** (pendiente, segunda parte de 1.4): la Server Action que envía el mensaje mandará la notificación con `after()`, sin Database Webhook ni otro secreto que las claves VAPID. Las suscripciones caducadas (respuesta 410) se borran.
 - **Email de respaldo:** un cron recoge los mensajes que llevan más de 15 minutos sin leer y envía un email agrupado, como máximo uno por hora y usuario.
 
 ### 5.4 Búsqueda

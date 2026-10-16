@@ -99,3 +99,17 @@ _Ninguna decisión de negocio pendiente (2026-10-16)._
   · Páginas compartibles y que funcionan en cualquier navegador, sin peticiones extra con datos lentos.
 - **D-046 · 2026-10-16** · **Textos de interfaz en el cliente por zona:** cada grupo de rutas pasa a `NextIntlClientProvider` solo los textos de sus componentes de cliente (`src/i18n/client-messages.ts`). · Antes cada página llevaba en su HTML el `es.json` entero (unos 20 KB sin comprimir).
 - **D-047 · 2026-10-17** · **Datos de demostración en el proyecto dev:** 7 vendedores ficticios (2 Premium) y 24 anuncios con fotos de Unsplash, descargadas en WebP y subidas a nuestro Storage como las de un anuncio real. Las cuentas llevan `user_metadata.demo = true` y teléfonos `+240000000xxx`, para borrarlas de una vez. · Petición del cliente, para probar el catálogo con contenido variado. No pasan al proyecto de producción (D-036).
+- **D-048 · 2026-10-17** · **Chat (matiza MODELO-DATOS §5.5 y §8):**
+  - Los mensajes se envían con la RPC `send_message`, no con un insert directo: las reglas (bloqueos, cuenta activa, foto válida y límite por minuto) están en un solo sitio.
+  - El tiempo real usa `realtime.send` a canales privados, en lugar de `broadcast_changes`, para enviar solo los campos necesarios.
+  - La conversación se crea con el primer mensaje.
+  - Al suscribirse, el cliente se pone al día, para no perder lo que llegue mientras conecta o sin red.
+  - La notificación push saldrá de la Server Action que envía el mensaje, sin Database Webhook.
+
+  · Probado con dos navegadores: sin ponerse al día, un mensaje que llegaba en los 1–2 s de conexión se perdía.
+- **D-049 · 2026-10-17** · **La ficha pasa a pantalla completa, sin barra inferior,** con la barra fija "WhatsApp · Chatear", como en el wireframe 04. Quien ve su propio anuncio tiene "Editar mi anuncio". · Dos barras fijas apiladas ocupaban demasiado en 360 px.
+- **D-050 · 2026-10-17** · **WhatsApp sin el teléfono en la página:**
+  - El botón es un formulario. Al pulsarlo, el servidor pide el teléfono con `whatsapp_contact` (sesión, ajuste del vendedor, bloqueos y tope diario) y redirige a `wa.me` con el título y el enlace del anuncio.
+  - No hay botón de "Llamar" en el MVP: WhatsApp ya permite llamar.
+
+  · Así nadie puede recolectar teléfonos leyendo páginas, ni siquiera con sesión.

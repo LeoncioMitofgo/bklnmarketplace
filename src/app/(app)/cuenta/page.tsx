@@ -9,6 +9,7 @@ import { Avatar } from "@/components/profile/avatar";
 import { buttonClasses } from "@/components/ui/button";
 import { signOut } from "@/lib/auth/actions";
 import { getSessionUser } from "@/lib/auth/session";
+import { setShowWhatsapp } from "@/lib/chat/actions";
 import { formatGqPhone } from "@/lib/format";
 import { createClient } from "@/lib/supabase/server";
 
@@ -42,7 +43,7 @@ async function AccountContent() {
       .single(),
     supabase
       .from("profile_private")
-      .select("phone, email_verified_at")
+      .select("phone, email_verified_at, show_whatsapp")
       .eq("user_id", user.id)
       .single(),
   ]);
@@ -109,6 +110,22 @@ async function AccountContent() {
           <dt className="text-xs text-text-muted">{t("phone")}</dt>
           <dd>{formatGqPhone(priv.phone)}</dd>
           <p className="text-xs text-text-muted">{t("phonePrivate")}</p>
+        </div>
+
+        <div className="flex flex-col gap-2 p-4">
+          <dt className="text-xs text-text-muted">{t("whatsappTitle")}</dt>
+          <dd className="text-sm leading-relaxed">
+            {priv.show_whatsapp ? t("whatsappOn") : t("whatsappOff")}
+          </dd>
+          <form action={setShowWhatsapp}>
+            <input type="hidden" name="show" value={priv.show_whatsapp ? "0" : "1"} />
+            <button
+              type="submit"
+              className={buttonClasses(priv.show_whatsapp ? "ghost" : "secondary", "min-h-11")}
+            >
+              {priv.show_whatsapp ? t("whatsappDisable") : t("whatsappEnable")}
+            </button>
+          </form>
         </div>
       </dl>
 

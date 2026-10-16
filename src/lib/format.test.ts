@@ -1,9 +1,14 @@
 import { describe, expect, it } from "vitest";
 import {
+  calendarDaysAgo,
+  dayKey,
+  formatClock,
   formatDate,
   formatGqPhone,
+  formatLongDate,
   formatNumber,
   formatXaf,
+  inboxTime,
   normalizeGqPhone,
   responseTimeParts,
 } from "./format";
@@ -73,5 +78,26 @@ describe("responseTimeParts", () => {
     expect(responseTimeParts(45)).toEqual({ unit: "minutes", count: 45 });
     expect(responseTimeParts(130)).toEqual({ unit: "hours", count: 2 });
     expect(responseTimeParts(3000)).toEqual({ unit: "days", count: 2 });
+  });
+});
+
+describe("fechas del chat (hora de Malabo, UTC+1)", () => {
+  const now = new Date("2026-10-17T10:00:00Z"); // 11:00 en Malabo
+
+  it("hora y día en Malabo", () => {
+    expect(formatClock("2026-10-17T09:42:00Z")).toBe("10:42");
+    expect(dayKey("2026-10-16T23:30:00Z")).toBe("2026-10-17"); // ya es día 17 en Malabo
+  });
+
+  it("hora de la bandeja", () => {
+    expect(inboxTime("2026-10-17T08:05:00Z", now)).toEqual({ kind: "today", text: "09:05" });
+    expect(inboxTime("2026-10-16T12:00:00Z", now).kind).toBe("yesterday");
+    expect(inboxTime("2026-10-13T12:00:00Z", now)).toEqual({ kind: "week", text: "mar" });
+    expect(inboxTime("2026-10-02T12:00:00Z", now)).toEqual({ kind: "older", text: "2 oct" });
+  });
+
+  it("separador de día", () => {
+    expect(formatLongDate("2026-10-12T12:00:00Z")).toBe("12 de octubre");
+    expect(calendarDaysAgo("2026-10-16T22:59:00Z", now)).toBe(1);
   });
 });
