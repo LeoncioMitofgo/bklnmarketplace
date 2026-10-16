@@ -8,7 +8,9 @@ Marketplace de clasificados generalista (modelo Jiji + perfiles de vendedor tipo
 - El proyecto Next.js 16 y la configuración de Vercel.
 - Las migraciones de configuración y usuarios, aplicadas en el proyecto dev.
 
-**Siguiente:** registro y login (ALCANCE §5.7, D-012), con la verificación de email propia (D-020).
+Registro, login, verificación de email, recuperación de contraseña, `/cuenta`, `/u/<usuario>` y la barra inferior están hechos. Falta probarlos en el navegador: ver la casilla pendiente de ROADMAP 1.1.
+
+**Siguiente:** 1.2 Anuncios (publicar, mis anuncios, caducidad, límites por plan).
 
 ## Recursos
 

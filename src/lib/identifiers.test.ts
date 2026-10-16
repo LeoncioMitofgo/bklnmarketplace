@@ -1,5 +1,17 @@
 import { describe, expect, it } from "vitest";
-import { detectIdentifierKind, isValidUsername } from "./identifiers";
+import { detectIdentifierKind, isValidUsername, maskEmail } from "./identifiers";
+
+describe("maskEmail", () => {
+  it("deja la primera letra y el dominio", () => {
+    expect(maskEmail("juan.perez@gmail.com")).toBe("j***@gmail.com");
+    expect(maskEmail("a@b.gq")).toBe("a***@b.gq");
+  });
+
+  it("no revela nada si no parece un email", () => {
+    expect(maskEmail("sinarroba")).toBe("***");
+    expect(maskEmail("@gmail.com")).toBe("***");
+  });
+});
 
 describe("detectIdentifierKind", () => {
   it.each([

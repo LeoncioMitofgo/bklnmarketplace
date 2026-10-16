@@ -21,3 +21,10 @@ export function normalizeUsername(input: string): string {
 export function isValidUsername(input: string): boolean {
   return USERNAME_PATTERN.test(normalizeUsername(input));
 }
+
+/** "juan.perez@gmail.com" → "j***@gmail.com": se enseña el email sin revelarlo entero. */
+export function maskEmail(email: string): string {
+  const at = email.lastIndexOf("@");
+  if (at < 1) return "***";
+  return `${email[0]}***${email.slice(at)}`;
+}

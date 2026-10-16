@@ -42,7 +42,7 @@ Cada viaje entre Malabo y Europa cuesta unos 150 ms, más lo que añada la red m
 | Búsqueda | Búsqueda de texto completo de Postgres (`spanish`), `unaccent` y trigramas; atributos en JSONB | Meilisearch o Typesense solo si algún día hace falta |
 | Tareas programadas | `pg_cron` para tareas solo de SQL; Vercel Cron para las que envían email o push | §5.5 |
 | Push | Web Push (VAPID) + service worker propio + librería `web-push` | Sin Firebase |
-| Email | Resend + React Email | También como SMTP de Supabase Auth |
+| Email | Resend (API REST) con plantillas HTML propias | La app envía la verificación y la recuperación (D-037); React Email, si las plantillas crecen |
 | Traducciones | next-intl | Solo `es`, sin prefijo de idioma en la URL |
 | Validación | Zod | Esquemas compartidos entre cliente y servidor |
 | Errores | Sentry | Script cargado con el mínimo impacto |
@@ -118,7 +118,11 @@ Criterios:
   2. Se envía un email con Resend.
   3. La ruta `/verificar-email` marca `email_verified_at`.
   4. Publicar exige que esté marcado; la RLS de `listings` lo comprueba.
-- **Recuperar contraseña:** el servidor busca el email a partir del identificador, llama a `resetPasswordForEmail` (que envía con el SMTP de Resend) y muestra el email enmascarado.
+- **Recuperar contraseña:**
+  1. El servidor busca el email a partir del identificador.
+  2. Crea el enlace con `auth.admin.generateLink({ type: "recovery" })`, que no envía nada, y manda el email por su cuenta.
+  3. El enlace lleva a `/nueva-contrasena`, donde, al guardar la contraseña, se hace `verifyOtp` + `updateUser` (D-037).
+  4. Se muestra el email enmascarado.
 - **Límite de intentos:** contador propio por identificador e IP en `rate_limits`.
 
 ### 5.2 Imágenes

@@ -7,6 +7,21 @@
   "brand": {
     "logoLabel": "BKLN Marketplace"
   },
+  "common": {
+    "close": "Cerrar",
+    "back": "Volver",
+    "showPassword": "Mostrar",
+    "hidePassword": "Ocultar",
+    "loading": "Cargando…"
+  },
+  "nav": {
+    "label": "Navegación principal",
+    "home": "Inicio",
+    "search": "Buscar",
+    "publish": "Publicar",
+    "messages": "Mensajes",
+    "profile": "Perfil"
+  },
   "price": {
     "perMonth": "{price}/mes",
     "negotiable": "Negociable",
@@ -18,5 +33,152 @@
     "body": "Estamos preparando BKLN Marketplace: anuncios de todo tipo, chat con los vendedores sin dar tu número y tiendas para negocios.",
     "cities": "Malabo, Bata y todo el país",
     "footer": "Un proyecto de BKLN Software & Systems · Malabo"
+  },
+  "auth": {
+    "login": {
+      "metaTitle": "Entrar",
+      "title": "Entra en tu cuenta",
+      "returnNotice": "Para continuar necesitas una cuenta. Al entrar volverás donde estabas.",
+      "identifier": "Usuario, email o teléfono",
+      "identifierPlaceholder": "p. ej. 222 123 456",
+      "password": "Contraseña",
+      "forgot": "¿Olvidaste tu contraseña?",
+      "submit": "Entrar",
+      "submitting": "Entrando…",
+      "noAccount": "¿Aún no tienes cuenta?",
+      "createAccount": "Crear cuenta"
+    },
+    "signup": {
+      "metaTitle": "Crear cuenta",
+      "title": "Crea tu cuenta",
+      "displayName": "Nombre",
+      "username": "Nombre de usuario",
+      "usernameHint": "Empieza por una letra; solo minúsculas, números, punto y guion bajo. Será tu perfil: bklnmarketplace.com/u/…",
+      "phone": "Teléfono",
+      "phoneHint": "Sirve para entrar. Nunca se muestra en tus anuncios.",
+      "email": "Email",
+      "emailHint": "Para recuperar tu contraseña. Tendrás que confirmarlo antes de publicar.",
+      "password": "Contraseña",
+      "passwordHint": "Mínimo 8 caracteres.",
+      "terms": "Acepto los <terms>términos de uso</terms> y la <privacy>política de privacidad</privacy>.",
+      "submit": "Crear cuenta",
+      "submitting": "Creando tu cuenta…",
+      "haveAccount": "¿Ya tienes cuenta?",
+      "login": "Entrar"
+    },
+    "recover": {
+      "metaTitle": "Recuperar contraseña",
+      "title": "Recupera tu contraseña",
+      "intro": "Escribe tu usuario, email o teléfono y te enviaremos a tu email un enlace para crear una nueva.",
+      "submit": "Enviar enlace",
+      "submitting": "Enviando…",
+      "backToLogin": "Volver a entrar"
+    },
+    "newPassword": {
+      "metaTitle": "Nueva contraseña",
+      "title": "Crea una nueva contraseña",
+      "password": "Nueva contraseña",
+      "submit": "Guardar contraseña",
+      "submitting": "Guardando…",
+      "requestNew": "Pedir un enlace nuevo"
+    },
+    "verifyEmail": {
+      "metaTitle": "Confirmar email",
+      "title": "Confirma tu email",
+      "intro": "Pulsa el botón para confirmar tu dirección de email.",
+      "submit": "Confirmar mi email",
+      "submitting": "Confirmando…",
+      "goToAccount": "Ir a mi cuenta"
+    },
+    "messages": {
+      "accountCreatedConfirm": "Cuenta creada. Revisa tu email para confirmarla y después entra.",
+      "resetSent": "Te hemos enviado un enlace a {email}. Caduca en 1 hora.",
+      "emailConfirmed": "¡Listo! Tu email está confirmado. Ya puedes publicar anuncios.",
+      "alreadyVerified": "Tu email ya está confirmado.",
+      "verificationResent": "Te hemos enviado otro email a {email}."
+    },
+    "errors": {
+      "displayName": {
+        "length": "Escribe un nombre de 2 a 50 caracteres."
+      },
+      "username": {
+        "format": "Usa de 3 a 20 caracteres: empieza por una letra y usa solo minúsculas, números, punto o guion bajo.",
+        "taken": "Ese nombre de usuario ya está en uso."
+      },
+      "phone": {
+        "format": "Escribe un teléfono de Guinea Ecuatorial de 9 cifras.",
+        "taken": "Ya hay una cuenta con este teléfono."
+      },
+      "email": {
+        "format": "Escribe un email válido.",
+        "taken": "Ya hay una cuenta con este email."
+      },
+      "password": {
+        "length": "La contraseña debe tener entre 8 y 72 caracteres.",
+        "weak": "Esa contraseña no sirve. Prueba con otra distinta."
+      },
+      "terms": {
+        "required": "Tienes que aceptar los términos para crear la cuenta."
+      },
+      "form": {
+        "credentialsRequired": "Escribe tu usuario, email o teléfono y tu contraseña.",
+        "identifierRequired": "Escribe tu usuario, email o teléfono.",
+        "invalidCredentials": "Usuario o contraseña incorrectos.",
+        "emailNotConfirmed": "Tienes que confirmar tu email antes de entrar. Revisa tu correo.",
+        "tooManyAttempts": "Demasiados intentos. Espera unos minutos y vuelve a probar.",
+        "signupFailed": "No hemos podido crear la cuenta. Inténtalo de nuevo.",
+        "accountNotFound": "No encontramos ninguna cuenta con esos datos.",
+        "linkInvalid": "El enlace no es válido o ha caducado. Pide uno nuevo.",
+        "unexpected": "Algo ha fallado. Inténtalo de nuevo."
+      }
+    }
+  },
+  "account": {
+    "metaTitle": "Mi cuenta",
+    "title": "Mi cuenta",
+    "loading": "Cargando tu cuenta…",
+    "publicProfile": "Ver mi perfil público",
+    "plan": "Plan",
+    "planNormal": "Normal",
+    "planPremium": "Premium hasta el {date}",
+    "email": "Email",
+    "emailVerified": "Confirmado",
+    "emailPending": "Sin confirmar",
+    "emailPendingNotice": "Confirma tu email para poder publicar anuncios. Te enviamos un enlace al registrarte.",
+    "resend": "Reenviar email",
+    "resending": "Enviando…",
+    "phone": "Teléfono",
+    "phonePrivate": "Solo lo ves tú.",
+    "signOut": "Cerrar sesión"
+  },
+  "profile": {
+    "loading": "Cargando perfil…",
+    "premium": "PREMIUM",
+    "memberSince": "Miembro desde {date}",
+    "listings": "Anuncios",
+    "noListings": "{name} aún no tiene anuncios publicados."
+  },
+  "emails": {
+    "footer": "BKLN Marketplace · Malabo, Guinea Ecuatorial",
+    "verify": {
+      "subject": "Confirma tu email en BKLN Marketplace",
+      "greeting": "Hola, {name}:",
+      "body": "Confirma tu dirección de email para poder publicar anuncios en BKLN Marketplace.",
+      "button": "Confirmar mi email",
+      "expiry": "El enlace caduca en 24 horas. Si no has creado una cuenta, ignora este mensaje."
+    },
+    "reset": {
+      "subject": "Crea una nueva contraseña en BKLN Marketplace",
+      "greeting": "Hola, {name}:",
+      "body": "Hemos recibido una petición para cambiar tu contraseña.",
+      "button": "Crear nueva contraseña",
+      "expiry": "El enlace caduca en 1 hora. Si no lo has pedido tú, ignora este mensaje: tu contraseña no cambia."
+    }
+  },
+  "notFound": {
+    "metaTitle": "Página no encontrada",
+    "title": "Esta página no existe",
+    "body": "Puede que el enlace esté mal o que ya no esté disponible.",
+    "goHome": "Ir al inicio"
   }
 }

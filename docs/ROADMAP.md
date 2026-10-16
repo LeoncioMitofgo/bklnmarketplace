@@ -27,7 +27,7 @@
 - [x] Vercel: variables públicas, más `framework: nextjs` y región `lhr1` en `vercel.ts` (2026-10-16)
 - [ ] Vercel: `SUPABASE_SECRET_KEY`, que añade el usuario en el panel como *Sensitive*
 - [x] DNS en Hostinger apuntando a Vercel (2026-10-16)
-- [ ] Registros DNS de Resend (email), cuando se configure el email
+- [ ] Resend: cuenta, `RESEND_API_KEY` (en `.env.local` y en Vercel) y dominio verificado con sus registros DNS en Hostinger. Hasta entonces, fuera de producción los emails se escriben en la consola del servidor
 
 ## Fase 1 — MVP
 
@@ -38,10 +38,11 @@
   - Utilidades de formato (FCFA, +240, Africa/Malabo) con tests.
   - Clientes de Supabase y proxy de sesión.
   - Página "Próximamente".
-- [ ] Layout mobile con barra inferior (llega con las primeras pantallas reales)
-- [ ] Registro (nombre, usuario, teléfono, email, contraseña) y login con usuario/email/teléfono + contraseña
-- [ ] Confirmación de email, recuperación de contraseña por email y límite de intentos
-- [ ] Perfil de usuario `/u/<usuario>` y vuelta al punto de origen tras el login
+- [x] Layout mobile con barra inferior en las pantallas de la app (2026-10-16). `/buscar`, `/publicar` y `/mensajes` llegan en 1.2–1.4
+- [x] Registro (`/registro`) y login (`/entrar`) con usuario, email o teléfono + contraseña (2026-10-16)
+- [x] Confirmación de email propia (`/verificar-email`), recuperación de contraseña (`/recuperar` → `/nueva-contrasena`) y límite de intentos (2026-10-16)
+- [x] Perfil público `/u/<usuario>` (cacheado), `/cuenta` y vuelta al punto de origen tras el login (2026-10-16)
+- [ ] Probar los flujos en el navegador. Hace falta antes: "Confirm email" desactivado en Supabase, `SUPABASE_SECRET_KEY` en `.env.local` y en Vercel, y Resend configurado para que los emails salgan de verdad
 - [x] Configuración de planes: tablas `plans` y `plan_prices` + `current_plan()` (2026-10-16)
 - [x] Datos iniciales: 13 categorías, 49 subcategorías, 40 atributos, 16 ciudades y ajustes (2026-10-16)
 - [x] Base de datos de usuarios (2026-10-16):

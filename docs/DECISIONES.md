@@ -63,3 +63,11 @@ _Ninguna decisión de negocio pendiente (2026-10-16)._
   · Es el mecanismo de caché por etiquetas de Next 16 y reduce viajes de red (ARQUITECTURA §1).
 - **D-035 · 2026-10-16** · **Los datos de referencia van en una migración, no en `seed.sql`:** planes, precios, ajustes, ciudades, categorías y atributos. `seed.sql` queda para datos de prueba. · Producción también los necesita.
 - **D-036 · 2026-10-16** · **Mientras no exista el proyecto Supabase de producción, el despliegue de producción de Vercel apunta al proyecto dev.** Antes del lanzamiento hay que cambiar sus variables. · De momento solo se publica una página estática, sin datos reales.
+- **D-037 · 2026-10-16** · **Emails de auth propios:**
+  - La verificación de email y la recuperación de contraseña los envía la app, con la API REST de Resend y plantillas HTML sencillas. React Email queda para cuando las plantillas crezcan.
+  - La recuperación usa `generateLink` + `verifyOtp`.
+  - Los dos enlaces se canjean al pulsar un botón (POST), no al abrir la URL, porque los antivirus de correo abren los enlaces solos.
+  - Sin `RESEND_API_KEY`, fuera de producción el email se escribe en la consola.
+
+  · Emails en español y con nuestra marca, sin depender de las plantillas de Supabase y robustos frente a los escáneres de enlaces.
+- **D-038 · 2026-10-16** · **Flujo de git: se trabaja directamente en `main`.** Cada push publica en bklnmarketplace.com. Las pantallas sin terminar quedan accesibles por URL, aunque la home siga mostrando "Próximamente". · Decisión del cliente; se descartó una rama de desarrollo con previews.
