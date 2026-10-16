@@ -7,8 +7,9 @@ import { ResendVerification } from "@/components/account/resend-verification";
 import { Alert } from "@/components/ui/alert";
 import { buttonClasses } from "@/components/ui/button";
 import { attributesFor, type Catalog } from "@/lib/catalog-types";
-import { formatNumber, formatXaf } from "@/lib/format";
+import { formatXaf } from "@/lib/format";
 import { publishListing } from "@/lib/listings/actions";
+import { attributeText } from "@/lib/listings/attributes";
 import { imageUrl } from "@/lib/listings/images";
 import type { EditableImage, EditableListing } from "@/lib/listings/queries";
 import type { StepName } from "./listing-wizard";
@@ -43,9 +44,6 @@ export function ReviewStep({ listing, images, catalog, emailVerified, onEdit }: 
       : category?.price_period === "month"
         ? tPrice("perMonth", { price: formatXaf(listing.price_xaf) })
         : formatXaf(listing.price_xaf);
-
-  const attributeText = (value: string | number | boolean) =>
-    typeof value === "boolean" ? t("yes") : typeof value === "number" ? formatNumber(value) : value;
 
   function publish() {
     setError(null);
@@ -104,8 +102,7 @@ export function ReviewStep({ listing, images, catalog, emailVerified, onEdit }: 
                   <div key={d.key}>
                     <dt className="text-xs text-text-muted">{d.label}</dt>
                     <dd>
-                      {attributeText(listing.attributes[d.key])}
-                      {d.unit ? ` ${d.unit}` : ""}
+                      {attributeText(d, listing.attributes[d.key], { yes: t("yes"), no: t("no") })}
                     </dd>
                   </div>
                 ))}

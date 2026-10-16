@@ -20,9 +20,10 @@ export type AttributeDef = {
   options: string[] | null;
   unit: string | null;
   is_required: boolean;
+  is_filterable: boolean;
 };
 
-export type City = { id: number; name: string };
+export type City = { id: number; slug: string; name: string };
 
 export type Catalog = {
   categories: Category[];

@@ -31,6 +31,7 @@ const attrs: AttributeDef[] = [
     options: ["Apple", "Samsung"],
     unit: null,
     is_required: true,
+    is_filterable: false,
   },
   {
     id: 2,
@@ -41,6 +42,7 @@ const attrs: AttributeDef[] = [
     options: ["64 GB", "128 GB"],
     unit: null,
     is_required: false,
+    is_filterable: false,
   },
   {
     id: 3,
@@ -51,6 +53,7 @@ const attrs: AttributeDef[] = [
     options: null,
     unit: null,
     is_required: false,
+    is_filterable: false,
   },
   {
     id: 4,
@@ -61,6 +64,7 @@ const attrs: AttributeDef[] = [
     options: null,
     unit: null,
     is_required: false,
+    is_filterable: false,
   },
 ];
 

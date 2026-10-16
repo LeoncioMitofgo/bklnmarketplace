@@ -64,6 +64,9 @@ async function AccountContent() {
             <Link href="/mis-anuncios" className="text-sm font-semibold text-primary">
               {t("myListings")}
             </Link>
+            <Link href="/favoritos" className="text-sm font-semibold text-primary">
+              {t("favorites")}
+            </Link>
             <Link href={`/u/${profile.username}`} className="text-sm font-semibold text-primary">
               {t("publicProfile")}
             </Link>

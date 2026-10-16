@@ -4,13 +4,14 @@ Marketplace de clasificados generalista (modelo Jiji + perfiles de vendedor tipo
 
 ## Estado actual
 
-**Fase 1.1 en curso.** La Fase 0 se completó el 2026-10-16. Ya están hechos:
-- El proyecto Next.js 16 y la configuración de Vercel.
-- Las migraciones de configuración y usuarios, aplicadas en el proyecto dev.
+**Fase 1 en curso.** La Fase 0 se completó el 2026-10-16. Hechas y probadas:
+- 1.1: auth, cuenta, perfil y barra inferior.
+- 1.2: anuncios (publicar, Mis anuncios, caducidad y límites). El primer anuncio real se publicó desde un Android.
+- 1.3: catálogo público (inicio, búsqueda con filtros, ficha, perfil con anuncios, favoritos y SEO). El inicio real sustituye a "Próximamente" y nada se indexa hasta el lanzamiento (D-043, D-044).
 
-1.1 (auth, cuenta, perfil y barra inferior) y 1.2 (anuncios: publicar, Mis anuncios, caducidad y límites) están hechos y probados contra la base de datos. Las pruebas en el móvil quedan pendientes del usuario (ver las casillas sin marcar de ROADMAP).
+Las pruebas en el móvil que quedan pendientes del usuario son las casillas sin marcar de ROADMAP.
 
-**Siguiente:** 1.3 Catálogo público (home, búsqueda, ficha de anuncio, perfil público con anuncios, favoritos y SEO).
+**Siguiente:** 1.4 Contacto (chat en tiempo real, bandeja de mensajes, botón de WhatsApp y notificaciones).
 
 ## Recursos
 

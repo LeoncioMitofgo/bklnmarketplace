@@ -105,3 +105,9 @@ Reglas:
 | 11 | Conversación | Anuncio fijado arriba · aviso de seguridad · foto · "Visto" · bloquear o denunciar desde el menú |
 | 12 | Hazte Premium | Comparativa Normal/Premium · 4 periodos con precio por mes · oficina y agencia · botón de WhatsApp para el código |
 | 13 | Admin | Usable desde el móvil · denuncias con acceso al chat denunciado · pagos por confirmar con referencia única y fecha de fin calculada |
+
+**Diferencias con los wireframes al implementar la 1.3 (catálogo):**
+- 01 Inicio: "Recientes" de todo el país, sin selector de ciudad (D-044).
+- 02 y 03: el botón de la hoja de filtros dice "Ver resultados", sin el número (D-045). El total de resultados aparece encima de la lista.
+- 04 Ficha: el corazón de favorito y el botón de compartir van sobre la foto. La barra fija con WhatsApp y Chatear y el enlace "Denunciar" llegan con 1.4 y 1.5.
+- Tarjetas: sin corazón de favorito en los listados (D-042).

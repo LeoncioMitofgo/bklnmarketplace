@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { formatDate, formatGqPhone, formatNumber, formatXaf, normalizeGqPhone } from "./format";
+import {
+  formatDate,
+  formatGqPhone,
+  formatNumber,
+  formatXaf,
+  normalizeGqPhone,
+  responseTimeParts,
+} from "./format";
 
 describe("formatNumber / formatXaf", () => {
   it("agrupa miles con punto, también con 4 cifras", () => {
@@ -57,5 +64,14 @@ describe("formatDate", () => {
   it("usa dd/mm/aaaa y la hora de Malabo (UTC+1)", () => {
     // 23:30 UTC del 15 de octubre ya es 16 de octubre en Malabo.
     expect(formatDate("2026-10-15T23:30:00Z")).toBe("16/10/2026");
+  });
+});
+
+describe("responseTimeParts", () => {
+  it("elige minutos, horas o días", () => {
+    expect(responseTimeParts(0)).toEqual({ unit: "minutes", count: 1 });
+    expect(responseTimeParts(45)).toEqual({ unit: "minutes", count: 45 });
+    expect(responseTimeParts(130)).toEqual({ unit: "hours", count: 2 });
+    expect(responseTimeParts(3000)).toEqual({ unit: "days", count: 2 });
   });
 });

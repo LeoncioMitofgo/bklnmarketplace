@@ -64,9 +64,10 @@ Cada viaje entre Malabo y Europa cuesta unos 150 ms, más lo que añada la red m
 /
 ├─ src/
 │  ├─ app/                    # rutas (los segmentos de URL, en español)
-│  │  ├─ (public)/            # home, buscar, anuncio/, categoria/, u/, t/
+│  │  ├─ (app)/               # pantallas con barra inferior: inicio, buscar, categoria/, anuncio/, u/,
+│  │  │                       #   favoritos, cuenta, mis-anuncios (y mensajes, premium, t/ cuando lleguen)
 │  │  ├─ (auth)/              # registro, entrar, recuperar, verificar-email
-│  │  ├─ (app)/               # publicar, mensajes, mis-anuncios, favoritos, ajustes, premium
+│  │  ├─ (flow)/              # pantalla completa sin barra inferior: publicar
 │  │  ├─ admin/               # panel de administración (rol admin)
 │  │  └─ api/                 # webhooks, cron, push
 │  ├─ components/             # ui/ (shadcn) + componentes propios
@@ -146,8 +147,11 @@ Criterios:
 - `search_vector` = título (peso A) + descripción (peso B), con configuración `spanish` y `unaccent`. `unaccent` dentro de una columna generada necesita una función envoltorio `IMMUTABLE`. Índice GIN.
 - `pg_trgm` sobre el título para tolerar errores de escritura.
 - Índices de filtro sobre `(status, category_id, city_id, price, created_at)`, más un índice GIN sobre los atributos JSONB.
-- Orden por relevancia: `ts_rank` más un plus para Premium.
-- La paginación usa un cursor, no un `offset` numérico.
+- Todo lo hace la RPC `search_listings` (MODELO-DATOS §5.8), que devuelve las tarjetas ya preparadas y el total:
+  - Cada palabra se busca como prefijo ("ipho" encuentra "iPhone") y, para las erratas, se compara el título por similitud de trigramas.
+  - Filtros: categoría principal o subcategoría, ciudad, precio, estado, atributos de lista o sí/no y rangos numéricos (D-045).
+  - Orden: relevancia (`ts_rank`; a igualdad, Premium primero; sin texto, Premium y luego lo más reciente), más recientes y precio.
+- "Ver más" pide más resultados de la misma URL (`?n=`), hasta 200 (D-041).
 
 ### 5.5 Tareas programadas
 
@@ -163,9 +167,12 @@ Criterios:
 Las rutas de cron se protegen con `CRON_SECRET`. En desarrollo (plan Hobby, como mucho un cron al día) se lanzan a mano.
 
 ### 5.6 Caché, SEO y compartir
-- Las páginas públicas se cachean con etiquetas (`listing:{id}`, `category:{id}`, `user:{id}`). Las Server Actions que modifican datos invalidan las etiquetas afectadas.
+- Las consultas públicas se cachean con `"use cache"` y etiquetas: `listings` (cualquier anuncio; la invalidan todas las acciones de anuncios), `listing:{código}`, `profile:{usuario}` y `catalog` (categorías y ciudades). Lo de anuncios usa `cacheLife("minutes")`: lo que caduca pg_cron, que no puede invalidar la caché de Next, se refleja en como mucho un minuto.
+- Lo que depende de la sesión (el corazón de favorito, Mi cuenta) va en su propio `<Suspense>` y nunca dentro de una caché compartida. Por eso los listados no llevan corazón (D-042).
 - `generateMetadata` genera el Open Graph con la foto grande, el título, el precio y la ciudad. También hay `sitemap.ts` dinámico y JSON‑LD de tipo `Product`/`Offer`.
 - El teléfono y el email nunca aparecen en el HTML.
+- Hasta el lanzamiento no se indexa nada: sin `SITE_INDEXABLE=true`, robots.txt lo bloquea todo y las páginas llevan `noindex` (D-043).
+- Compartir: el menú nativo del móvil (`navigator.share`) o, si no existe, un enlace de WhatsApp con el texto y la URL.
 
 ## 6. Entornos
 

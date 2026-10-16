@@ -83,3 +83,18 @@ _Ninguna decisión de negocio pendiente (2026-10-16)._
   - Crear el borrador es una acción explícita (botón), no una visita a una URL, para que la precarga de enlaces no genere borradores.
 
   · Así se retoma desde cualquier dispositivo y nunca se pierde lo escrito (ALCANCE §4.4).
+- **D-041 · 2026-10-16** · **"Ver más" amplía el número de resultados de la misma URL (`?n=2`, `?n=3`…)** en lugar de paginar con cursor (matiza ARQUITECTURA §5.4):
+  - Páginas de 20, hasta 10 (200 resultados); a partir de ahí se pide afinar con los filtros.
+  - El enlace lleva un ancla al primer resultado nuevo, así que sin JavaScript también deja al usuario donde estaba.
+
+  · Es lo más simple que funciona sin JavaScript, cada URL se cachea y con el volumen del MVP la consulta es barata. Si los volúmenes crecen, se puede pasar a cursor sin cambiar la interfaz.
+- **D-042 · 2026-10-16** · **El corazón de favorito está en la ficha y en `/favoritos`, no en las tarjetas de los listados.** · Así el inicio, la búsqueda y los perfiles se sirven cacheados sin depender de la sesión. Se puede añadir a las tarjetas más adelante si los datos lo piden.
+- **D-043 · 2026-10-16** · **Nada se indexa hasta el lanzamiento:** sin la variable `SITE_INDEXABLE=true`, robots.txt lo bloquea todo y las páginas llevan `noindex`. El sitemap, los canonical y el JSON-LD ya están listos. · Producción usa el proyecto dev con datos de prueba (D-036) y no deben acabar en Google.
+- **D-044 · 2026-10-16** · **El inicio real sustituye a "Próximamente"** en bklnmarketplace.com (matiza D-038), sin indexar (D-043). "Recientes" muestra todo el país: el selector de ciudad del wireframe 01 queda fuera del MVP y la ciudad se filtra en la búsqueda. · Hacía falta para probar el catálogo en el móvil. Nadie más conoce aún la dirección.
+- **D-045 · 2026-10-16** · **Filtros de búsqueda:**
+  - Van en la URL en español. Los atributos usan su etiqueta sin tildes ni eñes: `marca=Toyota`, `anio_min=2015`, `banios_min=2`.
+  - Se filtra por atributos de lista, de sí/no y rangos numéricos; los de texto libre (modelo, talla) no.
+  - La hoja de filtros se abre con el ancla `#filtros` y CSS `:target`: funciona sin JavaScript y el botón atrás de Android la cierra. El botón dice "Ver resultados" sin el número del wireframe 03, que exigiría una consulta por cada cambio.
+
+  · Páginas compartibles y que funcionan en cualquier navegador, sin peticiones extra con datos lentos.
+- **D-046 · 2026-10-16** · **Textos de interfaz en el cliente por zona:** cada grupo de rutas pasa a `NextIntlClientProvider` solo los textos de sus componentes de cliente (`src/i18n/client-messages.ts`). · Antes cada página llevaba en su HTML el `es.json` entero (unos 20 KB sin comprimir).

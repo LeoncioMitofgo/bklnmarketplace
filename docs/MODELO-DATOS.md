@@ -372,8 +372,9 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
   - Cierra la solicitud y lo apunta en `moderation_log`. Todo ocurre en una sola transacción.
 
 ### 5.8 Otros RPC
-- `register_listing_view(listing_id)`: suma una vista. Lo llama la ficha después de cargar, sin bloquear la página.
-- `search_listings(...)`: búsqueda con filtros, orden y cursor, que devuelve las tarjetas ya preparadas (§9).
+- `register_listing_view(listing_id)`: suma una vista a un anuncio activo; las del propio vendedor no cuentan. La ficha la pide después de cargar, una vez por anuncio y sesión del navegador. El trigger de `updated_at` no salta cuando solo cambia `view_count`.
+- `search_listings(query, category_id, city_id, price_min, price_max, condition, attributes, ranges, sort, limit)`: búsqueda de anuncios activos con filtros y orden (ARQUITECTURA §5.4). `security invoker`: se aplica la RLS de quien busca. Devuelve las tarjetas ya preparadas (como `listing_cards`) y `total_count`. `attributes` es una coincidencia exacta (`{"brand": "Toyota"}`) y `ranges` son rangos de atributos numéricos (`{"year": [2015, null]}`). Como mucho 200 filas (D-041).
+- `my_favorites(limit)`: favoritos del usuario con su disponibilidad (`active`, `sold`, `paused`, `expired` o `unavailable`). Es `security definer` porque la RLS ya no deja ver los anuncios pausados o caducados de otros; de los bloqueados, en revisión o eliminados no devuelve el contenido.
 - `admin_suspend_user`, `admin_ban_user`: banear bloquea todos los anuncios del usuario y su acceso en Supabase Auth.
 
 ## 6. RLS (resumen)
@@ -387,7 +388,7 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
 | `app_settings` | Todos si `is_public` · admin | Admin | Admin | Admin |
 | `listings` | Todos: `active`, y `sold` de los últimos 30 días · dueño: todos los suyos salvo `deleted` · admin: todos | Dueño, siempre como `draft` | Dueño: solo columnas de contenido; el estado, por RPC | Nadie (borrado lógico) |
 | `listing_images` | Si se puede ver el anuncio | Dueño (con límite de fotos) | Dueño (`position`) | Dueño |
-| `favorites` | Dueño | Dueño | — | Dueño |
+| `favorites` | Dueño | Dueño, solo de anuncios activos | — | Dueño |
 | `conversations` | Participantes · admin solo si hay una denuncia sobre esa conversación | RPC | RPC (leído) | — |
 | `messages` | Participantes · admin solo si hay una denuncia sobre esa conversación | Participante sin bloqueo | — | — |
 | `blocks` | Quien bloquea | Quien bloquea | — | Quien bloquea |
@@ -421,7 +422,8 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
 - `conversations`: (`buyer_id`, `last_message_at desc`) · (`seller_id`, `last_message_at desc`).
 - `reports`: (`listing_id`) donde `status = 'open'`.
 - `f_unaccent()` es una función envoltorio `IMMUTABLE` de `unaccent`, necesaria para la columna generada y los índices.
-- Las tarjetas de los listados salen de una vista `listing_cards` (`security_invoker`): anuncio + miniatura de portada + ciudad + insignia Premium del vendedor.
+- Las tarjetas de los listados salen de una vista `listing_cards` (`security_invoker`): anuncio + portada (`cover_path`, `cover_format`) + `seller_is_premium`. La ciudad se pone en la aplicación con el catálogo, que ya está cacheado.
+- `favorites`: (`listing_id`) para el borrado en cascada y (`user_id`, `created_at desc`) para la lista.
 
 ## 10. Tareas programadas en SQL (pg_cron)
 

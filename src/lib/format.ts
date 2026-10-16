@@ -54,3 +54,13 @@ const dateFormatter = new Intl.DateTimeFormat("es-ES", {
 export function formatDate(date: Date | string): string {
   return dateFormatter.format(new Date(date));
 }
+
+/** Tiempo de respuesta redondeado a la unidad que se lee mejor: 45 → 45 min, 130 → 2 h, 3000 → 2 días. */
+export function responseTimeParts(minutes: number): {
+  unit: "minutes" | "hours" | "days";
+  count: number;
+} {
+  if (minutes < 60) return { unit: "minutes", count: Math.max(1, Math.round(minutes)) };
+  if (minutes < 60 * 24) return { unit: "hours", count: Math.round(minutes / 60) };
+  return { unit: "days", count: Math.round(minutes / (60 * 24)) };
+}

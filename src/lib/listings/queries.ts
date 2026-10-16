@@ -71,6 +71,7 @@ export type MyListing = {
   title: string | null;
   price_xaf: number | null;
   category_id: number | null;
+  city_id: number | null;
   expires_at: string | null;
   moderation_reason: string | null;
   updated_at: string;
@@ -83,7 +84,7 @@ export async function getMyListings(userId: string): Promise<MyListing[]> {
   const { data } = await supabase
     .from("listings")
     .select(
-      "id, code, status, title, price_xaf, category_id, expires_at, moderation_reason, updated_at, listing_images(storage_path, format, position)",
+      "id, code, status, title, price_xaf, category_id, city_id, expires_at, moderation_reason, updated_at, listing_images(storage_path, format, position)",
     )
     .eq("user_id", userId)
     .neq("status", "deleted")

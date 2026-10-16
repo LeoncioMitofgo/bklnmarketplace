@@ -10,6 +10,7 @@ import { getSessionUser } from "@/lib/auth/session";
 import { getCatalog } from "@/lib/catalog";
 import { formatXaf } from "@/lib/format";
 import { imageUrl } from "@/lib/listings/images";
+import { listingPath } from "@/lib/listings/paths";
 import {
   getMyListings,
   getPlanUsage,
@@ -89,6 +90,8 @@ async function MyListingsContent({
         return t(`status.${listing.status}`);
     }
   };
+
+  const cityName = (id: number | null) => catalog.cities.find((c) => c.id === id)?.name ?? null;
 
   const price = (listing: MyListing) => {
     if (listing.price_xaf === null) return null;
@@ -170,9 +173,18 @@ async function MyListingsContent({
                         {priceText}
                       </p>
                     ) : null}
-                    <p className="line-clamp-2 text-[15px] leading-snug">
-                      {listing.title ?? t("mine.untitled")}
-                    </p>
+                    {listing.status === "active" || listing.status === "sold" ? (
+                      <Link
+                        href={listingPath(listing.code, listing.title, cityName(listing.city_id))}
+                        className="line-clamp-2 text-[15px] leading-snug text-primary underline"
+                      >
+                        {listing.title}
+                      </Link>
+                    ) : (
+                      <p className="line-clamp-2 text-[15px] leading-snug">
+                        {listing.title ?? t("mine.untitled")}
+                      </p>
+                    )}
                     <p className="text-xs text-text-muted">{statusLine(listing)}</p>
                   </div>
                 </div>

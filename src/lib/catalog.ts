@@ -22,11 +22,11 @@ export async function getCatalog(): Promise<Catalog> {
       .order("name"),
     supabase
       .from("category_attributes")
-      .select("id, category_id, key, label, type, options, unit, is_required")
+      .select("id, category_id, key, label, type, options, unit, is_required, is_filterable")
       .order("sort_order"),
     supabase
       .from("cities")
-      .select("id, name")
+      .select("id, slug, name")
       .eq("is_active", true)
       .order("sort_order")
       .order("name"),

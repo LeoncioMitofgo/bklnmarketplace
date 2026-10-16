@@ -27,13 +27,6 @@
     "negotiable": "Negociable",
     "onRequest": "A consultar"
   },
-  "comingSoon": {
-    "eyebrow": "Muy pronto",
-    "title": "Compra y vende en Guinea Ecuatorial",
-    "body": "Estamos preparando BKLN Marketplace: anuncios de todo tipo, chat con los vendedores sin dar tu número y tiendas para negocios.",
-    "cities": "Malabo, Bata y todo el país",
-    "footer": "Un proyecto de BKLN Software & Systems · Malabo"
-  },
   "auth": {
     "login": {
       "metaTitle": "Entrar",
@@ -150,14 +143,24 @@
     "resending": "Enviando…",
     "phone": "Teléfono",
     "phonePrivate": "Solo lo ves tú.",
-    "signOut": "Cerrar sesión"
+    "signOut": "Cerrar sesión",
+    "favorites": "Mis favoritos"
   },
   "profile": {
     "loading": "Cargando perfil…",
     "premium": "PREMIUM",
     "memberSince": "Miembro desde {date}",
     "listings": "Anuncios",
-    "noListings": "{name} aún no tiene anuncios publicados."
+    "noListings": "{name} aún no tiene anuncios publicados.",
+    "responds": "Suele responder en {time}",
+    "responseTime": {
+      "minutes": "{count} min",
+      "hours": "{count} h",
+      "days": "{count, plural, one {# día} other {# días}}"
+    },
+    "onSale": "En venta ({count})",
+    "more": "Ver más anuncios",
+    "soldRecently": "Vendidos recientemente"
   },
   "emails": {
     "footer": "BKLN Marketplace · Malabo, Guinea Ecuatorial",
@@ -256,7 +259,8 @@
       "publishing": "Publicando…",
       "done": "Guardar y salir",
       "verifyNotice": "Para publicar tienes que confirmar tu email. Te enviamos un enlace al registrarte.",
-      "safety": "Recuerda: nunca pidas ni hagas pagos por adelantado."
+      "safety": "Recuerda: nunca pidas ni hagas pagos por adelantado.",
+      "no": "No"
     },
     "mine": {
       "metaTitle": "Mis anuncios",
@@ -347,5 +351,142 @@
     "title": "Esta página no existe",
     "body": "Puede que el enlace esté mal o que ya no esté disponible.",
     "goHome": "Ir al inicio"
+  },
+  "catalog": {
+    "card": {
+      "premium": "PREMIUM",
+      "sold": "VENDIDO",
+      "negotiable": "Negociable"
+    },
+    "shortNames": {
+      "moviles-tablets": "Móviles",
+      "hogar": "Hogar",
+      "moda-belleza": "Moda",
+      "bebes-ninos": "Bebés",
+      "construccion-herramientas": "Construcción",
+      "agricultura-alimentacion": "Agricultura",
+      "animales-mascotas": "Animales",
+      "deporte-ocio": "Deporte"
+    },
+    "home": {
+      "categories": "Categorías",
+      "allCategories": "Ver todas",
+      "featured": "Destacados",
+      "featuredMore": "Ver más",
+      "recent": "Recientes",
+      "moreListings": "Ver más anuncios",
+      "empty": "Todavía no hay anuncios publicados.",
+      "emptyCta": "Publica el primero"
+    },
+    "search": {
+      "metaTitle": "Buscar anuncios",
+      "metaTitleQuery": "«{q}» en anuncios",
+      "label": "¿Qué buscas?",
+      "placeholder": "¿Qué buscas?",
+      "submit": "Buscar",
+      "categories": "Categorías",
+      "allIn": "Todo en {name}",
+      "filters": "Filtros",
+      "filtersCount": "Filtros ({count})",
+      "removeFilter": "Quitar filtro: {label}",
+      "results": "{count, plural, =0 {Ningún anuncio} one {# anuncio} other {# anuncios}}",
+      "more": "Ver {count} más",
+      "refine": "Hay {count} anuncios. Usa los filtros para afinar la búsqueda.",
+      "empty": "No hay anuncios que coincidan.",
+      "emptyHint": "Prueba con otras palabras o quita algún filtro.",
+      "clear": "Quitar filtros y empezar de nuevo",
+      "rangeBoth": "{min} – {max}",
+      "rangeFrom": "desde {min}",
+      "rangeTo": "hasta {max}"
+    },
+    "sort": {
+      "relevancia": "Más relevantes",
+      "recientes": "Más recientes",
+      "precio-asc": "Precio más bajo",
+      "precio-desc": "Precio más alto"
+    },
+    "filters": {
+      "title": "Filtros",
+      "clear": "Limpiar",
+      "close": "Cerrar filtros",
+      "apply": "Ver resultados",
+      "category": "Categoría",
+      "anyCategory": "Todas las categorías",
+      "allIn": "Todo en {name}",
+      "categoryHint": "Elige una categoría para ver sus filtros propios (marca, año…).",
+      "city": "Ciudad",
+      "anyCity": "Todo el país",
+      "price": "Precio (FCFA)",
+      "priceMin": "Precio mínimo",
+      "priceMax": "Precio máximo",
+      "min": "Mínimo",
+      "max": "Máximo",
+      "condition": "Estado",
+      "anyCondition": "Todos",
+      "new": "Nuevo",
+      "used": "Usado",
+      "any": "Cualquiera",
+      "from": "Desde",
+      "to": "Hasta",
+      "rangeMin": "{label} desde",
+      "rangeMax": "{label} hasta"
+    },
+    "category": {
+      "metaDescription": "Anuncios de {name} en Guinea Ecuatorial. Compra y vende en Malabo, Bata y todo el país."
+    },
+    "listing": {
+      "photoCount": "{current} / {total}",
+      "back": "Volver",
+      "share": "Compartir",
+      "shareText": "Mira este anuncio en BKLN Marketplace: {title}",
+      "favorite": "Guardar en favoritos",
+      "unfavorite": "Quitar de favoritos",
+      "views": "{count, plural, one {# vista} other {# vistas}}",
+      "soldBanner": "Este anuncio ya está vendido.",
+      "details": "Detalles",
+      "condition": "Estado",
+      "category": "Categoría",
+      "yes": "Sí",
+      "no": "No",
+      "description": "Descripción",
+      "similar": "Anuncios similares",
+      "seller": {
+        "memberSince": "Miembro desde {date}",
+        "responds": "Suele responder en {time}",
+        "responseTime": {
+          "minutes": "{count} min",
+          "hours": "{count} h",
+          "days": "{count, plural, one {# día} other {# días}}"
+        },
+        "viewProfile": "Ver perfil · {count, plural, =0 {sin anuncios activos} one {# anuncio} other {# anuncios}}"
+      },
+      "safety": {
+        "title": "Compra con seguridad",
+        "tip1": "No pagues nada por adelantado.",
+        "tip2": "Queda en un lugar público y concurrido.",
+        "tip3": "Revisa el producto antes de pagar."
+      }
+    },
+    "favorites": {
+      "metaTitle": "Favoritos",
+      "title": "Favoritos",
+      "loading": "Cargando tus favoritos…",
+      "empty": "Aún no tienes favoritos. Pulsa el corazón de un anuncio para guardarlo aquí.",
+      "explore": "Ver anuncios",
+      "save": "Guardar en favoritos",
+      "remove": "Quitar de favoritos",
+      "unavailableTitle": "Anuncio no disponible",
+      "status": {
+        "sold": "Vendido",
+        "paused": "Pausado por el vendedor",
+        "expired": "Caducado",
+        "unavailable": "Ya no está disponible"
+      }
+    }
+  },
+  "errorPage": {
+    "title": "No se ha podido cargar",
+    "body": "Puede que se haya cortado la conexión. Comprueba tu red y vuelve a intentarlo.",
+    "retry": "Reintentar"
   }
 }

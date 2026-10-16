@@ -191,6 +191,46 @@ export type Database = {
           },
         ]
       }
+      favorites: {
+        Row: {
+          created_at: string
+          listing_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          listing_id: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          listing_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "favorites_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listing_cards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "favorites_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "favorites_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       listing_images: {
         Row: {
           created_at: string
@@ -223,6 +263,13 @@ export type Database = {
           width?: number
         }
         Relationships: [
+          {
+            foreignKeyName: "listing_images_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listing_cards"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "listing_images_listing_id_fkey"
             columns: ["listing_id"]
@@ -568,7 +615,57 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      listing_cards: {
+        Row: {
+          category_id: number | null
+          city_id: number | null
+          code: string | null
+          condition: Database["public"]["Enums"]["item_condition"] | null
+          cover_format: string | null
+          cover_path: string | null
+          id: string | null
+          is_negotiable: boolean | null
+          neighborhood: string | null
+          price_xaf: number | null
+          published_at: string | null
+          root_category_id: number | null
+          seller_is_premium: boolean | null
+          sold_at: string | null
+          status: Database["public"]["Enums"]["listing_status"] | null
+          title: string | null
+          user_id: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "listings_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "listings_city_id_fkey"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "cities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "listings_root_category_id_fkey"
+            columns: ["root_category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "listings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       check_rate_limit: {
@@ -647,12 +744,64 @@ export type Database = {
         }
       }
       mark_listing_sold: { Args: { p_listing_id: string }; Returns: undefined }
+      my_favorites: {
+        Args: { p_limit?: number }
+        Returns: {
+          availability: string
+          category_id: number
+          city_id: number
+          code: string
+          cover_format: string
+          cover_path: string
+          favorited_at: string
+          is_negotiable: boolean
+          listing_id: string
+          neighborhood: string
+          price_xaf: number
+          published_at: string
+          title: string
+        }[]
+      }
       pause_listing: { Args: { p_listing_id: string }; Returns: undefined }
       publish_listing: { Args: { p_listing_id: string }; Returns: undefined }
       reactivate_listing: { Args: { p_listing_id: string }; Returns: undefined }
+      register_listing_view: {
+        Args: { p_listing_id: string }
+        Returns: undefined
+      }
       renew_listing: { Args: { p_listing_id: string }; Returns: undefined }
       renew_premium_listings: { Args: never; Returns: number }
       resolve_login_email: { Args: { p_identifier: string }; Returns: string }
+      search_listings: {
+        Args: {
+          p_attributes?: Json
+          p_category_id?: number
+          p_city_id?: number
+          p_condition?: Database["public"]["Enums"]["item_condition"]
+          p_limit?: number
+          p_price_max?: number
+          p_price_min?: number
+          p_query?: string
+          p_ranges?: Json
+          p_sort?: string
+        }
+        Returns: {
+          category_id: number
+          city_id: number
+          code: string
+          condition: Database["public"]["Enums"]["item_condition"]
+          cover_format: string
+          cover_path: string
+          id: string
+          is_negotiable: boolean
+          neighborhood: string
+          price_xaf: number
+          published_at: string
+          seller_is_premium: boolean
+          title: string
+          total_count: number
+        }[]
+      }
       set_listing_cover: { Args: { p_image_id: string }; Returns: undefined }
     }
     Enums: {

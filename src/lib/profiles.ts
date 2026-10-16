@@ -14,7 +14,7 @@ export async function getPublicProfile(username: string) {
   const { data } = await createPublicClient()
     .from("profiles")
     .select(
-      "id, username, display_name, avatar_path, bio, created_at, premium_until, city:cities(name)",
+      "id, username, display_name, avatar_path, bio, created_at, premium_until, response_time_minutes, city:cities(name)",
     )
     .eq("username", username)
     .maybeSingle();

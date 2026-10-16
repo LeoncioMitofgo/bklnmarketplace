@@ -1,6 +1,6 @@
 # Roadmap — BKLN Marketplace
 
-**Estado: Fase 0 en curso.** Marca cada casilla al completarla (con fecha si es un hito).
+**Estado: Fase 1 en curso** (1.1, 1.2 y 1.3 hechas). Marca cada casilla al completarla (con fecha si es un hito).
 
 ---
 
@@ -61,16 +61,22 @@
 - [ ] Avisos de caducidad por email (cuando se configure Resend; Vercel Cron)
 - [x] Control de límites por plan, aplicado en la base de datos (2026-10-16): anuncios activos, fotos, duración y ritmo diario
 - [x] Capa de datos de anuncios probada de extremo a extremo (2026-10-16): 37 comprobaciones de la base de datos y 11 de páginas con sesión
-- [ ] Probar en el móvil la subida de fotos (compresión real en Android e iPhone) y el asistente completo (lo hace el usuario)
+- [x] Probar en el móvil el asistente completo y la subida de fotos en Android (2026-10-16): primer anuncio real, 3 fotos WebP de 14–127 KB
+- [ ] Probar la subida de fotos en un iPhone (JPEG)
 - [ ] Limpieza programada de los ficheros de Storage de anuncios borrados y de fotos huérfanas (Vercel Cron)
 
 ### 1.3 Catálogo público
-- [ ] Home: categorías, destacados Premium, recientes
-- [ ] Búsqueda, filtros y orden
-- [ ] Ficha de anuncio, compartir con Open Graph y anuncios similares
-- [ ] Perfil público del vendedor
-- [ ] Favoritos
-- [ ] SEO: URLs, sitemap, datos estructurados
+- [x] Home: categorías, destacados Premium, recientes (2026-10-16). Sustituye a "Próximamente" (D-044)
+- [x] Búsqueda, filtros y orden (2026-10-16):
+  - `/buscar` y `/categoria/<slug>`, con la RPC `search_listings`.
+  - Filtros en la URL y en una hoja que funciona sin JavaScript (D-045).
+  - "Ver más" sin scroll infinito (D-041).
+- [x] Ficha de anuncio (`/anuncio/<título-ciudad>-<código>`), compartir (menú del móvil o WhatsApp) con Open Graph, contador de vistas y anuncios similares (2026-10-16). El chat y el botón de WhatsApp llegan en 1.4
+- [x] Perfil público del vendedor con sus anuncios en venta y vendidos recientes (2026-10-16)
+- [x] Favoritos: corazón en la ficha y `/favoritos`, que indica si se vendió, se pausó o caducó (2026-10-16, D-042)
+- [x] SEO: URLs legibles, canonical, sitemap y JSON-LD Product/Offer (2026-10-16). La indexación queda bloqueada hasta el lanzamiento (D-043)
+- [x] Probado de extremo a extremo (2026-10-16): 53 comprobaciones de base de datos y páginas, más 29 en un navegador móvil real a 360 px (hoja de filtros, "Ver más", atrás, favorito sin sesión → entrar → vuelta)
+- [ ] Probar en el móvil el inicio, la búsqueda, los filtros, la ficha y los favoritos (lo hace el usuario)
 
 ### 1.4 Contacto
 - [ ] Chat en tiempo real por anuncio (texto e imagen)
@@ -94,9 +100,11 @@
 
 ### 1.7 Lanzamiento
 - [ ] Analítica básica y monitorización de errores
+- [ ] Recortar el JavaScript de primera carga de las páginas públicas (~160 KB comprimidos en la 1.3; la base de React y Next son ~115 KB). Candidatos: el formateador de mensajes de next-intl en el cliente (~12 KB) y Analytics (~6 KB)
 - [ ] Pruebas en Android de gama baja con red lenta
 - [ ] Sembrar anuncios con vendedores y tiendas fundadoras
 - [ ] Proyecto Supabase de producción (Pro, Londres) y Vercel Pro. **Cambiar las variables de producción de Vercel al proyecto nuevo** (D-036)
+- [ ] Abrir la indexación: `SITE_INDEXABLE=true` en las variables de producción de Vercel (D-043)
 - [ ] Despliegue en producción
 
 ## Fase 2 — Crecimiento
