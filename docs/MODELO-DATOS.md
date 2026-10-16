@@ -180,8 +180,8 @@ Lleva también `is_active boolean`, para retirar una modalidad sin borrarla.
 | `root_category_id` | `integer` | Lo rellena un trigger; sirve para filtrar rápido por categoría principal |
 | `city_id` | `smallint` | → `cities` |
 | `neighborhood` | `text` null | Barrio o zona, máximo 80 caracteres |
-| `title` | `text` | 5–80 caracteres |
-| `description` | `text` | 1–4000 caracteres |
+| `title` | `text` null | 5–80 caracteres. Null mientras es borrador; `publish_listing` lo exige |
+| `description` | `text` null | Hasta 4000 caracteres. Null mientras es borrador; `publish_listing` lo exige |
 | `price_xaf` | `bigint` null | ≥ 0. Solo puede ser null si la categoría no exige precio |
 | `is_negotiable` | `boolean` | |
 | `condition` | `item_condition` null | `new` · `used`. Solo si la categoría lo usa |
@@ -202,7 +202,8 @@ Lleva también `is_active boolean`, para retirar una modalidad sin borrarla.
 |---|---|---|
 | `id` | `uuid` PK | |
 | `listing_id` | `uuid` | → `listings`, en cascada |
-| `storage_path` | `text` | Base `{user_id}/{listing_id}/{id}`; los ficheros son `-l.webp` (grande) y `-t.webp` (miniatura) |
+| `storage_path` | `text` | Base `{user_id}/{listing_id}/{id}`; los ficheros son `{base}-l.{format}` (grande) y `{base}-t.{format}` (miniatura). Un trigger comprueba que la ruta sea del dueño |
+| `format` | `text` | `webp`, o `jpg` en navegadores que no generan WebP, como Safari (D-039) |
 | `width`, `height` | `integer` | De la imagen grande; evitan que la página salte al cargar |
 | `position` | `smallint` | 0 = portada. Único por anuncio (restricción diferible, para poder reordenar) |
 | `created_at` | `timestamptz` | |
@@ -403,7 +404,7 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
 
 | Bucket | Acceso | Ruta | Reglas |
 |---|---|---|---|
-| `listing-images` | Público | `{user_id}/{listing_id}/{image_id}-l.webp` / `-t.webp` | Solo WebP, máximo 1 MB. Solo se escribe en la carpeta propia (`{user_id}` = `auth.uid()`) |
+| `listing-images` | Público | `{user_id}/{listing_id}/{image_id}-l.{webp,jpg}` / `-t.{webp,jpg}` | WebP o JPEG, máximo 1 MB. Se sube con URLs firmadas que crea el servidor tras comprobar el dueño y el límite de fotos; los usuarios no tienen permisos de escritura en Storage (D-039) |
 | `profile-media` | Público | `{user_id}/avatar.webp`, `{user_id}/logo.webp`, `{user_id}/cover.webp` | Solo WebP, máximo 1 MB, carpeta propia |
 | `chat-images` | **Privado** | `{conversation_id}/{uuid}.webp` | Leen y escriben solo los participantes; se sirven con URL firmada |
 

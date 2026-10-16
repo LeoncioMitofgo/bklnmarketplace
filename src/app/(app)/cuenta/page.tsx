@@ -60,9 +60,14 @@ async function AccountContent() {
         <div className="flex min-w-0 flex-col gap-1">
           <p className="truncate text-lg font-bold">{profile.display_name}</p>
           <p className="text-sm text-text-muted">@{profile.username}</p>
-          <Link href={`/u/${profile.username}`} className="text-sm font-semibold text-primary">
-            {t("publicProfile")}
-          </Link>
+          <div className="flex flex-wrap gap-x-4">
+            <Link href="/mis-anuncios" className="text-sm font-semibold text-primary">
+              {t("myListings")}
+            </Link>
+            <Link href={`/u/${profile.username}`} className="text-sm font-semibold text-primary">
+              {t("publicProfile")}
+            </Link>
+          </div>
         </div>
       </section>
 

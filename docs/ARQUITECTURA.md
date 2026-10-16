@@ -126,8 +126,13 @@ Criterios:
 - **Límite de intentos:** contador propio por identificador e IP en `rate_limits`.
 
 ### 5.2 Imágenes
-1. En el móvil, cada foto se recomprime con canvas en dos variantes WebP: grande (lado largo de 1600 px como máximo) y miniatura (480 px como máximo). Al recomprimir desaparecen los metadatos EXIF y el GPS.
-2. Se sube directamente a Storage, a la ruta `listing-images/{user_id}/{listing_id}/…`, con reintento y barra de progreso. Una política de RLS solo permite escribir en la carpeta propia.
+1. En el móvil, cada foto se recomprime con canvas en dos variantes: grande (lado largo de 1600 px como máximo) y miniatura (480 px como máximo).
+   - El formato es WebP. Si el navegador no sabe generarlo, como Safari, se usa JPEG.
+   - Si la foto grande pasa de 1 MB, se baja la calidad.
+   - Al recomprimir desaparecen los metadatos EXIF y el GPS.
+2. El servidor (`prepareImageUpload`) comprueba el dueño y el límite de fotos y crea dos URLs de subida firmadas.
+3. El móvil sube cada variante con `XMLHttpRequest`, para tener progreso real. Si algo falla, se puede reintentar.
+4. `confirmImageUpload` registra la foto en `listing_images`; un trigger vuelve a comprobar la ruta y el límite (D-039).
 3. Se muestran con `<img>`, `srcset` (miniatura o grande), `loading="lazy"` y `width`/`height` fijados para que la página no salte. No se usa el optimizador de Vercel.
 4. Las imágenes huérfanas (sin anuncio a las 24 h) se borran con un cron que usa la API de Storage.
 

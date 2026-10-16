@@ -42,7 +42,8 @@
 - [x] Registro (`/registro`) y login (`/entrar`) con usuario, email o teléfono + contraseña (2026-10-16)
 - [x] Confirmación de email propia (`/verificar-email`), recuperación de contraseña (`/recuperar` → `/nueva-contrasena`) y límite de intentos (2026-10-16)
 - [x] Perfil público `/u/<usuario>` (cacheado), `/cuenta` y vuelta al punto de origen tras el login (2026-10-16)
-- [ ] Probar los flujos en el navegador. Hace falta antes: "Confirm email" desactivado en Supabase, `SUPABASE_SECRET_KEY` en `.env.local` y en Vercel, y Resend configurado para que los emails salgan de verdad
+- [x] Capa de datos de auth probada de extremo a extremo contra el proyecto dev: 22 comprobaciones de registro, login, RLS, tokens, límites y recuperación (2026-10-16)
+- [ ] Probar los formularios en el navegador (lo hace el usuario). Los emails de verificación y recuperación solo salen cuando se configure Resend; en local (`pnpm dev`) se escriben en la terminal
 - [x] Configuración de planes: tablas `plans` y `plan_prices` + `current_plan()` (2026-10-16)
 - [x] Datos iniciales: 13 categorías, 49 subcategorías, 40 atributos, 16 ciudades y ajustes (2026-10-16)
 - [x] Base de datos de usuarios (2026-10-16):
@@ -51,10 +52,17 @@
   - `resolve_login_email()`, que solo puede ejecutar el servidor.
 
 ### 1.2 Anuncios
-- [ ] Asistente de publicación con compresión de fotos en el dispositivo, borrador y atributos por categoría
-- [ ] Mis anuncios: editar, pausar/reactivar, vendido, renovar, eliminar
-- [ ] Caducidad automática y avisos de caducidad
-- [ ] Control de límites por plan
+- [x] Asistente de publicación (2026-10-16), en `/publicar` → `/publicar/[id]`:
+  - 4 pasos.
+  - Fotos comprimidas en el móvil, subidas con progreso real y con opción de reintentar.
+  - Borrador en la base de datos y atributos según la categoría.
+- [x] Mis anuncios (`/mis-anuncios`): pestañas por estado, editar, pausar/reactivar, vendido, renovar y eliminar (2026-10-16)
+- [x] Caducidad automática y renovación automática Premium con pg_cron, más el reajuste diario de límites (2026-10-16)
+- [ ] Avisos de caducidad por email (cuando se configure Resend; Vercel Cron)
+- [x] Control de límites por plan, aplicado en la base de datos (2026-10-16): anuncios activos, fotos, duración y ritmo diario
+- [x] Capa de datos de anuncios probada de extremo a extremo (2026-10-16): 37 comprobaciones de la base de datos y 11 de páginas con sesión
+- [ ] Probar en el móvil la subida de fotos (compresión real en Android e iPhone) y el asistente completo (lo hace el usuario)
+- [ ] Limpieza programada de los ficheros de Storage de anuncios borrados y de fotos huérfanas (Vercel Cron)
 
 ### 1.3 Catálogo público
 - [ ] Home: categorías, destacados Premium, recientes
@@ -75,7 +83,7 @@
 - [ ] Lista de contenido y palabras prohibidas
 - [ ] Límites de ritmo (publicación y chat)
 - [ ] Avisos anti‑estafa (ficha + chat)
-- [ ] Términos, privacidad y borrar cuenta
+- [ ] Términos, privacidad y borrar cuenta. Al borrar hay que invalidar la caché `profile:<usuario>`; si no, el perfil público sigue visible hasta que caduca
 
 ### 1.6 Premium y administración
 - [ ] Página "Hazte Premium": precios por periodo, formas de pago, solicitud y botón de WhatsApp para el código del envío

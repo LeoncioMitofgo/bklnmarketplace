@@ -71,3 +71,15 @@ _Ninguna decisión de negocio pendiente (2026-10-16)._
 
   · Emails en español y con nuestra marca, sin depender de las plantillas de Supabase y robustos frente a los escáneres de enlaces.
 - **D-038 · 2026-10-16** · **Flujo de git: se trabaja directamente en `main`.** Cada push publica en bklnmarketplace.com. Las pantallas sin terminar quedan accesibles por URL, aunque la home siga mostrando "Próximamente". · Decisión del cliente; se descartó una rama de desarrollo con previews.
+- **D-039 · 2026-10-16** · **Subida de fotos (matiza D-019):**
+  - El servidor crea URLs firmadas tras comprobar el dueño y el límite de fotos, y el móvil sube con progreso real (`XMLHttpRequest`).
+  - Los usuarios no tienen permisos de escritura en Storage.
+  - WebP, con JPEG como respaldo, porque Safari no genera WebP desde canvas; el bucket admite los dos.
+
+  · El progreso visible importa con datos lentos. Además, con URLs firmadas nadie puede subir ficheros fuera de su anuncio ni pasarse del límite.
+- **D-040 · 2026-10-16** · **Borradores de anuncio en la base de datos:**
+  - El borrador se crea al pulsar "Empezar un anuncio nuevo" (como mucho 10 abiertos por usuario) y cada paso se guarda en el servidor.
+  - En el paso de detalles, además, se guarda una copia en el navegador por si se corta la red.
+  - Crear el borrador es una acción explícita (botón), no una visita a una URL, para que la precarga de enlaces no genere borradores.
+
+  · Así se retoma desde cualquier dispositivo y nunca se pierde lo escrito (ALCANCE §4.4).

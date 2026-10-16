@@ -8,9 +8,9 @@ Marketplace de clasificados generalista (modelo Jiji + perfiles de vendedor tipo
 - El proyecto Next.js 16 y la configuración de Vercel.
 - Las migraciones de configuración y usuarios, aplicadas en el proyecto dev.
 
-Registro, login, verificación de email, recuperación de contraseña, `/cuenta`, `/u/<usuario>` y la barra inferior están hechos. Falta probarlos en el navegador: ver la casilla pendiente de ROADMAP 1.1.
+1.1 (auth, cuenta, perfil y barra inferior) y 1.2 (anuncios: publicar, Mis anuncios, caducidad y límites) están hechos y probados contra la base de datos. Las pruebas en el móvil quedan pendientes del usuario (ver las casillas sin marcar de ROADMAP).
 
-**Siguiente:** 1.2 Anuncios (publicar, mis anuncios, caducidad, límites por plan).
+**Siguiente:** 1.3 Catálogo público (home, búsqueda, ficha de anuncio, perfil público con anuncios, favoritos y SEO).
 
 ## Recursos
 

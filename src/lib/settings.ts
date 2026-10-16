@@ -34,3 +34,21 @@ export async function getRateLimits(): Promise<RateLimits> {
   }
   return data.value as RateLimits;
 }
+
+/** Días antes de caducar en los que ya se puede renovar un anuncio (ALCANCE §5.1). */
+export async function getRenewWindowDays(): Promise<number> {
+  "use cache";
+  cacheTag("app-settings");
+  cacheLife("hours");
+
+  const { data, error } = await createAdminClient()
+    .from("app_settings")
+    .select("value")
+    .eq("key", "renew_window_days")
+    .single();
+
+  if (error || !data) {
+    throw new Error(`No se pudo leer renew_window_days: ${error?.message}`);
+  }
+  return Number(data.value);
+}

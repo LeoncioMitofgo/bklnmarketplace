@@ -191,6 +191,157 @@ export type Database = {
           },
         ]
       }
+      listing_images: {
+        Row: {
+          created_at: string
+          format: string
+          height: number
+          id: string
+          listing_id: string
+          position: number
+          storage_path: string
+          width: number
+        }
+        Insert: {
+          created_at?: string
+          format?: string
+          height: number
+          id?: string
+          listing_id: string
+          position?: number
+          storage_path: string
+          width: number
+        }
+        Update: {
+          created_at?: string
+          format?: string
+          height?: number
+          id?: string
+          listing_id?: string
+          position?: number
+          storage_path?: string
+          width?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "listing_images_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      listings: {
+        Row: {
+          attributes: Json
+          category_id: number | null
+          city_id: number | null
+          code: string
+          condition: Database["public"]["Enums"]["item_condition"] | null
+          created_at: string
+          deleted_at: string | null
+          description: string | null
+          expires_at: string | null
+          first_published_at: string | null
+          id: string
+          is_negotiable: boolean
+          moderation_reason: string | null
+          neighborhood: string | null
+          price_xaf: number | null
+          published_at: string | null
+          root_category_id: number | null
+          search_vector: unknown
+          sold_at: string | null
+          status: Database["public"]["Enums"]["listing_status"]
+          title: string | null
+          updated_at: string
+          user_id: string
+          view_count: number
+        }
+        Insert: {
+          attributes?: Json
+          category_id?: number | null
+          city_id?: number | null
+          code?: string
+          condition?: Database["public"]["Enums"]["item_condition"] | null
+          created_at?: string
+          deleted_at?: string | null
+          description?: string | null
+          expires_at?: string | null
+          first_published_at?: string | null
+          id?: string
+          is_negotiable?: boolean
+          moderation_reason?: string | null
+          neighborhood?: string | null
+          price_xaf?: number | null
+          published_at?: string | null
+          root_category_id?: number | null
+          search_vector?: unknown
+          sold_at?: string | null
+          status?: Database["public"]["Enums"]["listing_status"]
+          title?: string | null
+          updated_at?: string
+          user_id?: string
+          view_count?: number
+        }
+        Update: {
+          attributes?: Json
+          category_id?: number | null
+          city_id?: number | null
+          code?: string
+          condition?: Database["public"]["Enums"]["item_condition"] | null
+          created_at?: string
+          deleted_at?: string | null
+          description?: string | null
+          expires_at?: string | null
+          first_published_at?: string | null
+          id?: string
+          is_negotiable?: boolean
+          moderation_reason?: string | null
+          neighborhood?: string | null
+          price_xaf?: number | null
+          published_at?: string | null
+          root_category_id?: number | null
+          search_vector?: unknown
+          sold_at?: string | null
+          status?: Database["public"]["Enums"]["listing_status"]
+          title?: string | null
+          updated_at?: string
+          user_id?: string
+          view_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "listings_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "listings_city_id_fkey"
+            columns: ["city_id"]
+            isOneToOne: false
+            referencedRelation: "cities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "listings_root_category_id_fkey"
+            columns: ["root_category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "listings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       plan_prices: {
         Row: {
           is_active: boolean
@@ -447,15 +598,76 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      delete_listing: { Args: { p_listing_id: string }; Returns: undefined }
+      enforce_plan_limits: { Args: never; Returns: number }
+      expire_listings: { Args: never; Returns: number }
       f_unaccent: { Args: { "": string }; Returns: string }
+      find_banned_term: { Args: { p_text: string }; Returns: string }
+      generate_listing_code: { Args: never; Returns: string }
       is_admin: { Args: never; Returns: boolean }
       is_premium: { Args: { p_user_id: string }; Returns: boolean }
       is_reserved_username: { Args: { p_username: string }; Returns: boolean }
+      listing_assert_can_activate: {
+        Args: { p_listing_id: string; p_user_id: string }
+        Returns: undefined
+      }
+      listing_for_owner: {
+        Args: { p_listing_id: string }
+        Returns: {
+          attributes: Json
+          category_id: number | null
+          city_id: number | null
+          code: string
+          condition: Database["public"]["Enums"]["item_condition"] | null
+          created_at: string
+          deleted_at: string | null
+          description: string | null
+          expires_at: string | null
+          first_published_at: string | null
+          id: string
+          is_negotiable: boolean
+          moderation_reason: string | null
+          neighborhood: string | null
+          price_xaf: number | null
+          published_at: string | null
+          root_category_id: number | null
+          search_vector: unknown
+          sold_at: string | null
+          status: Database["public"]["Enums"]["listing_status"]
+          title: string | null
+          updated_at: string
+          user_id: string
+          view_count: number
+        }
+        SetofOptions: {
+          from: "*"
+          to: "listings"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      mark_listing_sold: { Args: { p_listing_id: string }; Returns: undefined }
+      pause_listing: { Args: { p_listing_id: string }; Returns: undefined }
+      publish_listing: { Args: { p_listing_id: string }; Returns: undefined }
+      reactivate_listing: { Args: { p_listing_id: string }; Returns: undefined }
+      renew_listing: { Args: { p_listing_id: string }; Returns: undefined }
+      renew_premium_listings: { Args: never; Returns: number }
       resolve_login_email: { Args: { p_identifier: string }; Returns: string }
+      set_listing_cover: { Args: { p_image_id: string }; Returns: undefined }
     }
     Enums: {
       account_status: "active" | "suspended" | "banned"
       attribute_type: "text" | "number" | "select" | "boolean"
+      item_condition: "new" | "used"
+      listing_status:
+        | "draft"
+        | "active"
+        | "paused"
+        | "sold"
+        | "expired"
+        | "under_review"
+        | "blocked"
+        | "deleted"
       price_period: "total" | "month"
       user_role: "user" | "admin"
     }
@@ -587,6 +799,17 @@ export const Constants = {
     Enums: {
       account_status: ["active", "suspended", "banned"],
       attribute_type: ["text", "number", "select", "boolean"],
+      item_condition: ["new", "used"],
+      listing_status: [
+        "draft",
+        "active",
+        "paused",
+        "sold",
+        "expired",
+        "under_review",
+        "blocked",
+        "deleted",
+      ],
       price_period: ["total", "month"],
       user_role: ["user", "admin"],
     },
