@@ -103,6 +103,7 @@
 - [ ] Recortar el JavaScript de primera carga de las páginas públicas (~160 KB comprimidos en la 1.3; la base de React y Next son ~115 KB). Candidatos: el formateador de mensajes de next-intl en el cliente (~12 KB) y Analytics (~6 KB)
 - [ ] Pruebas en Android de gama baja con red lenta
 - [ ] Sembrar anuncios con vendedores y tiendas fundadoras
+- [ ] Si se lanza sobre el proyecto dev, borrar antes las cuentas de demostración (D-047): son las de `user_metadata.demo = true` en Supabase Auth; al borrarlas desaparecen sus anuncios, y sus fotos hay que quitarlas de Storage
 - [ ] Proyecto Supabase de producción (Pro, Londres) y Vercel Pro. **Cambiar las variables de producción de Vercel al proyecto nuevo** (D-036)
 - [ ] Abrir la indexación: `SITE_INDEXABLE=true` en las variables de producción de Vercel (D-043)
 - [ ] Despliegue en producción

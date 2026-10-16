@@ -98,3 +98,4 @@ _Ninguna decisión de negocio pendiente (2026-10-16)._
 
   · Páginas compartibles y que funcionan en cualquier navegador, sin peticiones extra con datos lentos.
 - **D-046 · 2026-10-16** · **Textos de interfaz en el cliente por zona:** cada grupo de rutas pasa a `NextIntlClientProvider` solo los textos de sus componentes de cliente (`src/i18n/client-messages.ts`). · Antes cada página llevaba en su HTML el `es.json` entero (unos 20 KB sin comprimir).
+- **D-047 · 2026-10-17** · **Datos de demostración en el proyecto dev:** 7 vendedores ficticios (2 Premium) y 24 anuncios con fotos de Unsplash, descargadas en WebP y subidas a nuestro Storage como las de un anuncio real. Las cuentas llevan `user_metadata.demo = true` y teléfonos `+240000000xxx`, para borrarlas de una vez. · Petición del cliente, para probar el catálogo con contenido variado. No pasan al proyecto de producción (D-036).

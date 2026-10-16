@@ -47,7 +47,8 @@ export async function SearchResults({ filters, catalog, basePath, title }: Props
   const keep = [...toSearchParams({ ...filters, q: "", pages: 1 }, catalog).entries()];
   const shown = result.cards.length;
   const canLoadMore = result.total > shown && filters.pages < MAX_PAGES;
-  const activeFilters = countActiveFilters(filters);
+  // En /categoria/<slug> la categoría es la página, no un filtro.
+  const activeFilters = countActiveFilters(omitCategory ? { ...filters, category: null } : filters);
 
   return (
     <>

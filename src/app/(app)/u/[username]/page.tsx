@@ -115,7 +115,7 @@ async function ProfileContent({
           <ul className="grid grid-cols-2 gap-x-3 gap-y-5">
             {listings.active.map((listing, index) => (
               <li key={listing.id} id={`a${index + 1}`} className="scroll-mt-4">
-                <ListingCard listing={listing} catalog={catalog} now={now} />
+                <ListingCard listing={listing} catalog={catalog} now={now} hidePremium />
               </li>
             ))}
           </ul>
@@ -136,7 +136,7 @@ async function ProfileContent({
           <ul className="grid grid-cols-2 gap-x-3 gap-y-5">
             {listings.sold.map((listing) => (
               <li key={listing.id}>
-                <ListingCard listing={listing} catalog={catalog} now={now} />
+                <ListingCard listing={listing} catalog={catalog} now={now} hidePremium />
               </li>
             ))}
           </ul>

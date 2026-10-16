@@ -48,8 +48,8 @@ function Cover({ src }: { src: string | null }) {
   ) : null;
 }
 
-/** Tarjeta vertical: rejillas y carrusel de destacados. */
-export async function ListingCard(props: CardProps) {
+/** Tarjeta vertical: rejillas y carrusel de destacados. En el perfil de un Premium, sin insignia repetida. */
+export async function ListingCard(props: CardProps & { hidePremium?: boolean }) {
   const { listing } = props;
   const { t, href, price, place, time, cover } = await cardData(props);
   return (
@@ -58,7 +58,9 @@ export async function ListingCard(props: CardProps) {
         <Cover src={cover} />
         <div className="absolute left-2 top-2 flex gap-1">
           {listing.status === "sold" ? <Badge tone="sold">{t("sold")}</Badge> : null}
-          {listing.seller_is_premium ? <Badge tone="premium">{t("premium")}</Badge> : null}
+          {listing.seller_is_premium && !props.hidePremium ? (
+            <Badge tone="premium">{t("premium")}</Badge>
+          ) : null}
         </div>
       </div>
       <p className="mt-1 font-display text-[15px] font-extrabold text-primary">{price}</p>
