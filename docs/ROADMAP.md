@@ -89,7 +89,7 @@
   - Aviso con el nombre y el mensaje, que abre la conversación.
   - Al cerrar sesión se da de baja el móvil.
   - Probado con Chrome real: el servidor envía y FCM acepta; el service worker muestra el aviso.
-- [ ] Poner las claves VAPID en Vercel (lo hace el usuario) y volver a desplegar. Sin ellas, los avisos están apagados en producción
+- [x] Claves VAPID en Vercel (Production) y nuevo despliegue (2026-10-17). Comprobado contra bklnmarketplace.com: FCM acepta los avisos firmados por el servidor
 - [ ] Avisos push en iPhone: solo con la web instalada en la pantalla de inicio (fase 2, PWA)
 - [ ] Email de respaldo por mensajes sin leer (cuando se configure Resend)
 - [ ] Probar el chat en el móvil entre dos cuentas (lo hace el usuario)
