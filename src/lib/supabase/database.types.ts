@@ -631,6 +631,124 @@ export type Database = {
         }
         Relationships: []
       }
+      premium_activations: {
+        Row: {
+          amount_xaf: number
+          created_at: string
+          created_by: string | null
+          id: string
+          method: Database["public"]["Enums"]["payment_method"]
+          months: number
+          notes: string | null
+          period_end: string
+          period_start: string
+          reference: string
+          request_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          amount_xaf: number
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          method: Database["public"]["Enums"]["payment_method"]
+          months: number
+          notes?: string | null
+          period_end: string
+          period_start: string
+          reference: string
+          request_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          amount_xaf?: number
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          method?: Database["public"]["Enums"]["payment_method"]
+          months?: number
+          notes?: string | null
+          period_end?: string
+          period_start?: string
+          reference?: string
+          request_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "premium_activations_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "premium_activations_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "premium_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "premium_activations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      premium_requests: {
+        Row: {
+          created_at: string
+          handled_at: string | null
+          handled_by: string | null
+          id: string
+          months: number
+          payment_method: Database["public"]["Enums"]["payment_method"]
+          price_xaf: number
+          status: Database["public"]["Enums"]["premium_request_status"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          handled_at?: string | null
+          handled_by?: string | null
+          id?: string
+          months: number
+          payment_method: Database["public"]["Enums"]["payment_method"]
+          price_xaf: number
+          status?: Database["public"]["Enums"]["premium_request_status"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          handled_at?: string | null
+          handled_by?: string | null
+          id?: string
+          months?: number
+          payment_method?: Database["public"]["Enums"]["payment_method"]
+          price_xaf?: number
+          status?: Database["public"]["Enums"]["premium_request_status"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "premium_requests_handled_by_fkey"
+            columns: ["handled_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "premium_requests_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profile_private: {
         Row: {
           email_verified_at: string | null
@@ -984,6 +1102,62 @@ export type Database = {
           name: string
         }[]
       }
+      admin_activate_premium: {
+        Args: {
+          p_amount_xaf: number
+          p_method: Database["public"]["Enums"]["payment_method"]
+          p_months: number
+          p_notes?: string
+          p_reference: string
+          p_user_id: string
+        }
+        Returns: string
+      }
+      admin_assert: { Args: never; Returns: string }
+      admin_block_listing: {
+        Args: { p_listing_id: string; p_reason: string }
+        Returns: undefined
+      }
+      admin_close_report: {
+        Args: {
+          p_note?: string
+          p_report_id: string
+          p_status: Database["public"]["Enums"]["report_status"]
+        }
+        Returns: undefined
+      }
+      admin_metrics: { Args: never; Returns: Json }
+      admin_restore_listing: {
+        Args: { p_listing_id: string; p_reason: string }
+        Returns: undefined
+      }
+      admin_set_banned: {
+        Args: { p_banned: boolean; p_reason: string; p_user_id: string }
+        Returns: undefined
+      }
+      admin_suspend_user: {
+        Args: { p_days: number; p_reason: string; p_user_id: string }
+        Returns: undefined
+      }
+      admin_users: {
+        Args: { p_limit?: number; p_query?: string; p_user_id?: string }
+        Returns: {
+          active_listings: number
+          created_at: string
+          display_name: string
+          email: string
+          email_verified_at: string
+          id: string
+          open_reports: number
+          phone: string
+          premium_until: string
+          role: Database["public"]["Enums"]["user_role"]
+          status: Database["public"]["Enums"]["account_status"]
+          suspended_until: string
+          username: string
+        }[]
+      }
+      cancel_premium_request: { Args: never; Returns: undefined }
       chat_assert_can_write: { Args: { p_user_id: string }; Returns: undefined }
       chat_rate_limit: {
         Args: {
@@ -1157,6 +1331,13 @@ export type Database = {
         Returns: string
       }
       report_rate_limit: { Args: { p_user_id: string }; Returns: undefined }
+      request_premium: {
+        Args: {
+          p_method: Database["public"]["Enums"]["payment_method"]
+          p_months: number
+        }
+        Returns: string
+      }
       resolve_login_email: { Args: { p_identifier: string }; Returns: string }
       search_listings: {
         Args: {
@@ -1227,6 +1408,12 @@ export type Database = {
         | "under_review"
         | "blocked"
         | "deleted"
+      payment_method:
+        | "cash_office"
+        | "money_transfer_agency"
+        | "bank_transfer"
+        | "rosa_money"
+      premium_request_status: "pending" | "completed" | "cancelled"
       price_period: "total" | "month"
       report_reason:
         | "scam"
@@ -1377,6 +1564,13 @@ export const Constants = {
         "blocked",
         "deleted",
       ],
+      payment_method: [
+        "cash_office",
+        "money_transfer_agency",
+        "bank_transfer",
+        "rosa_money",
+      ],
+      premium_request_status: ["pending", "completed", "cancelled"],
       price_period: ["total", "month"],
       report_reason: [
         "scam",

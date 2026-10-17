@@ -8,7 +8,7 @@ import { updateSession } from "@/lib/supabase/proxy";
  */
 function requiresSession(pathname: string): boolean {
   return (
-    /^\/(cuenta|favoritos|mis-anuncios|mensajes|publicar)(\/|$)/.test(pathname) ||
+    /^\/(cuenta|favoritos|mis-anuncios|mensajes|publicar|admin)(\/|$)/.test(pathname) ||
     /^\/anuncio\/[^/]+\/denunciar$/.test(pathname)
   );
 }

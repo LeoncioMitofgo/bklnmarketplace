@@ -154,7 +154,10 @@
     "pushTitle": "Avisos de mensajes en este móvil",
     "terms": "Términos de uso",
     "privacy": "Privacidad",
-    "deleteAccount": "Borrar mi cuenta"
+    "deleteAccount": "Borrar mi cuenta",
+    "goPremium": "Hazte Premium",
+    "renewPremium": "Renovar",
+    "admin": "Panel de administración"
   },
   "profile": {
     "loading": "Cargando perfil…",
@@ -972,6 +975,290 @@
           ]
         }
       ]
+    }
+  },
+  "premium": {
+    "metaTitle": "Hazte Premium",
+    "description": "Más anuncios, más tiempo publicados, más visibilidad y tu propia tienda en BKLN Marketplace.",
+    "title": "Hazte Premium",
+    "subtitle": "Vende más: más anuncios a la vez, más tiempo publicados, primero en las búsquedas y con tu propia tienda.",
+    "active": "Eres Premium hasta el {date}. Si renuevas ahora, el tiempo nuevo se suma al que te queda.",
+    "compare": {
+      "title": "Normal o Premium",
+      "feature": "Ventaja",
+      "normal": "Normal",
+      "premium": "Premium",
+      "listings": "Anuncios activos a la vez",
+      "photos": "Fotos por anuncio",
+      "duration": "Lo que dura cada anuncio",
+      "days": "{count, plural, one {# día} other {# días}}",
+      "renew": "Renovación de los anuncios",
+      "renewManual": "Manual",
+      "renewAuto": "Automática",
+      "featured": "En «Destacados» del inicio y primero en las búsquedas",
+      "badge": "Insignia Premium",
+      "store": "Tienda con dirección propia (/t/tu-tienda)",
+      "yes": "Sí",
+      "no": "No"
+    },
+    "choose": {
+      "title": "Elige tu periodo",
+      "period": "Periodo",
+      "method": "¿Cómo vas a pagar?",
+      "submit": "Solicitar Premium",
+      "change": "Cambiar la solicitud",
+      "submitting": "Enviando…",
+      "login": "Entra para hacerte Premium",
+      "months": "{count, plural, one {# mes} other {# meses}}",
+      "perMonth": "{price} al mes",
+      "saving": "Ahorras {amount}",
+      "best": "Mejor precio"
+    },
+    "methods": {
+      "cash_office": {
+        "title": "En la oficina, en efectivo",
+        "hint": "Si estás en Malabo."
+      },
+      "money_transfer_agency": {
+        "title": "Por agencia de envío de dinero",
+        "hint": "Si estás fuera de Malabo."
+      }
+    },
+    "pending": {
+      "title": "Tu solicitud está pendiente de pago",
+      "summary": "{months} · {amount} · {method}",
+      "office": "Ven a la oficina con {amount} y di tu nombre de usuario: @{username}. Estamos en {address}, {hours}. Activamos tu Premium al recibir el pago.",
+      "agency": "Envía {amount} por una agencia de envío de dinero a nombre de {beneficiary}. Después mándanos el código del envío por WhatsApp y activaremos tu Premium en cuanto lo comprobemos.",
+      "whatsapp": "Enviar el código por WhatsApp",
+      "whatsappText": "Hola, soy @{username}. He enviado {amount} por agencia para Premium de {months}. Código del envío: ",
+      "cancel": "Cancelar la solicitud"
+    },
+    "pay": {
+      "title": "Cómo pagar",
+      "officeTitle": "En Malabo: en la oficina",
+      "officeText": "{name}, {address}. {hours}.",
+      "agencyTitle": "Fuera de Malabo: por agencia",
+      "agencyText": "Envía el importe a nombre de {beneficiary} por una agencia de envío de dinero y mándanos el código del envío por WhatsApp al {phone}.",
+      "manual": "Comprobamos cada pago a mano y activamos Premium en cuanto lo vemos. Te avisaremos."
+    },
+    "errors": {
+      "months_required": "Elige un periodo.",
+      "method_required": "Elige cómo vas a pagar.",
+      "premium_invalid": "Ese periodo ya no está disponible. Elige otro.",
+      "account_restricted": "Tu cuenta está restringida ahora mismo.",
+      "unexpected": "Algo ha fallado. Inténtalo de nuevo."
+    }
+  },
+  "notifications": {
+    "premiumTitle": "Ya eres Premium",
+    "premiumBody": "Hasta el {date}. Ya puedes publicar más anuncios y salir en «Destacados».",
+    "blockedTitle": "Hemos bloqueado un anuncio tuyo",
+    "blockedBody": "«{title}»: {reason}"
+  },
+  "admin": {
+    "nav": {
+      "title": "BKLN Admin",
+      "label": "Secciones del panel",
+      "site": "Ver la web",
+      "home": "Resumen",
+      "payments": "Pagos",
+      "reports": "Denuncias",
+      "users": "Usuarios"
+    },
+    "methods": {
+      "cash_office": "Oficina (efectivo)",
+      "money_transfer_agency": "Agencia de envío",
+      "bank_transfer": "Transferencia",
+      "rosa_money": "Rosa Money"
+    },
+    "reasons": {
+      "scam": "Estafa",
+      "prohibited": "Prohibido",
+      "duplicate": "Repetido",
+      "wrong_category": "Categoría equivocada",
+      "offensive": "Ofensivo",
+      "other": "Otro motivo"
+    },
+    "home": {
+      "title": "Pendiente",
+      "pendingRequests": "Pagos por confirmar",
+      "openReports": "Denuncias abiertas",
+      "underReview": "Anuncios ocultos por denuncias",
+      "metrics": "Métricas",
+      "users": "Usuarios",
+      "recent": "+{week} en 7 días · +{month} en 30",
+      "listings": "Anuncios activos",
+      "published": "{week} publicados en 7 días · {month} en 30",
+      "conversations": "Conversaciones (30 días)",
+      "lastWeek": "{count} en los últimos 7 días",
+      "premium": "Premium activos"
+    },
+    "payments": {
+      "title": "Pagos por confirmar",
+      "empty": "No hay solicitudes pendientes.",
+      "summary": "{months, plural, one {# mes} other {# meses}} · {amount}",
+      "register": "Registrar",
+      "recent": "Últimos cobros",
+      "noActivations": "Todavía no hay cobros registrados.",
+      "until": "hasta el {date}",
+      "registeredBy": "Registrado por @{admin} el {date}",
+      "deletedUser": "Cuenta borrada"
+    },
+    "reports": {
+      "title": "Denuncias",
+      "listingsTitle": "Anuncios denunciados",
+      "peopleTitle": "Personas denunciadas desde el chat",
+      "empty": "No hay anuncios con denuncias abiertas.",
+      "emptyPeople": "No hay denuncias abiertas desde el chat.",
+      "count": "{count, plural, one {# denuncia} other {# denuncias}}",
+      "untitled": "Sin título",
+      "deletedUser": "Cuenta borrada",
+      "status": {
+        "draft": "Borrador",
+        "active": "Activo",
+        "paused": "Pausado",
+        "sold": "Vendido",
+        "expired": "Caducado",
+        "under_review": "En revisión",
+        "blocked": "Bloqueado",
+        "deleted": "Eliminado"
+      }
+    },
+    "listing": {
+      "title": "Anuncio denunciado",
+      "back": "← Denuncias",
+      "untitled": "Sin título",
+      "blockedReason": "Motivo del bloqueo: {reason}",
+      "seller": "Vendedor: {name} (@{username})",
+      "viewPublic": "Ver la ficha pública",
+      "reports": "Denuncias abiertas: {count}",
+      "reportStatus": {
+        "resolved": "resuelta",
+        "dismissed": "descartada"
+      },
+      "by": "De @{username} · {date}",
+      "deletedUser": "cuenta borrada",
+      "blockHint": "Deja de verse y el vendedor no puede reactivarlo. Verá el motivo en Mis anuncios y le llegará un aviso.",
+      "block": "Bloquear",
+      "restoreHint": "Vuelve a estar activo y las denuncias abiertas se descartan.",
+      "restore": "Restaurar",
+      "dismissHint": "El anuncio sigue como está y las denuncias abiertas se cierran.",
+      "dismiss": "Descartar denuncias",
+      "reason": "Motivo (al bloquear lo ve el vendedor)",
+      "working": "Guardando…",
+      "moderateTitle": "Moderar",
+      "reasonPlaceholder": "p. ej. Venta de medicamentos con receta · Revisado: es legítimo"
+    },
+    "chatReport": {
+      "title": "Denuncia del chat",
+      "back": "← Denuncias",
+      "heading": "{name} (@{username})",
+      "deletedUser": "Usuario eliminado",
+      "by": "Denunciado por @{username} · {date}",
+      "about": "Conversación sobre «{title}»",
+      "userActions": "Ver la ficha del usuario (suspender o banear) →",
+      "conversation": "Conversación",
+      "noMessages": "No hay mensajes.",
+      "photo": "Foto del chat",
+      "closeTitle": "Cerrar la denuncia",
+      "closeHint": "Para suspender o banear, ve a la ficha del usuario. Aquí solo se cierra la denuncia.",
+      "resolve": "Marcar como resuelta",
+      "dismiss": "Descartar",
+      "note": "Nota (opcional)",
+      "working": "Guardando…",
+      "closed": {
+        "resolved": "Resuelta. Nota: {note}",
+        "dismissed": "Descartada. Nota: {note}"
+      }
+    },
+    "users": {
+      "title": "Usuarios",
+      "search": "Buscar",
+      "searchPlaceholder": "Nombre, @usuario, email o teléfono",
+      "results": "{count, plural, =0 {Ningún resultado} one {# resultado} other {# resultados}}",
+      "latest": "Los últimos en registrarse",
+      "badges": {
+        "admin": "Admin",
+        "premium": "Premium hasta {date}",
+        "banned": "Baneado",
+        "suspended": "Suspendido hasta {date}",
+        "reports": "{count, plural, one {# denuncia} other {# denuncias}}"
+      }
+    },
+    "user": {
+      "title": "Usuario",
+      "back": "← Usuarios",
+      "email": "Email",
+      "unverified": "sin confirmar",
+      "phone": "Teléfono",
+      "since": "Miembro desde",
+      "publicProfile": "Ver su perfil público",
+      "premiumTitle": "Premium",
+      "premiumUntil": "Premium hasta el {date}. Lo que actives ahora se suma a esa fecha.",
+      "premiumNone": "Plan Normal.",
+      "pending": "Solicitud pendiente: {months, plural, one {# mes} other {# meses}} · {amount} · {method} (desde el {date})",
+      "months": "{count, plural, one {# mes} other {# meses}}",
+      "form": {
+        "months": "Periodo",
+        "amount": "Importe cobrado (FCFA)",
+        "method": "Forma de pago",
+        "reference": "Número de recibo o código del envío",
+        "referenceHint": "Cada referencia solo se puede usar una vez. Se guarda en mayúsculas y sin espacios.",
+        "notes": "Notas (opcional)",
+        "until": "Premium hasta el {date}",
+        "activate": "Registrar el pago y activar Premium",
+        "extend": "Registrar el pago y ampliar Premium"
+      },
+      "history": "Cobros",
+      "activation": "{months, plural, one {# mes} other {# meses}} · {amount} · {method} · {reference} · del {from} al {to}",
+      "listingsTitle": "Anuncios",
+      "noListings": "No tiene anuncios.",
+      "isAdmin": "Es administrador: no se le puede suspender ni banear desde el panel.",
+      "moderationTitle": "Moderación",
+      "suspendHint": "Mientras dure, no puede publicar, escribir en el chat ni denunciar.",
+      "days": "Días",
+      "daysOption": "{count, plural, one {# día} other {# días}}",
+      "suspend": "Suspender",
+      "suspendedUntil": "Suspendido hasta el {date}.",
+      "unsuspend": "Quitar la suspensión",
+      "banHint": "Pierde el acceso a su cuenta, su perfil deja de verse y sus anuncios se bloquean.",
+      "ban": "Banear",
+      "bannedNow": "Está baneado. Al quitar el baneo recupera el acceso, pero sus anuncios siguen bloqueados hasta que los restaures.",
+      "unban": "Quitar el baneo",
+      "reason": "Motivo",
+      "working": "Guardando…",
+      "logTitle": "Historial",
+      "log": {
+        "activate_premium": "Premium activado",
+        "suspend_user": "Suspendido",
+        "unsuspend_user": "Suspensión quitada",
+        "ban_user": "Baneado",
+        "unban_user": "Baneo quitado"
+      }
+    },
+    "feedback": {
+      "premiumActivated": "Hecho: Premium hasta el {date}. Le hemos avisado.",
+      "listingBlocked": "Anuncio bloqueado. Le hemos avisado al vendedor.",
+      "listingRestored": "Anuncio restaurado.",
+      "reportsDismissed": "Denuncias descartadas.",
+      "reportResolved": "Denuncia resuelta.",
+      "reportDismissed": "Denuncia descartada.",
+      "suspended": "Suspendido {days} días.",
+      "unsuspended": "Suspensión quitada.",
+      "banned": "Usuario baneado y sus anuncios bloqueados.",
+      "unbanned": "Baneo quitado."
+    },
+    "errors": {
+      "not_admin": "No tienes permiso para hacer esto.",
+      "premium_invalid": "Revisa el periodo, el importe y la referencia.",
+      "premium_reference_used": "Esa referencia ya se usó en otro cobro con la misma forma de pago.",
+      "user_not_found": "Ese usuario ya no existe.",
+      "reason_required": "Escribe el motivo.",
+      "listing_invalid_transition": "El anuncio ya no está en un estado que permita esto. Recarga la página.",
+      "report_invalid": "Estado de denuncia no válido.",
+      "report_not_found": "Esa denuncia ya está cerrada.",
+      "target_is_admin": "No se puede aplicar a un administrador.",
+      "unexpected": "Algo ha fallado. Inténtalo de nuevo."
     }
   }
 }

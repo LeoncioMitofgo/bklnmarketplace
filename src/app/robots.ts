@@ -22,6 +22,7 @@ export default function robots(): MetadataRoute.Robots {
         "/nueva-contrasena",
         "/verificar-email",
         "/anuncio/*/denunciar",
+        "/admin",
       ],
     },
     sitemap: `${siteUrl()}/sitemap.xml`,

@@ -13,7 +13,9 @@ Marketplace de clasificados generalista (modelo Jiji + perfiles de vendedor tipo
 
 Las pruebas en el móvil que quedan pendientes del usuario son las casillas sin marcar de ROADMAP. En el proyecto dev hay datos de demostración (D-047).
 
-**Siguiente:** 1.6 Premium y administración (página "Hazte Premium", panel admin con la cola de denuncias y activación de Premium). Falta también editar el perfil (ALCANCE §4.3), que no estaba en el roadmap.
+- 1.6, primera parte: "Hazte Premium" en `/premium` con solicitud y WhatsApp, y panel `/admin` (pagos y activación de Premium, denuncias con el chat denunciado, usuarios con suspender y banear, métricas) (D-057). El rol de admin se da con SQL.
+
+**Siguiente:** segunda parte de la 1.6: tienda `/t/<slug>`, editar el perfil (ALCANCE §4.3), categorías, ciudades y planes en el admin, y el aviso de Premium por caducar.
 
 ## Recursos
 

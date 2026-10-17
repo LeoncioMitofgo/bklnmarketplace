@@ -112,14 +112,25 @@
 - [ ] Probar en el móvil denunciar, bloquear y borrar una cuenta de prueba (lo hace el usuario)
 
 ### 1.6 Premium y administración
-- [ ] Página "Hazte Premium": precios por periodo, formas de pago, solicitud y botón de WhatsApp para el código del envío
-- [ ] Panel admin: reportes, usuarios, categorías/atributos, ciudades, métricas
-  - Cola de denuncias sobre `reports` (ya existe). Restaurar o bloquear anuncios en revisión: hasta entonces se hace con SQL.
-  - El admin tiene que poder leer las conversaciones denunciadas (MODELO-DATOS §6): falta la política, y la de las fotos de `chat-images`.
+- [x] "Hazte Premium" en `/premium` (2026-10-17, D-057):
+  - Comparativa Normal/Premium y precios por periodo, con el precio por mes y el ahorro. Todo sale de la configuración.
+  - Formas de pago y solicitud, que se puede cambiar o cancelar. Botón de WhatsApp con el usuario, el periodo y el importe.
+  - Se llega desde Mi cuenta ("Hazte Premium" o "Renovar").
+- [x] Panel admin en `/admin`, usable desde el móvil (2026-10-17, D-057):
+  - Resumen con las colas y las métricas básicas.
+  - Pagos por confirmar y últimos cobros.
+  - Denuncias: bloquear, restaurar o descartar; leer el chat denunciado, con sus fotos.
+  - Usuarios: buscar, Premium, suspender y banear (también en Supabase Auth), con historial.
+- [x] Activación y ampliación de Premium con registro de pagos (2026-10-17):
+  - Referencia única por forma de pago; el tiempo nuevo se suma al periodo actual.
+  - Cierra la solicitud y avisa al usuario por push.
+- [x] Avisos push: Premium activado y anuncio bloqueado por moderación (2026-10-17)
+- [x] Probado de extremo a extremo (2026-10-17): 57 comprobaciones de base de datos y 37 en navegador. Se repitieron las pruebas de navegador del catálogo, el chat y la 1.5
+- [ ] Dar el rol de admin a la cuenta del cliente (de momento, con SQL: `profile_private.role = 'admin'`)
+- [ ] Panel admin: categorías y atributos, ciudades y planes (segunda parte de la 1.6)
 - [ ] Editar el perfil y los datos de la cuenta (nombre, ciudad, descripción, usuario, email, teléfono y contraseña; ALCANCE §4.3). No estaba en el roadmap
-- [ ] Activación y extensión de Premium con registro de pagos
 - [ ] Tienda personalizada `/t/<slug>`
-- [ ] Caducidad de Premium: aviso, vuelta a Normal, pausado automático de los anuncios que sobran
+- [ ] Caducidad de Premium: aviso 7 días antes (falta). La vuelta a Normal y el pausado de los anuncios que sobran ya los hace el cron diario `enforce_plan_limits` (1.2), y la tienda deja de verse (RLS de `stores`)
 
 ### 1.7 Lanzamiento
 - [ ] Analítica básica y monitorización de errores

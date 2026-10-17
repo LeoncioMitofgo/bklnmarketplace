@@ -172,7 +172,13 @@ Criterios:
 
 Las rutas de cron se protegen con `CRON_SECRET`. En desarrollo (plan Hobby, como mucho un cron al día) se lanzan a mano.
 
-### 5.6 Caché, SEO y compartir
+### 5.6 Panel de administración (D-057)
+- `/admin`, sin barra inferior y pensado para el móvil. El proxy exige sesión y cada página comprueba `is_admin()`: a quien no es admin le responde "no existe".
+- Todo lo que escribe pasa por RPC `admin_*`, que vuelven a comprobar el rol en la base de datos. El servidor solo usa la clave secreta para banear en Supabase Auth.
+- El admin lee los chats denunciados con la RLS (`conversations`, `messages` y `chat-images` solo si hay una denuncia sobre esa conversación).
+- Cada acción invalida la caché pública que toca: `listings` al bloquear o restaurar, y `listings` + `profile:{usuario}` al activar Premium o banear. Avisa por push con `after()`.
+
+### 5.7 Caché, SEO y compartir
 - Las consultas públicas se cachean con `"use cache"` y etiquetas: `listings` (cualquier anuncio; la invalidan todas las acciones de anuncios), `listing:{código}`, `profile:{usuario}` y `catalog` (categorías y ciudades). Lo de anuncios usa `cacheLife("minutes")`: lo que caduca pg_cron, que no puede invalidar la caché de Next, se refleja en como mucho un minuto.
 - Lo que depende de la sesión (el corazón de favorito, Mi cuenta) va en su propio `<Suspense>` y nunca dentro de una caché compartida. Por eso los listados no llevan corazón (D-042).
 - Next 16 no deja leer la hora al prerenderizar (D-052). `getSessionUser` empieza con `await io()`, así que lo de la sesión queda fuera de la precarga. Los "hace 2 h" de las páginas públicas se calculan con `fetchedAt`, la hora guardada junto a los datos cacheados.

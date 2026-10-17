@@ -44,7 +44,7 @@ async function AccountContent() {
       .single(),
     supabase
       .from("profile_private")
-      .select("phone, email_verified_at, show_whatsapp")
+      .select("phone, email_verified_at, show_whatsapp, role")
       .eq("user_id", user.id)
       .single(),
   ]);
@@ -79,10 +79,13 @@ async function AccountContent() {
       <dl className="flex flex-col divide-y divide-border rounded-card border border-border">
         <div className="flex flex-col gap-1 p-4">
           <dt className="text-xs text-text-muted">{t("plan")}</dt>
-          <dd className="font-semibold">
+          <dd className="flex flex-wrap items-center justify-between gap-2 font-semibold">
             {isPremium && premiumUntil
               ? t("planPremium", { date: format.dateTime(premiumUntil, { dateStyle: "short" }) })
               : t("planNormal")}
+            <Link href="/premium" className="text-sm font-semibold text-primary">
+              {isPremium ? t("renewPremium") : t("goPremium")}
+            </Link>
           </dd>
         </div>
 
@@ -140,6 +143,12 @@ async function AccountContent() {
       <SignOutButton label={t("signOut")} />
 
       <nav className="flex flex-col divide-y divide-border border-t border-border text-[15px]">
+        {priv.role === "admin" ? (
+          <Link href="/admin" className="flex min-h-12 items-center justify-between font-semibold">
+            {t("admin")}
+            <ChevronRightIcon className="size-5 text-text-muted" />
+          </Link>
+        ) : null}
         <Link href="/terminos" className="flex min-h-12 items-center justify-between">
           {t("terms")}
           <ChevronRightIcon className="size-5 text-text-muted" />

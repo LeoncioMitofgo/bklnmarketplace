@@ -149,3 +149,12 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
   - La lista inicial pasa a 37 términos (drogas, medicamentos con receta, armas, documentos y dinero falsos, fauna protegida y servicios sexuales). Se evitan los que dan falsos positivos, como "pistola" (de silicona), "fusil" (de pesca) o "granada" (la fruta).
   - Términos y privacidad en `es.json` (`legal`), como secciones de párrafos y listas, para poder traducirlos.
   - Edad mínima de 18 años y contacto `hello@bklnsoftware.tech`, pendientes de confirmar (ver Pendientes).
+- **D-057 · 2026-10-17** · **Hazte Premium y panel de administración (1.6, primera parte):**
+  - `/premium` es pública: comparativa, precios y formas de pago salen de `plans`, `plan_prices` y `app_settings.office`. Para pedir Premium hace falta sesión.
+  - La solicitud pendiente es una sola: elegir otro periodo o forma de pago la cambia en vez de crear otra.
+  - El cobro se registra en la ficha del usuario del panel, que se abre desde "Pagos". El formulario viene relleno con la solicitud y el importe se puede cambiar (descuentos, Premium gratis a tiendas fundadoras…), pero la referencia es obligatoria.
+  - El panel está en `/admin`. A quien no es admin le responde "no existe". Todas las acciones van por RPC que comprueban el rol, y ninguna se puede aplicar a otro admin.
+  - Banear corta también el acceso en Supabase Auth (10 años). Quitar el baneo devuelve el acceso, pero sus anuncios siguen bloqueados hasta restaurarlos uno a uno.
+  - El rol de admin se da con SQL; no hay pantalla para eso en el MVP.
+
+  · ALCANCE §4.11 y §5.3 con el mínimo de pantallas: el admin hace casi todo desde la ficha del usuario y la del anuncio denunciado.

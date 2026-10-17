@@ -111,3 +111,7 @@ Reglas:
 - 02 y 03: el botón de la hoja de filtros dice "Ver resultados", sin el número (D-045). El total de resultados aparece encima de la lista.
 - 04 Ficha: el corazón de favorito y el botón de compartir van sobre la foto. La barra fija con WhatsApp y Chatear llegó con 1.4 (la ficha va sin barra inferior, D-049); el enlace "Denunciar" llega con 1.5.
 - Tarjetas: sin corazón de favorito en los listados (D-042).
+
+**Al implementar la 1.6 (Premium y admin):**
+- 12 Hazte Premium: el ahorro se muestra en FCFA ("Ahorras 1.700 FCFA") en lugar del porcentaje, y "Mejor precio" (naranja) va en el periodo más barato por mes. Con una solicitud pendiente, arriba aparece una caja con las instrucciones según la forma de pago.
+- 13 Admin: pestañas arriba (Resumen · Pagos · Denuncias · Usuarios). El cobro se registra en la ficha del usuario, con el formulario relleno con su solicitud y la fecha de fin calculada al momento. Cada anuncio denunciado tiene un solo formulario de moderación (Bloquear · Restaurar · Descartar).

@@ -1,5 +1,5 @@
 import "server-only";
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendPushToUser } from "./send";
 
@@ -42,5 +42,52 @@ export async function notifyNewMessage(input: {
     });
   } catch (error) {
     console.error("notify_new_message", (error as Error).message);
+  }
+}
+
+/** Solo si el usuario no ha desactivado los avisos (notify_push). */
+async function wantsPush(userId: string): Promise<boolean> {
+  const { data } = await createAdminClient()
+    .from("profile_private")
+    .select("notify_push")
+    .eq("user_id", userId)
+    .single();
+  return Boolean(data?.notify_push);
+}
+
+/** "Ya eres Premium" al activar o ampliar Premium (ALCANCE §5.3, paso 5). */
+export async function notifyPremiumActivated(userId: string, until: string): Promise<void> {
+  try {
+    if (!(await wantsPush(userId))) return;
+    const [t, format] = await Promise.all([getTranslations("notifications"), getFormatter()]);
+    await sendPushToUser(userId, {
+      title: t("premiumTitle"),
+      body: t("premiumBody", { date: format.dateTime(new Date(until), { dateStyle: "short" }) }),
+      url: "/cuenta",
+      tag: "premium",
+    });
+  } catch (error) {
+    console.error("notify_premium", (error as Error).message);
+  }
+}
+
+/** Aviso al vendedor cuando el admin bloquea su anuncio (ALCANCE §4.6). */
+export async function notifyListingBlocked(listingId: string, reason: string): Promise<void> {
+  try {
+    const { data: listing } = await createAdminClient()
+      .from("listings")
+      .select("user_id, title")
+      .eq("id", listingId)
+      .single();
+    if (!listing || !(await wantsPush(listing.user_id))) return;
+    const t = await getTranslations("notifications");
+    await sendPushToUser(listing.user_id, {
+      title: t("blockedTitle"),
+      body: t("blockedBody", { title: listing.title ?? "", reason }),
+      url: "/mis-anuncios",
+      tag: `b${listingId.replace(/-/g, "").slice(0, 31)}`,
+    });
+  } catch (error) {
+    console.error("notify_blocked", (error as Error).message);
   }
 }

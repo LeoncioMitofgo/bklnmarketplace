@@ -277,7 +277,7 @@ Un usuario solo puede denunciar una vez cada anuncio, y a cada persona una vez m
 | `status` | `premium_request_status` | `pending` · `completed` · `cancelled` |
 | `created_at`, `handled_at`, `handled_by` | | |
 
-Solo puede haber una solicitud `pending` por usuario.
+Solo puede haber una solicitud `pending` por usuario. `request_premium(months, method)` la crea o la cambia (periodo, forma de pago y precio), y `cancel_premium_request()` la cancela. En el MVP solo se admiten `cash_office` y `money_transfer_agency` (D-057).
 
 **`premium_activations`**: cada cobro registrado. Se conserva siempre (contabilidad).
 
@@ -373,16 +373,24 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
 - **Términos prohibidos** (`find_banned_term`): se comparan sin tildes ni mayúsculas y como palabras completas, con plural opcional en -s/-es (D-056).
 
 ### 5.7 Premium
-- **`admin_activate_premium(user_id, months, amount, method, reference, request_id)`**:
+- **`admin_activate_premium(user_id, months, amount, method, reference, notes)`**:
   - Calcula `period_start = greatest(now(), premium_until)`, para que una renovación con Premium activo se sume al periodo actual.
-  - Registra el cobro en `premium_activations` (falla si la referencia ya existe) y actualiza `premium_until`.
-  - Cierra la solicitud y lo apunta en `moderation_log`. Todo ocurre en una sola transacción.
+  - Normaliza la referencia (mayúsculas, sin espacios) y falla con `premium_reference_used` si ya se usó con esa forma de pago.
+  - Registra el cobro en `premium_activations` y actualiza `premium_until`.
+  - Cierra la solicitud pendiente del usuario, si la hay, y lo apunta en `moderation_log`. Todo en una sola transacción.
 
 ### 5.8 Otros RPC
 - `register_listing_view(listing_id)`: suma una vista a un anuncio activo; las del propio vendedor no cuentan. La ficha la pide después de cargar, una vez por anuncio y sesión del navegador. El trigger de `updated_at` no salta cuando solo cambia `view_count`.
 - `search_listings(query, category_id, city_id, price_min, price_max, condition, attributes, ranges, sort, limit)`: búsqueda de anuncios activos con filtros y orden (ARQUITECTURA §5.4). `security invoker`: se aplica la RLS de quien busca. Devuelve las tarjetas ya preparadas (como `listing_cards`) y `total_count`. `attributes` es una coincidencia exacta (`{"brand": "Toyota"}`) y `ranges` son rangos de atributos numéricos (`{"year": [2015, null]}`). Como mucho 200 filas (D-041).
 - `my_favorites(limit)`: favoritos del usuario con su disponibilidad (`active`, `sold`, `paused`, `expired` o `unavailable`). Es `security definer` porque la RLS ya no deja ver los anuncios pausados o caducados de otros; de los bloqueados, en revisión o eliminados no devuelve el contenido.
-- `admin_suspend_user`, `admin_ban_user`: banear bloquea todos los anuncios del usuario y su acceso en Supabase Auth.
+- **RPC de admin** (todas empiezan comprobando `is_admin()` con `admin_assert()`; D-057):
+  - `admin_block_listing(listing_id, reason)` y `admin_restore_listing(listing_id, reason)`: bloquear cierra sus denuncias abiertas como resueltas; restaurar las descarta.
+  - `admin_close_report(report_id, status, note)`: cierra una denuncia como resuelta o descartada.
+  - `admin_suspend_user(user_id, days, reason)`: suspende hasta `now() + days`; con 0 días quita la suspensión.
+  - `admin_set_banned(user_id, banned, reason)`: al banear bloquea sus anuncios visibles y cierra las denuncias contra él. El acceso en Supabase Auth lo corta el servidor (`ban_duration`).
+  - Ninguna se puede aplicar a otro admin.
+  - `admin_users(query, user_id, limit)`: búsqueda de usuarios con email, teléfono, estado, Premium, anuncios activos y denuncias abiertas.
+  - `admin_metrics()`: colas y métricas del resumen.
 
 ## 6. RLS (resumen)
 
@@ -401,7 +409,7 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
 | `blocks` | Quien bloquea | Quien bloquea | — | Quien bloquea |
 | `reports` | Autor · admin | RPC (`report_listing`, `report_conversation`) | Admin (estado y resolución) | — |
 | `moderation_log` | Admin | RPC de admin | — | — |
-| `premium_requests` | Dueño · admin | Dueño | Dueño (cancelar) · admin | — |
+| `premium_requests` | Dueño · admin | RPC (`request_premium`) | RPC (cambiar o cancelar) · admin al activar | — |
 | `premium_activations` | Dueño · admin | RPC de admin | — | — |
 | `push_subscriptions` | Dueño | Dueño | Dueño | Dueño |
 | `email_verification_tokens`, `rate_limits`, `notification_log` | Solo servidor | Solo servidor | Solo servidor | Solo servidor |
