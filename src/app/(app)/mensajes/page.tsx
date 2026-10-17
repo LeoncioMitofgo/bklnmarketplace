@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { InboxLive } from "@/components/chat/inbox-live";
+import { PushPrompt } from "@/components/push/push-prompt";
 import { buttonClasses } from "@/components/ui/button";
 import { getSessionUser } from "@/lib/auth/session";
 import { getConversations } from "@/lib/chat/queries";
@@ -67,6 +68,10 @@ async function InboxContent({ searchParams }: Pick<PageProps<"/mensajes">, "sear
           </Link>
         ))}
       </nav>
+
+      <div className="px-4 empty:hidden">
+        <PushPrompt />
+      </div>
 
       {conversations.length === 0 ? (
         <div className="mx-4 flex flex-col items-center gap-4 rounded-card bg-surface px-4 py-8 text-center">

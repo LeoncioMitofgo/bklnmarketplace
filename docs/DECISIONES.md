@@ -113,3 +113,15 @@ _Ninguna decisión de negocio pendiente (2026-10-16)._
   - No hay botón de "Llamar" en el MVP: WhatsApp ya permite llamar.
 
   · Así nadie puede recolectar teléfonos leyendo páginas, ni siquiera con sesión.
+- **D-051 · 2026-10-17** · **Notificaciones push web:**
+  - Salen de la Server Action del mensaje con `after()` y `web-push` (sin Database Webhook). Las claves VAPID van en variables de entorno; la privada, solo en el servidor.
+  - Se ofrecen con una invitación en la bandeja y en la conversación ("Ahora no" la oculta 7 días) y un ajuste por móvil en Mi cuenta. Nunca se pide permiso sin que el usuario pulse un botón.
+  - Un móvil está suscrito con una sola cuenta: al suscribirse con otra, pasa a ella, y al cerrar sesión se da de baja.
+  - En iPhone solo funcionarán con la web instalada en la pantalla de inicio (fase 2).
+
+  · Es lo más simple que cumple ALCANCE §4.6 ("si el vendedor no se entera, el chat muere") sin más servicios ni secretos.
+- **D-052 · 2026-10-17** · **La hora y la precarga de Next 16:** con Cache Components, Next no deja leer la hora al prerenderizar, lo que incluye el App Shell de la precarga parcial y las fichas que se cachean en segundo plano.
+  - `getSessionUser` empieza con `await io()`.
+  - Los "hace X" de las páginas públicas usan `fetchedAt`, la hora guardada con los datos cacheados: como mucho se desvían un minuto.
+
+  · Lo detectaron las pruebas con el servidor de producción: errores en el registro y fichas que no se llegaban a cachear.

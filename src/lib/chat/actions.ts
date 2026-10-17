@@ -2,11 +2,13 @@
 
 import { refresh } from "next/cache";
 import { redirect } from "next/navigation";
+import { after } from "next/server";
 import { getTranslations } from "next-intl/server";
 import { getSessionUser } from "@/lib/auth/session";
 import { getCatalog } from "@/lib/catalog";
 import { listingPath } from "@/lib/listings/paths";
 import { getPublicListing } from "@/lib/listings/public";
+import { notifyNewMessage } from "@/lib/push/notify";
 import { siteUrl } from "@/lib/site";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
@@ -46,7 +48,8 @@ export async function startConversation(
   listingId: string,
   body: string,
 ): Promise<ChatResult<{ conversationId: string }>> {
-  if (!(await getSessionUser())) return { ok: false, error: "not_authenticated" };
+  const user = await getSessionUser();
+  if (!user) return { ok: false, error: "not_authenticated" };
   if (!isUuid(listingId)) return { ok: false, error: "listing_not_available" };
 
   const supabase = await createClient();
@@ -58,7 +61,10 @@ export async function startConversation(
     p_body: body,
   });
   if (sent.error) return fail(sent.error);
-  return { ok: true, data: { conversationId: start.data } };
+
+  const conversationId = start.data;
+  after(() => notifyNewMessage({ conversationId, senderId: user.id, body: sent.data.body }));
+  return { ok: true, data: { conversationId } };
 }
 
 export async function sendMessage(
@@ -66,7 +72,8 @@ export async function sendMessage(
   body: string | null,
   imagePath: string | null,
 ): Promise<ChatResult<ChatMessage>> {
-  if (!(await getSessionUser())) return { ok: false, error: "not_authenticated" };
+  const user = await getSessionUser();
+  if (!user) return { ok: false, error: "not_authenticated" };
   if (!isUuid(conversationId)) return { ok: false, error: "conversation_not_found" };
 
   const supabase = await createClient();
@@ -76,6 +83,7 @@ export async function sendMessage(
     p_image_path: imagePath ?? undefined,
   });
   if (error || !data) return fail(error);
+  after(() => notifyNewMessage({ conversationId, senderId: user.id, body: data.body }));
 
   let imageUrl: string | null = null;
   if (data.image_path) {

@@ -7,6 +7,9 @@ import { LISTINGS_TAG, listingTag } from "./tags";
 // Consultas públicas (rol anon, RLS: activos y vendidos recientes), cacheadas por etiquetas.
 // Cualquier cambio de un anuncio invalida LISTINGS_TAG (actions.ts). Lo que caduca pg_cron
 // se refleja al revalidar ("minutes": como mucho, 1 minuto después).
+//
+// fetchedAt: la hora a la que se leyeron los datos, guardada con ellos. Las páginas calculan los
+// "hace 2 h" respecto a ella: Next 16 no deja leer la hora al prerenderizar (ISR de las fichas).
 
 export type ListingCardData = {
   id: string;
@@ -81,6 +84,7 @@ export async function searchListings(args: SearchArgs) {
   if (error) throw new Error(`search_listings: ${error.message}`);
   const rows = data ?? [];
   return {
+    fetchedAt: Date.now(),
     total: rows[0]?.total_count ?? 0,
     cards: rows.map(({ total_count: _, ...row }) => ({
       ...row,
@@ -119,6 +123,7 @@ export async function getPublicListing(code: string) {
   const { listing_images, seller, ...rest } = listing;
   return {
     ...rest,
+    fetchedAt: Date.now(),
     status: rest.status as "active" | "sold",
     attributes: rest.attributes as Record<string, string | number | boolean>,
     images: [...listing_images].sort((a, b) => a.position - b.position),
@@ -173,7 +178,12 @@ export async function getProfileListings(userId: string, limit: number) {
   if (active.error || sold.error) {
     throw new Error(`profile_listings: ${active.error?.message ?? sold.error?.message}`);
   }
-  return { active: asCards(active.data), activeTotal: active.count ?? 0, sold: asCards(sold.data) };
+  return {
+    fetchedAt: Date.now(),
+    active: asCards(active.data),
+    activeTotal: active.count ?? 0,
+    sold: asCards(sold.data),
+  };
 }
 
 /** Anuncios activos y vendedores con anuncios, para el sitemap. */

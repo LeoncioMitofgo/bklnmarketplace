@@ -4,10 +4,11 @@ import { redirect } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { ResendVerification } from "@/components/account/resend-verification";
+import { SignOutButton } from "@/components/account/sign-out-button";
 import { CheckIcon } from "@/components/icons";
 import { Avatar } from "@/components/profile/avatar";
+import { PushSettings } from "@/components/push/push-settings";
 import { buttonClasses } from "@/components/ui/button";
-import { signOut } from "@/lib/auth/actions";
 import { getSessionUser } from "@/lib/auth/session";
 import { setShowWhatsapp } from "@/lib/chat/actions";
 import { formatGqPhone } from "@/lib/format";
@@ -113,6 +114,13 @@ async function AccountContent() {
         </div>
 
         <div className="flex flex-col gap-2 p-4">
+          <dt className="text-xs text-text-muted">{t("pushTitle")}</dt>
+          <dd>
+            <PushSettings />
+          </dd>
+        </div>
+
+        <div className="flex flex-col gap-2 p-4">
           <dt className="text-xs text-text-muted">{t("whatsappTitle")}</dt>
           <dd className="text-sm leading-relaxed">
             {priv.show_whatsapp ? t("whatsappOn") : t("whatsappOff")}
@@ -129,11 +137,7 @@ async function AccountContent() {
         </div>
       </dl>
 
-      <form action={signOut}>
-        <button type="submit" className={buttonClasses("ghost")}>
-          {t("signOut")}
-        </button>
-      </form>
+      <SignOutButton label={t("signOut")} />
     </>
   );
 }

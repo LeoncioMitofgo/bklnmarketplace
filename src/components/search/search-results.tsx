@@ -37,7 +37,7 @@ export async function SearchResults({ filters, catalog, basePath, title }: Props
     getTranslations("catalog.search"),
     getTranslations("catalog.sort"),
   ]);
-  const now = Date.now();
+  const now = result.fetchedAt;
 
   const href = (next: Partial<SearchFilters>, path = basePath) =>
     searchHref(path, { ...filters, pages: 1, ...next }, catalog, {

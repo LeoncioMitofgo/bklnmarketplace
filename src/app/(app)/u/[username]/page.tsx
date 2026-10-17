@@ -56,8 +56,8 @@ async function ProfileContent({
     getTranslations("profile"),
     getFormatter(),
   ]);
-  const now = Date.now();
-  const isPremium = profile.premium_until !== null && new Date(profile.premium_until) > new Date();
+  const now = listings.fetchedAt;
+  const isPremium = profile.premium_until !== null && Date.parse(profile.premium_until) > now;
   const response =
     profile.response_time_minutes !== null
       ? responseTimeParts(profile.response_time_minutes)

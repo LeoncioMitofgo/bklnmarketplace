@@ -11,6 +11,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     "account",
     "listings.mine",
     "listings.errors",
+    "push",
   ]);
   return (
     <NextIntlClientProvider messages={messages}>

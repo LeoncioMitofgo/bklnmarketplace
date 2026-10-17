@@ -301,7 +301,7 @@ Solo puede haber una solicitud `pending` por usuario.
 
 | Tabla | Para qué | Columnas clave |
 |---|---|---|
-| `push_subscriptions` | Notificaciones push | `user_id`, `endpoint` (único), `p256dh`, `auth`, `user_agent`, `last_used_at` |
+| `push_subscriptions` | Notificaciones push (una fila por navegador) | `user_id`, `endpoint` (único), `p256dh`, `auth`, `user_agent`, `last_used_at`. Las guarda el servidor (upsert por `endpoint`: si el móvil ya estaba con otra cuenta, pasa a la actual). RLS: cada usuario lee y borra las suyas |
 | `email_verification_tokens` | Verificación propia (D-020) | `token_hash` PK, `user_id`, `email`, `expires_at` (24 h), `used_at` |
 | `rate_limits` | Intentos de login y otros límites | PK (`key`, `window_start`), `count` |
 | `notification_log` | Evita avisos repetidos (crons idempotentes) | `user_id`, `kind`, `ref_id`, `channel`, `sent_at` |
@@ -415,7 +415,7 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
 
 - Un trigger en `messages` emite con `realtime.send` (privado) el mensaje a `conversation:{id}` (evento `message`) y un aviso a `user:{destinatario}` (evento `inbox`). `mark_conversation_read` emite `read` en `conversation:{id}`.
 - La política de `realtime.messages` (`extension = broadcast`) solo deja recibir de las conversaciones propias y de `user:{auth.uid()}`. No hay política de insert: los clientes no pueden emitir.
-- La notificación push la enviará la Server Action que envía el mensaje (pendiente, segunda parte de 1.4).
+- La notificación push la envía la Server Action que envía el mensaje (D-051), con las suscripciones de `push_subscriptions`.
 
 ## 9. Índices principales
 

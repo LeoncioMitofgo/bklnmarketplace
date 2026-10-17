@@ -116,7 +116,7 @@ async function ListingContent({ params }: Pick<PageProps<"/anuncio/[slug]">, "pa
     getTranslations("listings.details"),
     getFormatter(),
   ]);
-  const now = Date.now();
+  const now = listing.fetchedAt;
   const title = listing.title ?? "";
   const price = priceLabel(listing.price_xaf, category, tPrice);
   const place = [listing.neighborhood, city].filter(Boolean).join(", ");
@@ -234,7 +234,7 @@ async function ListingContent({ params }: Pick<PageProps<"/anuncio/[slug]">, "pa
           </section>
         ) : null}
 
-        <SellerCard seller={listing.seller} />
+        <SellerCard seller={listing.seller} now={now} />
         <SafetyTips />
 
         {listing.status === "active" && listing.category_id !== null ? (
@@ -291,13 +291,13 @@ async function FavoriteSlot({
   );
 }
 
-async function SellerCard({ seller }: { seller: PublicListing["seller"] }) {
+async function SellerCard({ seller, now }: { seller: PublicListing["seller"]; now: number }) {
   const [t, tCard, format] = await Promise.all([
     getTranslations("catalog.listing.seller"),
     getTranslations("catalog.card"),
     getFormatter(),
   ]);
-  const isPremium = seller.premium_until !== null && new Date(seller.premium_until) > new Date();
+  const isPremium = seller.premium_until !== null && Date.parse(seller.premium_until) > now;
   const response =
     seller.response_time_minutes !== null ? responseTimeParts(seller.response_time_minutes) : null;
 

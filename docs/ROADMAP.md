@@ -84,7 +84,13 @@
 - [x] Barra fija de la ficha con Chatear y WhatsApp opcional, solo con sesión. El teléfono se pide al pulsar y tiene un tope diario (2026-10-17, D-049 y D-050). Se activa en Mi cuenta
 - [x] Tiempo de respuesta del vendedor (pg_cron diario) en la conversación, la ficha y el perfil (2026-10-17)
 - [x] Probado de extremo a extremo (2026-10-17): 51 comprobaciones de base de datos y tiempo real, y 23 con dos navegadores móviles a la vez (comprador y vendedora)
-- [ ] Notificaciones push web (segunda parte de 1.4): hacen falta las claves VAPID en Vercel
+- [x] Notificaciones push web (2026-10-17, D-051):
+  - Invitación a activarlas en la bandeja y en la conversación, y ajuste en Mi cuenta.
+  - Aviso con el nombre y el mensaje, que abre la conversación.
+  - Al cerrar sesión se da de baja el móvil.
+  - Probado con Chrome real: el servidor envía y FCM acepta; el service worker muestra el aviso.
+- [ ] Poner las claves VAPID en Vercel (lo hace el usuario) y volver a desplegar. Sin ellas, los avisos están apagados en producción
+- [ ] Avisos push en iPhone: solo con la web instalada en la pantalla de inicio (fase 2, PWA)
 - [ ] Email de respaldo por mensajes sin leer (cuando se configure Resend)
 - [ ] Probar el chat en el móvil entre dos cuentas (lo hace el usuario)
 

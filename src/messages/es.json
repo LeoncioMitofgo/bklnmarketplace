@@ -150,7 +150,8 @@
     "whatsappOn": "Activado: quien haya entrado en su cuenta ve un botón de WhatsApp en tus anuncios. Tu número no aparece en la página; solo se usa al pulsar el botón.",
     "whatsappOff": "Desactivado: solo te pueden escribir por el chat de BKLN. Si lo activas, quien haya entrado en su cuenta podrá escribirte también por WhatsApp.",
     "whatsappEnable": "Activar el botón de WhatsApp",
-    "whatsappDisable": "Desactivar el botón de WhatsApp"
+    "whatsappDisable": "Desactivar el botón de WhatsApp",
+    "pushTitle": "Avisos de mensajes en este móvil"
   },
   "profile": {
     "loading": "Cargando perfil…",
@@ -591,5 +592,19 @@
       "offline": "No hay conexión. Tu mensaje sigue aquí: vuelve a intentarlo cuando tengas red.",
       "unexpected": "Algo ha fallado. Inténtalo de nuevo."
     }
+  },
+  "push": {
+    "prompt": "Activa los avisos para enterarte al momento cuando te escriban, aunque no tengas la página abierta.",
+    "activate": "Activar avisos",
+    "activating": "Activando…",
+    "later": "Ahora no",
+    "deactivate": "Desactivar en este móvil",
+    "on": "Activados: te avisaremos en este móvil cuando te escriban.",
+    "off": "Desactivados en este móvil.",
+    "denied": "Tu navegador tiene bloqueados los avisos de BKLN Marketplace. Puedes permitirlos en los ajustes del navegador (el candado junto a la dirección).",
+    "unsupported": "Este navegador no admite avisos. En Android, usa Chrome. En iPhone llegarán cuando se pueda instalar la web en la pantalla de inicio.",
+    "error": "No se han podido activar los avisos. Comprueba la conexión y vuelve a intentarlo.",
+    "photo": "📷 Foto",
+    "someone": "Alguien"
   }
 }

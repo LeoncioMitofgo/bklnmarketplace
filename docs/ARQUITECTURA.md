@@ -144,7 +144,7 @@ Criterios:
 - El cliente pasa el token de la sesión (`realtime.setAuth()`) antes de suscribirse. Cada vez que queda suscrito, también al reconectar, se pone al día: la conversación pide los mensajes posteriores al último que tiene y la bandeja se refresca.
 - Fotos del chat: se comprimen en el móvil, se suben a una URL firmada del bucket privado `chat-images` y se ven con URLs firmadas de 1 hora.
 - El contador de no leídos de la barra inferior se pide con una Server Action al cargar y al navegar (como mucho cada 20 s), y al momento cuando el chat avisa de un cambio. Así las páginas públicas no cargan el cliente de Realtime.
-- **Push** (pendiente, segunda parte de 1.4): la Server Action que envía el mensaje mandará la notificación con `after()`, sin Database Webhook ni otro secreto que las claves VAPID. Las suscripciones caducadas (respuesta 410) se borran.
+- **Push** (D-051): la Server Action que envía el mensaje manda la notificación con `after()` y `web-push`, sin Database Webhook ni más secretos que las claves VAPID. Se respeta `notify_push` y un aviso nuevo de la misma conversación sustituye al anterior (`tag` en el móvil, `topic` en el servicio de push). Las suscripciones caducadas (404/410) se borran. El service worker (`public/sw.js`) solo hace push por ahora y no avisa si ya estás viendo esa conversación.
 - **Email de respaldo:** un cron recoge los mensajes que llevan más de 15 minutos sin leer y envía un email agrupado, como máximo uno por hora y usuario.
 
 ### 5.4 Búsqueda
@@ -173,6 +173,7 @@ Las rutas de cron se protegen con `CRON_SECRET`. En desarrollo (plan Hobby, como
 ### 5.6 Caché, SEO y compartir
 - Las consultas públicas se cachean con `"use cache"` y etiquetas: `listings` (cualquier anuncio; la invalidan todas las acciones de anuncios), `listing:{código}`, `profile:{usuario}` y `catalog` (categorías y ciudades). Lo de anuncios usa `cacheLife("minutes")`: lo que caduca pg_cron, que no puede invalidar la caché de Next, se refleja en como mucho un minuto.
 - Lo que depende de la sesión (el corazón de favorito, Mi cuenta) va en su propio `<Suspense>` y nunca dentro de una caché compartida. Por eso los listados no llevan corazón (D-042).
+- Next 16 no deja leer la hora al prerenderizar (D-052). `getSessionUser` empieza con `await io()`, así que lo de la sesión queda fuera de la precarga. Los "hace 2 h" de las páginas públicas se calculan con `fetchedAt`, la hora guardada junto a los datos cacheados.
 - `generateMetadata` genera el Open Graph con la foto grande, el título, el precio y la ciudad. También hay `sitemap.ts` dinámico y JSON‑LD de tipo `Product`/`Offer`.
 - El teléfono y el email nunca aparecen en el HTML.
 - Hasta el lanzamiento no se indexa nada: sin `SITE_INDEXABLE=true`, robots.txt lo bloquea todo y las páginas llevan `noindex` (D-043).

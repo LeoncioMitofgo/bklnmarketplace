@@ -7,6 +7,7 @@ import { ChatHeader } from "@/components/chat/chat-header";
 import { ChatThread } from "@/components/chat/chat-thread";
 import { ListingPin } from "@/components/chat/listing-pin";
 import { ChatSafetyNotice } from "@/components/chat/safety-notice";
+import { PushPrompt } from "@/components/push/push-prompt";
 import { getSessionUser } from "@/lib/auth/session";
 import { getCatalog } from "@/lib/catalog";
 import { getConversation, getMessages } from "@/lib/chat/queries";
@@ -113,7 +114,12 @@ async function ConversationContent({
               {t("older")}
             </Link>
           ) : (
-            <ChatSafetyNotice />
+            <>
+              <ChatSafetyNotice />
+              <div className="mb-2 empty:hidden">
+                <PushPrompt />
+              </div>
+            </>
           )
         }
       />

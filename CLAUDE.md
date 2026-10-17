@@ -8,12 +8,11 @@ Marketplace de clasificados generalista (modelo Jiji + perfiles de vendedor tipo
 - 1.1: auth, cuenta, perfil y barra inferior.
 - 1.2: anuncios (publicar, Mis anuncios, caducidad y límites). El primer anuncio real se publicó desde un Android.
 - 1.3: catálogo público (inicio, búsqueda con filtros, ficha, perfil con anuncios, favoritos y SEO). El inicio real sustituye a "Próximamente" y nada se indexa hasta el lanzamiento (D-043, D-044).
-
-- 1.4, primera parte: chat en tiempo real con fotos, bandeja, no leídos, bloqueos, botón de WhatsApp y tiempo de respuesta. La ficha va a pantalla completa con la barra de contacto (D-048 a D-050).
+- 1.4: chat en tiempo real con fotos, bandeja, no leídos, bloqueos, botón de WhatsApp, tiempo de respuesta y notificaciones push (D-048 a D-052). La ficha va a pantalla completa con la barra de contacto. Los avisos push están apagados en producción hasta que el usuario ponga las claves VAPID en Vercel.
 
 Las pruebas en el móvil que quedan pendientes del usuario son las casillas sin marcar de ROADMAP. En el proyecto dev hay datos de demostración (D-047).
 
-**Siguiente:** 1.4, segunda parte: notificaciones push (requiere que el usuario ponga las claves VAPID en Vercel). Después, 1.5 Confianza y moderación.
+**Siguiente:** 1.5 Confianza y moderación (denuncias con auto‑ocultado, términos, privacidad y borrar cuenta).
 
 ## Recursos
 
