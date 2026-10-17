@@ -133,7 +133,7 @@ Lleva también `is_active boolean`, para retirar una modalidad sin borrarla.
 | `office` | sí | `{ name: "BKLN Software & Systems", address: "Banapa, Malabo", hours: "L–V 8:00–16:00 · S 11:00–14:00", payments_whatsapp: "+240555220846", agency_beneficiary: "BKLN Marketplace" }` |
 | `report_hide_threshold` | no | `3` |
 | `renew_window_days` | no | `3` |
-| `rate_limits` | no | Anuncios por día, conversaciones nuevas por hora, consultas de WhatsApp por día; valores más estrictos para cuentas de menos de 7 días |
+| `rate_limits` | no | Anuncios por día, conversaciones nuevas por hora, mensajes por minuto, consultas de WhatsApp por día y denuncias por día (`reports_per_day`); valores más estrictos para cuentas de menos de 7 días |
 | `banned_terms` | no | Lista de palabras y expresiones prohibidas |
 | `reserved_usernames` | no | `admin`, `soporte`, `bkln`, `anuncio`, `t`, `u`, … |
 
@@ -259,9 +259,9 @@ Cada mensaje lleva `body`, `image_path` o los dos. Los mensajes no se editan ni 
 | `resolved_by`, `resolved_at`, `resolution_note` | | |
 | `created_at` | `timestamptz` | |
 
-Un usuario solo puede denunciar una vez cada anuncio (índice único parcial).
+Un usuario solo puede denunciar una vez cada anuncio, y a cada persona una vez mientras la denuncia siga abierta (índices únicos parciales). La denuncia de un anuncio guarda también al vendedor en `reported_user_id`. Las del chat llevan la persona y la conversación, sin anuncio (D-053).
 
-**`moderation_log`**: historial de las acciones de admin. `id` · `admin_id` · `action` (`block_listing`, `restore_listing`, `suspend_user`, `ban_user`, `activate_premium`…) · `target_type` · `target_id` · `reason` · `created_at`. No tiene claves foráneas, para que sobreviva aunque se borren los objetivos.
+**`moderation_log`**: historial de las acciones de moderación. `id` · `admin_id` (null = el sistema) · `action` (`auto_hide_listing`, `block_listing`, `restore_listing`, `suspend_user`, `ban_user`, `activate_premium`…) · `target_type` · `target_id` · `reason` · `created_at`. No tiene claves foráneas, para que sobreviva aunque se borren los objetivos.
 
 ### 3.6 Premium
 
@@ -365,7 +365,12 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
 - Los límites de ritmo del chat (`conversations_per_hour`, más estricto en cuentas nuevas, y `messages_per_minute`) están en `app_settings.rate_limits`.
 
 ### 5.6 Denuncias
-- Trigger `after insert` en `reports`: si se alcanza el umbral, el anuncio pasa a `under_review`.
+- **`report_listing(listing_id, reason, details)`** y **`report_conversation(conversation_id, reason, details, block)`** (D-053):
+  - Comprueban la sesión y la cuenta activa, que el anuncio sea visible o esté en revisión, que no sea tuyo, o que participes en la conversación y la otra persona exista.
+  - "Otro motivo" exige explicación (máximo 1000 caracteres) y el tope es `reports_per_day`.
+  - Devuelven `created`, `already` o, si esa denuncia ha ocultado el anuncio, `hidden`. `report_conversation` puede bloquear a la otra persona en la misma llamada.
+- Trigger `after insert` en `reports`: con `report_hide_threshold` denuncias abiertas de usuarios distintos, el anuncio activo pasa a `under_review` y se apunta en `moderation_log`. Bloquea la fila del anuncio para que dos denuncias simultáneas no se cuenten a la vez.
+- **Términos prohibidos** (`find_banned_term`): se comparan sin tildes ni mayúsculas y como palabras completas, con plural opcional en -s/-es (D-056).
 
 ### 5.7 Premium
 - **`admin_activate_premium(user_id, months, amount, method, reference, request_id)`**:
@@ -394,7 +399,7 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
 | `conversations` | Participantes · admin solo si hay una denuncia sobre esa conversación | RPC | RPC (leído) | — |
 | `messages` | Participantes · admin solo si hay una denuncia sobre esa conversación | Participante sin bloqueo | — | — |
 | `blocks` | Quien bloquea | Quien bloquea | — | Quien bloquea |
-| `reports` | Autor · admin | Usuario con sesión | Admin | — |
+| `reports` | Autor · admin | RPC (`report_listing`, `report_conversation`) | Admin (estado y resolución) | — |
 | `moderation_log` | Admin | RPC de admin | — | — |
 | `premium_requests` | Dueño · admin | Dueño | Dueño (cancelar) · admin | — |
 | `premium_activations` | Dueño · admin | RPC de admin | — | — |
@@ -443,6 +448,7 @@ Los avisos por email y la limpieza de imágenes de Storage los hace Vercel Cron 
 
 Lo ejecuta el servidor (`auth.admin.deleteUser`) y las claves foráneas hacen el resto:
 
-- **Se borra en cascada:** perfil, datos privados, tienda, anuncios y sus fotos, favoritos, bloqueos, solicitudes de Premium y suscripciones push. Las fotos de Storage las limpia un cron.
+- **Se borra en cascada:** perfil, datos privados, tienda, anuncios y sus fotos, favoritos, bloqueos, solicitudes de Premium y suscripciones push. Los ficheros de Storage (`listing-images` y `profile-media`) los borra el servidor justo después, con la lista de `account_storage_objects()` (D-055).
+- **Las denuncias** se conservan, con `set null` en quien denunció, el anuncio y la persona denunciada.
 - **Se conserva, anonimizado (`set null`):** los mensajes que ya envió y las conversaciones con otros usuarios, que aparecen como "Usuario eliminado" y "Anuncio eliminado". La otra persona conserva su historial y, si hubo estafa, las pruebas.
 - **Se conserva por contabilidad:** `premium_activations`, con `user_id = null`. También `moderation_log`.

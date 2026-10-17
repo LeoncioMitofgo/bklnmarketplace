@@ -4,7 +4,7 @@ import { ChevronLeftIcon, MoreIcon } from "@/components/icons";
 import { setBlocked } from "@/lib/chat/actions";
 import { responseTimeParts } from "@/lib/format";
 
-/** Cabecera de la conversación: volver, con quién hablas y menú (ver perfil, bloquear). */
+/** Cabecera de la conversación: volver, con quién hablas y menú (ver perfil, denunciar, bloquear). */
 export async function ChatHeader({
   conversationId,
   other,
@@ -56,6 +56,15 @@ export async function ChatHeader({
             <Link href={`/u/${other.username}`} className="flex min-h-11 items-center px-4 text-sm">
               {t("conversation.viewProfile")}
             </Link>
+            {conversationId ? (
+              <Link
+                href={`/mensajes/${conversationId}/denunciar`}
+                prefetch={false}
+                className="flex min-h-11 items-center px-4 text-sm text-danger"
+              >
+                {t("conversation.report", { name })}
+              </Link>
+            ) : null}
             {conversationId ? (
               <form action={setBlocked}>
                 <input type="hidden" name="conversationId" value={conversationId} />

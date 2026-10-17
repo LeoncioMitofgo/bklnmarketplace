@@ -1,6 +1,6 @@
 # Roadmap — BKLN Marketplace
 
-**Estado: Fase 1 en curso** (1.1, 1.2 y 1.3 hechas). Marca cada casilla al completarla (con fecha si es un hito).
+**Estado: Fase 1 en curso** (1.1 a 1.5 hechas). Marca cada casilla al completarla (con fecha si es un hito).
 
 ---
 
@@ -95,15 +95,28 @@
 - [ ] Probar el chat en el móvil entre dos cuentas (lo hace el usuario)
 
 ### 1.5 Confianza y moderación
-- [ ] Reportes con auto‑ocultado por umbral
-- [ ] Lista de contenido y palabras prohibidas
-- [ ] Límites de ritmo (publicación y chat)
-- [ ] Avisos anti‑estafa (ficha + chat)
-- [ ] Términos, privacidad y borrar cuenta. Al borrar hay que invalidar la caché `profile:<usuario>`; si no, el perfil público sigue visible hasta que caduca
+- [x] Denuncias con auto‑ocultado (2026-10-17, D-053):
+  - "Denunciar este anuncio" en la ficha y "Denunciar a…" en el menú del chat, con la opción de bloquear a la vez.
+  - Con 3 denuncias abiertas de usuarios distintos, el anuncio pasa a "En revisión" y desaparece de las páginas públicas al momento. Queda apuntado en `moderation_log`.
+  - Tope de 20 denuncias al día por usuario.
+- [x] Lista de contenido y palabras prohibidas (2026-10-17, D-056): se comprueba por palabras completas y la lista inicial es más amplia. El vendedor ve la lista en los términos, enlazada desde el último paso de publicar
+- [x] Límites de ritmo (publicación y chat): hechos en 1.2 y 1.4, más el de denuncias
+- [x] Avisos anti‑estafa (ficha + chat): hechos en 1.3 y 1.4
+- [x] Términos de uso (`/terminos`) y política de privacidad (`/privacidad`), enlazados desde el registro, Mi cuenta y el pie del inicio (2026-10-17, D-056)
+- [x] Borrar la cuenta desde Mi cuenta, con la contraseña (2026-10-17, D-055):
+  - Se borran en el momento su perfil, sus anuncios y sus fotos de Storage.
+  - Se invalida la caché de su perfil y de sus anuncios.
+- [x] Corregido: entrar desde una pantalla con sesión (Mensajes, Perfil…) devolvía otra vez a `/entrar`. Ahora el proxy redirige a entrar antes de montar la página (D-054)
+- [x] Probado de extremo a extremo (2026-10-17): 54 comprobaciones de base de datos y 43 en un navegador móvil a 360 px. Se repitieron las pruebas de navegador del catálogo y del chat
+- [ ] Revisar los textos legales (los escribió Claude y son provisionales; lo hace el cliente): edad mínima de 18 años y email de contacto `hello@bklnsoftware.tech`
+- [ ] Probar en el móvil denunciar, bloquear y borrar una cuenta de prueba (lo hace el usuario)
 
 ### 1.6 Premium y administración
 - [ ] Página "Hazte Premium": precios por periodo, formas de pago, solicitud y botón de WhatsApp para el código del envío
 - [ ] Panel admin: reportes, usuarios, categorías/atributos, ciudades, métricas
+  - Cola de denuncias sobre `reports` (ya existe). Restaurar o bloquear anuncios en revisión: hasta entonces se hace con SQL.
+  - El admin tiene que poder leer las conversaciones denunciadas (MODELO-DATOS §6): falta la política, y la de las fotos de `chat-images`.
+- [ ] Editar el perfil y los datos de la cuenta (nombre, ciudad, descripción, usuario, email, teléfono y contraseña; ALCANCE §4.3). No estaba en el roadmap
 - [ ] Activación y extensión de Premium con registro de pagos
 - [ ] Tienda personalizada `/t/<slug>`
 - [ ] Caducidad de Premium: aviso, vuelta a Normal, pausado automático de los anuncios que sobran

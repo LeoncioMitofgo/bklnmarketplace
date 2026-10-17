@@ -7,7 +7,7 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
 
 ## Pendientes
 
-_Ninguna decisión de negocio pendiente (2026-10-16)._
+- **Textos legales provisionales (D-056):** los términos y la privacidad los redactó Claude en lenguaje sencillo y hay que revisarlos. Hay que confirmar en especial la edad mínima (18 años), el email de contacto (`hello@bklnsoftware.tech`) y si se citan leyes concretas de Guinea Ecuatorial.
 
 ## Tomadas
 
@@ -125,3 +125,27 @@ _Ninguna decisión de negocio pendiente (2026-10-16)._
   - Los "hace X" de las páginas públicas usan `fetchedAt`, la hora guardada con los datos cacheados: como mucho se desvían un minuto.
 
   · Lo detectaron las pruebas con el servidor de producción: errores en el registro y fichas que no se llegaban a cachear.
+- **D-053 · 2026-10-17** · **Denuncias:**
+  - Se denuncia en pantallas propias (`/anuncio/<slug>/denunciar` y `/mensajes/<id>/denunciar`) que funcionan sin JavaScript. Sin sesión, se pasa por entrar y se vuelve al formulario.
+  - En el chat solo valen los motivos que tienen sentido para una persona: estafa, ofensivo, prohibido u otro. "Bloquear también" viene marcado.
+  - "Otro motivo" exige explicación.
+  - La denuncia de un anuncio guarda también al vendedor; la del chat, a la persona y la conversación, sin anuncio, así que no cuenta para ocultarlo.
+  - Se crean por RPC (`report_listing`, `report_conversation`), con un tope diario (`reports_per_day`, 20).
+  - El auto‑ocultado lo hace un trigger y se apunta en `moderation_log` como acción del sistema (`admin_id` null). La denuncia que lo oculta invalida la caché de las páginas públicas.
+
+  · Lo más simple que cumple ALCANCE §5.5. El riesgo de que tres cuentas falsas oculten un anuncio ajeno se asume: lo revisa un admin, y el registro tiene límite por IP.
+- **D-054 · 2026-10-17** · **Las pantallas con sesión redirigen a entrar en el proxy**, no en la página (`/cuenta`, `/favoritos`, `/mis-anuncios`, `/mensajes`, `/publicar` y las de denunciar). Las páginas lo siguen comprobando.
+
+  · Next 16 deja montadas en segundo plano las páginas visitadas. Si la redirección la hacía la página, al volver tras entrar la página vieja la repetía y el usuario acababa otra vez en `/entrar`. Pasaba también con la barra inferior desde la 1.1. `refresh()` y `revalidatePath` no lo arreglaban.
+- **D-055 · 2026-10-17** · **Borrar la cuenta:**
+  - Se pide la contraseña, con 5 intentos cada 15 minutos.
+  - El servidor borra el usuario de Supabase Auth y las claves foráneas hacen el resto (MODELO-DATOS §11).
+  - Quita las cookies de la sesión e invalida la caché de sus anuncios y de su perfil.
+  - Las fotos de Storage las borra justo después, con `after()` y `account_storage_objects()`, en lugar de esperar a un cron.
+
+  · Las fotos están en un bucket público: no deben seguir accesibles después de borrar la cuenta. La contraseña evita que alguien con el móvil desbloqueado borre la cuenta de otro.
+- **D-056 · 2026-10-17** · **Términos prohibidos y textos legales:**
+  - Los términos prohibidos se buscan como palabras completas, admitiendo el plural (-s/-es). Antes se buscaban dentro del texto, así que "arma" habría saltado con "armario".
+  - La lista inicial pasa a 37 términos (drogas, medicamentos con receta, armas, documentos y dinero falsos, fauna protegida y servicios sexuales). Se evitan los que dan falsos positivos, como "pistola" (de silicona), "fusil" (de pesca) o "granada" (la fruta).
+  - Términos y privacidad en `es.json` (`legal`), como secciones de párrafos y listas, para poder traducirlos.
+  - Edad mínima de 18 años y contacto `hello@bklnsoftware.tech`, pendientes de confirmar (ver Pendientes).

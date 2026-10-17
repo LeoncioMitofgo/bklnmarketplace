@@ -3,15 +3,17 @@ import { type NextRequest, NextResponse } from "next/server";
 import { hasSupabaseEnv, supabasePublishableKey, supabaseUrl } from "./env";
 
 /**
- * Refresca la sesión de Supabase en cada petición con sesión.
+ * Refresca la sesión de Supabase en cada petición con sesión y dice si hay una sesión válida.
  * Los visitantes sin cookies de Supabase (la mayoría) no pagan nada.
  */
-export async function updateSession(request: NextRequest) {
+export async function updateSession(
+  request: NextRequest,
+): Promise<{ response: NextResponse; signedIn: boolean }> {
   let response = NextResponse.next({ request });
 
   const hasAuthCookie = request.cookies.getAll().some(({ name }) => name.startsWith("sb-"));
   if (!hasAuthCookie || !hasSupabaseEnv()) {
-    return response;
+    return { response, signedIn: false };
   }
 
   const supabase = createServerClient(supabaseUrl(), supabasePublishableKey(), {
@@ -34,7 +36,7 @@ export async function updateSession(request: NextRequest) {
   });
 
   // Valida el JWT (en local, con las claves asimétricas del proyecto) y lo renueva si va a caducar.
-  await supabase.auth.getClaims();
+  const { data } = await supabase.auth.getClaims();
 
-  return response;
+  return { response, signedIn: Boolean(data?.claims?.sub) };
 }

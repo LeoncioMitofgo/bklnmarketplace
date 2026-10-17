@@ -4,15 +4,16 @@ Marketplace de clasificados generalista (modelo Jiji + perfiles de vendedor tipo
 
 ## Estado actual
 
-**Fase 1 en curso.** La Fase 0 se completó el 2026-10-16. Hechas y probadas:
+**Fase 1 en curso.** La Fase 0 se completó el 2026-10-16. Hechas y probadas (1.5 el 2026-10-17):
 - 1.1: auth, cuenta, perfil y barra inferior.
 - 1.2: anuncios (publicar, Mis anuncios, caducidad y límites). El primer anuncio real se publicó desde un Android.
 - 1.3: catálogo público (inicio, búsqueda con filtros, ficha, perfil con anuncios, favoritos y SEO). El inicio real sustituye a "Próximamente" y nada se indexa hasta el lanzamiento (D-043, D-044).
 - 1.4: chat en tiempo real con fotos, bandeja, no leídos, bloqueos, botón de WhatsApp, tiempo de respuesta y notificaciones push (D-048 a D-052). La ficha va a pantalla completa con la barra de contacto.
+- 1.5: denuncias con auto‑ocultado a las 3, términos prohibidos por palabras completas, `/terminos`, `/privacidad` y borrar la cuenta (D-053 a D-056). Las pantallas con sesión redirigen a entrar en el proxy (D-054). Los textos legales son provisionales: los revisa el cliente.
 
 Las pruebas en el móvil que quedan pendientes del usuario son las casillas sin marcar de ROADMAP. En el proyecto dev hay datos de demostración (D-047).
 
-**Siguiente:** 1.5 Confianza y moderación (denuncias con auto‑ocultado, términos, privacidad y borrar cuenta).
+**Siguiente:** 1.6 Premium y administración (página "Hazte Premium", panel admin con la cola de denuncias y activación de Premium). Falta también editar el perfil (ALCANCE §4.3), que no estaba en el roadmap.
 
 ## Recursos
 

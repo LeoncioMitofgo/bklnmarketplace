@@ -73,7 +73,7 @@ Cada viaje entre Malabo y Europa cuesta unos 150 ms, más lo que añada la red m
 │  ├─ components/             # ui/ (shadcn) + componentes propios
 │  ├─ lib/                    # clientes de Supabase, formatos (FCFA, +240, fechas), planes, esquemas Zod
 │  ├─ messages/es.json        # textos de la interfaz
-│  └─ proxy.ts                # refresco de sesión de Supabase (en Next 16, proxy.ts sustituye a middleware.ts)
+│  └─ proxy.ts                # refresco de sesión y redirección a /entrar en las pantallas con sesión (D-054)
 ├─ supabase/
 │  ├─ migrations/             # SQL escrito a mano y versionado
 │  ├─ seed.sql                # categorías, atributos, ciudades, planes
@@ -125,6 +125,8 @@ Criterios:
   3. El enlace lleva a `/nueva-contrasena`, donde, al guardar la contraseña, se hace `verifyOtp` + `updateUser` (D-037).
   4. Se muestra el email enmascarado.
 - **Límite de intentos:** contador propio por identificador e IP en `rate_limits`.
+- **Pantallas con sesión** (D-054): el proxy redirige a `/entrar?next=…` antes de montar la página. Si lo hiciera la página, Next 16 la deja montada en segundo plano y, al volver tras entrar, repetía la redirección.
+- **Borrar la cuenta** (D-055): una Server Action comprueba la contraseña con un cliente sin cookies y borra el usuario con `auth.admin.deleteUser`. Después quita las cookies, invalida la caché del perfil y de los anuncios, y borra las fotos de Storage con `after()`.
 
 ### 5.2 Imágenes
 1. En el móvil, cada foto se recomprime con canvas en dos variantes: grande (lado largo de 1600 px como máximo) y miniatura (480 px como máximo).
@@ -166,7 +168,7 @@ Criterios:
 | Al caducar Premium, pausar los anuncios que pasen del límite Normal | pg_cron (SQL) | Diaria |
 | Email por mensajes sin leer | Vercel Cron → `/api/cron/...` | Cada 10–15 min (en producción, plan Pro) |
 | Avisos: anuncio por caducar, Premium a 7 días de caducar | Vercel Cron | Diaria |
-| Limpiar imágenes huérfanas y tokens caducados | Vercel Cron (API de Storage) | Diaria |
+| Limpiar imágenes huérfanas y de anuncios eliminados, y tokens caducados (las fotos de una cuenta borrada se borran en el momento, D-055) | Vercel Cron (API de Storage) | Diaria |
 
 Las rutas de cron se protegen con `CRON_SECRET`. En desarrollo (plan Hobby, como mucho un cron al día) se lanzan a mano.
 

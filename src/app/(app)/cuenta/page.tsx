@@ -5,7 +5,7 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { ResendVerification } from "@/components/account/resend-verification";
 import { SignOutButton } from "@/components/account/sign-out-button";
-import { CheckIcon } from "@/components/icons";
+import { CheckIcon, ChevronRightIcon } from "@/components/icons";
 import { Avatar } from "@/components/profile/avatar";
 import { PushSettings } from "@/components/push/push-settings";
 import { buttonClasses } from "@/components/ui/button";
@@ -138,6 +138,25 @@ async function AccountContent() {
       </dl>
 
       <SignOutButton label={t("signOut")} />
+
+      <nav className="flex flex-col divide-y divide-border border-t border-border text-[15px]">
+        <Link href="/terminos" className="flex min-h-12 items-center justify-between">
+          {t("terms")}
+          <ChevronRightIcon className="size-5 text-text-muted" />
+        </Link>
+        <Link href="/privacidad" className="flex min-h-12 items-center justify-between">
+          {t("privacy")}
+          <ChevronRightIcon className="size-5 text-text-muted" />
+        </Link>
+        <Link
+          href="/cuenta/borrar"
+          prefetch={false}
+          className="flex min-h-12 items-center justify-between text-danger"
+        >
+          {t("deleteAccount")}
+          <ChevronRightIcon className="size-5" />
+        </Link>
+      </nav>
     </>
   );
 }

@@ -3,7 +3,14 @@ import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Suspense } from "react";
-import { ChevronRightIcon, ClockIcon, EyeIcon, HeartIcon, MapPinIcon } from "@/components/icons";
+import {
+  ChevronRightIcon,
+  ClockIcon,
+  EyeIcon,
+  FlagIcon,
+  HeartIcon,
+  MapPinIcon,
+} from "@/components/icons";
 import { ContactBar } from "@/components/listings/contact-bar";
 import { FavoriteButton } from "@/components/listings/favorite-button";
 import { Gallery } from "@/components/listings/gallery";
@@ -236,6 +243,14 @@ async function ListingContent({ params }: Pick<PageProps<"/anuncio/[slug]">, "pa
 
         <SellerCard seller={listing.seller} now={now} />
         <SafetyTips />
+        <Link
+          href={`${path}/denunciar`}
+          prefetch={false}
+          className="-mt-3 flex min-h-11 items-center gap-2 self-start text-sm font-semibold text-text-muted"
+        >
+          <FlagIcon className="size-4" />
+          {t("report")}
+        </Link>
 
         {listing.status === "active" && listing.category_id !== null ? (
           <Suspense fallback={null}>

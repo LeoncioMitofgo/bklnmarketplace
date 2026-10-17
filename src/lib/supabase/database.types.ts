@@ -539,6 +539,36 @@ export type Database = {
           },
         ]
       }
+      moderation_log: {
+        Row: {
+          action: string
+          admin_id: string | null
+          created_at: string
+          id: number
+          reason: string | null
+          target_id: string | null
+          target_type: string
+        }
+        Insert: {
+          action: string
+          admin_id?: string | null
+          created_at?: string
+          id?: never
+          reason?: string | null
+          target_id?: string | null
+          target_type: string
+        }
+        Update: {
+          action?: string
+          admin_id?: string | null
+          created_at?: string
+          id?: never
+          reason?: string | null
+          target_id?: string | null
+          target_type?: string
+        }
+        Relationships: []
+      }
       plan_prices: {
         Row: {
           is_active: boolean
@@ -757,6 +787,94 @@ export type Database = {
         }
         Relationships: []
       }
+      reports: {
+        Row: {
+          conversation_id: string | null
+          created_at: string
+          details: string | null
+          id: string
+          listing_id: string | null
+          reason: Database["public"]["Enums"]["report_reason"]
+          reported_user_id: string | null
+          reporter_id: string | null
+          resolution_note: string | null
+          resolved_at: string | null
+          resolved_by: string | null
+          status: Database["public"]["Enums"]["report_status"]
+        }
+        Insert: {
+          conversation_id?: string | null
+          created_at?: string
+          details?: string | null
+          id?: string
+          listing_id?: string | null
+          reason: Database["public"]["Enums"]["report_reason"]
+          reported_user_id?: string | null
+          reporter_id?: string | null
+          resolution_note?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: Database["public"]["Enums"]["report_status"]
+        }
+        Update: {
+          conversation_id?: string | null
+          created_at?: string
+          details?: string | null
+          id?: string
+          listing_id?: string | null
+          reason?: Database["public"]["Enums"]["report_reason"]
+          reported_user_id?: string | null
+          reporter_id?: string | null
+          resolution_note?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          status?: Database["public"]["Enums"]["report_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reports_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listing_cards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reports_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reports_reported_user_id_fkey"
+            columns: ["reported_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reports_reporter_id_fkey"
+            columns: ["reporter_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reports_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       stores: {
         Row: {
           address: string | null
@@ -859,6 +977,13 @@ export type Database = {
       }
     }
     Functions: {
+      account_storage_objects: {
+        Args: { p_user_id: string }
+        Returns: {
+          bucket_id: string
+          name: string
+        }[]
+      }
       chat_assert_can_write: { Args: { p_user_id: string }; Returns: undefined }
       chat_rate_limit: {
         Args: {
@@ -1014,6 +1139,24 @@ export type Database = {
       }
       renew_listing: { Args: { p_listing_id: string }; Returns: undefined }
       renew_premium_listings: { Args: never; Returns: number }
+      report_conversation: {
+        Args: {
+          p_block?: boolean
+          p_conversation_id: string
+          p_details?: string
+          p_reason: Database["public"]["Enums"]["report_reason"]
+        }
+        Returns: string
+      }
+      report_listing: {
+        Args: {
+          p_details?: string
+          p_listing_id: string
+          p_reason: Database["public"]["Enums"]["report_reason"]
+        }
+        Returns: string
+      }
+      report_rate_limit: { Args: { p_user_id: string }; Returns: undefined }
       resolve_login_email: { Args: { p_identifier: string }; Returns: string }
       search_listings: {
         Args: {
@@ -1085,6 +1228,14 @@ export type Database = {
         | "blocked"
         | "deleted"
       price_period: "total" | "month"
+      report_reason:
+        | "scam"
+        | "prohibited"
+        | "duplicate"
+        | "wrong_category"
+        | "offensive"
+        | "other"
+      report_status: "open" | "resolved" | "dismissed"
       user_role: "user" | "admin"
     }
     CompositeTypes: {
@@ -1227,6 +1378,15 @@ export const Constants = {
         "deleted",
       ],
       price_period: ["total", "month"],
+      report_reason: [
+        "scam",
+        "prohibited",
+        "duplicate",
+        "wrong_category",
+        "offensive",
+        "other",
+      ],
+      report_status: ["open", "resolved", "dismissed"],
       user_role: ["user", "admin"],
     },
   },

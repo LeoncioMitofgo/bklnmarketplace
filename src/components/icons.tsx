@@ -161,6 +161,13 @@ export const MoreIcon = (p: IconProps) => (
   </Icon>
 );
 
+export const FlagIcon = (p: IconProps) => (
+  <Icon {...p}>
+    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+    <path d="M4 22v-7" />
+  </Icon>
+);
+
 export const BellIcon = (p: IconProps) => (
   <Icon {...p}>
     <path d="M10.27 21a2 2 0 0 0 3.46 0" />

@@ -151,7 +151,10 @@
     "whatsappOff": "Desactivado: solo te pueden escribir por el chat de BKLN. Si lo activas, quien haya entrado en su cuenta podrá escribirte también por WhatsApp.",
     "whatsappEnable": "Activar el botón de WhatsApp",
     "whatsappDisable": "Desactivar el botón de WhatsApp",
-    "pushTitle": "Avisos de mensajes en este móvil"
+    "pushTitle": "Avisos de mensajes en este móvil",
+    "terms": "Términos de uso",
+    "privacy": "Privacidad",
+    "deleteAccount": "Borrar mi cuenta"
   },
   "profile": {
     "loading": "Cargando perfil…",
@@ -267,7 +270,8 @@
       "done": "Guardar y salir",
       "verifyNotice": "Para publicar tienes que confirmar tu email. Te enviamos un enlace al registrarte.",
       "safety": "Recuerda: nunca pidas ni hagas pagos por adelantado.",
-      "no": "No"
+      "no": "No",
+      "rules": "Al publicar aceptas las normas: revisa <link>qué no se puede anunciar</link>."
     },
     "mine": {
       "metaTitle": "Mis anuncios",
@@ -334,7 +338,7 @@
       "listing_condition_required": "Indica si es nuevo o usado.",
       "listing_photo_required": "El anuncio necesita al menos una foto.",
       "listing_photo_limit": "Has llegado al máximo de fotos de tu plan.",
-      "listing_banned_term": "El anuncio contiene algo que no está permitido en BKLN Marketplace.",
+      "listing_banned_term": "El anuncio contiene algo que no está permitido. Revisa el título y la descripción: en los términos de uso tienes la lista de lo que no se puede anunciar.",
       "listing_duplicate": "Ya tienes un anuncio activo muy parecido en esta categoría.",
       "listing_daily_limit": "Has publicado muchos anuncios hoy. Vuelve a intentarlo mañana.",
       "listing_renew_not_allowed": "Solo se puede renovar cuando el anuncio está a punto de caducar o ya ha caducado.",
@@ -472,7 +476,8 @@
         "tip1": "No pagues nada por adelantado.",
         "tip2": "Queda en un lugar público y concurrido.",
         "tip3": "Revisa el producto antes de pagar."
-      }
+      },
+      "report": "Denunciar este anuncio"
     },
     "favorites": {
       "metaTitle": "Favoritos",
@@ -573,7 +578,8 @@
       },
       "ownListing": "Este anuncio es tuyo. Cuando alguien te escriba, lo verás en Mensajes.",
       "goToMine": "Ir a Mis anuncios",
-      "notAvailable": "Este anuncio ya no está disponible."
+      "notAvailable": "Este anuncio ya no está disponible.",
+      "report": "Denunciar a {name}"
     },
     "errors": {
       "not_authenticated": "Tienes que entrar en tu cuenta.",
@@ -606,5 +612,366 @@
     "error": "No se han podido activar los avisos. Comprueba la conexión y vuelve a intentarlo.",
     "photo": "📷 Foto",
     "someone": "Alguien"
+  },
+  "report": {
+    "listing": {
+      "metaTitle": "Denunciar anuncio",
+      "title": "Denunciar este anuncio",
+      "intro": "Cuéntanos qué pasa con «{title}». La denuncia es anónima: el vendedor no sabrá quién la ha hecho.",
+      "own": "Es tu anuncio: no puedes denunciarlo.",
+      "back": "Volver al anuncio",
+      "reasons": {
+        "scam": {
+          "label": "Parece una estafa",
+          "hint": "Pide pagos por adelantado, el precio es demasiado bueno o el producto no existe."
+        },
+        "prohibited": {
+          "label": "Es algo prohibido",
+          "hint": "Armas, drogas, medicamentos con receta, documentos, animales protegidos…"
+        },
+        "duplicate": {
+          "label": "Está repetido",
+          "hint": "El mismo vendedor lo ha publicado varias veces."
+        },
+        "wrong_category": {
+          "label": "Está en otra categoría",
+          "hint": "No corresponde a la categoría en la que aparece."
+        },
+        "offensive": {
+          "label": "Es ofensivo",
+          "hint": "Insultos, contenido sexual o fotos inapropiadas."
+        },
+        "other": {
+          "label": "Otro motivo",
+          "hint": "Explícanos abajo qué pasa."
+        }
+      },
+      "done": "Gracias por avisarnos. Revisaremos el anuncio lo antes posible y, si incumple las normas, lo retiraremos.",
+      "already": "Ya habías denunciado este anuncio. Lo revisaremos lo antes posible."
+    },
+    "user": {
+      "metaTitle": "Denunciar usuario",
+      "title": "Denunciar a {name}",
+      "intro": "La denuncia es anónima: {name} no sabrá quién la ha hecho. Para comprobarla, podremos leer esta conversación.",
+      "deleted": "Esta persona ha borrado su cuenta.",
+      "back": "Volver a la conversación",
+      "reasons": {
+        "scam": {
+          "label": "Intenta estafarme",
+          "hint": "Me pide pagar por adelantado, códigos o datos bancarios."
+        },
+        "offensive": {
+          "label": "Me insulta o me acosa",
+          "hint": "Insultos, amenazas, mensajes sexuales o insistencia."
+        },
+        "prohibited": {
+          "label": "Ofrece algo prohibido",
+          "hint": "Armas, drogas, documentos, animales protegidos…"
+        },
+        "other": {
+          "label": "Otro motivo",
+          "hint": "Explícanos abajo qué pasa."
+        }
+      },
+      "block": "Bloquear también a {name}",
+      "blockHint": "No podrá volver a escribirte.",
+      "alreadyBlocked": "Ya tienes bloqueada a esta persona.",
+      "done": "Gracias por avisarnos. Revisaremos lo ocurrido lo antes posible.",
+      "already": "Ya habías denunciado a esta persona. Lo revisaremos lo antes posible.",
+      "blocked": "Has bloqueado a {name}: ya no podrá escribirte."
+    },
+    "reason": "¿Qué pasa?",
+    "details": "Cuéntanos más",
+    "detailsHint": "Opcional, salvo si eliges «Otro motivo». Como mucho 1000 caracteres.",
+    "submit": "Enviar denuncia",
+    "submitting": "Enviando…",
+    "doneTitle": "Denuncia enviada",
+    "errors": {
+      "reason_required": "Elige un motivo.",
+      "details_required": "Explícanos qué pasa.",
+      "details_too_long": "Como mucho 1000 caracteres.",
+      "report_invalid": "Revisa el motivo y la explicación.",
+      "report_rate_limited": "Has enviado muchas denuncias hoy. Vuelve a intentarlo mañana.",
+      "listing_not_available": "Este anuncio ya no está disponible.",
+      "own_listing": "No puedes denunciar tu propio anuncio.",
+      "conversation_not_found": "Esta conversación no existe.",
+      "recipient_deleted": "Esta persona ha borrado su cuenta.",
+      "account_restricted": "Tu cuenta está restringida ahora mismo.",
+      "offline": "No hay conexión. Lo que has escrito sigue aquí: vuelve a intentarlo cuando tengas red.",
+      "unexpected": "Algo ha fallado. Inténtalo de nuevo."
+    },
+    "home": "Ir al inicio"
+  },
+  "deleteAccount": {
+    "metaTitle": "Borrar mi cuenta",
+    "title": "Borrar mi cuenta",
+    "warning": "Esto no se puede deshacer.",
+    "deletedTitle": "Se borra para siempre:",
+    "deleted1": "Tu perfil y tu página pública.",
+    "deleted2": "Todos tus anuncios, con sus fotos.",
+    "deleted3": "Tus favoritos, tus bloqueos y los avisos de mensajes en tus móviles.",
+    "deleted4": "Tu plan Premium, si lo tienes: el tiempo que te quede se pierde.",
+    "keptTitle": "Se conserva:",
+    "kept1": "Los mensajes que ya enviaste: quienes hablaron contigo los seguirán viendo, con tu nombre cambiado por «Usuario eliminado».",
+    "kept2": "Las denuncias que hiciste o recibiste, para proteger a otros usuarios.",
+    "freed": "Tu nombre de usuario, tu teléfono y tu email quedarán libres para crear otra cuenta.",
+    "password": "Escribe tu contraseña para confirmar",
+    "submit": "Borrar mi cuenta para siempre",
+    "submitting": "Borrando…",
+    "cancel": "No, volver a mi cuenta",
+    "errors": {
+      "password_required": "Escribe tu contraseña.",
+      "invalid_password": "La contraseña no es correcta.",
+      "too_many_attempts": "Demasiados intentos. Espera 15 minutos y vuelve a intentarlo.",
+      "unexpected": "No hemos podido borrar la cuenta. Inténtalo de nuevo."
+    },
+    "done": {
+      "metaTitle": "Cuenta borrada",
+      "title": "Tu cuenta se ha borrado",
+      "text": "Gracias por haber usado BKLN Marketplace. Si algún día vuelves, puedes crear una cuenta nueva cuando quieras.",
+      "home": "Ir al inicio"
+    }
+  },
+  "legal": {
+    "updated": "Última actualización: 17/10/2026",
+    "contents": "En esta página",
+    "footer": "BKLN Software & Systems · Malabo",
+    "terms": {
+      "metaTitle": "Términos de uso",
+      "title": "Términos de uso",
+      "description": "Las normas de BKLN Marketplace: cuentas, anuncios, qué no se puede vender, chat, seguridad y moderación.",
+      "intro": "Estos términos explican cómo funciona BKLN Marketplace y qué normas hay que cumplir para usarlo. Al crear una cuenta los aceptas. Están escritos para que se entiendan; si algo no te queda claro, escríbenos.",
+      "sections": [
+        {
+          "id": "servicio",
+          "title": "Qué es BKLN Marketplace",
+          "blocks": [
+            "BKLN Marketplace (bklnmarketplace.com) es una web de anuncios clasificados para comprar y vender en Guinea Ecuatorial. La gestiona BKLN Software & Systems, con oficina en Banapa, Malabo.",
+            "Ponemos en contacto a quien vende con quien compra. No vendemos ni compramos nada, no cobramos comisión por las ventas y no intervenimos en los pagos ni en las entregas: el acuerdo es solo entre el comprador y el vendedor."
+          ]
+        },
+        {
+          "id": "cuenta",
+          "title": "Tu cuenta",
+          "blocks": [
+            "Para ver anuncios no hace falta cuenta. Para publicar, chatear y guardar favoritos, sí.",
+            [
+              "Tienes que ser mayor de 18 años.",
+              "Tu nombre, tu teléfono y tu email tienen que ser reales y tuyos.",
+              "Eres responsable de lo que se haga con tu cuenta: no compartas tu contraseña.",
+              "Puedes borrar tu cuenta cuando quieras desde Mi cuenta."
+            ]
+          ]
+        },
+        {
+          "id": "anuncios",
+          "title": "Publicar anuncios",
+          "blocks": [
+            "Publicar es gratis y los anuncios aparecen al momento, sin revisión previa. Por eso eres responsable de lo que publicas.",
+            [
+              "Anuncia solo cosas que existen, que puedes vender y que están en Guinea Ecuatorial.",
+              "Usa fotos reales del producto y una descripción honesta.",
+              "Pon el precio en francos CFA y elige la categoría correcta.",
+              "No publiques el mismo anuncio varias veces."
+            ],
+            "Los anuncios caducan pasado un tiempo, y cada plan tiene un límite de anuncios activos y de fotos. Lo verás al publicar."
+          ]
+        },
+        {
+          "id": "prohibido",
+          "title": "Qué no se puede anunciar",
+          "blocks": [
+            [
+              "Armas, munición y explosivos.",
+              "Drogas y medicamentos que necesitan receta.",
+              "Documentos oficiales (DNI, pasaportes, carnés) y dinero falso.",
+              "Animales protegidos o partes de ellos: marfil, pieles, carne de especies protegidas.",
+              "Contenido sexual y servicios sexuales.",
+              "Falsificaciones e imitaciones de marcas.",
+              "Productos robados y servicios ilegales.",
+              "Cualquier otra cosa que prohíban las leyes de Guinea Ecuatorial."
+            ],
+            "Algunos de estos anuncios se bloquean al publicarlos. Los demás los retiramos en cuanto los vemos o nos los denuncian."
+          ]
+        },
+        {
+          "id": "contacto",
+          "title": "Chat y contacto",
+          "blocks": [
+            "El chat sirve para hablar de los anuncios. Trata a los demás con respeto: no se permiten insultos, acoso, spam ni mensajes que no tengan que ver con el anuncio.",
+            "El botón de WhatsApp solo aparece si el vendedor lo activa. Tu número de teléfono nunca se muestra en la web.",
+            "Puedes bloquear a cualquier persona desde la conversación: no podrá volver a escribirte."
+          ]
+        },
+        {
+          "id": "seguridad",
+          "title": "Compra y vende con seguridad",
+          "blocks": [
+            [
+              "No pagues nada por adelantado, ni por el envío ni por la reserva.",
+              "Queda en un lugar público y concurrido, mejor de día.",
+              "Revisa el producto antes de pagar.",
+              "Desconfía de los precios demasiado buenos y de quien te mete prisa.",
+              "No compartas códigos, contraseñas ni datos bancarios."
+            ],
+            "Como no intervenimos en las ventas, no podemos garantizar los productos ni recuperar un pago. Si alguien intenta estafarte, denúncialo: nos ayuda a proteger a todos."
+          ]
+        },
+        {
+          "id": "moderacion",
+          "title": "Denuncias y moderación",
+          "blocks": [
+            "Cualquier usuario puede denunciar un anuncio o a otro usuario. Cuando un anuncio recibe varias denuncias de personas distintas, se oculta hasta que lo revisemos.",
+            "Podemos retirar anuncios y suspender o cerrar las cuentas que incumplan estas normas. Cuando bloqueamos un anuncio, el vendedor ve el motivo en Mis anuncios.",
+            "Para comprobar una denuncia hecha desde el chat, podemos leer esa conversación. No leemos las conversaciones que nadie ha denunciado."
+          ]
+        },
+        {
+          "id": "premium",
+          "title": "Plan Premium",
+          "blocks": [
+            "Además del plan Normal, que es gratis, hay un plan Premium de pago con más anuncios y otras ventajas. Se paga en nuestra oficina o, fuera de Malabo, por agencia de envío, y lo activamos a mano por el periodo pagado. Los precios y las condiciones se muestran antes de pedirlo."
+          ]
+        },
+        {
+          "id": "responsabilidad",
+          "title": "Responsabilidad",
+          "blocks": [
+            "Cada usuario responde de sus anuncios, de sus mensajes y de sus acuerdos. BKLN Marketplace no es parte de las compraventas y no responde de la calidad, la legalidad o la entrega de los productos, ni de lo que hagan los usuarios fuera de la web.",
+            "Hacemos lo posible para que la web funcione siempre, pero puede haber cortes o errores, y no respondemos de las pérdidas que causen."
+          ]
+        },
+        {
+          "id": "cambios",
+          "title": "Cambios en estos términos",
+          "blocks": [
+            "Podemos cambiar estos términos para adaptarlos al servicio o a la ley. Si el cambio es importante, lo avisaremos en la web antes de aplicarlo. Si sigues usando BKLN Marketplace después, los aceptas."
+          ]
+        },
+        {
+          "id": "ley",
+          "title": "Ley aplicable y contacto",
+          "blocks": [
+            "Estos términos se rigen por las leyes de la República de Guinea Ecuatorial.",
+            "Para cualquier duda o reclamación, escríbenos a hello@bklnsoftware.tech o ven a nuestra oficina de Banapa, Malabo: de lunes a viernes de 8:00 a 16:00 y los sábados de 11:00 a 14:00."
+          ]
+        }
+      ]
+    },
+    "privacy": {
+      "metaTitle": "Política de privacidad",
+      "title": "Política de privacidad",
+      "description": "Qué datos guarda BKLN Marketplace, para qué, con quién los comparte y cómo borrar tu cuenta.",
+      "intro": "Aquí te contamos qué datos tuyos guardamos, para qué y qué puedes hacer con ellos. En resumen: solo pedimos lo necesario, tu teléfono y tu email nunca son públicos y no vendemos tus datos.",
+      "sections": [
+        {
+          "id": "responsable",
+          "title": "Quién es responsable",
+          "blocks": [
+            "BKLN Software & Systems, con oficina en Banapa, Malabo (Guinea Ecuatorial), gestiona BKLN Marketplace y es responsable de tus datos. Puedes escribirnos a hello@bklnsoftware.tech."
+          ]
+        },
+        {
+          "id": "datos",
+          "title": "Qué datos guardamos",
+          "blocks": [
+            [
+              "Al registrarte: tu nombre visible, tu nombre de usuario, tu teléfono, tu email y tu contraseña. La contraseña se guarda cifrada: nadie puede leerla, ni siquiera nosotros.",
+              "En tu perfil: tu ciudad y lo que quieras contar de ti.",
+              "Tus anuncios y sus fotos. Antes de subir una foto, el móvil le quita los datos ocultos, como la ubicación GPS.",
+              "Tus conversaciones del chat, con sus fotos.",
+              "Tus favoritos, las personas que bloqueas y las denuncias que haces.",
+              "Datos técnicos: la dirección IP, para limitar los intentos de entrar y evitar abusos, y el tipo de navegador, si activas los avisos de mensajes.",
+              "Estadísticas de visitas, sin cookies y sin identificarte, para saber qué páginas se usan."
+            ]
+          ]
+        },
+        {
+          "id": "uso",
+          "title": "Para qué los usamos",
+          "blocks": [
+            [
+              "Para que la web funcione: tu cuenta, tus anuncios, el chat y los avisos.",
+              "Para tu seguridad y la de los demás: evitar estafas, spam y abusos, y revisar las denuncias.",
+              "Para mejorar el servicio con estadísticas que no te identifican."
+            ],
+            "No vendemos tus datos ni los usamos para publicidad de otras empresas."
+          ]
+        },
+        {
+          "id": "publico",
+          "title": "Qué ven los demás",
+          "blocks": [
+            "Es público: tu nombre visible, tu nombre de usuario, tu ciudad, tu descripción, desde cuándo eres miembro, cuánto sueles tardar en responder y tus anuncios.",
+            "Nunca es público: tu teléfono y tu email. Si activas el botón de WhatsApp, tu número solo se comparte con quien lo pulse, al abrirle WhatsApp.",
+            "Tus mensajes solo los ven las personas de la conversación. Nuestro equipo solo puede leer una conversación si alguien la denuncia."
+          ]
+        },
+        {
+          "id": "terceros",
+          "title": "Con quién los compartimos",
+          "blocks": [
+            "Usamos proveedores que guardan o procesan datos por nosotros, solo para prestar el servicio:",
+            [
+              "Supabase: la base de datos, las cuentas y las fotos. Sus servidores están en Europa.",
+              "Vercel: aloja la web y cuenta las visitas sin cookies.",
+              "Google, Mozilla o Apple, según tu navegador: entregan los avisos de mensajes, si los activas.",
+              "Resend: envía los emails de confirmación y de recuperar la contraseña.",
+              "WhatsApp (Meta): solo si pulsas el botón de WhatsApp de un anuncio."
+            ],
+            "También podemos entregar datos a las autoridades de Guinea Ecuatorial cuando la ley nos obligue."
+          ]
+        },
+        {
+          "id": "cookies",
+          "title": "Cookies y datos en tu móvil",
+          "blocks": [
+            "Usamos una cookie para mantener tu sesión iniciada; sin ella no podrías entrar en tu cuenta. No usamos cookies de publicidad ni de seguimiento.",
+            "El navegador también guarda algunas cosas en tu móvil, como el borrador de un anuncio o de un mensaje, para que no pierdas lo que escribes si se corta la conexión."
+          ]
+        },
+        {
+          "id": "conservacion",
+          "title": "Cuánto tiempo los guardamos",
+          "blocks": [
+            "Mientras tengas la cuenta. Los anuncios que eliminas dejan de verse enseguida, pero se guardan hasta que borras la cuenta, por si hay que revisar una denuncia.",
+            "Si borras tu cuenta, se borran tu perfil, tus anuncios con sus fotos, tus favoritos y tus bloqueos. Se conservan, sin tu nombre, los mensajes que enviaste (la otra persona sigue viendo la conversación, con «Usuario eliminado») y las denuncias, para proteger a otros usuarios. Los pagos de Premium se conservan por contabilidad.",
+            "Las copias de seguridad pueden tener tus datos unos días más, hasta que se renuevan."
+          ]
+        },
+        {
+          "id": "derechos",
+          "title": "Tus derechos",
+          "blocks": [
+            [
+              "Ver tus datos en Mi cuenta y pedirnos que corrijamos cualquiera que esté mal.",
+              "Borrar tu cuenta cuando quieras, desde Mi cuenta → Borrar mi cuenta.",
+              "Pedirnos una copia de tus datos o preguntarnos cualquier cosa sobre ellos, en hello@bklnsoftware.tech."
+            ]
+          ]
+        },
+        {
+          "id": "proteccion",
+          "title": "Cómo los protegemos",
+          "blocks": [
+            "Las conexiones van cifradas (HTTPS), las contraseñas se guardan cifradas y cada usuario solo puede ver y cambiar lo suyo. Aun así, ningún sistema es seguro al 100 %: si detectamos un problema que afecte a tus datos, te avisaremos."
+          ]
+        },
+        {
+          "id": "menores",
+          "title": "Menores",
+          "blocks": [
+            "BKLN Marketplace es solo para mayores de 18 años. Si sabemos que una cuenta es de un menor, la borraremos."
+          ]
+        },
+        {
+          "id": "cambios",
+          "title": "Cambios en esta política",
+          "blocks": [
+            "Si cambiamos esta política de forma importante, lo avisaremos en la web antes de aplicarlo."
+          ]
+        }
+      ]
+    }
   }
 }

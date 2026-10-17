@@ -1,12 +1,14 @@
 // Botones según IDENTIDAD §5: 52 px de alto, radio 12 px. El naranja (accent) solo para Publicar y Premium.
 
-export type ButtonVariant = "primary" | "secondary" | "accent" | "ghost";
+export type ButtonVariant = "primary" | "secondary" | "accent" | "ghost" | "danger";
 
 const VARIANTS: Record<ButtonVariant, string> = {
   primary: "bg-primary text-white hover:bg-primary-hover",
   secondary: "border-2 border-primary bg-bg text-primary hover:bg-surface",
   accent: "bg-accent text-text",
   ghost: "text-primary hover:bg-surface",
+  // Solo para acciones que no se pueden deshacer (borrar la cuenta).
+  danger: "bg-danger text-white",
 };
 
 export function buttonClasses(variant: ButtonVariant = "primary", className = ""): string {

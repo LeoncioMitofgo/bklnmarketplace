@@ -120,7 +120,16 @@ export function ReviewStep({ listing, images, catalog, emailVerified, onEdit }: 
         {editLink("details")}
       </div>
 
-      <p className="text-[13px] text-text-muted">{t("safety")}</p>
+      <p className="text-[13px] leading-relaxed text-text-muted">
+        {t.rich("rules", {
+          link: (chunks) => (
+            <Link href="/terminos#prohibido" className="font-semibold text-primary underline">
+              {chunks}
+            </Link>
+          ),
+        })}{" "}
+        {t("safety")}
+      </p>
 
       {error ? <Alert tone="error">{error}</Alert> : null}
 

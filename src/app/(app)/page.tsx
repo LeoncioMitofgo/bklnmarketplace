@@ -19,7 +19,7 @@ const RECENT_LIMIT = 8;
 const FEATURED_LIMIT = 10;
 
 export default async function HomePage() {
-  const tBrand = await getTranslations("brand");
+  const [tBrand, tLegal] = await Promise.all([getTranslations("brand"), getTranslations("legal")]);
   return (
     <main className="flex flex-col gap-7 pt-4">
       <header className="flex flex-col gap-3 px-4">
@@ -28,6 +28,14 @@ export default async function HomePage() {
       </header>
       <Categories />
       <Listings />
+      <footer className="flex flex-wrap justify-center gap-x-4 px-4 text-xs text-text-muted">
+        <Link href="/terminos" prefetch={false} className="flex min-h-11 items-center">
+          {tLegal("terms.title")}
+        </Link>
+        <Link href="/privacidad" prefetch={false} className="flex min-h-11 items-center">
+          {tLegal("privacy.title")}
+        </Link>
+      </footer>
     </main>
   );
 }
