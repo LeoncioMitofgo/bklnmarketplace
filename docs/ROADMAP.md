@@ -127,7 +127,10 @@
 - [x] Avisos push: Premium activado y anuncio bloqueado por moderación (2026-10-17)
 - [x] Probado de extremo a extremo (2026-10-17): 57 comprobaciones de base de datos y 37 en navegador. Se repitieron las pruebas de navegador del catálogo, el chat y la 1.5
 - [x] Rol de admin para la cuenta del cliente, `julio_nkulu` (comprobado el 2026-11-03; se da con SQL: `profile_private.role = 'admin'`)
-- [ ] Panel admin: categorías y atributos, ciudades y planes (segunda parte de la 1.6)
+- [x] Panel admin, catálogo y ajustes (2026-11-03, D-060):
+  - Pestaña "Catálogo": categorías y subcategorías (crear, editar, ordenar y desactivar), sus atributos (crear, editar y eliminar) y ciudades.
+  - Pestaña "Ajustes": límites de los planes, precios de Premium (añadir o retirar periodos), datos de la oficina, términos prohibidos y denuncias para ocultar.
+  - Probado en un navegador móvil: 26 comprobaciones, dejando la configuración como estaba.
 - [x] Editar el perfil y los datos de la cuenta (2026-11-03, D-058):
   - `/cuenta/perfil`: foto (recortada y reducida en el móvil), nombre, usuario, ciudad y descripción.
   - `/cuenta/acceso`: email (hay que volver a confirmarlo), teléfono y contraseña. Cada cambio pide la contraseña actual; cambiar la contraseña cierra la sesión en los demás dispositivos.

@@ -15,9 +15,9 @@ Las pruebas en el móvil que quedan pendientes del usuario son las casillas sin 
 
 - 1.6, primera parte: "Hazte Premium" en `/premium` con solicitud y WhatsApp, y panel `/admin` (pagos y activación de Premium, denuncias con el chat denunciado, usuarios con suspender y banear, métricas) (D-057). El rol de admin se da con SQL.
 
-- 1.6, segunda parte (en curso): editar el perfil (`/cuenta/perfil`, con foto) y el acceso (`/cuenta/acceso`: email, teléfono y contraseña) (D-058), y la tienda Premium `/t/<tienda>`, que se edita en `/cuenta/tienda` (D-059). Las dos, el 2026-11-03.
+- 1.6, segunda parte (en curso): editar el perfil (`/cuenta/perfil`, con foto) y el acceso (`/cuenta/acceso`: email, teléfono y contraseña) (D-058), la tienda Premium `/t/<tienda>`, que se edita en `/cuenta/tienda` (D-059), y el catálogo y los ajustes en el panel (D-060). Todo, el 2026-11-03.
 
-**Siguiente:** categorías, ciudades y planes en el admin, y el aviso de Premium por caducar.
+**Siguiente:** aviso de Premium por caducar (último punto de la 1.6) y después la 1.7, lanzamiento.
 
 ## Recursos
 

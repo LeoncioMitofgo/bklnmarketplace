@@ -183,3 +183,11 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
   - La ficha enlaza a la tienda en lugar de al perfil cuando el vendedor la tiene.
 
   · ALCANCE §4.8 con el mínimo: sin plantillas ni colores propios, que se pueden añadir más adelante.
+- **D-060 · 2026-11-03** · **Catálogo y ajustes en el panel:**
+  - Las categorías y las ciudades no se borran, porque hay anuncios y perfiles que dependen de ellas: se desactivan. Desactivar una categoría principal desactiva también sus subcategorías. Sus anuncios siguen publicados.
+  - Los atributos se pueden eliminar: los anuncios guardan el dato, pero deja de verse y de pedirse. Su clave y su tipo no se cambian después de crearlos, porque los anuncios ya guardan valores con ellos.
+  - La dirección de una ciudad (filtro `ciudad=`) no cambia. La de una categoría sí se puede cambiar, avisando de que los enlaces antiguos dejan de funcionar.
+  - En "Ajustes" se editan los límites de los planes, los precios de Premium (un periodo se retira sin borrarlo), la oficina, los términos prohibidos y el umbral de denuncias. Los límites de ritmo quedan fuera del panel: se cambian con SQL.
+  - Se escribe con la sesión del admin y la RLS de cada tabla. Se invalida la caché que toca: `catalog`, `plans` o `app-settings`.
+
+  · ALCANCE §4.11 con formularios sencillos. Desactivar en vez de borrar evita romper anuncios ya publicados.

@@ -178,6 +178,7 @@ Las rutas de cron se protegen con `CRON_SECRET`. En desarrollo (plan Hobby, como
 - Todo lo que escribe pasa por RPC `admin_*`, que vuelven a comprobar el rol en la base de datos. El servidor solo usa la clave secreta para banear en Supabase Auth.
 - El admin lee los chats denunciados con la RLS (`conversations`, `messages` y `chat-images` solo si hay una denuncia sobre esa conversación).
 - Cada acción invalida la caché pública que toca: `listings` al bloquear o restaurar, y `listings` + `profile:{usuario}` al activar Premium o banear. Avisa por push con `after()`.
+- El catálogo (categorías, atributos y ciudades) y los ajustes (planes, precios, oficina, términos prohibidos y umbral de denuncias) se escriben con la sesión del admin y la RLS de cada tabla, e invalidan `catalog`, `plans` o `app-settings` (D-060).
 
 ### 5.7 Caché, SEO y compartir
 - Las consultas públicas se cachean con `"use cache"` y etiquetas: `listings` (cualquier anuncio; la invalidan todas las acciones de anuncios), `listing:{código}`, `profile:{usuario}`, `store:{slug}` (la tienda; también lleva la etiqueta del perfil del dueño, para que activar o caducar Premium o banear la actualicen), `stores` (sitemap) y `catalog` (categorías y ciudades). Lo de anuncios usa `cacheLife("minutes")`: lo que caduca pg_cron, que no puede invalidar la caché de Next, se refleja en como mucho un minuto.

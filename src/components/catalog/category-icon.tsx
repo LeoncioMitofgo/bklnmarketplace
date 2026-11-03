@@ -101,3 +101,6 @@ export function CategoryIcon({
     </svg>
   );
 }
+
+/** Iconos que se pueden elegir para una categoría principal (panel de admin). */
+export const CATEGORY_ICON_NAMES = Object.keys(PATHS);
