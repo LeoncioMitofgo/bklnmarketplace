@@ -49,6 +49,21 @@ async function encodeUnderLimit(source: ImageBitmap, maxSide: number, type: stri
   return result;
 }
 
+/** Una sola foto de `maxSide` px como mucho en el lado largo (portada de la tienda). */
+export async function compressToMax(
+  file: File,
+  maxSide: number,
+): Promise<{ format: ImageFormat; blob: Blob }> {
+  const bitmap = await decode(file);
+  try {
+    const webp = await encodeUnderLimit(bitmap, maxSide, "image/webp");
+    if (webp.blob.type === "image/webp") return { format: "webp", blob: webp.blob };
+    return { format: "jpg", blob: (await encodeUnderLimit(bitmap, maxSide, "image/jpeg")).blob };
+  } finally {
+    bitmap.close();
+  }
+}
+
 /**
  * Foto cuadrada (recorte centrado) de `side` px como mucho, para la foto de perfil.
  * WebP si el navegador sabe generarlo; si no (Safari), JPEG.

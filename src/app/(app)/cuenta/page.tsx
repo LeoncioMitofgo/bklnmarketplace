@@ -150,6 +150,10 @@ async function AccountContent() {
           {t("access")}
           <ChevronRightIcon className="size-5 text-text-muted" />
         </Link>
+        <Link href="/cuenta/tienda" className="flex min-h-12 items-center justify-between">
+          {t("store")}
+          <ChevronRightIcon className="size-5 text-text-muted" />
+        </Link>
         {priv.role === "admin" ? (
           <Link href="/admin" className="flex min-h-12 items-center justify-between font-semibold">
             {t("admin")}

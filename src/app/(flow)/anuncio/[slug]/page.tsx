@@ -347,10 +347,10 @@ async function SellerCard({ seller, now }: { seller: PublicListing["seller"]; no
         </div>
       </div>
       <Link
-        href={`/u/${seller.username}`}
+        href={seller.store ? `/t/${seller.store.slug}` : `/u/${seller.username}`}
         className="flex min-h-11 items-center justify-between rounded-control bg-surface px-4 text-sm font-semibold text-primary"
       >
-        {t("viewProfile", { count: seller.activeListings })}
+        {t(seller.store ? "viewStore" : "viewProfile", { count: seller.activeListings })}
         <ChevronRightIcon className="size-5" />
       </Link>
     </section>

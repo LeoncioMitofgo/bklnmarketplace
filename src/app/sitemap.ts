@@ -3,11 +3,17 @@ import { getCatalog } from "@/lib/catalog";
 import { listingPath } from "@/lib/listings/paths";
 import { getSitemapListings } from "@/lib/listings/public";
 import { siteUrl } from "@/lib/site";
+import { getSitemapStores } from "@/lib/stores/public";
 
-// Sitemap (ALCANCE §7): inicio, categorías, anuncios activos y perfiles de quien tiene anuncios.
+// Sitemap (ALCANCE §7): inicio, categorías, anuncios activos, tiendas Premium y perfiles de quien
+// tiene anuncios.
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteUrl();
-  const [catalog, listings] = await Promise.all([getCatalog(), getSitemapListings()]);
+  const [catalog, listings, stores] = await Promise.all([
+    getCatalog(),
+    getSitemapListings(),
+    getSitemapStores(),
+  ]);
 
   const cityName = (id: number | null) => catalog.cities.find((c) => c.id === id)?.name ?? null;
   const sellers = new Set(listings.flatMap((l) => (l.seller ? [l.seller.username] : [])));
@@ -22,6 +28,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...listings.map((listing) => ({
       url: `${base}${listingPath(listing.code, listing.title, cityName(listing.city_id))}`,
       lastModified: listing.updated_at,
+      changeFrequency: "daily" as const,
+      priority: 0.6,
+    })),
+    ...stores.map((store) => ({
+      url: `${base}/t/${store.slug}`,
+      lastModified: store.updated_at,
       changeFrequency: "daily" as const,
       priority: 0.6,
     })),

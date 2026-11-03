@@ -1397,6 +1397,9 @@ export type Database = {
       }
       set_listing_cover: { Args: { p_image_id: string }; Returns: undefined }
       start_conversation: { Args: { p_listing_id: string }; Returns: string }
+      store_is_visible: { Args: { p_user_id: string }; Returns: boolean }
+      store_whatsapp_contact: { Args: { p_user_id: string }; Returns: string }
+      store_whatsapp_enabled: { Args: { p_user_id: string }; Returns: boolean }
       unread_count: { Args: never; Returns: number }
       whatsapp_contact: { Args: { p_listing_id: string }; Returns: string }
     }

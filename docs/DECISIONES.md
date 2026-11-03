@@ -172,3 +172,14 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
     - Cambiar la contraseña cierra la sesión en los demás dispositivos.
 
   · ALCANCE §4.3. Pedir la contraseña protege los datos con los que se entra si alguien coge el móvil con la sesión abierta.
+- **D-059 · 2026-11-03** · **Tienda Premium:**
+  - Se crea y se edita en `/cuenta/tienda`, solo con Premium (lo exige la RLS de `stores`).
+    - Sin Premium, la pantalla explica la tienda y lleva a "Hazte Premium".
+    - Si caduca, dice que no se ve y que no se ha borrado nada.
+  - La dirección (`/t/<slug>`) propone por defecto el nombre de usuario con guiones y se normaliza lo que se escribe (sin tildes, espacios a guiones).
+  - Logo cuadrado de 400 px y portada de 1200 px, reducidos en el móvil y subidos como la foto de perfil (D-058): `profile-media`, nombre nuevo cada vez y un trigger que solo acepta fotos del dueño.
+  - Página pública cacheada e indexable. Las pestañas "En venta" y "Vendidos" son enlaces (`?ver=vendidos`), así que funcionan sin JavaScript.
+  - El WhatsApp de la tienda sigue las reglas de la ficha (D-050): solo con sesión y si el dueño lo activó; el teléfono se pide al pulsar, con el mismo tope diario.
+  - La ficha enlaza a la tienda en lugar de al perfil cuando el vendedor la tiene.
+
+  · ALCANCE §4.8 con el mínimo: sin plantillas ni colores propios, que se pueden añadir más adelante.

@@ -92,7 +92,7 @@ El email no se duplica aquí: vive en `auth.users` y solo lo leen las funciones 
 | `opening_hours` | `text` null | Texto libre ("L–V 8:00–18:00") |
 | `created_at`, `updated_at` | `timestamptz` | |
 
-El botón de WhatsApp de la tienda usa el mismo teléfono y el mismo ajuste `show_whatsapp` del perfil.
+El botón de WhatsApp de la tienda usa el mismo teléfono y el mismo ajuste `show_whatsapp` del perfil: `store_whatsapp_enabled(user_id)` y `store_whatsapp_contact(user_id)`, con las mismas reglas y el mismo tope diario que el de la ficha (D-059). El trigger `stores_check_media` comprueba que `logo_path` y `cover_path` son fotos del dueño (`{user_id}/logo-{uuid}` y `cover-{uuid}`).
 
 ### 3.2 Configuración
 

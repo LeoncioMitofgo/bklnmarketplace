@@ -112,6 +112,9 @@ Reglas:
 - 04 Ficha: el corazón de favorito y el botón de compartir van sobre la foto. La barra fija con WhatsApp y Chatear llegó con 1.4 (la ficha va sin barra inferior, D-049); el enlace "Denunciar" llega con 1.5.
 - Tarjetas: sin corazón de favorito en los listados (D-042).
 
+**Al implementar la 1.6 (tienda):**
+- 05 Tienda Premium: la portada se ve a 3:1 y, si no hay, se pone una franja del color primario. El logo es cuadrado y monta sobre la portada. Las pestañas "En venta" y "Vendidos" son enlaces. Con sesión aparece el botón de WhatsApp (contorno) y siempre el de compartir.
+
 **Al implementar la 1.6 (Premium y admin):**
 - 12 Hazte Premium: el ahorro se muestra en FCFA ("Ahorras 1.700 FCFA") en lugar del porcentaje, y "Mejor precio" (naranja) va en el periodo más barato por mes. Con una solicitud pendiente, arriba aparece una caja con las instrucciones según la forma de pago.
 - 13 Admin: pestañas arriba (Resumen · Pagos · Denuncias · Usuarios). El cobro se registra en la ficha del usuario, con el formulario relleno con su solicitud y la fecha de fin calculada al momento. Cada anuncio denunciado tiene un solo formulario de moderación (Bloquear · Restaurar · Descartar).

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Suspense } from "react";
-import { ClockIcon, MapPinIcon } from "@/components/icons";
+import { ChevronRightIcon, ClockIcon, MapPinIcon } from "@/components/icons";
 import { ListingCard } from "@/components/listings/listing-card";
 import { Avatar } from "@/components/profile/avatar";
 import { getCatalog } from "@/lib/catalog";
@@ -104,6 +104,17 @@ async function ProfileContent({
       </div>
 
       {profile.bio ? <p className="text-base leading-relaxed">{profile.bio}</p> : null}
+
+      {/* La caché del perfil dura horas: el Premium se vuelve a mirar aquí, por si ha caducado. */}
+      {profile.store && isPremium ? (
+        <Link
+          href={`/t/${profile.store.slug}`}
+          className="flex min-h-12 items-center justify-between rounded-card border-2 border-accent px-4 text-[15px] font-semibold"
+        >
+          {t("store", { name: profile.store.name })}
+          <ChevronRightIcon className="size-5 text-text-muted" />
+        </Link>
+      ) : null}
 
       <section className="flex flex-col gap-4 border-t border-border pt-5">
         <h2 className="text-lg font-extrabold">{t("onSale", { count: listings.activeTotal })}</h2>

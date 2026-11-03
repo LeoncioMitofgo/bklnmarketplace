@@ -175,7 +175,8 @@
     "renewPremium": "Renovar",
     "admin": "Panel de administración",
     "editProfile": "Editar perfil",
-    "access": "Email, teléfono y contraseña"
+    "access": "Email, teléfono y contraseña",
+    "store": "Mi tienda"
   },
   "profile": {
     "loading": "Cargando perfil…",
@@ -191,7 +192,8 @@
     },
     "onSale": "En venta ({count})",
     "more": "Ver más anuncios",
-    "soldRecently": "Vendidos recientemente"
+    "soldRecently": "Vendidos recientemente",
+    "store": "Ver su tienda: {name}"
   },
   "emails": {
     "footer": "BKLN Marketplace · Malabo, Guinea Ecuatorial",
@@ -490,7 +492,8 @@
           "hours": "{count} h",
           "days": "{count, plural, one {# día} other {# días}}"
         },
-        "viewProfile": "Ver perfil · {count, plural, =0 {sin anuncios activos} one {# anuncio} other {# anuncios}}"
+        "viewProfile": "Ver perfil · {count, plural, =0 {sin anuncios activos} one {# anuncio} other {# anuncios}}",
+        "viewStore": "Ver su tienda · {count, plural, =0 {sin anuncios activos} one {# anuncio} other {# anuncios}}"
       },
       "safety": {
         "title": "Compra con seguridad",
@@ -1329,6 +1332,101 @@
       "savePhone": "Cambiar el teléfono",
       "savePassword": "Cambiar la contraseña",
       "saving": "Guardando…"
+    }
+  },
+  "store": {
+    "whatsappText": "Hola, he visto tu tienda {name} en BKLN Marketplace: {url}",
+    "edit": {
+      "metaTitle": "Mi tienda",
+      "title": "Mi tienda",
+      "back": "Mi cuenta",
+      "intro": "Con Premium tienes una tienda con dirección propia para compartir por WhatsApp: tu logo, una portada, tu horario y todos tus anuncios.",
+      "premiumOnly": "La tienda es para vendedores Premium: una página con tu logo, tu portada, tu horario y todos tus anuncios, con dirección propia (bklnmarketplace.com/t/tu-tienda).",
+      "goPremium": "Hazte Premium",
+      "expired": "Tu tienda no se ve porque tu plan Premium ha caducado. No se ha borrado nada: al renovar vuelve a aparecer tal cual.",
+      "renew": "Renovar Premium",
+      "live": "Tu tienda está publicada mientras seas Premium (hasta el {date}).",
+      "view": "Ver mi tienda",
+      "imagesTitle": "Logo y portada"
+    },
+    "form": {
+      "name": "Nombre de la tienda",
+      "slug": "Dirección de la tienda",
+      "slugHint": "bklnmarketplace.com/t/… Minúsculas, números y guiones. Si la cambias, los enlaces antiguos dejan de funcionar.",
+      "description": "Descripción",
+      "descriptionHint": "Qué vendes, desde cuándo, si haces envíos… Hasta 1000 caracteres.",
+      "address": "Dirección",
+      "addressHint": "Calle, barrio o una referencia para encontrarte.",
+      "openingHours": "Horario",
+      "openingHoursHint": "Por ejemplo: L–V 8:00–18:00 · S 9:00–14:00",
+      "create": "Crear mi tienda",
+      "save": "Guardar cambios",
+      "saving": "Guardando…"
+    },
+    "images": {
+      "logo": {
+        "label": "Logo",
+        "hint": "Se recorta en cuadrado."
+      },
+      "cover": {
+        "label": "Portada",
+        "hint": "Una foto ancha: se ve recortada arriba de la tienda."
+      },
+      "add": "Poner una foto",
+      "change": "Cambiar",
+      "remove": "Quitar",
+      "preparing": "Preparando…",
+      "uploading": "Subiendo… {percent} %",
+      "errors": {
+        "offline": "No hay conexión. Vuelve a intentarlo cuando tengas red.",
+        "photo_unreadable": "No hemos podido leer esta foto. Prueba con otra.",
+        "rate_limited": "Has subido muchas fotos. Espera un rato.",
+        "unexpected": "No se ha podido guardar la foto. Inténtalo de nuevo."
+      }
+    },
+    "errors": {
+      "name": {
+        "length": "Escribe un nombre de 2 a 60 caracteres."
+      },
+      "slug": {
+        "format": "Usa de 3 a 40 caracteres: empieza por una letra y usa minúsculas, números y guiones.",
+        "taken": "Esa dirección ya la usa otra tienda."
+      },
+      "description": {
+        "length": "Como mucho 1000 caracteres."
+      },
+      "address": {
+        "length": "Como mucho 200 caracteres."
+      },
+      "openingHours": {
+        "length": "Como mucho 120 caracteres."
+      },
+      "premium_required": "Tu plan Premium no está activo: renuévalo para editar la tienda.",
+      "unexpected": "Algo ha fallado. Inténtalo de nuevo."
+    },
+    "messages": {
+      "created": "¡Tu tienda está publicada! Añade ahora el logo y la portada.",
+      "saved": "Cambios guardados."
+    },
+    "page": {
+      "metaDescription": "Tienda de {name} en BKLN Marketplace: todos sus anuncios en un solo sitio.",
+      "premium": "PREMIUM",
+      "by": "de {name} (@{username})",
+      "responds": "Suele responder en {time}",
+      "responseTime": {
+        "minutes": "{count} min",
+        "hours": "{count} h",
+        "days": "{count, plural, one {# día} other {# días}}"
+      },
+      "memberSince": "En BKLN Marketplace desde {date}",
+      "share": "Compartir la tienda",
+      "shareText": "Mira la tienda {name} en BKLN Marketplace:",
+      "tabs": "Anuncios de la tienda",
+      "onSale": "En venta ({count})",
+      "sold": "Vendidos",
+      "noListings": "Ahora mismo no tiene anuncios en venta.",
+      "noSold": "Todavía no hay anuncios vendidos.",
+      "more": "Ver más anuncios"
     }
   }
 }

@@ -133,7 +133,12 @@
   - `/cuenta/acceso`: email (hay que volver a confirmarlo), teléfono y contraseña. Cada cambio pide la contraseña actual; cambiar la contraseña cierra la sesión en los demás dispositivos.
   - La foto sale en Mi cuenta, en el perfil público y en la ficha del anuncio.
   - Probado en un navegador móvil: 28 comprobaciones.
-- [ ] Tienda personalizada `/t/<slug>`
+- [x] Tienda Premium `/t/<tienda>` (2026-11-03, D-059):
+  - Se edita en `/cuenta/tienda`: nombre, dirección web, descripción, dirección, horario, logo y portada.
+  - La página pública tiene portada, logo, insignia, horario y dirección, y las pestañas "En venta" y "Vendidos". Se puede compartir, con Open Graph, y está en el sitemap. El WhatsApp solo aparece con sesión.
+  - Enlazada desde la ficha ("Ver su tienda"), el perfil y Mi cuenta.
+  - Si caduca Premium, deja de verse y sus datos se conservan.
+  - Probada en un navegador móvil: 24 comprobaciones.
 - [ ] Caducidad de Premium: aviso 7 días antes (falta). La vuelta a Normal y el pausado de los anuncios que sobran ya los hace el cron diario `enforce_plan_limits` (1.2), y la tienda deja de verse (RLS de `stores`)
 
 ### 1.7 Lanzamiento

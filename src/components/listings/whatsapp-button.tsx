@@ -4,18 +4,30 @@ import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 import { PhoneIcon } from "@/components/icons";
 import { buttonClasses } from "@/components/ui/button";
-import { openWhatsApp } from "@/lib/chat/actions";
+
+type WhatsAppAction = (
+  state: { error?: string },
+  formData: FormData,
+) => Promise<{ error?: string }>;
 
 /**
- * Botón de WhatsApp de la ficha (solo con sesión y si el vendedor lo activó). El teléfono no está
- * en la página: lo pide al pulsar, con tope diario, y abre wa.me con el anuncio en el mensaje.
+ * Botón de WhatsApp de la ficha o de la tienda (solo con sesión y si el vendedor lo activó). El
+ * teléfono no está en la página: la acción lo pide al pulsar, con tope diario, y abre wa.me.
  */
-export function WhatsAppButton({ code }: { code: string }) {
+export function WhatsAppButton({
+  action: serverAction,
+  fields,
+}: {
+  action: WhatsAppAction;
+  fields: Record<string, string>;
+}) {
   const t = useTranslations("chat");
-  const [state, action, pending] = useActionState(openWhatsApp, {});
+  const [state, action, pending] = useActionState(serverAction, {});
   return (
     <form action={action} className="relative flex-1">
-      <input type="hidden" name="code" value={code} />
+      {Object.entries(fields).map(([name, value]) => (
+        <input key={name} type="hidden" name={name} value={value} />
+      ))}
       <button type="submit" disabled={pending} className={buttonClasses("secondary")}>
         <PhoneIcon className="size-5" />
         {pending ? t("contact.opening") : t("contact.whatsapp")}

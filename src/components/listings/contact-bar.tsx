@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { MessageIcon } from "@/components/icons";
 import { buttonClasses } from "@/components/ui/button";
 import { getSessionUser } from "@/lib/auth/session";
+import { openWhatsApp } from "@/lib/chat/actions";
 import { isWhatsappEnabled } from "@/lib/chat/queries";
 import { WhatsAppButton } from "./whatsapp-button";
 
@@ -47,7 +48,7 @@ async function ContactActions({ listingId, code, sellerId }: Props) {
   const whatsapp = user ? await isWhatsappEnabled(listingId) : false;
   return (
     <>
-      {whatsapp ? <WhatsAppButton code={code} /> : null}
+      {whatsapp ? <WhatsAppButton action={openWhatsApp} fields={{ code }} /> : null}
       <ChatLink code={code} />
     </>
   );
