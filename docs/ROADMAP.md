@@ -133,6 +133,7 @@
 - [ ] Caducidad de Premium: aviso 7 días antes (falta). La vuelta a Normal y el pausado de los anuncios que sobran ya los hace el cron diario `enforce_plan_limits` (1.2), y la tienda deja de verse (RLS de `stores`)
 
 ### 1.7 Lanzamiento
+- [ ] Revisar la marca (2026-11-03: al cliente no le convence la actual): logo, icono de la app y figura. Antes de los iconos de la PWA, el favicon y la imagen de Open Graph
 - [ ] Analítica básica y monitorización de errores
 - [ ] Recortar el JavaScript de primera carga de las páginas públicas (~160 KB comprimidos en la 1.3; la base de React y Next son ~115 KB). Candidatos: el formateador de mensajes de next-intl en el cliente (~12 KB) y Analytics (~6 KB)
 - [ ] Pruebas en Android de gama baja con red lenta
