@@ -147,7 +147,7 @@
   - Aviso push 7 días antes con un cron diario de Vercel (`/api/cron/daily`, a las 9:00 en Malabo), una vez por periodo (`notification_log`).
   - La vuelta a Normal y el pausado de los anuncios que sobran ya los hacía el cron `enforce_plan_limits` (1.2), y la tienda deja de verse por su RLS.
   - Probado: 11 comprobaciones del cron y de los avisos.
-- [ ] Poner `CRON_SECRET` en Vercel (Production, *Sensitive*; lo hace el usuario) y volver a desplegar. Sin él, el cron responde 401 y no envía avisos push (los de la web funcionan igual)
+- [x] `CRON_SECRET` en Vercel (Production, *Sensitive*) y nuevo despliegue, hechos por el usuario (2026-11-03)
 
 ### 1.7 Lanzamiento
 - [ ] Guardar las pruebas de extremo a extremo en el repo. Vivían en una carpeta temporal del sistema y se borraron el 2026-11-03; solo se conserva la del perfil
