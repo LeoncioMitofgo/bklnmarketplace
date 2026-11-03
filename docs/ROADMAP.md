@@ -27,7 +27,7 @@
 - [x] Vercel: variables públicas, más `framework: nextjs` y región `lhr1` en `vercel.ts` (2026-10-16)
 - [ ] Vercel: `SUPABASE_SECRET_KEY`, que añade el usuario en el panel como *Sensitive*
 - [x] DNS en Hostinger apuntando a Vercel (2026-10-16)
-- [ ] Resend: cuenta, `RESEND_API_KEY` (en `.env.local` y en Vercel) y dominio verificado con sus registros DNS en Hostinger. Hasta entonces, fuera de producción los emails se escriben en la consola del servidor
+- [x] Resend: cuenta, `RESEND_API_KEY` en Vercel y dominio verificado en Hostinger (2026-11-03, lo hizo el usuario). Los emails de confirmación y de recuperar la contraseña ya salen en producción y se confirman bien
 
 ## Fase 1 — MVP
 
@@ -58,7 +58,7 @@
   - Borrador en la base de datos y atributos según la categoría.
 - [x] Mis anuncios (`/mis-anuncios`): pestañas por estado, editar, pausar/reactivar, vendido, renovar y eliminar (2026-10-16)
 - [x] Caducidad automática y renovación automática Premium con pg_cron, más el reajuste diario de límites (2026-10-16)
-- [ ] Avisos de caducidad por email (cuando se configure Resend; Vercel Cron)
+- [ ] Avisos de caducidad por email (Resend ya está; irían en el cron diario `/api/cron/daily`, D-061)
 - [x] Control de límites por plan, aplicado en la base de datos (2026-10-16): anuncios activos, fotos, duración y ritmo diario
 - [x] Capa de datos de anuncios probada de extremo a extremo (2026-10-16): 37 comprobaciones de la base de datos y 11 de páginas con sesión
 - [x] Probar en el móvil el asistente completo y la subida de fotos en Android (2026-10-16): primer anuncio real, 3 fotos WebP de 14–127 KB
@@ -91,7 +91,7 @@
   - Probado con Chrome real: el servidor envía y FCM acepta; el service worker muestra el aviso.
 - [x] Claves VAPID en Vercel (Production) y nuevo despliegue (2026-10-17). Comprobado contra bklnmarketplace.com: FCM acepta los avisos firmados por el servidor
 - [ ] Avisos push en iPhone: solo con la web instalada en la pantalla de inicio (fase 2, PWA)
-- [ ] Email de respaldo por mensajes sin leer (cuando se configure Resend)
+- [ ] Email de respaldo por mensajes sin leer (Resend ya está; el plan Hobby solo permite un cron al día, así que puede esperar a Vercel Pro)
 - [ ] Probar el chat en el móvil entre dos cuentas (lo hace el usuario)
 
 ### 1.5 Confianza y moderación

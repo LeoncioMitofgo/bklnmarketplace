@@ -198,3 +198,9 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
   - Además, aviso en la web (Mi cuenta y Mis anuncios), que no depende del cron ni de tener los avisos activados.
 
   · ALCANCE §5.3 y §4.6 con la infraestructura que ya hay (push). Mientras no haya email, el aviso en la web cubre a quien no tiene push.
+- **D-062 · 2026-11-03** · **Cada despliegue lleva su identificador** (`deploymentId: VERCEL_DEPLOYMENT_ID` en `next.config.ts`).
+  - Una pestaña abierta desde antes de un despliegue recarga la página entera al navegar, en lugar de usar código o Server Actions de la versión anterior.
+  - La caché `use cache` también se separa por despliegue.
+
+  · Como se despliega con cada push a `main`, en los logs salía "Failed to find Server Action" cuando una pestaña vieja usaba una acción que había cambiado (pasó al reorganizar las del panel). Es inofensivo: a esa persona le basta con recargar. Comprobado en local con dos despliegues seguidos.
+  · Al pasar a Vercel Pro (1.7), mirar también su *Skew Protection*, que sigue sirviendo la versión anterior a las pestañas abiertas.
