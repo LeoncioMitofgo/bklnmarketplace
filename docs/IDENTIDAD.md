@@ -1,6 +1,6 @@
 # Identidad visual — BKLN Marketplace
 
-> Versión 1.0 — 2026-10-16. Dirección A, **"Atlántico"** (D-031, D-032).
+> Versión 1.1 — 2026-11-03 (símbolo nuevo, D-063). Dirección A, **"Atlántico"** (D-031, D-032).
 > Lienzo con las tres propuestas y los wireframes: https://claude.ai/artifact/MZ6e1a5Qp5W8V5LfJZU2RN. Es privado; para que otros lo vean hay que compartirlo desde su menú.
 
 ---
@@ -13,20 +13,35 @@
 
 ## 2. Logo
 
+Símbolo (D-063): una **"b" minúscula azul con una etiqueta de precio blanca** recortada en la panza y **dos trazos naranjas** arriba a la derecha. Lo diseñó el cliente con ChatGPT y se redibujó a mano en SVG. Se lee bien desde 16 px.
+
 ```svg
-<svg width="44" height="44" viewBox="0 0 44 44">
-  <path d="M10 4h24a8 8 0 0 1 8 8v14a8 8 0 0 1-8 8H17l-7 7v-7a8 8 0 0 1-8-8V12a8 8 0 0 1 8-8z" fill="#0B4F8A"/>
-  <circle cx="11" cy="13" r="3" fill="#FFFFFF"/>
-  <path d="M17 19h16M17 25h10" stroke="#F2662B" stroke-width="3" stroke-linecap="round"/>
+<svg viewBox="0 0 44 44">
+  <path fill="#0B4F8A" d="M2.5 27V7a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v5.86A15 15 0 1 1 2.5 27Z"/>
+  <g transform="translate(17.5 27) rotate(-45)">
+    <path fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2.4" stroke-linejoin="round" d="M8 0 3-5H-7.5V5H3Z"/>
+    <circle cx="3.2" cy="0" r="1.8" fill="#0B4F8A"/>
+  </g>
+  <path stroke="#F2662B" stroke-width="4" stroke-linecap="round" d="M29 11 32.5 4M33.5 16l6-6"/>
 </svg>
 ```
 
-- **Logotipo:** **bkln** (peso 800) + marketplace (peso 500), en minúsculas y con Plus Jakarta Sans. En producción se convierte a trazados SVG para no depender de la fuente.
+- **Ficheros maestros** en [marca/](marca/): `simbolo.svg` (positiva), `simbolo-negativo.svg` y `simbolo-monocromo.svg` (silueta blanca con la etiqueta calada). En la web, el componente `LogoSymbol` (`src/components/brand/logo.tsx`) dibuja lo mismo con los tokens.
+- **Logotipo:** **bkln** (peso 800) + marketplace (peso 500), en minúsculas, junto al símbolo. En la web, "marketplace" va con la fuente del sistema (solo se carga el peso 800, D-032); en la imagen para compartir, con Plus Jakarta Sans.
 - **Versiones:**
-  - Positiva: símbolo azul y texto azul sobre blanco.
-  - Negativa: símbolo y texto blancos sobre azul, con el agujero en azul.
-  - Las dos líneas del símbolo van **siempre en naranja**.
-- **Icono de la app y favicon:** solo el símbolo. Tamaño mínimo, 24 px.
+  - Positiva: "b" azul y etiqueta blanca, sobre blanco.
+  - Negativa: "b" blanca y etiqueta azul, sobre azul.
+  - Los dos trazos van **siempre en naranja**, salvo en la monocroma.
+- **Piezas generadas** (PNG, desde los SVG maestros con Chromium):
+
+| Pieza | Fichero | Medidas |
+|---|---|---|
+| Favicon | `src/app/icon.svg` | SVG (positiva) |
+| Icono del iPhone | `src/app/apple-icon.png` | 180×180, fondo blanco, símbolo al 74 % |
+| Iconos de la app | `public/icons/icon-192.png`, `icon-512.png` | Cuadrado blanco redondeado, símbolo al 78 %. También es el icono grande de las notificaciones |
+| Icono adaptable de Android | `public/icons/icon-maskable-512.png` | 512×512, fondo blanco, símbolo al 64 % (dentro del círculo seguro del 80 %) |
+| Icono pequeño de las notificaciones | `public/icons/badge-96.png` | 96×96, silueta monocroma sobre transparente |
+| Imagen para compartir (Open Graph) | `src/app/opengraph-image.png` | 1200×630, fondo azul, símbolo negativo, logotipo y "Compra y vende en Guinea Ecuatorial", centrado para que WhatsApp pueda recortarlo en cuadrado |
 
 ## 3. Colores
 

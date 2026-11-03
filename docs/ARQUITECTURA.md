@@ -78,7 +78,7 @@ Cada viaje entre Malabo y Europa cuesta unos 150 ms, más lo que añada la red m
 │  ├─ migrations/             # SQL escrito a mano y versionado
 │  ├─ seed.sql                # categorías, atributos, ciudades, planes
 │  └─ config.toml
-├─ public/                    # manifest, iconos, sw.js
+├─ public/                    # iconos de la app y de las notificaciones, sw.js (el manifiesto es src/app/manifest.ts)
 └─ docs/
 ```
 

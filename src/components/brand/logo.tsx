@@ -1,5 +1,5 @@
-// Logo de BKLN Marketplace (IDENTIDAD §2). El símbolo es SVG; el logotipo se pasará a trazados SVG
-// para no depender de fuentes. Mientras tanto: "bkln" en Plus Jakarta Sans 800 + "marketplace" en la del sistema.
+// Logo de BKLN Marketplace (IDENTIDAD §2). El símbolo es la "b" con la etiqueta de precio; los SVG
+// maestros están en docs/marca. Logotipo: "bkln" en Plus Jakarta Sans 800 + "marketplace" en la del sistema.
 
 type LogoProps = {
   label: string;
@@ -17,14 +17,22 @@ export function LogoSymbol({ className, title }: { className?: string; title?: s
       aria-hidden={title ? undefined : true}
     >
       <path
-        d="M10 4h24a8 8 0 0 1 8 8v14a8 8 0 0 1-8 8H17l-7 7v-7a8 8 0 0 1-8-8V12a8 8 0 0 1 8-8z"
+        d="M2.5 27V7a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v5.86A15 15 0 1 1 2.5 27Z"
         className="fill-primary"
       />
-      <circle cx="11" cy="13" r="3" className="fill-white" />
+      <g transform="translate(17.5 27) rotate(-45)">
+        <path
+          d="M8 0 3-5H-7.5V5H3Z"
+          className="fill-white stroke-white"
+          strokeWidth="2.4"
+          strokeLinejoin="round"
+        />
+        <circle cx="3.2" cy="0" r="1.8" className="fill-primary" />
+      </g>
       <path
-        d="M17 19h16M17 25h10"
+        d="M29 11 32.5 4M33.5 16l6-6"
         className="stroke-accent"
-        strokeWidth="3"
+        strokeWidth="4"
         strokeLinecap="round"
       />
     </svg>

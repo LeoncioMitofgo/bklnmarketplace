@@ -1,6 +1,6 @@
 # Roadmap — BKLN Marketplace
 
-**Estado: Fase 1 en curso** (1.1 a 1.6 hechas; sigue la 1.7, lanzamiento). Marca cada casilla al completarla (con fecha si es un hito).
+**Estado: Fase 1 en curso** (1.1 a 1.6 hechas; 1.7, lanzamiento, en curso: marca nueva y web instalable hechas). Marca cada casilla al completarla (con fecha si es un hito).
 
 ---
 
@@ -90,7 +90,7 @@
   - Al cerrar sesión se da de baja el móvil.
   - Probado con Chrome real: el servidor envía y FCM acepta; el service worker muestra el aviso.
 - [x] Claves VAPID en Vercel (Production) y nuevo despliegue (2026-10-17). Comprobado contra bklnmarketplace.com: FCM acepta los avisos firmados por el servidor
-- [ ] Avisos push en iPhone: solo con la web instalada en la pantalla de inicio (fase 2, PWA)
+- [ ] Probar los avisos push en iPhone (lo hace el usuario): solo funcionan con la web instalada en la pantalla de inicio, posible desde la 1.7 (D-063), en iOS 16.4 o posterior
 - [ ] Email de respaldo por mensajes sin leer (Resend ya está; el plan Hobby solo permite un cron al día, así que puede esperar a Vercel Pro)
 - [ ] Probar el chat en el móvil entre dos cuentas (lo hace el usuario)
 
@@ -151,7 +151,9 @@
 
 ### 1.7 Lanzamiento
 - [ ] Guardar las pruebas de extremo a extremo en el repo. Vivían en una carpeta temporal del sistema y se borraron el 2026-11-03; solo se conserva la del perfil
-- [ ] Revisar la marca (2026-11-03: al cliente no le convence la actual): logo, icono de la app y figura. Antes de los iconos de la PWA, el favicon y la imagen de Open Graph
+- [x] Marca nueva (2026-11-03, D-063): la "b" con la etiqueta de precio, que diseñó el cliente con ChatGPT y se redibujó en SVG. Logo de la web, favicon, iconos de la app (Android e iPhone), icono de las notificaciones e imagen para compartir. SVG maestros en `docs/marca/`
+- [x] La web se puede instalar en el móvil (2026-11-03, D-063): manifiesto con nombre, colores e iconos. Chrome la da por instalable (comprobado con su herramienta de depuración)
+- [ ] Probar en el móvil (lo hace el usuario): añadir a la pantalla de inicio en Android y en iPhone, el icono de una notificación y la vista previa de un enlace en WhatsApp
 - [ ] Analítica básica y monitorización de errores
 - [ ] Recortar el JavaScript de primera carga de las páginas públicas (~160 KB comprimidos en la 1.3; la base de React y Next son ~115 KB). Candidatos: el formateador de mensajes de next-intl en el cliente (~12 KB) y Analytics (~6 KB)
 - [ ] Pruebas en Android de gama baja con red lenta
@@ -178,7 +180,7 @@ Detalle, contactos y correos en [PAGOS-PROVEEDORES.md](PAGOS-PROVEEDORES.md).
 - [ ] Alertas de búsqueda guardada
 - [ ] Categoría Empleo
 - [ ] Francés
-- [ ] PWA instalable y modo sin conexión básico
+- [ ] Modo sin conexión básico (instalable ya desde la 1.7, D-063) y botón propio de "Instalar"
 - [ ] Aviso de mensajes nuevos por WhatsApp/SMS
 
 ## Fase 3 — Plataforma

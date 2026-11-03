@@ -1,6 +1,7 @@
 {
   "meta": {
     "siteName": "BKLN Marketplace",
+    "shortName": "BKLN",
     "title": "BKLN Marketplace · Compra y vende en Guinea Ecuatorial",
     "description": "Anuncios de todo tipo en Guinea Ecuatorial: vehículos, inmuebles, móviles, hogar, moda y servicios. Habla con el vendedor sin dar tu número."
   },
@@ -632,7 +633,7 @@
     "on": "Activados: te avisaremos en este móvil cuando te escriban.",
     "off": "Desactivados en este móvil.",
     "denied": "Tu navegador tiene bloqueados los avisos de BKLN Marketplace. Puedes permitirlos en los ajustes del navegador (el candado junto a la dirección).",
-    "unsupported": "Este navegador no admite avisos. En Android, usa Chrome. En iPhone llegarán cuando se pueda instalar la web en la pantalla de inicio.",
+    "unsupported": "Este navegador no admite avisos. En Android, usa Chrome. En iPhone, añade la web a la pantalla de inicio (botón Compartir) y ábrela desde el icono.",
     "error": "No se han podido activar los avisos. Comprueba la conexión y vuelve a intentarlo.",
     "photo": "📷 Foto",
     "someone": "Alguien"

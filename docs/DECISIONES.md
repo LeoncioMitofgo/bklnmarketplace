@@ -49,7 +49,7 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
 - **D-028 · 2026-10-16** · **Inmuebles con subcategorías separadas** para venta y alquiler, como Jiji, en lugar del atributo "Operación". Modifica D-014. · Es más simple de filtrar y el "/mes" lo decide la subcategoría. Decisión del cliente.
 - **D-029 · 2026-10-16** · **Mínimo una foto para publicar** en todas las categorías. · Los anuncios sin foto apenas reciben mensajes. Decisión del cliente.
 - **D-030 · 2026-10-16** · **Borrar la cuenta conserva, anonimizados, los mensajes enviados a otros** ("Usuario eliminado"), además de los cobros de Premium. Todo lo demás se borra. · Así la otra persona conserva su historial y borrar la cuenta no borra las pruebas de una estafa. Decisión del cliente.
-- **D-031 · 2026-10-16** · **Identidad visual: dirección A "Atlántico"**: azul `#0B4F8A` + naranja `#F2662B` (siempre con texto oscuro) y un símbolo que mezcla burbuja de chat y etiqueta. Detalle en [IDENTIDAD.md](IDENTIDAD.md). · Transmite confianza, clave con el pago fuera de la app, y se distingue de Jiji, que es verde. Decisión del cliente entre tres direcciones.
+- **D-031 · 2026-10-16** · **Identidad visual: dirección A "Atlántico"**: azul `#0B4F8A` + naranja `#F2662B` (siempre con texto oscuro) y un símbolo que mezcla burbuja de chat y etiqueta (sustituido el 2026-11-03 por la "b" con la etiqueta, D-063). Detalle en [IDENTIDAD.md](IDENTIDAD.md). · Transmite confianza, clave con el pago fuera de la app, y se distingue de Jiji, que es verde. Decisión del cliente entre tres direcciones.
 - **D-032 · 2026-10-16** · **Tipografía:** Plus Jakarta Sans 800 **solo en títulos y precios**, alojada en nuestro servidor y en un único peso; el resto, con la fuente del sistema. · Unos 20–25 KB una sola vez a cambio de personalidad. Decisión del cliente.
 - **D-033 · 2026-10-16** · **Wireframes v1** (13 pantallas, en el lienzo):
   - Publicar en 4 pasos.
@@ -204,3 +204,10 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
 
   · Como se despliega con cada push a `main`, en los logs salía "Failed to find Server Action" cuando una pestaña vieja usaba una acción que había cambiado (pasó al reorganizar las del panel). Es inofensivo: a esa persona le basta con recargar. Comprobado en local con dos despliegues seguidos.
   · Al pasar a Vercel Pro (1.7), mirar también su *Skew Protection*, que sigue sirviendo la versión anterior a las pestañas abiertas.
+- **D-063 · 2026-11-03** · **Marca nueva y web instalable:**
+  - Símbolo nuevo: la "b" minúscula azul con una etiqueta de precio blanca y dos trazos naranjas. Sustituye a la burbuja de D-031; los colores y la tipografía no cambian. Detalle y medidas en IDENTIDAD §2; SVG maestros en `docs/marca/`.
+  - El diseño lo generó el cliente con ChatGPT. El SVG que dio ChatGPT no coincidía con su propia imagen (la etiqueta se salía de la "b" y sobre azul desaparecía), así que se redibujó a mano y se comprobó de 16 a 320 px.
+  - Con él: logo de la web, favicon, iconos de la app (Android adaptable e iPhone), icono de las notificaciones e imagen para compartir de 1200×630 (la de la marca en todas las páginas, salvo los anuncios y las tiendas, que comparten su foto).
+  - **La web se puede instalar** desde el MVP (`src/app/manifest.ts`: nombre "BKLN", inicio en `/`, sin barra del navegador, iconos y colores de la marca). Se adelanta de la fase 2 porque solo era el manifiesto y los iconos; el modo sin conexión y un botón propio de "Instalar" siguen en la fase 2 (ALCANCE 1.8).
+
+  · El cliente quería una marca que le convenciera antes del lanzamiento. Instalar la web da un icono en la pantalla de inicio, como una app, sin tienda de aplicaciones, y en iPhone es lo que permite recibir avisos push (iOS 16.4 o posterior).

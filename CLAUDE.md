@@ -17,7 +17,9 @@ Las pruebas en el móvil que quedan pendientes del usuario son las casillas sin 
 
 - 1.6, segunda parte: editar el perfil (`/cuenta/perfil`, con foto) y el acceso (`/cuenta/acceso`: email, teléfono y contraseña) (D-058), la tienda Premium `/t/<tienda>`, que se edita en `/cuenta/tienda` (D-059), el catálogo y los ajustes en el panel (D-060), y el aviso de Premium por caducar, en la web y por push con un cron diario (D-061). Todo, el 2026-11-03. `CRON_SECRET` está en Vercel desde el 2026-11-03.
 
-**Siguiente:** 1.7, lanzamiento (ROADMAP): primero, guardar en el repo las pruebas de extremo a extremo y revisar la marca.
+- 1.7, primera parte: marca nueva (la "b" con la etiqueta) en el logo, el favicon, los iconos y la imagen para compartir, y la web se puede instalar en el móvil (D-063), el 2026-11-03.
+
+**Siguiente:** 1.7, lanzamiento (ROADMAP): guardar en el repo las pruebas de extremo a extremo.
 
 ## Recursos
 

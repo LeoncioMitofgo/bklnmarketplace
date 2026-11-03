@@ -1,6 +1,6 @@
 # BKLN Marketplace — Documento de alcance
 
-> **Fuente de verdad del producto.** Versión 1.7 — 2026-11-03 (1.1: registro e inicio de sesión · 1.2–1.4: precios y pago de Premium, nombre y dominio · 1.5: ajustes del modelo de datos · 1.6: ajustes de los wireframes · 1.7: candidatos de pago para la fase 3).
+> **Fuente de verdad del producto.** Versión 1.8 — 2026-11-03 (1.1: registro e inicio de sesión · 1.2–1.4: precios y pago de Premium, nombre y dominio · 1.5: ajustes del modelo de datos · 1.6: ajustes de los wireframes · 1.7: candidatos de pago para la fase 3 · 1.8: la web se puede instalar desde el MVP).
 > Cualquier cambio de alcance se refleja aquí y se registra en [DECISIONES.md](DECISIONES.md).
 
 ---
@@ -17,7 +17,7 @@ Propuesta de valor:
 
 ## 2. Tipo de producto
 
-- **Web app responsive, mobile first.** No hay app nativa por ahora (posible PWA más adelante).
+- **Web app responsive, mobile first.** No hay app nativa por ahora. Desde el MVP, la web **se puede instalar** en la pantalla de inicio con el icono de la marca (D-063); el modo sin conexión queda para la fase 2.
 - **Clasificados C2C + B2C.** La plataforma **pone en contacto, pero no intermedia ni pagos ni entregas** en v1. No hay carrito, pedidos ni checkout. La unidad central es el **anuncio** y la **conversación**.
 - **Mercado:** solo Guinea Ecuatorial. **Moneda:** XAF (FCFA). **Idioma:** español, preparado para francés.
 - **Nombre:** BKLN Marketplace. **Dominio:** `bklnmarketplace.com`.
@@ -264,7 +264,7 @@ Todos los anuncios tienen además: estado (nuevo/usado, cuando aplique), precio,
 | Alertas de búsqueda guardada | 2 |
 | Categoría Empleo | 2 |
 | Francés | 2 |
-| PWA instalable / modo sin conexión básico | 2 |
+| Modo sin conexión básico (la web ya se puede instalar desde el MVP, D-063) | 2 |
 | Aviso de mensajes nuevos por WhatsApp/SMS | 2 |
 | Pagos dentro de la app (Rosa Money, Muni Dinero, B-Morï, transferencia bancaria) y pago automático de Premium | 3 |
 | Envíos / integración con delivery | 3 |

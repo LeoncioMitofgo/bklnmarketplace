@@ -1,7 +1,7 @@
 import { deletePushSubscription, savePushSubscription } from "./actions";
 
 // Suscripción push de este navegador (solo cliente). En iPhone solo funciona con la web instalada
-// en la pantalla de inicio (fase 2); allí pushSupported() devuelve false y no se ofrece.
+// en la pantalla de inicio (D-063); en Safari, sin instalar, pushSupported() devuelve false y no se ofrece.
 
 export type PushState = "unsupported" | "default" | "denied" | "granted";
 

@@ -30,6 +30,6 @@ export async function proxy(request: NextRequest) {
 export const config = {
   // Todo menos estáticos, imágenes e iconos.
   matcher: [
-    "/((?!_next/static|_next/image|icon.svg|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|webp|ico|txt|xml)$).*)",
+    "/((?!_next/static|_next/image|icon.svg|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|webp|ico|txt|xml|webmanifest)$).*)",
   ],
 };

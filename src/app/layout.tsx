@@ -24,6 +24,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title: { default: t("title"), template: `%s · ${t("siteName")}` },
     description: t("description"),
     applicationName: t("siteName"),
+    // Nombre bajo el icono al añadirla a la pantalla de inicio del iPhone (el resto, en manifest.ts).
+    appleWebApp: { title: t("shortName") },
     openGraph: { siteName: t("siteName"), locale: "es_GQ", type: "website" },
     // Hasta el lanzamiento, nada indexable (ver robots.ts).
     robots: isIndexable() ? undefined : { index: false, follow: false },
