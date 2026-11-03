@@ -34,6 +34,7 @@ Las pruebas en el móvil que quedan pendientes del usuario son las casillas sin 
 - [docs/IDENTIDAD.md](docs/IDENTIDAD.md) — logo, tokens de color, tipografía, formas, componentes base y decisiones de cada pantalla (wireframes).
 - [docs/ROADMAP.md](docs/ROADMAP.md) — fases y checklist. Marcar lo que se complete.
 - [docs/DECISIONES.md](docs/DECISIONES.md) — decisiones tomadas y pendientes.
+- [docs/PAGOS-PROVEEDORES.md](docs/PAGOS-PROVEEDORES.md) — Rosa Money, Muni Dinero y Bonafide Microbank: quiénes son, contactos y correos para presentarnos (prepara los pagos de la fase 3).
 - Skill `bkln-feature` ([.claude/skills/bkln-feature/SKILL.md](.claude/skills/bkln-feature/SKILL.md)) — checklist obligatorio antes de diseñar o implementar cualquier funcionalidad.
 
 ## Reglas inamovibles (resumen de ALCANCE)

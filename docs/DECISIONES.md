@@ -9,6 +9,8 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
 
 - **Textos legales provisionales (D-056):** los términos y la privacidad los redactó Claude en lenguaje sencillo y hay que revisarlos. Hay que confirmar en especial la edad mínima (18 años), el email de contacto (`hello@bklnsoftware.tech`) y si se citan leyes concretas de Guinea Ecuatorial.
 
+- **Proveedor de pagos dentro de la app (fase 3):** candidatos Rosa Money, Muni Dinero y Bonafide Microbank (B-Morï, dentro de GIMACPAY). Los correos para presentarnos están preparados desde el 2026-11-03 ([PAGOS-PROVEEDORES.md](PAGOS-PROVEEDORES.md)). Se decide con sus respuestas: que tengan cuenta de comercio y confirmación automática del pago (API), además de requisitos y comisiones. Lo primero sería cobrar Premium.
+
 ## Tomadas
 
 - **D-001 · 2026-10-16** · Producto: clasificados **generalista tipo Jiji** (C2C + B2C) con perfiles de vendedor tipo Vinted. **Web mobile first**, sin app nativa por ahora. · Lo pide el mercado de GE; es más rápido validar con una web.

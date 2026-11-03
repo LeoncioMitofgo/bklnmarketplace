@@ -1,6 +1,6 @@
 # BKLN Marketplace — Documento de alcance
 
-> **Fuente de verdad del producto.** Versión 1.6 — 2026-10-16 (1.1: registro e inicio de sesión · 1.2–1.4: precios y pago de Premium, nombre y dominio · 1.5: ajustes del modelo de datos · 1.6: ajustes de los wireframes).
+> **Fuente de verdad del producto.** Versión 1.7 — 2026-11-03 (1.1: registro e inicio de sesión · 1.2–1.4: precios y pago de Premium, nombre y dominio · 1.5: ajustes del modelo de datos · 1.6: ajustes de los wireframes · 1.7: candidatos de pago para la fase 3).
 > Cualquier cambio de alcance se refleja aquí y se registra en [DECISIONES.md](DECISIONES.md).
 
 ---
@@ -152,7 +152,7 @@ Estos valores viven en **una única configuración de planes** y el código nunc
 - **Formas de pago en el MVP** (fuera de la app, comprobadas a mano por el admin):
   - **En Malabo: efectivo en la oficina.** BKLN Software & Systems, Banapa, Malabo. De lunes a viernes de 8:00 a 16:00 y los sábados de 11:00 a 14:00.
   - **Fuera de Malabo: envío de dinero por agencia.** El usuario envía el importe por una agencia de envío de dinero **a nombre de BKLN Marketplace** y comparte el código del envío por WhatsApp al **+240 555 220 846**.
-  - La transferencia bancaria y Rosa Money (mobile money) se integrarán en la app más adelante (fase 3).
+  - La transferencia bancaria y el dinero móvil se integrarán en la app más adelante (fase 3). Candidatos: Rosa Money, Muni Dinero y B-Morï de Bonafide Microbank ([PAGOS-PROVEEDORES.md](PAGOS-PROVEEDORES.md)).
   - La dirección, el horario, el WhatsApp de pagos y el beneficiario de los envíos van en la configuración de la app, no en el código.
 - **Flujo:**
   1. El usuario pulsa "Hazte Premium" y ve las ventajas, los precios y las dos formas de pago.
@@ -266,7 +266,7 @@ Todos los anuncios tienen además: estado (nuevo/usado, cuando aplique), precio,
 | Francés | 2 |
 | PWA instalable / modo sin conexión básico | 2 |
 | Aviso de mensajes nuevos por WhatsApp/SMS | 2 |
-| Pagos dentro de la app (Rosa Money, transferencia bancaria) y pago automático de Premium | 3 |
+| Pagos dentro de la app (Rosa Money, Muni Dinero, B-Morï, transferencia bancaria) y pago automático de Premium | 3 |
 | Envíos / integración con delivery | 3 |
 | App móvil nativa | 3 |
 | Expansión a otros países (CEMAC) | 3+ |

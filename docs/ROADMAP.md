@@ -126,7 +126,7 @@
   - Cierra la solicitud y avisa al usuario por push.
 - [x] Avisos push: Premium activado y anuncio bloqueado por moderación (2026-10-17)
 - [x] Probado de extremo a extremo (2026-10-17): 57 comprobaciones de base de datos y 37 en navegador. Se repitieron las pruebas de navegador del catálogo, el chat y la 1.5
-- [ ] Dar el rol de admin a la cuenta del cliente (de momento, con SQL: `profile_private.role = 'admin'`)
+- [x] Rol de admin para la cuenta del cliente, `julio_nkulu` (comprobado el 2026-11-03; se da con SQL: `profile_private.role = 'admin'`)
 - [ ] Panel admin: categorías y atributos, ciudades y planes (segunda parte de la 1.6)
 - [ ] Editar el perfil y los datos de la cuenta (nombre, ciudad, descripción, usuario, email, teléfono y contraseña; ALCANCE §4.3). No estaba en el roadmap
 - [ ] Tienda personalizada `/t/<slug>`
@@ -141,6 +141,13 @@
 - [ ] Proyecto Supabase de producción (Pro, Londres) y Vercel Pro. **Cambiar las variables de producción de Vercel al proyecto nuevo** (D-036)
 - [ ] Abrir la indexación: `SITE_INDEXABLE=true` en las variables de producción de Vercel (D-043)
 - [ ] Despliegue en producción
+
+### En paralelo: proveedores de pago (prepara la fase 3)
+Detalle, contactos y correos en [PAGOS-PROVEEDORES.md](PAGOS-PROVEEDORES.md).
+- [x] Investigar Rosa Money, Muni Dinero y Bonafide Microbank (B-Morï) (2026-11-03)
+- [ ] Conseguir el email de Bonafide Microbank (su web solo se abre en el navegador; también LinkedIn o X)
+- [ ] Enviar los correos desde hello@bklnsoftware.tech (lo hace el cliente): presentarnos como programadores de la plataforma y preguntar por cuenta de comercio, API, requisitos y comisiones
+- [ ] Con las respuestas, elegir proveedor (DECISIONES, pendientes) y empezar por cobrar Premium en la web
 
 ## Fase 2 — Crecimiento
 
@@ -157,7 +164,7 @@
 
 ## Fase 3 — Plataforma
 
-- [ ] Pagos dentro de la app (Rosa Money, transferencia bancaria) y pago automático de Premium
+- [ ] Pagos dentro de la app (Rosa Money, Muni Dinero, B-Morï de Bonafide Microbank, transferencia bancaria) y pago automático de Premium
 - [ ] Envíos / integración con delivery
 - [ ] App móvil
 - [ ] Expansión CEMAC
