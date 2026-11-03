@@ -569,6 +569,41 @@ export type Database = {
         }
         Relationships: []
       }
+      notification_log: {
+        Row: {
+          channel: string
+          id: number
+          kind: Database["public"]["Enums"]["notification_kind"]
+          ref: string
+          sent_at: string
+          user_id: string
+        }
+        Insert: {
+          channel: string
+          id?: never
+          kind: Database["public"]["Enums"]["notification_kind"]
+          ref: string
+          sent_at?: string
+          user_id: string
+        }
+        Update: {
+          channel?: string
+          id?: never
+          kind?: Database["public"]["Enums"]["notification_kind"]
+          ref?: string
+          sent_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_log_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       plan_prices: {
         Row: {
           is_active: boolean
@@ -1416,6 +1451,13 @@ export type Database = {
         | "under_review"
         | "blocked"
         | "deleted"
+      notification_kind:
+        | "unread_messages"
+        | "listing_expiring"
+        | "listing_expired"
+        | "premium_expiring"
+        | "premium_activated"
+        | "listing_blocked"
       payment_method:
         | "cash_office"
         | "money_transfer_agency"
@@ -1571,6 +1613,14 @@ export const Constants = {
         "under_review",
         "blocked",
         "deleted",
+      ],
+      notification_kind: [
+        "unread_messages",
+        "listing_expiring",
+        "listing_expired",
+        "premium_expiring",
+        "premium_activated",
+        "listing_blocked",
       ],
       payment_method: [
         "cash_office",

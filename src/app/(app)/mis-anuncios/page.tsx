@@ -5,6 +5,7 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { PlusIcon } from "@/components/icons";
 import { ListingRowActions } from "@/components/listings/listing-row-actions";
+import { PremiumNotice } from "@/components/premium/premium-notice";
 import { Alert } from "@/components/ui/alert";
 import { getSessionUser } from "@/lib/auth/session";
 import { getCatalog } from "@/lib/catalog";
@@ -18,6 +19,7 @@ import {
   type MyListing,
 } from "@/lib/listings/queries";
 import { getRenewWindowDays } from "@/lib/settings";
+import { createClient } from "@/lib/supabase/server";
 
 const TABS = {
   activos: ["active", "under_review", "blocked"],
@@ -56,7 +58,8 @@ async function MyListingsContent({
   const user = await getSessionUser();
   if (!user) redirect("/entrar?next=/mis-anuncios");
 
-  const [listings, usage, catalog, renewDays, t, tPrice, format] = await Promise.all([
+  const supabase = await createClient();
+  const [listings, usage, catalog, renewDays, t, tPrice, format, profile] = await Promise.all([
     getMyListings(user.id),
     getPlanUsage(user.id),
     getCatalog(),
@@ -64,6 +67,7 @@ async function MyListingsContent({
     getTranslations("listings"),
     getTranslations("price"),
     getFormatter(),
+    supabase.from("profiles").select("premium_until").eq("id", user.id).single(),
   ]);
 
   const inTab = (name: Tab, listing: MyListing) =>
@@ -117,6 +121,7 @@ async function MyListingsContent({
           {t("mine.publish")}
         </Link>
       </header>
+      <PremiumNotice premiumUntil={profile.data?.premium_until ?? null} showExpired />
 
       {params.publicado ? <Alert tone="success">{t("mine.published")}</Alert> : null}
       {params.aviso === "borradores" ? <Alert tone="info">{t("mine.draftsLimit")}</Alert> : null}

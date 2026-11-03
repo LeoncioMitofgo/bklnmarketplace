@@ -91,3 +91,21 @@ export async function notifyListingBlocked(listingId: string, reason: string): P
     console.error("notify_blocked", (error as Error).message);
   }
 }
+
+/** "Tu Premium caduca el…" (ALCANCE §5.3: aviso 7 días antes). Devuelve si se envió a algún móvil. */
+export async function notifyPremiumExpiring(userId: string, until: string): Promise<boolean> {
+  try {
+    if (!(await wantsPush(userId))) return false;
+    const [t, format] = await Promise.all([getTranslations("notifications"), getFormatter()]);
+    const delivered = await sendPushToUser(userId, {
+      title: t("expiringTitle"),
+      body: t("expiringBody", { date: format.dateTime(new Date(until), { dateStyle: "short" }) }),
+      url: "/premium",
+      tag: "premium",
+    });
+    return delivered > 0;
+  } catch (error) {
+    console.error("notify_premium_expiring", (error as Error).message);
+    return false;
+  }
+}

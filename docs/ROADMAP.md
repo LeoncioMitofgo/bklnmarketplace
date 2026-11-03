@@ -1,6 +1,6 @@
 # Roadmap — BKLN Marketplace
 
-**Estado: Fase 1 en curso** (1.1 a 1.5 hechas). Marca cada casilla al completarla (con fecha si es un hito).
+**Estado: Fase 1 en curso** (1.1 a 1.6 hechas; sigue la 1.7, lanzamiento). Marca cada casilla al completarla (con fecha si es un hito).
 
 ---
 
@@ -142,7 +142,12 @@
   - Enlazada desde la ficha ("Ver su tienda"), el perfil y Mi cuenta.
   - Si caduca Premium, deja de verse y sus datos se conservan.
   - Probada en un navegador móvil: 24 comprobaciones.
-- [ ] Caducidad de Premium: aviso 7 días antes (falta). La vuelta a Normal y el pausado de los anuncios que sobran ya los hace el cron diario `enforce_plan_limits` (1.2), y la tienda deja de verse (RLS de `stores`)
+- [x] Caducidad de Premium (2026-11-03, D-061):
+  - Aviso en Mi cuenta y en Mis anuncios en la última semana ("caduca en N días · Renovar Premium") y durante 30 días después de caducar, explicando la pausa de los anuncios que sobran y que la tienda no se borra.
+  - Aviso push 7 días antes con un cron diario de Vercel (`/api/cron/daily`, a las 9:00 en Malabo), una vez por periodo (`notification_log`).
+  - La vuelta a Normal y el pausado de los anuncios que sobran ya los hacía el cron `enforce_plan_limits` (1.2), y la tienda deja de verse por su RLS.
+  - Probado: 11 comprobaciones del cron y de los avisos.
+- [ ] Poner `CRON_SECRET` en Vercel (Production, *Sensitive*; lo hace el usuario) y volver a desplegar. Sin él, el cron responde 401 y no envía avisos push (los de la web funcionan igual)
 
 ### 1.7 Lanzamiento
 - [ ] Guardar las pruebas de extremo a extremo en el repo. Vivían en una carpeta temporal del sistema y se borraron el 2026-11-03; solo se conserva la del perfil

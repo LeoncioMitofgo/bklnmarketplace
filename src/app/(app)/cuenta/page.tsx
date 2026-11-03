@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import { ResendVerification } from "@/components/account/resend-verification";
 import { SignOutButton } from "@/components/account/sign-out-button";
 import { CheckIcon, ChevronRightIcon } from "@/components/icons";
+import { PremiumNotice } from "@/components/premium/premium-notice";
 import { Avatar } from "@/components/profile/avatar";
 import { PushSettings } from "@/components/push/push-settings";
 import { buttonClasses } from "@/components/ui/button";
@@ -78,6 +79,8 @@ async function AccountContent() {
           </div>
         </div>
       </section>
+
+      <PremiumNotice premiumUntil={profile.premium_until} showExpired />
 
       <dl className="flex flex-col divide-y divide-border rounded-card border border-border">
         <div className="flex flex-col gap-1 p-4">

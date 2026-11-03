@@ -191,3 +191,10 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
   - Se escribe con la sesión del admin y la RLS de cada tabla. Se invalida la caché que toca: `catalog`, `plans` o `app-settings`.
 
   · ALCANCE §4.11 con formularios sencillos. Desactivar en vez de borrar evita romper anuncios ya publicados.
+- **D-061 · 2026-11-03** · **Avisos programados y caducidad de Premium:**
+  - Un solo cron diario de Vercel (`/api/cron/daily`, 08:00 UTC, que en Malabo son las 9:00), protegido con `CRON_SECRET`. Sin el secreto no hace nada.
+  - De momento envía el aviso push de Premium a 7 días; ahí irán también los de anuncios por caducar y, con Resend, los emails.
+  - `notification_log` apunta cada aviso antes de enviarlo (único por usuario, tipo, referencia y canal): no se repite aunque el cron corra dos veces. La referencia de Premium es la fecha de fin, así que al renovar el periodo nuevo tiene su propio aviso.
+  - Además, aviso en la web (Mi cuenta y Mis anuncios), que no depende del cron ni de tener los avisos activados.
+
+  · ALCANCE §5.3 y §4.6 con la infraestructura que ya hay (push). Mientras no haya email, el aviso en la web cubre a quien no tiene push.

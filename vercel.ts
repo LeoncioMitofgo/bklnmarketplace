@@ -5,4 +5,6 @@ import type { VercelConfig } from "@vercel/config/v1";
 export const config: VercelConfig = {
   framework: "nextjs",
   regions: ["lhr1"],
+  // Avisos programados (D-061): a las 08:00 UTC, las 09:00 en Malabo. El plan Hobby permite uno al día.
+  crons: [{ path: "/api/cron/daily", schedule: "0 8 * * *" }],
 };

@@ -1074,7 +1074,9 @@
     "premiumTitle": "Ya eres Premium",
     "premiumBody": "Hasta el {date}. Ya puedes publicar más anuncios y salir en «Destacados».",
     "blockedTitle": "Hemos bloqueado un anuncio tuyo",
-    "blockedBody": "«{title}»: {reason}"
+    "blockedBody": "«{title}»: {reason}",
+    "expiringTitle": "Tu Premium está a punto de caducar",
+    "expiringBody": "Caduca el {date}. Renueva para no perder tu tienda ni tus anuncios extra."
   },
   "admin": {
     "nav": {
@@ -1558,5 +1560,10 @@
       "noSold": "Todavía no hay anuncios vendidos.",
       "more": "Ver más anuncios"
     }
+  },
+  "premiumNotice": {
+    "expiring": "Tu Premium caduca {count, plural, one {en 1 día} other {en # días}} ({date}). Renueva para no perder tu tienda ni el límite de anuncios Premium: el tiempo nuevo se suma al que te queda.",
+    "expired": "Tu Premium caducó el {date} y has vuelto al plan Normal. Si tenías más de {max} anuncios activos, los más antiguos se pausan solos y puedes elegir cuáles reactivar. Tu tienda no se ve, pero no se ha borrado.",
+    "renew": "Renovar Premium"
   }
 }
