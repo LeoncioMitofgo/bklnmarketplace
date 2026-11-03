@@ -106,7 +106,7 @@ export async function getPublicListing(code: string) {
   const { data: listing, error } = await supabase
     .from("listings")
     .select(
-      "id, code, user_id, status, title, description, price_xaf, is_negotiable, condition, category_id, city_id, neighborhood, attributes, view_count, published_at, sold_at, updated_at, listing_images(storage_path, format, width, height, position), seller:profiles!listings_user_id_fkey(username, display_name, created_at, premium_until, response_time_minutes, city:cities(name))",
+      "id, code, user_id, status, title, description, price_xaf, is_negotiable, condition, category_id, city_id, neighborhood, attributes, view_count, published_at, sold_at, updated_at, listing_images(storage_path, format, width, height, position), seller:profiles!listings_user_id_fkey(username, display_name, avatar_path, created_at, premium_until, response_time_minutes, city:cities(name))",
     )
     .eq("code", code)
     .in("status", ["active", "sold"])

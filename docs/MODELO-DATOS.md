@@ -330,7 +330,8 @@ Solo puede haber una solicitud `pending` por usuario. `request_premium(months, m
 - **`handle_new_user()`** (trigger sobre `auth.users`): crea `profiles` + `profile_private` con los metadatos del registro (username, nombre, teléfono). Comprueba formatos, nombres reservados y unicidad. Si algo falla, el registro entero falla. El servidor lo comprueba antes para dar un buen mensaje; el trigger es la red de seguridad.
 - **Cambio de email** (trigger sobre `auth.users`): pone `email_verified_at = null`.
 - **`resolve_login_email(identifier)`**: devuelve el email asociado a un username o teléfono. **Solo la puede ejecutar el servidor** (`service_role`), nunca el navegador.
-- **`check_rate_limit(key, max, window_seconds)`**: contador por ventana de tiempo. Solo servidor.
+- **`check_rate_limit(key, max, window_seconds)`**: contador por ventana de tiempo. Solo servidor. `rate_limit_exceeded(key, max, window_seconds)` mira el contador sin sumar: sirve para contar solo los fallos (contraseña actual en Mi cuenta).
+- **`email_taken(email)`**: si ya hay una cuenta con ese email. Solo servidor; se consulta después de comprobar la contraseña, para que no sirva para averiguar emails.
 
 ### 5.2 Plan efectivo
 - **`current_plan(user_id)`** devuelve la fila de `plans`: `premium` si `premium_until > now()`, si no `normal`. Todas las comprobaciones de límites la usan.
@@ -421,7 +422,7 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
 | Bucket | Acceso | Ruta | Reglas |
 |---|---|---|---|
 | `listing-images` | Público | `{user_id}/{listing_id}/{image_id}-l.{webp,jpg}` / `-t.{webp,jpg}` | WebP o JPEG, máximo 1 MB. Se sube con URLs firmadas que crea el servidor tras comprobar el dueño y el límite de fotos; los usuarios no tienen permisos de escritura en Storage (D-039) |
-| `profile-media` | Público | `{user_id}/avatar.webp`, `{user_id}/logo.webp`, `{user_id}/cover.webp` | Solo WebP, máximo 1 MB, carpeta propia |
+| `profile-media` | Público | `{user_id}/avatar-{uuid}.{webp,jpg}` (y, con la tienda, logo y portada) | WebP o JPEG, máximo 1 MB. Se sube con URLs firmadas que crea el servidor; cada foto lleva un nombre nuevo. El trigger `profiles_check_avatar` comprueba que `avatar_path` es una foto del propio usuario (D-058) |
 | `chat-images` | **Privado** | `{conversation_id}/{uuid}.webp` | Leen y escriben solo los participantes; se sirven con URL firmada |
 
 ## 8. Realtime

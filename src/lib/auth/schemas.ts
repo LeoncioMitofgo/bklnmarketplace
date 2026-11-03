@@ -9,26 +9,39 @@ export const passwordSchema = z
   .min(8, { error: "password.length" })
   .max(72, { error: "password.length" });
 
+// Campos sueltos: los usan el registro y la edición del perfil y de la cuenta.
+export const displayNameSchema = z
+  .string()
+  .trim()
+  .min(2, { error: "displayName.length" })
+  .max(50, { error: "displayName.length" });
+
+export const usernameSchema = z
+  .string()
+  .trim()
+  .toLowerCase()
+  .regex(USERNAME_PATTERN, { error: "username.format" });
+
+export const phoneSchema = z.string().transform((value, ctx) => {
+  const phone = normalizeGqPhone(value);
+  if (!phone) {
+    ctx.addIssue({ code: "custom", message: "phone.format" });
+    return z.NEVER;
+  }
+  return phone;
+});
+
+export const emailSchema = z
+  .string()
+  .trim()
+  .toLowerCase()
+  .pipe(z.email({ error: "email.format" }));
+
 export const signUpSchema = z.object({
-  displayName: z
-    .string()
-    .trim()
-    .min(2, { error: "displayName.length" })
-    .max(50, { error: "displayName.length" }),
-  username: z.string().trim().toLowerCase().regex(USERNAME_PATTERN, { error: "username.format" }),
-  phone: z.string().transform((value, ctx) => {
-    const phone = normalizeGqPhone(value);
-    if (!phone) {
-      ctx.addIssue({ code: "custom", message: "phone.format" });
-      return z.NEVER;
-    }
-    return phone;
-  }),
-  email: z
-    .string()
-    .trim()
-    .toLowerCase()
-    .pipe(z.email({ error: "email.format" })),
+  displayName: displayNameSchema,
+  username: usernameSchema,
+  phone: phoneSchema,
+  email: emailSchema,
   password: passwordSchema,
   terms: z.literal("on", { error: "terms.required" }),
 });

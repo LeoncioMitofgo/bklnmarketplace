@@ -1197,6 +1197,7 @@ export type Database = {
         }
       }
       delete_listing: { Args: { p_listing_id: string }; Returns: undefined }
+      email_taken: { Args: { p_email: string }; Returns: boolean }
       enforce_plan_limits: { Args: never; Returns: number }
       expire_listings: { Args: never; Returns: number }
       f_unaccent: { Args: { "": string }; Returns: string }
@@ -1306,6 +1307,10 @@ export type Database = {
       }
       pause_listing: { Args: { p_listing_id: string }; Returns: undefined }
       publish_listing: { Args: { p_listing_id: string }; Returns: undefined }
+      rate_limit_exceeded: {
+        Args: { p_key: string; p_max: number; p_window_seconds: number }
+        Returns: boolean
+      }
       reactivate_listing: { Args: { p_listing_id: string }; Returns: undefined }
       register_listing_view: {
         Args: { p_listing_id: string }

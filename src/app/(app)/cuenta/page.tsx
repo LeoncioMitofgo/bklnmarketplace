@@ -39,7 +39,7 @@ async function AccountContent() {
   const [{ data: profile }, { data: priv }] = await Promise.all([
     supabase
       .from("profiles")
-      .select("username, display_name, premium_until")
+      .select("username, display_name, premium_until, avatar_path")
       .eq("id", user.id)
       .single(),
     supabase
@@ -58,7 +58,7 @@ async function AccountContent() {
   return (
     <>
       <section className="flex items-center gap-4">
-        <Avatar name={profile.display_name} size="lg" />
+        <Avatar name={profile.display_name} path={profile.avatar_path} size="lg" />
         <div className="flex min-w-0 flex-col gap-1">
           <p className="truncate text-lg font-bold">{profile.display_name}</p>
           <p className="text-sm text-text-muted">@{profile.username}</p>
@@ -71,6 +71,9 @@ async function AccountContent() {
             </Link>
             <Link href={`/u/${profile.username}`} className="text-sm font-semibold text-primary">
               {t("publicProfile")}
+            </Link>
+            <Link href="/cuenta/perfil" className="text-sm font-semibold text-primary">
+              {t("editProfile")}
             </Link>
           </div>
         </div>
@@ -143,6 +146,10 @@ async function AccountContent() {
       <SignOutButton label={t("signOut")} />
 
       <nav className="flex flex-col divide-y divide-border border-t border-border text-[15px]">
+        <Link href="/cuenta/acceso" className="flex min-h-12 items-center justify-between">
+          {t("access")}
+          <ChevronRightIcon className="size-5 text-text-muted" />
+        </Link>
         {priv.role === "admin" ? (
           <Link href="/admin" className="flex min-h-12 items-center justify-between font-semibold">
             {t("admin")}

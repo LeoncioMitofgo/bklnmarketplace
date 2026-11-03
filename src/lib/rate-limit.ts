@@ -25,3 +25,25 @@ export async function hitRateLimit(
   }
   return data === true;
 }
+
+/**
+ * ¿Se ha llegado ya al límite? Mira el contador sin sumar un intento. Sirve para contar solo los
+ * fallos: se consulta antes de intentarlo y se suma (hitRateLimit) solo si sale mal.
+ */
+export async function rateLimitReached(
+  scope: string,
+  subject: string,
+  max: number,
+  windowSeconds: number,
+): Promise<boolean> {
+  const { data, error } = await createAdminClient().rpc("rate_limit_exceeded", {
+    p_key: `${scope}:${sha256(subject.toLowerCase())}`,
+    p_max: max,
+    p_window_seconds: windowSeconds,
+  });
+  if (error) {
+    console.error("rate_limit_error", scope, error.message);
+    return false;
+  }
+  return data === true;
+}

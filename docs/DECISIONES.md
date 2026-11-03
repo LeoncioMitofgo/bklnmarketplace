@@ -160,3 +160,15 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
   - El rol de admin se da con SQL; no hay pantalla para eso en el MVP.
 
   · ALCANCE §4.11 y §5.3 con el mínimo de pantallas: el admin hace casi todo desde la ficha del usuario y la del anuncio denunciado.
+- **D-058 · 2026-11-03** · **Editar el perfil y la cuenta:**
+  - Perfil público en `/cuenta/perfil`: foto, nombre, usuario, ciudad y descripción.
+    - Cambiar el usuario cambia la dirección `/u/<usuario>` y los enlaces antiguos dejan de funcionar (se avisa en el formulario).
+    - La caché del perfil, del nombre antiguo y del nuevo, y la de los anuncios se invalida al momento.
+  - La foto se recorta en cuadrado y se reduce en el móvil (400 px, WebP o JPEG). Se sube a una URL firmada del bucket `profile-media`, cada vez con un nombre nuevo (`{user_id}/avatar-{uuid}`) para que la CDN no sirva la vieja, y la anterior se borra. Un trigger impide apuntar a la foto de otro.
+  - Email, teléfono y contraseña en `/cuenta/acceso`: cada cambio pide la contraseña actual.
+    - Solo cuentan los fallos: 5 cada 15 minutos.
+    - El email lo cambia el servidor con la API de admin; hay que volver a confirmarlo para publicar.
+    - El teléfono se guarda normalizado. No se verifica por SMS (fase 2).
+    - Cambiar la contraseña cierra la sesión en los demás dispositivos.
+
+  · ALCANCE §4.3. Pedir la contraseña protege los datos con los que se entra si alguien coge el móvil con la sesión abierta.

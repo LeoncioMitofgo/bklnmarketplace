@@ -67,7 +67,7 @@ async function ProfileContent({
   return (
     <>
       <section className="flex items-center gap-4">
-        <Avatar name={profile.display_name} size="lg" />
+        <Avatar name={profile.display_name} path={profile.avatar_path} size="lg" />
         <div className="flex min-w-0 flex-col gap-1">
           <div className="flex flex-wrap items-center gap-2">
             <h1 className="text-xl font-extrabold">{profile.display_name}</h1>

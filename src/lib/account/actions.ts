@@ -1,6 +1,5 @@
 "use server";
 
-import { createClient as createStatelessClient } from "@supabase/supabase-js";
 import { updateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -8,17 +7,14 @@ import { after } from "next/server";
 import { getSessionUser } from "@/lib/auth/session";
 import { LISTINGS_TAG } from "@/lib/listings/tags";
 import { profileTag } from "@/lib/profiles";
-import { hitRateLimit } from "@/lib/rate-limit";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { supabasePublishableKey, supabaseUrl } from "@/lib/supabase/env";
 import { createClient } from "@/lib/supabase/server";
+import { checkCurrentPassword } from "./password";
 
 // Borrar la cuenta (ALCANCE §7, MODELO-DATOS §11). `error` es una clave bajo deleteAccount.errors.
 
 export type DeleteAccountState = { error?: string };
 
-const ATTEMPTS = 5;
-const ATTEMPTS_WINDOW = 15 * 60;
 /** Ficheros por llamada a la API de Storage. */
 const REMOVE_BATCH = 1000;
 
@@ -29,23 +25,8 @@ export async function deleteAccount(
   const user = await getSessionUser();
   if (!user) redirect("/entrar?next=/cuenta/borrar");
 
-  const password = formData.get("password");
-  if (typeof password !== "string" || password.length === 0) {
-    return { error: "password_required" };
-  }
-  if (!(await hitRateLimit("delete_account", user.id, ATTEMPTS, ATTEMPTS_WINDOW))) {
-    return { error: "too_many_attempts" };
-  }
-
-  // La contraseña se comprueba con un cliente sin cookies, para no tocar la sesión actual.
-  const verifier = createStatelessClient(supabaseUrl(), supabasePublishableKey(), {
-    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
-  });
-  const { error: passwordError } = await verifier.auth.signInWithPassword({
-    email: user.email,
-    password,
-  });
-  if (passwordError) return { error: "invalid_password" };
+  const passwordError = await checkCurrentPassword(user, String(formData.get("password") ?? ""));
+  if (passwordError) return { error: passwordError };
 
   const admin = createAdminClient();
   const { data: profile } = await admin

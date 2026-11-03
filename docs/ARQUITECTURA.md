@@ -126,6 +126,7 @@ Criterios:
   4. Se muestra el email enmascarado.
 - **Límite de intentos:** contador propio por identificador e IP en `rate_limits`.
 - **Pantallas con sesión** (D-054): el proxy redirige a `/entrar?next=…` antes de montar la página. Si lo hiciera la página, Next 16 la deja montada en segundo plano y, al volver tras entrar, repetía la redirección.
+- **Editar la cuenta** (D-058): perfil público con la sesión del usuario (permisos por columna). El email, el teléfono y la contraseña los cambia el servidor con la clave secreta, después de comprobar la contraseña actual con un cliente sin cookies (`lib/account/password.ts`). Al cambiar el email se renueva la sesión, para que el token lleve el email nuevo.
 - **Borrar la cuenta** (D-055): una Server Action comprueba la contraseña con un cliente sin cookies y borra el usuario con `auth.admin.deleteUser`. Después quita las cookies, invalida la caché del perfil y de los anuncios, y borra las fotos de Storage con `after()`.
 
 ### 5.2 Imágenes

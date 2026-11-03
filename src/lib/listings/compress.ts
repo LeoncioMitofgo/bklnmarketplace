@@ -50,6 +50,46 @@ async function encodeUnderLimit(source: ImageBitmap, maxSide: number, type: stri
 }
 
 /**
+ * Foto cuadrada (recorte centrado) de `side` px como mucho, para la foto de perfil.
+ * WebP si el navegador sabe generarlo; si no (Safari), JPEG.
+ */
+export async function compressSquare(
+  file: File,
+  side: number,
+): Promise<{ format: ImageFormat; blob: Blob }> {
+  const bitmap = await decode(file);
+  try {
+    const crop = Math.min(bitmap.width, bitmap.height);
+    const size = Math.min(side, crop);
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const context = canvas.getContext("2d");
+    if (!context) throw new Error("canvas_unavailable");
+    context.drawImage(
+      bitmap,
+      (bitmap.width - crop) / 2,
+      (bitmap.height - crop) / 2,
+      crop,
+      crop,
+      0,
+      0,
+      size,
+      size,
+    );
+    const toBlob = (type: string) =>
+      new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, type, 0.8));
+    const webp = await toBlob("image/webp");
+    if (webp?.type === "image/webp") return { format: "webp", blob: webp };
+    const jpg = await toBlob("image/jpeg");
+    if (!jpg) throw new Error("encode_failed");
+    return { format: "jpg", blob: jpg };
+  } finally {
+    bitmap.close();
+  }
+}
+
+/**
  * Devuelve la foto grande (≤1600 px) y la miniatura (≤480 px).
  * WebP si el navegador sabe generarlo; si no (Safari), JPEG.
  */

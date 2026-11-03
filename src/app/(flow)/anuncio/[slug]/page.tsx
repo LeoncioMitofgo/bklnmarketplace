@@ -319,7 +319,7 @@ async function SellerCard({ seller, now }: { seller: PublicListing["seller"]; no
   return (
     <section className="flex flex-col gap-3 rounded-card border border-border p-4">
       <div className="flex items-center gap-3">
-        <Avatar name={seller.display_name} />
+        <Avatar name={seller.display_name} path={seller.avatar_path} />
         <div className="flex min-w-0 flex-col gap-0.5">
           <p className="flex flex-wrap items-center gap-2">
             <span className="truncate text-base font-bold">{seller.display_name}</span>

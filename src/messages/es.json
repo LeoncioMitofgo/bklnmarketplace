@@ -89,7 +89,11 @@
       "resetSent": "Te hemos enviado un enlace a {email}. Caduca en 1 hora.",
       "emailConfirmed": "¡Listo! Tu email está confirmado. Ya puedes publicar anuncios.",
       "alreadyVerified": "Tu email ya está confirmado.",
-      "verificationResent": "Te hemos enviado otro email a {email}."
+      "verificationResent": "Te hemos enviado otro email a {email}.",
+      "profileSaved": "Cambios guardados.",
+      "emailChanged": "Email cambiado. Te hemos enviado un enlace a {email}: confírmalo para poder publicar anuncios.",
+      "phoneChanged": "Teléfono cambiado.",
+      "passwordChanged": "Contraseña cambiada. Hemos cerrado la sesión en tus otros dispositivos."
     },
     "errors": {
       "displayName": {
@@ -101,11 +105,13 @@
       },
       "phone": {
         "format": "Escribe un teléfono de Guinea Ecuatorial de 9 cifras.",
-        "taken": "Ya hay una cuenta con este teléfono."
+        "taken": "Ya hay una cuenta con este teléfono.",
+        "same": "Ese ya es tu teléfono."
       },
       "email": {
         "format": "Escribe un email válido.",
-        "taken": "Ya hay una cuenta con este email."
+        "taken": "Ya hay una cuenta con este email.",
+        "same": "Ese ya es tu email."
       },
       "password": {
         "length": "La contraseña debe tener entre 8 y 72 caracteres.",
@@ -124,6 +130,16 @@
         "accountNotFound": "No encontramos ninguna cuenta con esos datos.",
         "linkInvalid": "El enlace no es válido o ha caducado. Pide uno nuevo.",
         "unexpected": "Algo ha fallado. Inténtalo de nuevo."
+      },
+      "bio": {
+        "length": "Como mucho 300 caracteres."
+      },
+      "city": {
+        "invalid": "Elige una ciudad de la lista."
+      },
+      "currentPassword": {
+        "required": "Escribe tu contraseña actual.",
+        "invalid": "La contraseña actual no es correcta."
       }
     }
   },
@@ -157,7 +173,9 @@
     "deleteAccount": "Borrar mi cuenta",
     "goPremium": "Hazte Premium",
     "renewPremium": "Renovar",
-    "admin": "Panel de administración"
+    "admin": "Panel de administración",
+    "editProfile": "Editar perfil",
+    "access": "Email, teléfono y contraseña"
   },
   "profile": {
     "loading": "Cargando perfil…",
@@ -1259,6 +1277,58 @@
       "report_not_found": "Esa denuncia ya está cerrada.",
       "target_is_admin": "No se puede aplicar a un administrador.",
       "unexpected": "Algo ha fallado. Inténtalo de nuevo."
+    }
+  },
+  "settings": {
+    "profile": {
+      "metaTitle": "Editar perfil",
+      "title": "Editar perfil",
+      "back": "Mi cuenta",
+      "displayName": "Nombre visible",
+      "displayNameHint": "Es el nombre que ven los demás en tus anuncios y en el chat.",
+      "username": "Nombre de usuario",
+      "usernameHint": "Tu perfil está en bklnmarketplace.com/u/{username}. Si lo cambias, los enlaces antiguos dejarán de funcionar.",
+      "city": "Ciudad",
+      "cityNone": "Sin indicar",
+      "bio": "Sobre ti",
+      "bioHint": "Hasta 300 caracteres: qué vendes, dónde estás, cuándo respondes…",
+      "submit": "Guardar cambios",
+      "submitting": "Guardando…"
+    },
+    "avatar": {
+      "add": "Poner una foto",
+      "change": "Cambiar la foto",
+      "remove": "Quitar la foto",
+      "preparing": "Preparando…",
+      "uploading": "Subiendo… {percent} %",
+      "hint": "Se recorta en cuadrado y se reduce en tu móvil antes de subirla, así gastas menos datos.",
+      "errors": {
+        "offline": "No hay conexión. Vuelve a intentarlo cuando tengas red.",
+        "photo_unreadable": "No hemos podido leer esta foto. Prueba con otra.",
+        "rate_limited": "Has cambiado la foto muchas veces. Espera un rato.",
+        "unexpected": "No se ha podido guardar la foto. Inténtalo de nuevo."
+      }
+    },
+    "access": {
+      "metaTitle": "Email, teléfono y contraseña",
+      "title": "Email, teléfono y contraseña",
+      "back": "Mi cuenta",
+      "intro": "Son los datos para entrar en tu cuenta. Para cambiarlos te pedimos tu contraseña actual.",
+      "now": "Ahora: {value}",
+      "emailTitle": "Email",
+      "newEmail": "Nuevo email",
+      "emailHint": "Tendrás que confirmarlo otra vez para publicar anuncios.",
+      "phoneTitle": "Teléfono",
+      "newPhone": "Nuevo teléfono",
+      "phoneHint": "Es privado: solo lo usa el botón de WhatsApp, si lo activas.",
+      "passwordTitle": "Contraseña",
+      "newPassword": "Nueva contraseña",
+      "passwordHint": "Al menos 8 caracteres. Se cerrará la sesión en tus otros dispositivos.",
+      "currentPassword": "Contraseña actual",
+      "saveEmail": "Cambiar el email",
+      "savePhone": "Cambiar el teléfono",
+      "savePassword": "Cambiar la contraseña",
+      "saving": "Guardando…"
     }
   }
 }

@@ -128,11 +128,16 @@
 - [x] Probado de extremo a extremo (2026-10-17): 57 comprobaciones de base de datos y 37 en navegador. Se repitieron las pruebas de navegador del catálogo, el chat y la 1.5
 - [x] Rol de admin para la cuenta del cliente, `julio_nkulu` (comprobado el 2026-11-03; se da con SQL: `profile_private.role = 'admin'`)
 - [ ] Panel admin: categorías y atributos, ciudades y planes (segunda parte de la 1.6)
-- [ ] Editar el perfil y los datos de la cuenta (nombre, ciudad, descripción, usuario, email, teléfono y contraseña; ALCANCE §4.3). No estaba en el roadmap
+- [x] Editar el perfil y los datos de la cuenta (2026-11-03, D-058):
+  - `/cuenta/perfil`: foto (recortada y reducida en el móvil), nombre, usuario, ciudad y descripción.
+  - `/cuenta/acceso`: email (hay que volver a confirmarlo), teléfono y contraseña. Cada cambio pide la contraseña actual; cambiar la contraseña cierra la sesión en los demás dispositivos.
+  - La foto sale en Mi cuenta, en el perfil público y en la ficha del anuncio.
+  - Probado en un navegador móvil: 28 comprobaciones.
 - [ ] Tienda personalizada `/t/<slug>`
 - [ ] Caducidad de Premium: aviso 7 días antes (falta). La vuelta a Normal y el pausado de los anuncios que sobran ya los hace el cron diario `enforce_plan_limits` (1.2), y la tienda deja de verse (RLS de `stores`)
 
 ### 1.7 Lanzamiento
+- [ ] Guardar las pruebas de extremo a extremo en el repo. Vivían en una carpeta temporal del sistema y se borraron el 2026-11-03; solo se conserva la del perfil
 - [ ] Revisar la marca (2026-11-03: al cliente no le convence la actual): logo, icono de la app y figura. Antes de los iconos de la PWA, el favicon y la imagen de Open Graph
 - [ ] Analítica básica y monitorización de errores
 - [ ] Recortar el JavaScript de primera carga de las páginas públicas (~160 KB comprimidos en la 1.3; la base de React y Next son ~115 KB). Candidatos: el formateador de mensajes de next-intl en el cliente (~12 KB) y Analytics (~6 KB)
