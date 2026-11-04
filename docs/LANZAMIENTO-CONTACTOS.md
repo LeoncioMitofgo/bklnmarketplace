@@ -36,7 +36,7 @@ Directorios y guías que venden publicidad:
 
 **Lo que se ofrece y se pide (D-069):** a cambio de una aportación económica o en especie, el patrocinador tiene su marca en la campaña y en el acto de presentación, su logo en el pie de la web («Con el apoyo de») y, si la quiere, la exclusividad, sea en su sector o como único patrocinador. Las propuestas no llevan precio: la cifra se habla en la reunión.
 
-Cada patrocinador tiene **su propia propuesta en PDF y su mensaje**, en `C:/Users/leonc/PlanEject/propuestas` («Propuesta BKLN - <empresa>.pdf»; las fuentes son `propuestas/fuentes/patrocinio-*.md`). Llevan una maqueta del pie de la web con su logo, hecha en local con `PlanEject/scripts/capturas-patrocinio.mjs` (no se publica nada).
+Cada patrocinador tiene **su propia propuesta en PDF y su mensaje**, en `C:/Users/leonc/PlanEject/propuestas/BKLN Marketplace/2 Patrocinadores`, numeradas del 11 al 18 («NN - Propuesta BKLN - <empresa>.pdf» y «Mensaje - NN <empresa>.txt»; las fuentes son `propuestas/fuentes/patrocinio-*.md`). Llevan una maqueta del pie de la web con su logo, hecha en local con `PlanEject/scripts/capturas-patrocinio.mjs` (no se publica nada).
 
 | Empresa | Lo personal de su propuesta | Por dónde | Estado |
 |---|---|---|---|
@@ -62,7 +62,7 @@ Cada patrocinador tiene **su propia propuesta en PDF y su mensaje**, en `C:/User
 
 Los primeros anuncios de calidad. **Oferta (D-065): 6 meses de Premium gratis, contados desde la apertura, visibilidad (Destacados y tienda propia) y publicidad (se las nombra como tiendas fundadoras en la campaña del lanzamiento).**
 
-Cada tienda tiene **su propia propuesta en PDF y su mensaje**, con lo que hemos visto de ella (sus productos, sus precios, su dirección), en `C:/Users/leonc/PlanEject/propuestas` («Propuesta BKLN - <empresa>.pdf» y «Mensaje - <empresa>.txt»). Las fuentes están en `propuestas/fuentes/marketplace-*.md` y se regeneran con `node scripts/propuesta_md.mjs <archivo>`. Cada una lleva capturas de su sector, no genéricas: su búsqueda o su categoría, la ficha de un anuncio como los suyos (una Hilux, un Mercedes, un piso, un sofá) y la conversación vista desde la tienda. Se hacen con `PlanEject/scripts/capturas-marketplace.mjs` contra la web en local, con cuentas temporales que se borran al terminar.
+Cada tienda tiene **su propia propuesta en PDF y su mensaje**, con lo que hemos visto de ella (sus productos, sus precios, su dirección), en `C:/Users/leonc/PlanEject/propuestas/BKLN Marketplace/1 Tiendas fundadoras`, numeradas del 01 al 10 («NN - Propuesta BKLN - <empresa>.pdf» y «Mensaje - NN <empresa>.txt»). Las fuentes están en `propuestas/fuentes/marketplace-*.md` y se regeneran con `node scripts/propuesta_md.mjs <archivo>`. Cada una lleva capturas de su sector, no genéricas: su búsqueda o su categoría, la ficha de un anuncio como los suyos (una Hilux, un Mercedes, un piso, un sofá) y la conversación vista desde la tienda. Se hacen con `PlanEject/scripts/capturas-marketplace.mjs` contra la web en local, con cuentas temporales que se borran al terminar.
 
 | Empresa | Qué venden | Por dónde | Otros contactos | Estado |
 |---|---|---|---|---|
@@ -94,7 +94,7 @@ Se envían desde **hello@bklnsoftware.tech**, con el WhatsApp de BKLN, +240 222 
 
 ### Tiendas fundadoras
 
-Se envían en la semana del 4 de noviembre de 2026, con el PDF de cada una adjunto. Después del correo va el mensaje de WhatsApp con el mismo PDF (`Mensaje - <empresa>.txt` en `C:/Users/leonc/PlanEject/propuestas`).
+Se envían en la semana del 4 de noviembre de 2026, con el PDF de cada una adjunto. Después del correo va el mensaje de WhatsApp con el mismo PDF (`Mensaje - NN <empresa>.txt` en `C:/Users/leonc/PlanEject/propuestas/BKLN Marketplace/1 Tiendas fundadoras`).
 
 #### CFAO Motors (Toyota)
 
