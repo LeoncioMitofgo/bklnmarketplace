@@ -327,6 +327,18 @@ try {
   p = await page(`/u/${seller.username}`);
   ok("perfil con su anuncio en venta", p.body.includes(title) && p.body.includes("En venta (1)"));
 
+  // Oficina y papelería (D-070): la categoría y sus tres subcategorías.
+  p = await page("/categoria/oficina-papeleria");
+  ok(
+    "categoría Oficina y papelería con sus subcategorías",
+    p.status === 200 &&
+      p.body.includes("Oficina y papelería") &&
+      ["Papelería y material escolar", "Material de oficina", "Mobiliario de oficina"].every((s) =>
+        p.body.includes(s),
+      ),
+    String(p.status),
+  );
+
   p = await page("/favoritos", buyer.cookie);
   ok("/favoritos con sesión", p.body.includes(title), String(p.status));
   p = await page("/favoritos");

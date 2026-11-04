@@ -1,6 +1,6 @@
 # BKLN Marketplace — Documento de alcance
 
-> **Fuente de verdad del producto.** Versión 1.9 — 2026-11-04 (1.1: registro e inicio de sesión · 1.2–1.4: precios y pago de Premium, nombre y dominio · 1.5: ajustes del modelo de datos · 1.6: ajustes de los wireframes · 1.7: candidatos de pago para la fase 3 · 1.8: la web se puede instalar desde el MVP · 1.9: logos de los patrocinadores del lanzamiento en el pie).
+> **Fuente de verdad del producto.** Versión 1.10 — 2026-11-04 (1.1: registro e inicio de sesión · 1.2–1.4: precios y pago de Premium, nombre y dominio · 1.5: ajustes del modelo de datos · 1.6: ajustes de los wireframes · 1.7: candidatos de pago para la fase 3 · 1.8: la web se puede instalar desde el MVP · 1.9: logos de los patrocinadores del lanzamiento en el pie · 1.10: categoría Oficina y papelería).
 > Cualquier cambio de alcance se refleja aquí y se registra en [DECISIONES.md](DECISIONES.md).
 
 ---
@@ -233,6 +233,7 @@ Generalista tipo Jiji. Los atributos se definen **por categoría** (configurable
 | Agricultura y alimentación | Productos agrícolas, maquinaria, alimentación | — |
 | Animales y mascotas | Mascotas, accesorios (con restricciones) | — |
 | Deporte y ocio | Deporte, instrumentos, libros | — |
+| Oficina y papelería | Papelería y material escolar, material de oficina, mobiliario de oficina | — |
 | Servicios | Reparaciones, limpieza, clases, eventos, transporte, belleza | Precio opcional |
 | Otros | — | — |
 

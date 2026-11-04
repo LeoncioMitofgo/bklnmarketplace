@@ -159,6 +159,7 @@ Previsto para **enero de 2027** (D-068).
 - [ ] Recortar el JavaScript de primera carga de las páginas públicas (~160 KB comprimidos en la 1.3; la base de React y Next son ~115 KB). Candidatos: el formateador de mensajes de next-intl en el cliente (~12 KB) y Analytics (~6 KB)
 - [ ] Pruebas en Android de gama baja con red lenta
 - [x] Aviso de versión previa (2026-11-04, D-066): se quita solo al abrir la indexación
+- [x] Categoría «Oficina y papelería» con tres subcategorías (2026-11-04, D-070)
 - [x] El proyecto de Supabase actual es el de producción (2026-11-04, D-067). Funciones de Vercel en Dublín (`dub1`)
 - [ ] Estabilizar las tres pruebas e2e que fallan en la batería completa (chat-browser, moderation-browser y premium-admin-browser)
 - [ ] Sembrar anuncios con vendedores y tiendas fundadoras, con 6 meses de Premium gratis, visibilidad y publicidad (D-065). Empresas, emails y correos en [LANZAMIENTO-CONTACTOS.md](LANZAMIENTO-CONTACTOS.md) (2026-11-04), con medios, agencias y patrocinio para el lanzamiento
