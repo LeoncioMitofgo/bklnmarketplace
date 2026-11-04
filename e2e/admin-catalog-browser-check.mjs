@@ -214,10 +214,17 @@ try {
   const visitor = await (await browser.newContext(device)).newPage();
   await visitor.goto(`${BASE}/categoria/muebles-${tag}`);
   await visitor.locator("h1").waitFor();
+  // Los filtros llegan en streaming después del título: se espera a que estén en la página.
+  const filter = await visitor
+    .getByText("Material principal")
+    .first()
+    .waitFor({ state: "attached", timeout: 15_000 })
+    .then(() => true)
+    .catch(() => false);
   ok(
     "la subcategoría nueva ya sale en la web, con su filtro",
-    (await visitor.locator("h1").innerText()) === `Muebles ${tag}` &&
-      (await visitor.content()).includes("Material principal"),
+    (await visitor.locator("h1").innerText()) === `Muebles ${tag}` && filter,
+    (await visitor.content()).includes("Material") ? "sale «Material» sin renombrar" : "sin filtro",
   );
 
   // Desactivar la principal desactiva también la subcategoría.

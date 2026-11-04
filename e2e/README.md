@@ -69,6 +69,7 @@ pnpm e2e monitoring-check
   - `chromium` y `CHROMIUM_PATH`;
   - `ok(etiqueta, condición, detalle)` para cada comprobación, `crash(error)` si hay una excepción y `finish()` al final;
   - `watchErrors(página, errores)`, que recoge los errores de JavaScript y las peticiones fallidas.
+  - Cada prueba entra en el navegador con una IP inventada (`TEST_IP`, en la cabecera `x-forwarded-for`). En local no hay Vercel delante, y sin esto todas compartían `::1`: la batería completa chocaba con el límite de 30 logins por IP cada 15 minutos y las últimas pruebas se quedaban esperando.
 - El nombre del fichero termina en `-check.mjs` para que `pnpm e2e` lo encuentre.
 - Next 16 deja montadas y ocultas las páginas anteriores. Por eso:
   - los elementos se buscan filtrando los visibles: `.filter({ visible: true }).first()`;

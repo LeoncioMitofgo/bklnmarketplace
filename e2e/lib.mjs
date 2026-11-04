@@ -8,6 +8,24 @@ import { chromium } from "playwright-core";
 
 export { chromium, createClient };
 
+// Cada prueba entra con una IP inventada. En local no hay Vercel delante y Next pasa tal cual el
+// x-forwarded-for: sin esto, todas compartían ::1 y la batería completa chocaba con el límite de
+// logins por IP (30 cada 15 minutos).
+export const TEST_IP = `10.${[0, 0, 0].map(() => Math.floor(Math.random() * 250) + 1).join(".")}`;
+const withIp = (options = {}) => ({
+  ...options,
+  extraHTTPHeaders: { "x-forwarded-for": TEST_IP, ...options.extraHTTPHeaders },
+});
+const launch = chromium.launch.bind(chromium);
+chromium.launch = async (options) => {
+  const browser = await launch(options);
+  const newContext = browser.newContext.bind(browser); // newPage también pasa por aquí
+  browser.newContext = (options) => newContext(withIp(options));
+  return browser;
+};
+const launchPersistent = chromium.launchPersistentContext.bind(chromium);
+chromium.launchPersistentContext = (dir, options) => launchPersistent(dir, withIp(options));
+
 export const PROJECT = fileURLToPath(new URL("..", import.meta.url))
   .replace(/\\/g, "/")
   .replace(/\/$/, "");

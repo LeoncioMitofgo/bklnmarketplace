@@ -166,7 +166,7 @@ Previsto para **enero de 2027** (D-068).
 - [x] Categoría «Oficina y papelería» con tres subcategorías (2026-11-04, D-070)
 - [x] Panel de admin adaptado al ordenador: menú lateral y páginas a dos columnas (2026-11-04, D-071)
 - [x] El proyecto de Supabase actual es el de producción (2026-11-04, D-067). Funciones de Vercel en Dublín (`dub1`)
-- [ ] Estabilizar las dos pruebas e2e que fallan en la batería completa (chat-browser y moderation-browser). La de premium-admin-browser era un fallo del propio script (una comprobación sin await) y ya está corregida (2026-11-04)
+- [x] Estabilizar las pruebas e2e que fallaban en la batería completa (2026-11-04). Todas entraban desde `::1` y, al acumularse los logins, saltaba el límite de 30 por IP cada 15 minutos: ahora cada prueba usa su propia IP (`TEST_IP` en `e2e/lib.mjs`). También se corrigieron tres comprobaciones que leían antes de que llegara el contenido en streaming o sin await. La batería completa pasa (19 pruebas)
 - [ ] Sembrar anuncios con vendedores y tiendas fundadoras, con 6 meses de Premium gratis, visibilidad y publicidad (D-065). Empresas, emails y correos en [LANZAMIENTO-CONTACTOS.md](LANZAMIENTO-CONTACTOS.md) (2026-11-04), con medios, agencias y patrocinio para el lanzamiento
   - [x] Propuesta personalizada en PDF y mensaje para cada tienda (2026-11-04): CFAO Motors, Jetour, Casa Mercedes, RYESA, Cuattro, Rock & Noble, Inmo-GUINEA, KITEA, Unicasa y The Computer Store. Se generan con el sistema de propuestas de `C:/Users/leonc/PlanEject` (`propuestas/fuentes/marketplace-*.md`)
   - [ ] Cuando publique la primera tienda fundadora, cambiar el aviso de versión previa a «Muchos anuncios son de demostración…» (`preview.notice` en `es.json`, D-066)
