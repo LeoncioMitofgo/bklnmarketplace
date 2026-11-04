@@ -1,0 +1,227 @@
+{
+  "terms": [
+    {
+      "id": "servicio",
+      "title": "Qué es BKLN Marketplace",
+      "blocks": [
+        "BKLN Marketplace (bklnmarketplace.com) es una web de anuncios clasificados para comprar y vender en Guinea Ecuatorial. La gestiona BKLN Software & Systems, con oficina en Banapa, Malabo.",
+        "Ponemos en contacto a quien vende con quien compra. No vendemos ni compramos nada, no cobramos comisión por las ventas y no intervenimos en los pagos ni en las entregas: el acuerdo es solo entre el comprador y el vendedor."
+      ]
+    },
+    {
+      "id": "cuenta",
+      "title": "Tu cuenta",
+      "blocks": [
+        "Para ver anuncios no hace falta cuenta. Para publicar, chatear y guardar favoritos, sí.",
+        [
+          "Tienes que ser mayor de 18 años.",
+          "Tu nombre, tu teléfono y tu email tienen que ser reales y tuyos.",
+          "Eres responsable de lo que se haga con tu cuenta: no compartas tu contraseña.",
+          "Puedes borrar tu cuenta cuando quieras desde Mi cuenta."
+        ]
+      ]
+    },
+    {
+      "id": "anuncios",
+      "title": "Publicar anuncios",
+      "blocks": [
+        "Publicar es gratis y los anuncios aparecen al momento, sin revisión previa. Por eso eres responsable de lo que publicas.",
+        [
+          "Anuncia solo cosas que existen, que puedes vender y que están en Guinea Ecuatorial.",
+          "Usa fotos reales del producto y una descripción honesta.",
+          "Pon el precio en francos CFA y elige la categoría correcta.",
+          "No publiques el mismo anuncio varias veces."
+        ],
+        "Los anuncios caducan pasado un tiempo, y cada plan tiene un límite de anuncios activos y de fotos. Lo verás al publicar."
+      ]
+    },
+    {
+      "id": "prohibido",
+      "title": "Qué no se puede anunciar",
+      "blocks": [
+        [
+          "Armas, munición y explosivos.",
+          "Drogas y medicamentos que necesitan receta.",
+          "Documentos oficiales (DNI, pasaportes, carnés) y dinero falso.",
+          "Animales protegidos o partes de ellos: marfil, pieles, carne de especies protegidas.",
+          "Contenido sexual y servicios sexuales.",
+          "Falsificaciones e imitaciones de marcas.",
+          "Productos robados y servicios ilegales.",
+          "Cualquier otra cosa que prohíban las leyes de Guinea Ecuatorial."
+        ],
+        "Algunos de estos anuncios se bloquean al publicarlos. Los demás los retiramos en cuanto los vemos o nos los denuncian."
+      ]
+    },
+    {
+      "id": "contacto",
+      "title": "Chat y contacto",
+      "blocks": [
+        "El chat sirve para hablar de los anuncios. Trata a los demás con respeto: no se permiten insultos, acoso, spam ni mensajes que no tengan que ver con el anuncio.",
+        "El botón de WhatsApp solo aparece si el vendedor lo activa. Tu número de teléfono nunca se muestra en la web.",
+        "Puedes bloquear a cualquier persona desde la conversación: no podrá volver a escribirte."
+      ]
+    },
+    {
+      "id": "seguridad",
+      "title": "Compra y vende con seguridad",
+      "blocks": [
+        [
+          "No pagues nada por adelantado, ni por el envío ni por la reserva.",
+          "Queda en un lugar público y concurrido, mejor de día.",
+          "Revisa el producto antes de pagar.",
+          "Desconfía de los precios demasiado buenos y de quien te mete prisa.",
+          "No compartas códigos, contraseñas ni datos bancarios."
+        ],
+        "Como no intervenimos en las ventas, no podemos garantizar los productos ni recuperar un pago. Si alguien intenta estafarte, denúncialo: nos ayuda a proteger a todos."
+      ]
+    },
+    {
+      "id": "moderacion",
+      "title": "Denuncias y moderación",
+      "blocks": [
+        "Cualquier usuario puede denunciar un anuncio o a otro usuario. Cuando un anuncio recibe varias denuncias de personas distintas, se oculta hasta que lo revisemos.",
+        "Podemos retirar anuncios y suspender o cerrar las cuentas que incumplan estas normas. Cuando bloqueamos un anuncio, el vendedor ve el motivo en Mis anuncios.",
+        "Para comprobar una denuncia hecha desde el chat, podemos leer esa conversación. No leemos las conversaciones que nadie ha denunciado."
+      ]
+    },
+    {
+      "id": "premium",
+      "title": "Plan Premium",
+      "blocks": [
+        "Además del plan Normal, que es gratis, hay un plan Premium de pago con más anuncios y otras ventajas. Se paga en nuestra oficina o, fuera de Malabo, por agencia de envío, y lo activamos a mano por el periodo pagado. Los precios y las condiciones se muestran antes de pedirlo."
+      ]
+    },
+    {
+      "id": "responsabilidad",
+      "title": "Responsabilidad",
+      "blocks": [
+        "Cada usuario responde de sus anuncios, de sus mensajes y de sus acuerdos. BKLN Marketplace no es parte de las compraventas y no responde de la calidad, la legalidad o la entrega de los productos, ni de lo que hagan los usuarios fuera de la web.",
+        "Hacemos lo posible para que la web funcione siempre, pero puede haber cortes o errores, y no respondemos de las pérdidas que causen."
+      ]
+    },
+    {
+      "id": "cambios",
+      "title": "Cambios en estos términos",
+      "blocks": [
+        "Podemos cambiar estos términos para adaptarlos al servicio o a la ley. Si el cambio es importante, lo avisaremos en la web antes de aplicarlo. Si sigues usando BKLN Marketplace después, los aceptas."
+      ]
+    },
+    {
+      "id": "ley",
+      "title": "Ley aplicable y contacto",
+      "blocks": [
+        "Estos términos se rigen por las leyes de la República de Guinea Ecuatorial.",
+        "Para cualquier duda o reclamación, escríbenos a hello@bklnsoftware.tech o ven a nuestra oficina de Banapa, Malabo: de lunes a viernes de 8:00 a 16:00 y los sábados de 11:00 a 14:00."
+      ]
+    }
+  ],
+  "privacy": [
+    {
+      "id": "responsable",
+      "title": "Quién es responsable",
+      "blocks": [
+        "BKLN Software & Systems, con oficina en Banapa, Malabo (Guinea Ecuatorial), gestiona BKLN Marketplace y es responsable de tus datos. Puedes escribirnos a hello@bklnsoftware.tech."
+      ]
+    },
+    {
+      "id": "datos",
+      "title": "Qué datos guardamos",
+      "blocks": [
+        [
+          "Al registrarte: tu nombre visible, tu nombre de usuario, tu teléfono, tu email y tu contraseña. La contraseña se guarda cifrada: nadie puede leerla, ni siquiera nosotros.",
+          "En tu perfil: tu ciudad y lo que quieras contar de ti.",
+          "Tus anuncios y sus fotos. Antes de subir una foto, el móvil le quita los datos ocultos, como la ubicación GPS.",
+          "Tus conversaciones del chat, con sus fotos.",
+          "Tus favoritos, las personas que bloqueas y las denuncias que haces.",
+          "Datos técnicos: la dirección IP, para limitar los intentos de entrar y evitar abusos, y el tipo de navegador, si activas los avisos de mensajes.",
+          "Estadísticas de visitas, sin cookies y sin identificarte, para saber qué páginas se usan."
+        ]
+      ]
+    },
+    {
+      "id": "uso",
+      "title": "Para qué los usamos",
+      "blocks": [
+        [
+          "Para que la web funcione: tu cuenta, tus anuncios, el chat y los avisos.",
+          "Para tu seguridad y la de los demás: evitar estafas, spam y abusos, y revisar las denuncias.",
+          "Para mejorar el servicio con estadísticas que no te identifican."
+        ],
+        "No vendemos tus datos ni los usamos para publicidad de otras empresas."
+      ]
+    },
+    {
+      "id": "publico",
+      "title": "Qué ven los demás",
+      "blocks": [
+        "Es público: tu nombre visible, tu nombre de usuario, tu ciudad, tu descripción, desde cuándo eres miembro, cuánto sueles tardar en responder y tus anuncios.",
+        "Nunca es público: tu teléfono y tu email. Si activas el botón de WhatsApp, tu número solo se comparte con quien lo pulse, al abrirle WhatsApp.",
+        "Tus mensajes solo los ven las personas de la conversación. Nuestro equipo solo puede leer una conversación si alguien la denuncia."
+      ]
+    },
+    {
+      "id": "terceros",
+      "title": "Con quién los compartimos",
+      "blocks": [
+        "Usamos proveedores que guardan o procesan datos por nosotros, solo para prestar el servicio:",
+        [
+          "Supabase: la base de datos, las cuentas y las fotos. Sus servidores están en Europa.",
+          "Vercel: aloja la web y cuenta las visitas sin cookies.",
+          "Google, Mozilla o Apple, según tu navegador: entregan los avisos de mensajes, si los activas.",
+          "Resend: envía los emails de confirmación y de recuperar la contraseña.",
+          "WhatsApp (Meta): solo si pulsas el botón de WhatsApp de un anuncio."
+        ],
+        "También podemos entregar datos a las autoridades de Guinea Ecuatorial cuando la ley nos obligue."
+      ]
+    },
+    {
+      "id": "cookies",
+      "title": "Cookies y datos en tu móvil",
+      "blocks": [
+        "Usamos una cookie para mantener tu sesión iniciada; sin ella no podrías entrar en tu cuenta. No usamos cookies de publicidad ni de seguimiento.",
+        "El navegador también guarda algunas cosas en tu móvil, como el borrador de un anuncio o de un mensaje, para que no pierdas lo que escribes si se corta la conexión."
+      ]
+    },
+    {
+      "id": "conservacion",
+      "title": "Cuánto tiempo los guardamos",
+      "blocks": [
+        "Mientras tengas la cuenta. Los anuncios que eliminas dejan de verse enseguida, pero se guardan hasta que borras la cuenta, por si hay que revisar una denuncia.",
+        "Si borras tu cuenta, se borran tu perfil, tus anuncios con sus fotos, tus favoritos y tus bloqueos. Se conservan, sin tu nombre, los mensajes que enviaste (la otra persona sigue viendo la conversación, con «Usuario eliminado») y las denuncias, para proteger a otros usuarios. Los pagos de Premium se conservan por contabilidad.",
+        "Las copias de seguridad pueden tener tus datos unos días más, hasta que se renuevan."
+      ]
+    },
+    {
+      "id": "derechos",
+      "title": "Tus derechos",
+      "blocks": [
+        [
+          "Ver tus datos en Mi cuenta y pedirnos que corrijamos cualquiera que esté mal.",
+          "Borrar tu cuenta cuando quieras, desde Mi cuenta → Borrar mi cuenta.",
+          "Pedirnos una copia de tus datos o preguntarnos cualquier cosa sobre ellos, en hello@bklnsoftware.tech."
+        ]
+      ]
+    },
+    {
+      "id": "proteccion",
+      "title": "Cómo los protegemos",
+      "blocks": [
+        "Las conexiones van cifradas (HTTPS), las contraseñas se guardan cifradas y cada usuario solo puede ver y cambiar lo suyo. Aun así, ningún sistema es seguro al 100 %: si detectamos un problema que afecte a tus datos, te avisaremos."
+      ]
+    },
+    {
+      "id": "menores",
+      "title": "Menores",
+      "blocks": [
+        "BKLN Marketplace es solo para mayores de 18 años. Si sabemos que una cuenta es de un menor, la borraremos."
+      ]
+    },
+    {
+      "id": "cambios",
+      "title": "Cambios en esta política",
+      "blocks": [
+        "Si cambiamos esta política de forma importante, lo avisaremos en la web antes de aplicarlo."
+      ]
+    }
+  ]
+}

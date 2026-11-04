@@ -160,13 +160,13 @@ Previsto para **enero de 2027** (D-068).
   - «Validación del mercado» en el resumen del panel: % de anuncios con mensajes, tiempo de respuesta, usuarios activos y los que vuelven, y Premium (ALCANCE §9).
   - Errores del servidor y del navegador a Sentry, sin su SDK ni scripts de terceros, y sin la query ni datos personales. Probado con `monitoring-check` (11 comprobaciones) contra un Sentry de prueba.
   - [ ] Crear la cuenta gratuita de Sentry y un proyecto de Next.js, poner su DSN en Vercel como `SENTRY_DSN` (Production) y desplegar de nuevo (lo hace el cliente)
-- [ ] Recortar el JavaScript de primera carga de las páginas públicas (~160 KB comprimidos en la 1.3; la base de React y Next son ~115 KB). Candidatos: el formateador de mensajes de next-intl en el cliente (~12 KB) y Analytics (~6 KB)
+- [x] Recortar el JavaScript de primera carga de las páginas públicas (2026-11-04, D-075): de 153,6 a 144,9 KB comprimidos, al precompilar los mensajes de next-intl. React y el router de Next son unos 125 KB; Analytics y el aviso de errores ocupan 2 KB y se quedan
 - [ ] Pruebas en Android de gama baja con red lenta
 - [x] Aviso de versión previa (2026-11-04, D-066): se quita solo al abrir la indexación
 - [x] Categoría «Oficina y papelería» con tres subcategorías (2026-11-04, D-070)
 - [x] Panel de admin adaptado al ordenador: menú lateral y páginas a dos columnas (2026-11-04, D-071)
 - [x] El proyecto de Supabase actual es el de producción (2026-11-04, D-067). Funciones de Vercel en Dublín (`dub1`)
-- [x] Estabilizar las pruebas e2e que fallaban en la batería completa (2026-11-04). Todas entraban desde `::1` y, al acumularse los logins, saltaba el límite de 30 por IP cada 15 minutos: ahora cada prueba usa su propia IP (`TEST_IP` en `e2e/lib.mjs`). También se corrigieron tres comprobaciones que leían antes de que llegara el contenido en streaming o sin await. La batería completa pasa (19 pruebas)
+- [x] Estabilizar las pruebas e2e que fallaban en la batería completa (2026-11-04). Todas entraban desde `::1` y, al acumularse los logins, saltaba el límite de 30 por IP cada 15 minutos: ahora cada prueba usa su propia IP (`TEST_IP` en `e2e/lib.mjs`). También se corrigieron cuatro comprobaciones que miraban antes de tiempo (contenido en streaming o borrador que vuelve al hidratar) o sin await. La batería completa pasa (18 pruebas)
 - [ ] Sembrar anuncios con vendedores y tiendas fundadoras, con 6 meses de Premium gratis, visibilidad y publicidad (D-065). Empresas, emails y correos en [LANZAMIENTO-CONTACTOS.md](LANZAMIENTO-CONTACTOS.md) (2026-11-04), con medios, agencias y patrocinio para el lanzamiento
   - [x] Propuesta personalizada en PDF y mensaje para cada tienda (2026-11-04): CFAO Motors, Jetour, Casa Mercedes, RYESA, Cuattro, Rock & Noble, Inmo-GUINEA, KITEA, Unicasa y The Computer Store. Se generan con el sistema de propuestas de `C:/Users/leonc/PlanEject` (`propuestas/fuentes/marketplace-*.md`)
   - [ ] Cuando publique la primera tienda fundadora, cambiar el aviso de versión previa a «Muchos anuncios son de demostración…» (`preview.notice` en `es.json`, D-066)

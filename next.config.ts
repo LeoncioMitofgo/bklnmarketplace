@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
-const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+const withNextIntl = createNextIntlPlugin({
+  requestConfig: "./src/i18n/request.ts",
+  // Los mensajes se precompilan al compilar: el navegador ya no carga el formateador de ICU
+  // (~12 KB comprimidos en cada página). Solo admite textos; las listas de los textos legales van
+  // aparte, en content/legal.
+  experimental: {
+    messages: { path: "./src/messages", format: "json", locales: "infer", precompile: true },
+  },
+});
 
 const nextConfig: NextConfig = {
   // Cada despliegue de Vercel con su identificador (D-062): una pestaña abierta desde antes de un

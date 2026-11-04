@@ -285,11 +285,17 @@ try {
     .fill("Borrador sin enviar");
   await buyerPage.reload();
   await buyerPage.waitForSelector("text=Sí, a las 17:00 en Ela Nguema.");
-  ok(
-    "el borrador sobrevive a una recarga",
-    (await buyerPage.getByRole("textbox", { name: "Escribe un mensaje" }).inputValue()) ===
-      "Borrador sin enviar",
-  );
+  // El borrador vuelve al hidratar la página, un poco después de que se vean los mensajes.
+  const draftBack = await buyerPage
+    .waitForFunction(
+      () =>
+        [...document.querySelectorAll("textarea")].some((t) => t.value === "Borrador sin enviar"),
+      null,
+      { timeout: 10_000 },
+    )
+    .then(() => true)
+    .catch(() => false);
+  ok("el borrador sobrevive a una recarga", draftBack);
 
   // ─── Bloqueo ────────────────────────────────────────────────────────────────
   await sellerPage.getByLabel("Más opciones").filter({ visible: true }).first().click();

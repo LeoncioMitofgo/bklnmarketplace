@@ -271,3 +271,8 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
   - `notification_log` con la referencia `{anuncio}:{fecha de caducidad}`: si se renueva, el siguiente periodo vuelve a avisar. Se apunta antes de enviar; si Resend falla, se quita lo apuntado para reintentarlo al día siguiente. Entre envíos hay 0,6 s, por el límite de Resend en el plan gratuito (2 por segundo; 100 emails al día).
   - El cron acepta `?only=premium|listings|storage` para lanzar una sola tarea. Lo usan las pruebas e2e, para no tocar lo demás.
   · ROADMAP 1.2. Sin migración: los tipos `listing_expiring` y `listing_expired` ya existían.
+- **D-075 · 2026-11-04** · **Mensajes de next-intl precompilados** (`experimental.messages.precompile` en `next.config.ts`): los textos ICU se compilan al compilar la web y el navegador ya no carga el formateador (`IntlMessageFormat`).
+  - El JavaScript de primera carga de las páginas públicas baja de 153,6 a 144,9 KB comprimidos en los navegadores modernos (los polyfills `noModule`, 38,7 KB, no los descargan). El HTML también baja un poco. React y el router de Next son unos 125 KB y no se pueden recortar; Analytics y el aviso de errores comparten un trozo de 2 KB, así que se quedan.
+  - La precompilación solo admite textos, no listas. Por eso el cuerpo de los términos y la privacidad pasa de `es.json` a `src/content/legal/es.json`, que solo lee el servidor (`LegalDocument`). Los títulos siguen en `es.json`. El francés irá en `content/legal/fr.json`.
+  - Es una opción experimental de next-intl 4.14. Si una versión nueva la rompe, se quita la línea y todo vuelve a funcionar igual, con 9 KB más.
+  · ROADMAP 1.7 y la regla de poco peso en 3G (ALCANCE §7).

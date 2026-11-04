@@ -1,7 +1,9 @@
 import { getTranslations } from "next-intl/server";
+import legal from "@/content/legal/es.json";
 
-// Términos y privacidad (ALCANCE §7). El texto vive en es.json (legal.terms / legal.privacy) como
-// secciones con párrafos (texto) y listas (arrays de textos), para poder traducirlo al francés.
+// Términos y privacidad (ALCANCE §7). Los títulos van en es.json (legal.terms / legal.privacy) y el
+// texto, en content/legal/es.json: secciones con párrafos (texto) y listas (arrays de textos), para
+// poder traducirlo al francés. Va aparte porque next-intl precompila sus mensajes y no admite listas.
 
 type Block = string | string[];
 type Section = { id: string; title: string; blocks: Block[] };
@@ -23,7 +25,7 @@ function withEmailLinks(text: string) {
 
 export async function LegalDocument({ doc }: { doc: "terms" | "privacy" }) {
   const t = await getTranslations("legal");
-  const sections = t.raw(`${doc}.sections`) as Section[];
+  const sections: Section[] = legal[doc];
 
   return (
     <main className="flex flex-col gap-6 px-4 pt-6 pb-10">

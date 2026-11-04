@@ -43,7 +43,7 @@ Cada viaje entre Malabo y Europa cuesta unos 150 ms, más lo que añada la red m
 | Tareas programadas | `pg_cron` para tareas solo de SQL; Vercel Cron para las que envían email o push | §5.5 |
 | Push | Web Push (VAPID) + service worker propio + librería `web-push` | Sin Firebase |
 | Email | Resend (API REST) con plantillas HTML propias | La app envía la verificación y la recuperación (D-037); React Email, si las plantillas crecen |
-| Traducciones | next-intl | Solo `es`, sin prefijo de idioma en la URL |
+| Traducciones | next-intl, con los mensajes precompilados al compilar (D-075) | Solo `es`, sin prefijo de idioma en la URL. Los textos largos con listas (términos y privacidad) van en `src/content/legal/` |
 | Validación | Zod | Esquemas compartidos entre cliente y servidor |
 | Errores | Sentry (plan gratuito) sin su SDK: `instrumentation.ts` (`onRequestError`) para el servidor y `/api/errors` para el navegador, que mandan el sobre de su API con `fetch` (D-072) | Sin scripts de terceros en el cliente. Sin `SENTRY_DSN`, no se manda nada |
 | Analítica | Vercel Web Analytics (activada en el proyecto el 2026-10-16; se instala `@vercel/analytics` con `<Analytics />` en el layout raíz) + métricas de negocio desde nuestra base de datos | Sin PostHog ni GA, por peso. Los eventos personalizados de Vercel exigen el plan Pro; no los necesitamos, porque las métricas de validación salen de Postgres |
@@ -73,6 +73,7 @@ Cada viaje entre Malabo y Europa cuesta unos 150 ms, más lo que añada la red m
 │  ├─ components/             # ui/ (shadcn) + componentes propios
 │  ├─ lib/                    # clientes de Supabase, formatos (FCFA, +240, fechas), planes, esquemas Zod
 │  ├─ messages/es.json        # textos de la interfaz
+│  ├─ content/legal/es.json   # cuerpo de los términos y la privacidad (D-075)
 │  └─ proxy.ts                # refresco de sesión y redirección a /entrar en las pantallas con sesión (D-054)
 ├─ supabase/
 │  ├─ migrations/             # SQL escrito a mano y versionado
