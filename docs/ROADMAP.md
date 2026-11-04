@@ -1,6 +1,6 @@
 # Roadmap — BKLN Marketplace
 
-**Estado: Fase 1 en curso** (1.1 a 1.6 hechas; 1.7, lanzamiento, en curso: marca nueva y web instalable hechas). Marca cada casilla al completarla (con fecha si es un hito).
+**Estado: Fase 1 en curso** (1.1 a 1.6 hechas; 1.7, lanzamiento, en curso: marca nueva, web instalable y pruebas de extremo a extremo hechas). Marca cada casilla al completarla (con fecha si es un hito).
 
 ---
 
@@ -150,16 +150,23 @@
 - [x] `CRON_SECRET` en Vercel (Production, *Sensitive*) y nuevo despliegue, hechos por el usuario (2026-11-03)
 
 ### 1.7 Lanzamiento
-- [ ] Guardar las pruebas de extremo a extremo en el repo. Vivían en una carpeta temporal del sistema y se borraron el 2026-11-03; solo se conserva la del perfil
+- [x] Pruebas de extremo a extremo en el repo (2026-11-04, D-064): `e2e/`, con `pnpm e2e todas`. Se recuperaron del historial las que se habían borrado; son 17 scripts. Por separado pasan; en la batería completa fallaron tres por tiempos de espera (chat, moderación y panel de Premium)
 - [x] Marca nueva (2026-11-03, D-063): la "b" con la etiqueta de precio, que diseñó el cliente con ChatGPT y se redibujó en SVG. Logo de la web, favicon, iconos de la app (Android e iPhone), icono de las notificaciones e imagen para compartir. SVG maestros en `docs/marca/`
 - [x] La web se puede instalar en el móvil (2026-11-03, D-063): manifiesto con nombre, colores e iconos. Chrome la da por instalable (comprobado con su herramienta de depuración)
 - [ ] Probar en el móvil (lo hace el usuario): añadir a la pantalla de inicio en Android y en iPhone, el icono de una notificación y la vista previa de un enlace en WhatsApp
 - [ ] Analítica básica y monitorización de errores
 - [ ] Recortar el JavaScript de primera carga de las páginas públicas (~160 KB comprimidos en la 1.3; la base de React y Next son ~115 KB). Candidatos: el formateador de mensajes de next-intl en el cliente (~12 KB) y Analytics (~6 KB)
 - [ ] Pruebas en Android de gama baja con red lenta
-- [ ] Sembrar anuncios con vendedores y tiendas fundadoras
-- [ ] Si se lanza sobre el proyecto dev, borrar antes las cuentas de demostración (D-047): son las de `user_metadata.demo = true` en Supabase Auth; al borrarlas desaparecen sus anuncios, y sus fotos hay que quitarlas de Storage
-- [ ] Proyecto Supabase de producción (Pro, Londres) y Vercel Pro. **Cambiar las variables de producción de Vercel al proyecto nuevo** (D-036)
+- [x] Aviso de versión previa (2026-11-04, D-066): se quita solo al abrir la indexación
+- [x] El proyecto de Supabase actual es el de producción (2026-11-04, D-067). Funciones de Vercel en Dublín (`dub1`)
+- [ ] Estabilizar las tres pruebas e2e que fallan en la batería completa (chat-browser, moderation-browser y premium-admin-browser)
+- [ ] Sembrar anuncios con vendedores y tiendas fundadoras, con 6 meses de Premium gratis, visibilidad y publicidad (D-065). Empresas, emails y correos en [LANZAMIENTO-CONTACTOS.md](LANZAMIENTO-CONTACTOS.md) (2026-11-04), con medios, agencias y patrocinio para el lanzamiento
+  - [x] Propuesta personalizada en PDF y mensaje para cada tienda (2026-11-04): CFAO Motors, Casa Mercedes, Rock & Noble, Inmo-GUINEA y KITEA. Se generan con el sistema de propuestas de `C:/Users/leonc/PlanEject` (`propuestas/fuentes/marketplace-*.md`)
+  - [ ] Cuando publique la primera tienda fundadora, cambiar el aviso de versión previa a «Muchos anuncios son de demostración…» (`preview.notice` en `es.json`, D-066)
+  - [ ] Enviar las propuestas por WhatsApp y email, y el correo a AVANTE (lo hace el cliente desde hello@bklnsoftware.tech)
+- [ ] Antes de abrir, borrar las cuentas de demostración (D-047): son las de `user_metadata.demo = true` en Supabase Auth; al borrarlas desaparecen sus anuncios, y sus fotos hay que quitarlas de Storage
+- [ ] Supabase Pro en el proyecto actual y Vercel Pro, antes de abrir (D-067). Antes, mover el proyecto de la web de BKLN a una organización gratuita: en Pro, cada proyecto de la organización paga su cómputo
+- [ ] Proyecto de Supabase de desarrollo (Irlanda), antes de la próxima migración y antes de abrir: las migraciones y las pruebas e2e no deben tocar producción (D-067)
 - [ ] Abrir la indexación: `SITE_INDEXABLE=true` en las variables de producción de Vercel (D-043)
 - [ ] Despliegue en producción
 

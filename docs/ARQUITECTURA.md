@@ -18,13 +18,13 @@ Mediciones del 2026-10-16 desde Malabo (tiempo de conexión TCP a regiones de AW
 | EE. UU. Este | 213 ms | — |
 | Ciudad del Cabo | 291 ms | El tráfico de GE sale por Europa |
 
-Segunda medición (20 muestras alternas, el mismo día): **Londres** con mediana de 151 ms, el 10 % más lento por encima de 167 ms y máximo de 184 ms; **Irlanda** con mediana de 162 ms, el 10 % más lento por encima de 369 ms y máximo de 539 ms. Londres queda confirmada para producción por estabilidad. El proyecto de desarrollo está en Irlanda (D-024), lo que basta para desarrollar.
+Segunda medición (20 muestras alternas, el mismo día): **Londres** con mediana de 151 ms, el 10 % más lento por encima de 167 ms y máximo de 184 ms; **Irlanda** con mediana de 162 ms, el 10 % más lento por encima de 369 ms y máximo de 539 ms. Londres quedó elegida para producción por estabilidad, con el de desarrollo en Irlanda (D-024). **Desde el 2026-11-04, el proyecto de Irlanda es el de producción (D-067)** y las funciones de Vercel están en Dublín.
 
 Cada viaje entre Malabo y Europa cuesta unos 150 ms, más lo que añada la red móvil. De ahí salen estas reglas:
 
 1. **Server Components por defecto.** Solo se usa `"use client"` donde hay interacción real: chat, asistente de publicación, galería y formularios con estado.
 2. **Una pantalla = un viaje.** El servidor pide en paralelo los datos de la página y la entrega completa. Nada de que el cliente encadene peticiones.
-3. **Servidor junto a la base de datos.** Las funciones de Vercel van en `lhr1` y Supabase en `eu-west-2`, así que las consultas entre ellos tardan alrededor de 1 ms.
+3. **Servidor junto a la base de datos.** Las funciones de Vercel van en `dub1` (Dublín) y Supabase en `eu-west-1` (Irlanda), así que las consultas entre ellos tardan alrededor de 1 ms (D-067).
 4. **Las páginas públicas funcionan aunque no cargue el JavaScript** (por ejemplo, en navegadores ligeros como Opera Mini): se generan en el servidor y los enlaces son enlaces normales.
 5. **Lo público se cachea** (home, categorías, fichas, perfiles y tiendas) y se invalida por etiquetas cuando cambia un anuncio o un perfil.
 6. **Objetivos de peso orientativos:** JavaScript de primera carga en páginas públicas de ~100 KB comprimido como máximo, miniaturas de ~40 KB y fotos grandes de ~250 KB.
@@ -47,7 +47,7 @@ Cada viaje entre Malabo y Europa cuesta unos 150 ms, más lo que añada la red m
 | Validación | Zod | Esquemas compartidos entre cliente y servidor |
 | Errores | Sentry | Script cargado con el mínimo impacto |
 | Analítica | Vercel Web Analytics (activada en el proyecto el 2026-10-16; se instala `@vercel/analytics` con `<Analytics />` en el layout raíz) + métricas de negocio desde nuestra base de datos | Sin PostHog ni GA, por peso. Los eventos personalizados de Vercel exigen el plan Pro; no los necesitamos, porque las métricas de validación salen de Postgres |
-| Tests | Vitest (lógica) + Playwright (flujos a 360 px con red lenta simulada) | |
+| Tests | Vitest (lógica, `pnpm test`) + pruebas de extremo a extremo con `playwright-core` (base de datos y pantallas a 360 px, `pnpm e2e`; ver `e2e/README.md`, D-064) | |
 | Herramientas | pnpm, Node 24 LTS, Biome, Supabase CLI | |
 | Hosting | Vercel | Plan gratuito (Hobby) en desarrollo; **Pro al lanzar** (Hobby no permite uso comercial) |
 
@@ -193,21 +193,21 @@ Las rutas de cron se protegen con `CRON_SECRET`: Vercel lo manda como `Authoriza
 
 | | Desarrollo | Previews (Vercel) | Producción |
 |---|---|---|---|
-| Next.js | Local (`pnpm dev`) | Vercel Preview | Vercel Production, funciones en `lhr1` |
-| Supabase | Proyecto **dev** `xujlsrezhctlovncsywu` (Free, Irlanda `eu-west-1`) | El mismo proyecto dev | Proyecto **prod** (Pro, **Londres** `eu-west-2`), aún no creado |
+| Next.js | Local (`pnpm dev`) | Vercel Preview | Vercel Production, funciones en `dub1` |
+| Supabase | Proyecto aparte, **por crear** (Irlanda), antes de la próxima migración. Hasta entonces, el de producción | El de producción, hasta que exista el de desarrollo | Proyecto `xujlsrezhctlovncsywu` (Irlanda `eu-west-1`, D-067). Free hasta el lanzamiento, Pro antes de abrir |
 | Email | Resend (modo de prueba) | Resend | Resend con `bklnmarketplace.com` verificado (DNS en Hostinger) |
 
-- **En local las páginas irán más lentas que en producción**, porque el servidor de desarrollo está en Malabo y la base de datos en Londres. Las conclusiones de rendimiento se sacan en las previews, no en local.
-- En las previews, las funciones (Londres) consultan la base de datos dev (Irlanda): unos 10 ms más por consulta, despreciable.
+- **En local las páginas irán más lentas que en producción**, porque el servidor de desarrollo está en Malabo y la base de datos en Irlanda. Las conclusiones de rendimiento se sacan en las previews, no en local.
+- **Mientras no exista el proyecto de desarrollo, todo usa la base de datos de producción:** lo que se pruebe en local, en las previews o con `e2e/` escribe en ella.
 - Los proyectos Free se pausan tras 7 días sin actividad; se reactivan desde el panel de Supabase.
 - **Migraciones:**
-  - Se escriben a mano en `supabase/migrations/` y se aplican con `supabase db push`: primero en dev y en prod solo después de probarlas.
+  - Se escriben a mano en `supabase/migrations/` y se aplican con `supabase db push`: primero en el proyecto de desarrollo y en producción solo después de probarlas. Por eso hay que crear el de desarrollo antes de la próxima migración (D-067).
   - `supabase db diff` necesita Docker, así que no se usa.
   - Los tipos se generan con `supabase gen types typescript --linked`.
 - **Secretos** en `.env.local` (nunca en el repo) y en las variables de entorno de Vercel. El repo lleva un `.env.example` sin valores.
 - **Variables de Supabase:** `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` son públicas. `SUPABASE_SECRET_KEY` (la clave secreta nueva, que sustituye a la antigua `service_role`) es solo de servidor.
 - **Nunca en variables `NEXT_PUBLIC_`:** `SUPABASE_SECRET_KEY`, la clave VAPID privada, la clave de Resend ni `CRON_SECRET`.
-- **Configuración de Vercel en el repo:** al hacer el scaffold se fijan `framework: 'nextjs'` (el proyecto se creó sin framework) y `regions: ['lhr1']`.
+- **Configuración de Vercel en el repo:** al hacer el scaffold se fijan `framework: 'nextjs'` (el proyecto se creó sin framework) y `regions: ['dub1']` (era `lhr1` hasta D-067).
 - **Previews protegidas:** Vercel exige iniciar sesión para ver las previews (protección de despliegues). Para probarlas en móviles de otras personas habrá que usar enlaces para compartir o ajustar esa protección.
 
 ### DNS (Hostinger → Vercel)
@@ -232,9 +232,11 @@ El dominio principal es **`www.bklnmarketplace.com`**; la raíz redirige a `www`
 | Dominio | — | ~10–15 USD/año |
 | **Total** | **0** | **~45 USD/mes (~25–28.000 FCFA)** |
 
+Supabase Pro se paga por organización y cada proyecto paga además su cómputo: unos 10 USD/mes cada uno, con 10 USD incluidos en el plan. Con producción y desarrollo serían unos 35 USD/mes. El proyecto de la web de BKLN está en la misma organización: conviene moverlo a una organización gratuita antes de pasar a Pro, o también pagaría.
+
 ## 8. A comprobar al montar el proyecto
 
 - [ ] Límites de ritmo de Supabase Auth cuando el login se hace desde el servidor: todas las peticiones salen de IPs de Vercel.
 - [ ] Versión actual de Next.js y sus convenciones (`proxy.ts`, Cache Components).
-- [ ] Al crear el proyecto de producción, elegir **explícitamente** Londres (`eu-west-2`). El selector genérico "Europa" puso el de desarrollo en Irlanda.
+- [ ] Al crear el proyecto de desarrollo, elegir **explícitamente** Irlanda (`eu-west-1`), como producción (D-067).
 - [ ] La función `IMMUTABLE` envoltorio de `unaccent` para la columna generada de búsqueda.
