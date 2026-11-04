@@ -159,7 +159,7 @@ Previsto para **enero de 2027** (D-068).
   - Visitas y búsquedas en Vercel Web Analytics, enlazado desde el panel.
   - «Validación del mercado» en el resumen del panel: % de anuncios con mensajes, tiempo de respuesta, usuarios activos y los que vuelven, y Premium (ALCANCE §9).
   - Errores del servidor y del navegador a Sentry, sin su SDK ni scripts de terceros, y sin la query ni datos personales. Probado con `monitoring-check` (11 comprobaciones) contra un Sentry de prueba.
-  - [ ] Crear la cuenta gratuita de Sentry y un proyecto de Next.js, poner su DSN en Vercel como `SENTRY_DSN` (Production) y desplegar de nuevo (lo hace el cliente)
+  - [x] Cuenta gratuita de Sentry, proyecto `bkln-marketplace` y `SENTRY_DSN` en Vercel (Production), con un despliegue nuevo, hechos por el cliente (2026-11-04). Comprobado con un error de prueba del servidor y otro del navegador: llegan a Sentry y el aviso por email también
 - [x] Recortar el JavaScript de primera carga de las páginas públicas (2026-11-04, D-075): de 153,6 a 144,9 KB comprimidos, al precompilar los mensajes de next-intl. React y el router de Next son unos 125 KB; Analytics y el aviso de errores ocupan 2 KB y se quedan
 - [ ] Pruebas en Android de gama baja con red lenta
 - [x] Aviso de versión previa (2026-11-04, D-066): se quita solo al abrir la indexación

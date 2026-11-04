@@ -23,7 +23,7 @@ Las pruebas en el móvil que quedan pendientes del usuario son las casillas sin 
 
 - 1.7, preparar el lanzamiento (2026-11-04): empresas y correos en `docs/LANZAMIENTO-CONTACTOS.md`, tiendas fundadoras con 6 meses de Premium y propuestas personalizadas (D-065), aviso de versión previa (D-066) y **el proyecto de Supabase actual es el de producción** (D-067).
 
-**Siguiente:** 1.7, lanzamiento, previsto para **enero de 2027** (D-068). Pendiente (ROADMAP): lo que falta antes de abrir. La analítica y los errores están desde el 2026-11-04 (D-072); falta que el cliente cree la cuenta de Sentry y ponga `SENTRY_DSN` en Vercel.
+**Siguiente:** 1.7, lanzamiento, previsto para **enero de 2027** (D-068). Pendiente (ROADMAP): lo que falta antes de abrir. La analítica y los errores están desde el 2026-11-04 (D-072), con Sentry en marcha (proyecto `bkln-marketplace`, `SENTRY_DSN` en Vercel).
 
 ## Recursos
 
