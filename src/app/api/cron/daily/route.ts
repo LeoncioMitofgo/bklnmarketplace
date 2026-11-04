@@ -1,7 +1,9 @@
 import { sendPremiumExpiringReminders } from "@/lib/push/reminders";
+import { cleanupStorage } from "@/lib/storage/cleanup";
 
 // Cron diario de Vercel (vercel.ts → crons). Vercel manda "Authorization: Bearer <CRON_SECRET>".
 // Sin CRON_SECRET en las variables no hace nada: así nadie puede lanzarlo desde fuera.
+// Con ?dry=1 solo calcula la limpieza de Storage, sin borrar ni avisar: para revisarla a mano.
 
 export async function GET(request: Request) {
   // Recortado: un espacio o un salto de línea al pegar el valor en Vercel no debe romperlo.
@@ -15,6 +17,10 @@ export async function GET(request: Request) {
     });
     return new Response("Unauthorized", { status: 401 });
   }
+  if (new URL(request.url).searchParams.get("dry") === "1") {
+    return Response.json({ storage: await cleanupStorage({ dryRun: true }) });
+  }
   const premium = await sendPremiumExpiringReminders();
-  return Response.json({ premium });
+  const storage = await cleanupStorage();
+  return Response.json({ premium, storage });
 }

@@ -138,7 +138,7 @@ Criterios:
 3. El móvil sube cada variante con `XMLHttpRequest`, para tener progreso real. Si algo falla, se puede reintentar.
 4. `confirmImageUpload` registra la foto en `listing_images`; un trigger vuelve a comprobar la ruta y el límite (D-039).
 3. Se muestran con `<img>`, `srcset` (miniatura o grande), `loading="lazy"` y `width`/`height` fijados para que la página no salte. No se usa el optimizador de Vercel.
-4. Las imágenes huérfanas (sin anuncio a las 24 h) se borran con un cron que usa la API de Storage.
+4. Las imágenes huérfanas (sin uso a las 24 h) y las de anuncios borrados hace más de 30 días se borran con el cron diario, que usa la API de Storage (D-073).
 
 ### 5.3 Chat y notificaciones
 - Una `conversation` por (anuncio, comprador). Los `messages` llevan texto o foto. Se crean y se envían con RPC (`start_conversation`, `send_message`), que aplican bloqueos, cuenta activa y límites de ritmo (D-048).
@@ -169,7 +169,7 @@ Criterios:
 | Al caducar Premium, pausar los anuncios que pasen del límite Normal | pg_cron (SQL) | Diaria |
 | Email por mensajes sin leer | Vercel Cron → `/api/cron/...` | Cada 10–15 min (en producción, plan Pro) |
 | Avisos: Premium a 7 días de caducar (hecho, D-061); anuncio por caducar (pendiente) | Vercel Cron → `/api/cron/daily` (08:00 UTC) | Diaria |
-| Limpiar imágenes huérfanas y de anuncios eliminados, y tokens caducados (las fotos de una cuenta borrada se borran en el momento, D-055) | Vercel Cron (API de Storage) | Diaria |
+| Limpiar Storage: ficheros sin uso de más de 24 h, fotos de anuncios borrados hace más de 30 días y restos de cuentas borradas (hecho, D-073; las fotos de una cuenta borrada se borran en el momento, D-055). Los tokens caducados los borra `cleanup_technical_tables()` | Vercel Cron → `/api/cron/daily` (API de Storage) | Diaria |
 
 Las rutas de cron se protegen con `CRON_SECRET`: Vercel lo manda como `Authorization: Bearer …`, y sin la variable la ruta responde 401. El cron está en `vercel.ts` (`crons`). En desarrollo (plan Hobby, como mucho un cron al día) se lanzan a mano con esa cabecera.
 

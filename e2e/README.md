@@ -57,6 +57,7 @@ pnpm e2e monitoring-check
 | `store-browser-check` | Tienda Premium `/t/<tienda>` y su editor (1.6) |
 | `admin-catalog-browser-check` | Categorías, ciudades, planes, precios y oficina en el panel (1.6) |
 | `premium-reminder-check` | Cron diario y aviso de Premium por caducar, en la web y por push (1.6) |
+| `storage-cleanup-check` | Limpieza de Storage en modo prueba (`/api/cron/daily?dry=1`): deja lo que se usa y las subidas recientes, y borraría lo de anuncios borrados hace 40 días y lo de anuncios y cuentas que no existen (D-073). No borra nada |
 | `brand-check` | Iconos, manifiesto, Open Graph, logo y que Chrome pueda instalar la web (1.7) |
 | `monitoring-check` | Errores a Sentry (D-072): `/api/errors` solo desde nuestras páginas, un error del navegador llega una sola vez, sin la query ni cookies, y los cortes de conexión no se mandan (1.7) |
 

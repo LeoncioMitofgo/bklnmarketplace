@@ -63,7 +63,7 @@
 - [x] Capa de datos de anuncios probada de extremo a extremo (2026-10-16): 37 comprobaciones de la base de datos y 11 de páginas con sesión
 - [x] Probar en el móvil el asistente completo y la subida de fotos en Android (2026-10-16): primer anuncio real, 3 fotos WebP de 14–127 KB
 - [ ] Probar la subida de fotos en un iPhone (JPEG)
-- [ ] Limpieza programada de los ficheros de Storage de anuncios borrados y de fotos huérfanas (Vercel Cron)
+- [x] Limpieza programada de los ficheros de Storage de anuncios borrados y de fotos huérfanas (2026-11-04, D-073): en el cron diario; ficheros sin uso de más de 24 h, fotos de anuncios borrados hace más de 30 días y restos de cuentas borradas, con un freno si saldrían demasiados. Probado con `storage-cleanup-check` en modo prueba
 
 ### 1.3 Catálogo público
 - [x] Home: categorías, destacados Premium, recientes (2026-10-16). Sustituye a "Próximamente" (D-044)
@@ -179,7 +179,7 @@ Previsto para **enero de 2027** (D-068).
 - [ ] Acto de presentación en Malabo (enero de 2027): fecha, sala (Galambo, Centro Cultural de España u hotel) e invitados
 - [ ] Limpiar los restos de pruebas e2e fallidas en producción, con el visto bueno del cliente: cuentas `pnav+…` y `perfil+…`, las denuncias abiertas que dejaron, anuncios bloqueados «Móvil revisado…» y cobros de prueba de Premium
 - [ ] Decidir si se quedan los anuncios de prueba del cliente («Coche en venta», «Camisa y Chaleco», «POS en venta…»): no son de demostración y no se borran con ellas
-- [ ] Antes de abrir, borrar las cuentas de demostración (D-047): son las de `user_metadata.demo = true` en Supabase Auth; al borrarlas desaparecen sus anuncios, y sus fotos hay que quitarlas de Storage
+- [ ] Antes de abrir, borrar las cuentas de demostración (D-047): son las de `user_metadata.demo = true` en Supabase Auth; al borrarlas desaparecen sus anuncios, y sus fotos hay que quitarlas de Storage (si se borran desde el panel de Supabase, el cron las quita al día siguiente, D-073; como son muchas, puede saltar el freno y habrá que borrarlas a mano)
 - [ ] Supabase Pro en el proyecto actual y Vercel Pro, antes de abrir (D-067). Antes, mover el proyecto de la web de BKLN a una organización gratuita: en Pro, cada proyecto de la organización paga su cómputo
 - [ ] Proyecto de Supabase de desarrollo (Irlanda), antes de la próxima migración y antes de abrir: las migraciones y las pruebas e2e no deben tocar producción (D-067)
 - [ ] Abrir la indexación: `SITE_INDEXABLE=true` en las variables de producción de Vercel (D-043)
