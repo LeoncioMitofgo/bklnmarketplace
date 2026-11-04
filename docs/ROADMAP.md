@@ -167,6 +167,10 @@ Previsto para **enero de 2027** (D-068).
   - [ ] Enviar las propuestas por WhatsApp y email, y el correo a AVANTE, la semana del 4 de noviembre (lo hace el cliente desde hello@bklnsoftware.tech; correos en LANZAMIENTO-CONTACTOS)
   - [ ] Seguimiento: recordatorio a los 7–10 días, mensaje a mediados de diciembre y el día de la apertura a principios de enero
   - [ ] Activar Premium a cada tienda que diga que sí: 0 FCFA, referencia `FUNDADORA-<empresa>`, los meses hasta la apertura más 6 (D-065)
+- [x] Propuestas de patrocinio personalizadas (2026-11-04, D-069): Muni, GETESA, BANGE y Martínez Hermanos, con una maqueta del pie con su logo
+  - [ ] Enviarlas a partir del 18 de noviembre (lo hace el cliente; correos en LANZAMIENTO-CONTACTOS)
+  - [ ] Pie «Con el apoyo de» con los logos, cuando firme el primer patrocinador
+- [ ] Acto de presentación en Malabo (enero de 2027): fecha, sala (Galambo, Centro Cultural de España u hotel) e invitados
 - [ ] Antes de abrir, borrar las cuentas de demostración (D-047): son las de `user_metadata.demo = true` en Supabase Auth; al borrarlas desaparecen sus anuncios, y sus fotos hay que quitarlas de Storage
 - [ ] Supabase Pro en el proyecto actual y Vercel Pro, antes de abrir (D-067). Antes, mover el proyecto de la web de BKLN a una organización gratuita: en Pro, cada proyecto de la organización paga su cómputo
 - [ ] Proyecto de Supabase de desarrollo (Irlanda), antes de la próxima migración y antes de abrir: las migraciones y las pruebas e2e no deben tocar producción (D-067)

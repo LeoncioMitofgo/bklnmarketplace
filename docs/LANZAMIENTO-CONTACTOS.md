@@ -10,7 +10,7 @@
 1. **AVANTE Medios**: es la agencia de medios que conoce las audiencias del país (hace el primer Estudio General de Medios con el INEGE). Pedirle un plan y tarifas para el lanzamiento.
 2. **Tiendas fundadoras**: CFAO Motors (Toyota), Casa Mercedes, Rock & Noble, Inmo-GUINEA y KITEA llenan las categorías que más se buscan (vehículos, inmuebles y hogar) con anuncios de calidad. Cada una tiene su propuesta personalizada.
 3. **Real Equatorial Guinea**: nota de prensa el día del lanzamiento.
-4. **Muni**: ya vamos a escribirles por Muni Dinero; se puede proponer a la vez una acción conjunta.
+4. **Patrocinadores** (Muni, GETESA, BANGE, Martínez Hermanos): propuestas personalizadas, a partir del 18 de noviembre (D-069).
 5. **Centro Cultural de España**: sala para una presentación.
 
 ## Agencias y medios
@@ -34,13 +34,21 @@ Directorios y guías que venden publicidad:
 
 ## Patrocinio y alianzas
 
-| Empresa | Para qué | Email | Otros contactos | Estado |
-|---|---|---|---|---|
-| **Muni** | Operador de telefonía. Acción conjunta: difusión a sus clientes, y Muni Dinero como pago de Premium | info@muni-eg.com (web oficial) | Atención al cliente: 123 · Malabo II | Por contactar |
-| **GETESA** | Operador de telefonía | **No usar** el email de su web (contacto.web@getesa.org): ese dominio no tiene correo | Formulario «Solicitar contacto» en getesa.gq/contacta.html · WhatsApp +240 333 090 099 · C/ Rey Boncoro 219, Malabo | Por el formulario |
-| **BANGE** (Banco Nacional de Guinea Ecuatorial) | Banco. Patrocinio | atencionalcliente@bannge.com (web oficial; es atención al cliente: pedir que lo pasen a marketing) | Av. de las Naciones Unidas 28, Malabo | Por contactar |
-| **Grupo Martínez Hermanos** | Distribución, supermercados, tiendas, hotel y restauración | info@grupomartinezhermanos.com (web oficial) | +240 333 09 01 62 · Av. de la Independencia, Malabo | Por contactar |
-| **Ecobank** y **CCEI Bank** | Bancos | No se encontró email del país | Ecobank: Av. de la Independencia, Malabo · CCEI: C/ Presidente Nasser, Malabo | En persona |
+**Lo que se ofrece y se pide (D-069):** a cambio de una aportación económica o en especie, el patrocinador tiene su marca en la campaña y en el acto de presentación, su logo en el pie de la web («Con el apoyo de») y, si la quiere, la exclusividad, sea en su sector o como único patrocinador. Las propuestas no llevan precio: la cifra se habla en la reunión.
+
+Cada patrocinador tiene **su propia propuesta en PDF y su mensaje**, en `C:/Users/leonc/PlanEject/propuestas` («Propuesta BKLN - <empresa>.pdf»; las fuentes son `propuestas/fuentes/patrocinio-*.md`). Llevan una maqueta del pie de la web con su logo, hecha en local con `PlanEject/scripts/capturas-patrocinio.mjs` (no se publica nada).
+
+| Empresa | Lo personal de su propuesta | Por dónde | Estado |
+|---|---|---|---|
+| **Muni** | «Fuente de innovación» y 5G: navegar por la web sin gastar datos, difusión a sus clientes y, más adelante, Muni Dinero | info@muni-eg.com | Propuesta lista |
+| **GETESA** | Operador histórico (1984) y su lema «Gaste menos por navegar»: navegar por la web sin gastar datos, sus agencias, bonos y móviles para el acto | WhatsApp +240 333 090 099 y formulario de getesa.gq/contacta.html (el email de su web no funciona) | Propuesta lista |
+| **BANGE** | «El banco de todos», 20 años, Mejor Banco de GE 2026 (Global Finance), Pack Impulso Pymes y su memorando con el PNUD (innovación y empleo juvenil) | atencionalcliente@bannge.com, pidiendo que lo pasen a Marketing y Comunicación | Propuesta lista |
+| **Grupo Martínez Hermanos** | Cumple cien años en 2027 (fundado en 1927). Patrocinio y, además, Apsara Hogar, Moda y Walk como tiendas fundadoras. El acto, en Galambo (Centro Comercial Muankaban) | info@grupomartinezhermanos.com · +240 333 09 01 62 | Propuesta lista |
+| **Ecobank** y **CCEI Bank** | Sin propuesta por ahora. Si BANGE no entra, siguientes bancos a los que escribir | Ecobank: Av. de la Independencia · CCEI: C/ Presidente Nasser (en persona) | Más adelante |
+
+**Exclusividad:** Muni y GETESA compiten por lo mismo. Se escribe a los dos a la vez; si uno firma la exclusividad entre operadores, al otro se le avisa con educación y se le ofrece otra forma de colaborar.
+
+**Cuándo enviarlas:** a partir del 18 de noviembre, mejor con una o dos tiendas fundadoras confirmadas para poder nombrarlas en la reunión. Las grandes empresas tardan semanas en aprobar un patrocinio, y para un acto en enero no conviene esperar a diciembre.
 
 ## Tiendas fundadoras
 
@@ -229,21 +237,124 @@ Se envían en la semana del 4 de noviembre de 2026, con el PDF de cada una adjun
 >
 > [Firma]
 
-### Patrocinio o alianza (Muni, BANGE, Martínez Hermanos)
+### Patrocinadores
 
-**Asunto:** Colaboración en el lanzamiento de BKLN Marketplace
+Se envían a partir del 18 de noviembre de 2026, cada uno con su PDF adjunto.
+
+#### Muni
+
+- **Para:** info@muni-eg.com
+- **Asunto:** Propuesta para Muni: patrocinio del lanzamiento de BKLN Marketplace
+- **Adjunto:** Propuesta BKLN - Muni.pdf
 
 > Buenos días:
 >
-> Les escribimos desde BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo. En enero de 2027 lanzamos BKLN Marketplace (bklnmarketplace.com), una web de anuncios clasificados para comprar y vender en toda Guinea Ecuatorial, gratis y pensada para el móvil.
+> Les escribe Leoncio Felipe Mitogo, de BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo.
 >
-> Nos gustaría que [empresa] estuviera con nosotros en el lanzamiento. Podemos hablar de patrocinar la presentación o de una acción conjunta para sus clientes. Nos adaptamos a lo que les encaje mejor.
+> En enero de 2027 presentamos en Malabo BKLN Marketplace (bklnmarketplace.com), una web para comprar y vender en toda Guinea Ecuatorial desde el móvil, y nos gustaría que Muni nos acompañara en el lanzamiento. Una web que vive en el móvil encaja con un operador que se presenta como «Fuente de innovación».
 >
-> ¿Podríamos presentarles el proyecto en su oficina? Gracias por su tiempo.
+> Les ofrecemos su marca en la campaña de lanzamiento y en el acto de presentación, su logo en el pie de la web y, si lo desean, la exclusividad entre los operadores de telefonía. A cambio, buscamos una aportación económica o en especie: por ejemplo, que navegar por bklnmarketplace.com no gaste datos a sus clientes durante el lanzamiento.
+>
+> Les adjunto la propuesta completa. ¿Podríamos presentársela en una reunión de media hora en su oficina?
 >
 > Un saludo,
 >
-> [Firma]
+> Leoncio Felipe Mitogo
+> BKLN Software & Systems · Banapa, Malabo
+> hello@bklnsoftware.tech · +240 222 798 086
+> bklnsoftware.tech · bklnmarketplace.com
+
+#### GETESA (sin email que funcione)
+
+- **WhatsApp:** +240 333 090 099, con el mensaje de «Mensaje - GETESA.txt», que pregunta con quién de Marketing hablar. El PDF se manda cuando den un contacto.
+- **Formulario:** «Solicitar contacto» en getesa.gq/contacta.html, con este texto:
+
+> Buenos días:
+>
+> Les escribe Leoncio Felipe Mitogo, de BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo.
+>
+> En enero de 2027 presentamos en Malabo BKLN Marketplace (bklnmarketplace.com), una web para comprar y vender en toda Guinea Ecuatorial desde el móvil, y nos gustaría que GETESA nos acompañara en el lanzamiento. Su lema, «Gaste menos por navegar», encaja con una idea que solo puede ofrecer un operador: que navegar por bklnmarketplace.com no gaste datos a sus clientes durante el lanzamiento.
+>
+> Les ofrecemos su marca en la campaña de lanzamiento y en el acto de presentación, su logo en el pie de la web y, si lo desean, la exclusividad entre los operadores de telefonía. Tenemos preparada una propuesta para GETESA: ¿a qué email de su departamento de Marketing se la podemos enviar?
+>
+> Un saludo,
+>
+> Leoncio Felipe Mitogo
+> BKLN Software & Systems · Banapa, Malabo
+> hello@bklnsoftware.tech · +240 222 798 086
+> bklnsoftware.tech · bklnmarketplace.com
+
+#### BANGE
+
+- **Para:** atencionalcliente@bannge.com
+- **Asunto:** Propuesta para BANGE: patrocinio del lanzamiento de BKLN Marketplace
+- **Adjunto:** Propuesta BKLN - BANGE.pdf
+
+> Buenos días:
+>
+> Les agradeceríamos que hicieran llegar este correo a su departamento de Marketing y Comunicación.
+>
+> Les escribe Leoncio Felipe Mitogo, de BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo.
+>
+> En enero de 2027 presentamos en Malabo BKLN Marketplace (bklnmarketplace.com), una web para comprar y vender en toda Guinea Ecuatorial, pensada para que pequeños comerciantes, pymes y autónomos vendan desde el móvil, y nos gustaría que BANGE, «el banco de todos», nos acompañara en el lanzamiento. Encaja con su Pack Impulso Pymes y con su compromiso con la innovación y el empleo juvenil.
+>
+> Les ofrecemos su marca en la campaña de lanzamiento y en el acto de presentación, su logo en el pie de la web y, si lo desean, la exclusividad entre los bancos. A cambio, buscamos una aportación económica o en especie: por ejemplo, que su equipo de Pymes presente sus productos a las tiendas y vendedores que vengan al acto.
+>
+> Les adjunto la propuesta completa. ¿Podríamos presentársela en una reunión de media hora en su sede?
+>
+> Un saludo,
+>
+> Leoncio Felipe Mitogo
+> BKLN Software & Systems · Banapa, Malabo
+> hello@bklnsoftware.tech · +240 222 798 086
+> bklnsoftware.tech · bklnmarketplace.com
+
+#### Grupo Martínez Hermanos
+
+- **Para:** info@grupomartinezhermanos.com
+- **Asunto:** Propuesta para Martínez Hermanos: patrocinio del lanzamiento de BKLN Marketplace
+- **Adjunto:** Propuesta BKLN - Grupo Martínez Hermanos.pdf
+
+> Buenos días:
+>
+> Les escribe Leoncio Felipe Mitogo, de BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo.
+>
+> En enero de 2027 presentamos en Malabo BKLN Marketplace (bklnmarketplace.com), una web para comprar y vender en toda Guinea Ecuatorial, y nos gustaría que Martínez Hermanos nos acompañara en el lanzamiento, justo en el año en que el grupo cumple cien años.
+>
+> Les proponemos dos cosas. La primera, patrocinar el lanzamiento: su marca en la campaña y en el acto de presentación, su logo en el pie de la web y la exclusividad, si la desean. La segunda, que Apsara Hogar, Apsara Moda y Apsara Walk estén en la web desde el primer día como tiendas fundadoras, con 6 meses de Premium gratis. A cambio, buscamos una aportación económica o en especie: por ejemplo, celebrar el acto en Galambo.
+>
+> Les adjunto la propuesta completa. ¿Podríamos presentársela en una reunión de media hora en su sede de la avenida de la Independencia?
+>
+> Un saludo,
+>
+> Leoncio Felipe Mitogo
+> BKLN Software & Systems · Banapa, Malabo
+> hello@bklnsoftware.tech · +240 222 798 086
+> bklnsoftware.tech · bklnmarketplace.com
+
+### Acto de presentación (enero de 2027, Malabo)
+
+- **Fecha:** por decidir, en enero de 2027. Hay que fijarla antes de pedir sala.
+- **Sala:** Galambo, si Martínez Hermanos entra; si no, el Centro Cultural de España o un hotel.
+- **Invitados:** prensa, tiendas fundadoras, patrocinadores y AVANTE.
+- **Correo al Centro Cultural de España** (cuando haya fecha):
+  - **Para:** info.ccemalabo@aecid.es
+  - **Asunto:** Solicitud de sala para la presentación de BKLN Marketplace (enero de 2027)
+
+> Buenos días:
+>
+> Les escribe Leoncio Felipe Mitogo, de BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo.
+>
+> En enero de 2027 presentamos BKLN Marketplace (bklnmarketplace.com), una web hecha en Malabo para comprar y vender en toda Guinea Ecuatorial, y nos gustaría hacer la presentación en el Centro Cultural de España. Sería un acto de unas dos horas, la tarde del [fecha], para unas [número] personas: prensa, las empresas que estarán en la web desde el primer día y nuestros patrocinadores.
+>
+> ¿Tienen disponibilidad ese día y qué condiciones tiene el uso de una de sus salas? Muchas gracias.
+>
+> Un saludo,
+>
+> Leoncio Felipe Mitogo
+> BKLN Software & Systems · Banapa, Malabo
+> hello@bklnsoftware.tech · +240 222 798 086
+> bklnsoftware.tech · bklnmarketplace.com
 
 ## Fuentes
 

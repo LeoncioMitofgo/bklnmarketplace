@@ -232,3 +232,11 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
 
   · Decisión del cliente. Las tiendas fundadoras (D-065) pueden registrarse ya sin tener que trasladar sus cuentas después, y los anuncios de demostración se quedan hasta el lanzamiento. A cambio, la región ya no se puede cambiar: en la medición de ARQUITECTURA §1, Irlanda daba 11 ms más de mediana que Londres y picos peores.
 - **D-068 · 2026-11-04** · **Lanzamiento previsto para enero de 2027**, sin día fijo todavía. Las propuestas a las tiendas fundadoras salen la semana del 4 de noviembre, y el día exacto se les anuncia a principios de enero. · Decisión del cliente. Quedan unas cinco o seis semanas útiles antes de las fiestas para que las tiendas suban sus anuncios: esperar a diciembre sería abrir con la web casi vacía.
+- **D-069 · 2026-11-04** · **Patrocinio del lanzamiento:**
+  - Se pide una aportación **económica o en especie**, según la empresa (difusión a sus clientes, la sala o el cóctel del acto, navegar por la web sin gastar datos…).
+  - Se ofrece: su marca en la **campaña** y en el **acto de presentación** (en Malabo, en enero de 2027), su **logo en el pie de la web** («Con el apoyo de») y, si la quiere, la **exclusividad**, sea en su sector o como único patrocinador.
+  - Las propuestas **no llevan precio**: la cifra se habla en la reunión.
+  - Una propuesta personalizada por empresa (Muni, GETESA, BANGE y Martínez Hermanos), con una maqueta del pie con su logo. Contactos y correos en [LANZAMIENTO-CONTACTOS.md](LANZAMIENTO-CONTACTOS.md).
+  - El pie con los logos se programa cuando firme el primer patrocinador. Es la única publicidad dentro de la web: los banners entre los anuncios siguen fuera (ALCANCE §8, versión 1.9).
+
+  · Decisión del cliente. Con una web que aún no tiene usuarios, es más fácil cerrar algo en especie que en dinero. Y sin precio en el papel, la cifra se ajusta a lo que ofrezca cada empresa.

@@ -1,6 +1,6 @@
 # BKLN Marketplace — Documento de alcance
 
-> **Fuente de verdad del producto.** Versión 1.8 — 2026-11-03 (1.1: registro e inicio de sesión · 1.2–1.4: precios y pago de Premium, nombre y dominio · 1.5: ajustes del modelo de datos · 1.6: ajustes de los wireframes · 1.7: candidatos de pago para la fase 3 · 1.8: la web se puede instalar desde el MVP).
+> **Fuente de verdad del producto.** Versión 1.9 — 2026-11-04 (1.1: registro e inicio de sesión · 1.2–1.4: precios y pago de Premium, nombre y dominio · 1.5: ajustes del modelo de datos · 1.6: ajustes de los wireframes · 1.7: candidatos de pago para la fase 3 · 1.8: la web se puede instalar desde el MVP · 1.9: logos de los patrocinadores del lanzamiento en el pie).
 > Cualquier cambio de alcance se refleja aquí y se registra en [DECISIONES.md](DECISIONES.md).
 
 ---
@@ -270,7 +270,7 @@ Todos los anuncios tienen además: estado (nuevo/usado, cuando aplique), precio,
 | Envíos / integración con delivery | 3 |
 | App móvil nativa | 3 |
 | Expansión a otros países (CEMAC) | 3+ |
-| Ideas a evaluar (no comprometidas): destacados sueltos de pago, niveles Pro/Tienda, ofertas formales de precio, banners publicitarios | — |
+| Ideas a evaluar (no comprometidas): destacados sueltos de pago, niveles Pro/Tienda, ofertas formales de precio, banners publicitarios entre los anuncios. Los logos de los patrocinadores del lanzamiento en el pie («Con el apoyo de») sí entran (D-069) | — |
 
 ## 9. Métricas de validación
 
