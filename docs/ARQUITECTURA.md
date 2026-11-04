@@ -45,7 +45,7 @@ Cada viaje entre Malabo y Europa cuesta unos 150 ms, más lo que añada la red m
 | Email | Resend (API REST) con plantillas HTML propias | La app envía la verificación y la recuperación (D-037); React Email, si las plantillas crecen |
 | Traducciones | next-intl | Solo `es`, sin prefijo de idioma en la URL |
 | Validación | Zod | Esquemas compartidos entre cliente y servidor |
-| Errores | Sentry | Script cargado con el mínimo impacto |
+| Errores | Sentry (plan gratuito) sin su SDK: `instrumentation.ts` (`onRequestError`) para el servidor y `/api/errors` para el navegador, que mandan el sobre de su API con `fetch` (D-072) | Sin scripts de terceros en el cliente. Sin `SENTRY_DSN`, no se manda nada |
 | Analítica | Vercel Web Analytics (activada en el proyecto el 2026-10-16; se instala `@vercel/analytics` con `<Analytics />` en el layout raíz) + métricas de negocio desde nuestra base de datos | Sin PostHog ni GA, por peso. Los eventos personalizados de Vercel exigen el plan Pro; no los necesitamos, porque las métricas de validación salen de Postgres |
 | Tests | Vitest (lógica, `pnpm test`) + pruebas de extremo a extremo con `playwright-core` (base de datos y pantallas a 360 px, `pnpm e2e`; ver `e2e/README.md`, D-064) | |
 | Herramientas | pnpm, Node 24 LTS, Biome, Supabase CLI | |
@@ -69,7 +69,7 @@ Cada viaje entre Malabo y Europa cuesta unos 150 ms, más lo que añada la red m
 │  │  ├─ (auth)/              # registro, entrar, recuperar, verificar-email
 │  │  ├─ (flow)/              # pantalla completa sin barra inferior: publicar
 │  │  ├─ admin/               # panel de administración (rol admin)
-│  │  └─ api/                 # webhooks, cron, push
+│  │  └─ api/                 # webhooks, cron, push, errores del navegador
 │  ├─ components/             # ui/ (shadcn) + componentes propios
 │  ├─ lib/                    # clientes de Supabase, formatos (FCFA, +240, fechas), planes, esquemas Zod
 │  ├─ messages/es.json        # textos de la interfaz
@@ -178,6 +178,7 @@ Las rutas de cron se protegen con `CRON_SECRET`: Vercel lo manda como `Authoriza
 - Todo lo que escribe pasa por RPC `admin_*`, que vuelven a comprobar el rol en la base de datos. El servidor solo usa la clave secreta para banear en Supabase Auth.
 - El admin lee los chats denunciados con la RLS (`conversations`, `messages` y `chat-images` solo si hay una denuncia sobre esa conversación).
 - Cada acción invalida la caché pública que toca: `listings` al bloquear o restaurar, y `listings` + `profile:{usuario}` al activar Premium o banear. Avisa por push con `after()`.
+- El resumen muestra las colas, métricas básicas (`admin_metrics`) y las de validación de ALCANCE §9 (`lib/admin/validation-metrics.ts`, con la clave secreta, D-072), con un enlace a Vercel Analytics para las visitas y búsquedas.
 - El catálogo (categorías, atributos y ciudades) y los ajustes (planes, precios, oficina, términos prohibidos y umbral de denuncias) se escriben con la sesión del admin y la RLS de cada tabla, e invalidan `catalog`, `plans` o `app-settings` (D-060).
 
 ### 5.7 Caché, SEO y compartir
@@ -207,6 +208,7 @@ Las rutas de cron se protegen con `CRON_SECRET`: Vercel lo manda como `Authoriza
 - **Secretos** en `.env.local` (nunca en el repo) y en las variables de entorno de Vercel. El repo lleva un `.env.example` sin valores.
 - **Variables de Supabase:** `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` son públicas. `SUPABASE_SECRET_KEY` (la clave secreta nueva, que sustituye a la antigua `service_role`) es solo de servidor.
 - **Nunca en variables `NEXT_PUBLIC_`:** `SUPABASE_SECRET_KEY`, la clave VAPID privada, la clave de Resend ni `CRON_SECRET`.
+- **`SENTRY_DSN`** (D-072): no es secreto, pero solo lo usa el servidor. El aviso de errores del navegador se monta al compilar, así que al ponerlo o quitarlo hace falta un despliegue nuevo.
 - **Configuración de Vercel en el repo:** al hacer el scaffold se fijan `framework: 'nextjs'` (el proyecto se creó sin framework) y `regions: ['dub1']` (era `lhr1` hasta D-067).
 - **Previews protegidas:** Vercel exige iniciar sesión para ver las previews (protección de despliegues). Para probarlas en móviles de otras personas habrá que usar enlaces para compartir o ajustar esa protección.
 

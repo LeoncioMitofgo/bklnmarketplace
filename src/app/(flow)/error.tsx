@@ -1,10 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
+import { reportClientError } from "@/components/monitoring/error-reporter";
 import { buttonClasses } from "@/components/ui/button";
 
 // Error al cargar una pantalla (casi siempre, conexión cortada): explicar y dejar reintentar.
-export default function AppError({ retry }: { error: unknown; retry: () => void }) {
+export default function AppError({ error, retry }: { error: unknown; retry: () => void }) {
+  useEffect(() => reportClientError(error), [error]);
   const t = useTranslations("errorPage");
   return (
     <main className="flex flex-col gap-4 px-4 pt-10">

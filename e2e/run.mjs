@@ -7,8 +7,9 @@ const DIR = fileURLToPath(new URL(".", import.meta.url));
 const tests = readdirSync(DIR)
   .filter((f) => f.endsWith("-check.mjs"))
   .map((f) => f.replace(/\.mjs$/, ""));
-// push-check necesita Google Chrome instalado y avisos de FCM; se lanza aparte.
-const SEPARATE = new Set(["push-check"]);
+// push-check necesita Google Chrome instalado y avisos de FCM, y monitoring-check, el servidor
+// compilado con SENTRY_DSN; se lanzan aparte.
+const SEPARATE = new Set(["push-check", "monitoring-check"]);
 
 const [name, ...args] = process.argv.slice(2);
 const run = (test, testArgs = []) =>

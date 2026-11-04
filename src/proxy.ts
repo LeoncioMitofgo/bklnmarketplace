@@ -28,8 +28,8 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Todo menos estáticos, imágenes e iconos.
+  // Todo menos estáticos, imágenes, iconos y los avisos de error del navegador (no usan la sesión).
   matcher: [
-    "/((?!_next/static|_next/image|icon.svg|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|webp|ico|txt|xml|webmanifest)$).*)",
+    "/((?!_next/static|_next/image|api/errors|icon.svg|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|webp|ico|txt|xml|webmanifest)$).*)",
   ],
 };

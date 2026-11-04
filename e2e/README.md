@@ -24,6 +24,14 @@ pnpm e2e moderation-browser-check                  # una sola
 pnpm e2e push-check                                # la de avisos push, aparte
 ```
 
+`monitoring-check` también va aparte: levanta un Sentry de prueba en el puerto 4999 y necesita la web compilada y arrancada con su DSN:
+
+```sh
+SENTRY_DSN=http://e2e@localhost:4999/1 pnpm build
+SENTRY_DSN=http://e2e@localhost:4999/1 CRON_SECRET=prueba-local-cron pnpm start -p 3100
+pnpm e2e monitoring-check
+```
+
 - `pnpm e2e` sin nada lista las pruebas.
 - Otra dirección: `E2E_BASE_URL=http://localhost:3000`.
 - Las fotos, capturas y perfiles temporales del navegador van a la carpeta temporal del sistema (`bkln-e2e`).
@@ -44,12 +52,13 @@ pnpm e2e push-check                                # la de avisos push, aparte
 | `moderation-db-check` | Denuncias, auto‑ocultado a las 3, términos prohibidos y borrar la cuenta (1.5) |
 | `moderation-browser-check` | Denunciar un anuncio y una conversación, términos, privacidad y borrar la cuenta (1.5) |
 | `premium-admin-db-check` | Solicitudes de Premium y las RPC del panel: activar, bloquear, restaurar, suspender y banear (1.6) |
-| `premium-admin-browser-check` | `/premium` y el panel `/admin`: pagos, denuncias con el chat denunciado, y suspender y banear usuarios (1.6); el panel en un portátil (D-071) |
+| `premium-admin-browser-check` | `/premium` y el panel `/admin`: pagos, denuncias con el chat denunciado, y suspender y banear usuarios (1.6); el panel en un portátil (D-071) y las métricas de validación (D-072) |
 | `profile-browser-check` | Editar el perfil con foto y el acceso (email, teléfono y contraseña) (1.6) |
 | `store-browser-check` | Tienda Premium `/t/<tienda>` y su editor (1.6) |
 | `admin-catalog-browser-check` | Categorías, ciudades, planes, precios y oficina en el panel (1.6) |
 | `premium-reminder-check` | Cron diario y aviso de Premium por caducar, en la web y por push (1.6) |
 | `brand-check` | Iconos, manifiesto, Open Graph, logo y que Chrome pueda instalar la web (1.7) |
+| `monitoring-check` | Errores a Sentry (D-072): `/api/errors` solo desde nuestras páginas, un error del navegador llega una sola vez, sin la query ni cookies, y los cortes de conexión no se mandan (1.7) |
 
 ## Al escribir una nueva
 

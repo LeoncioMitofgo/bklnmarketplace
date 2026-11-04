@@ -1118,7 +1118,24 @@
       "published": "{week} publicados en 7 días · {month} en 30",
       "conversations": "Conversaciones (30 días)",
       "lastWeek": "{count} en los últimos 7 días",
-      "premium": "Premium activos"
+      "premium": "Premium activos",
+      "validation": "Validación del mercado",
+      "validationHint": "Las métricas de ALCANCE §9, de los últimos 30 días salvo que se diga otra cosa.",
+      "withMessage": "Anuncios con mensajes",
+      "withMessageDetail": "{with} de {total} publicados en 30 días",
+      "percent": "{value} %",
+      "responseTime": "Tiempo de respuesta",
+      "responseTimeDetail": "{count, plural, =0 {Aún sin datos} one {Mediana de # vendedor} other {Mediana de # vendedores}}",
+      "responseUnits": {
+        "minutes": "{count} min",
+        "hours": "{count} h",
+        "days": "{count, plural, one {# día} other {# días}}"
+      },
+      "active": "Usuarios activos (7 días)",
+      "activeDetail": "{returning} vuelven · {new} nuevos",
+      "premiumMonth": "Premium activados",
+      "premiumMonthDetail": "{count, plural, one {# solicitud} other {# solicitudes}}",
+      "visits": "Visitas y búsquedas, en Vercel Analytics ↗"
     },
     "payments": {
       "title": "Pagos por confirmar",

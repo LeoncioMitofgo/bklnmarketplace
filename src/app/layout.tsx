@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { ErrorReporter } from "@/components/monitoring/error-reporter";
 import { pickMessages } from "@/i18n/client-messages";
 import { LOCALE } from "@/i18n/request";
 import { isIndexable } from "@/lib/seo";
@@ -44,6 +45,8 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang={LOCALE} className={jakarta.variable}>
       <body className="min-h-dvh">
+        {/* Antes que las pantallas: tiene que escuchar antes de que algo falle (D-072). */}
+        {process.env.SENTRY_DSN ? <ErrorReporter /> : null}
         <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
         <Analytics />
       </body>

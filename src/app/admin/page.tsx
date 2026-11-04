@@ -4,9 +4,15 @@ import { Suspense } from "react";
 import { AdminColumns, AdminShell, AdminSkeleton } from "@/components/admin/admin-shell";
 import { ChevronRightIcon } from "@/components/icons";
 import { requireAdmin } from "@/lib/admin/auth";
-import { formatNumber } from "@/lib/format";
+import { getValidationMetrics } from "@/lib/admin/validation-metrics";
+import { formatNumber, responseTimeParts } from "@/lib/format";
 
-// Resumen del panel: colas pendientes y métricas básicas (ALCANCE §4.11).
+// Resumen del panel: colas pendientes, métricas básicas (ALCANCE §4.11) y las de validación (§9, D-072).
+
+// Visitas y búsquedas: las cuenta Vercel Web Analytics (ARQUITECTURA §2), no nuestra base de datos.
+const ANALYTICS_URL = "https://vercel.com/bkln-software/bkln_marketplace/analytics";
+
+type Stat = { label: string; value: string; detail?: string };
 
 type Metrics = Record<
   | "pending_requests"
@@ -34,8 +40,9 @@ export default function AdminHomePage() {
 
 async function AdminHome() {
   const { supabase } = await requireAdmin("/admin");
-  const [{ data, error }, t] = await Promise.all([
+  const [{ data, error }, v, t] = await Promise.all([
     supabase.rpc("admin_metrics"),
+    getValidationMetrics(),
     getTranslations("admin.home"),
   ]);
   if (error || !data) throw new Error(`admin_metrics: ${error?.message}`);
@@ -46,23 +53,51 @@ async function AdminHome() {
     { href: "/admin/denuncias", label: t("openReports"), value: m.open_reports },
     { href: "/admin/denuncias", label: t("underReview"), value: m.under_review },
   ];
-  const stats = [
+  const stats: Stat[] = [
     {
       label: t("users"),
-      value: m.users_total,
+      value: formatNumber(m.users_total),
       detail: t("recent", { week: m.users_7d, month: m.users_30d }),
     },
     {
       label: t("listings"),
-      value: m.listings_active,
+      value: formatNumber(m.listings_active),
       detail: t("published", { week: m.listings_7d, month: m.listings_30d }),
     },
     {
       label: t("conversations"),
-      value: m.conversations_30d,
+      value: formatNumber(m.conversations_30d),
       detail: t("lastWeek", { count: m.conversations_7d }),
     },
-    { label: t("premium"), value: m.premium_active },
+    { label: t("premium"), value: formatNumber(m.premium_active) },
+  ];
+  const response =
+    v.medianResponseMinutes === null ? null : responseTimeParts(v.medianResponseMinutes);
+  const validation: Stat[] = [
+    {
+      label: t("withMessage"),
+      value:
+        v.listingsWithMessagePct === null ? "—" : t("percent", { value: v.listingsWithMessagePct }),
+      detail: t("withMessageDetail", { with: v.listingsWithMessage, total: v.listingsPublished }),
+    },
+    {
+      label: t("responseTime"),
+      value: response ? t(`responseUnits.${response.unit}`, { count: response.count }) : "—",
+      detail: t("responseTimeDetail", { count: v.sellersWithResponseTime }),
+    },
+    {
+      label: t("active"),
+      value: formatNumber(v.activeUsers),
+      detail: t("activeDetail", {
+        returning: v.returningUsers,
+        new: v.activeUsers - v.returningUsers,
+      }),
+    },
+    {
+      label: t("premiumMonth"),
+      value: formatNumber(v.premiumActivations),
+      detail: t("premiumMonthDetail", { count: v.premiumRequests }),
+    },
   ];
 
   return (
@@ -96,19 +131,37 @@ async function AdminHome() {
 
         <section className="flex flex-col gap-2">
           <h2 className="text-lg font-extrabold">{t("metrics")}</h2>
-          <ul className="grid grid-cols-2 gap-3">
-            {stats.map((s) => (
-              <li key={s.label} className="flex flex-col gap-1 rounded-card bg-surface p-4">
-                <span className="text-xs text-text-muted">{s.label}</span>
-                <span className="font-display text-2xl font-extrabold">
-                  {formatNumber(s.value)}
-                </span>
-                {s.detail ? <span className="text-xs text-text-muted">{s.detail}</span> : null}
-              </li>
-            ))}
-          </ul>
+          <Stats items={stats} className="grid grid-cols-2 gap-3" />
         </section>
       </AdminColumns>
+
+      <section className="flex flex-col gap-2">
+        <h2 className="text-lg font-extrabold">{t("validation")}</h2>
+        <p className="text-sm text-text-muted">{t("validationHint")}</p>
+        <Stats items={validation} className="grid grid-cols-2 gap-3 lg:grid-cols-4" />
+        <a
+          href={ANALYTICS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex min-h-11 items-center text-sm font-semibold text-primary"
+        >
+          {t("visits")}
+        </a>
+      </section>
     </AdminShell>
+  );
+}
+
+function Stats({ items, className }: { items: Stat[]; className: string }) {
+  return (
+    <ul className={className}>
+      {items.map((s) => (
+        <li key={s.label} className="flex flex-col gap-1 rounded-card bg-surface p-4">
+          <span className="text-xs text-text-muted">{s.label}</span>
+          <span className="font-display text-2xl font-extrabold">{s.value}</span>
+          {s.detail ? <span className="text-xs text-text-muted">{s.detail}</span> : null}
+        </li>
+      ))}
+    </ul>
   );
 }

@@ -232,6 +232,21 @@ try {
   await ap.waitForURL(/\/admin$/);
   await waitText(ap, "Pagos por confirmar");
   ok("Mi cuenta → Panel de administración", true);
+  await waitText(ap, "Validación del mercado");
+  const home = await text(ap);
+  ok(
+    "métricas de validación: mensajes, respuesta, activos y Premium (D-072)",
+    ["Anuncios con mensajes", "Tiempo de respuesta", "Usuarios activos (7 días)"].every((s) =>
+      home.includes(s),
+    ) && /\d+ solicitud(es)?/.test(home),
+    home.slice(-400),
+  );
+  ok(
+    "enlace a las visitas en Vercel Analytics",
+    (await ap.getByRole("link", { name: /Vercel Analytics/ }).getAttribute("href"))?.includes(
+      "vercel.com/bkln-software/bkln_marketplace/analytics",
+    ),
+  );
   ok(
     "sin scroll horizontal en el panel",
     await ap.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
@@ -414,6 +429,8 @@ try {
     await ap.getByText("Teléfono", { exact: true }).filter({ visible: true }).first().isVisible(),
   );
   await ap.goto(`${BASE}/admin/usuarios/${seller.id}`);
+  // Llega en streaming: medir cuando ya se ve, no cuando está en el HTML todavía oculto.
+  await ap.locator("#premium").waitFor({ state: "visible" });
   const premium = await ap.locator("#premium").boundingBox();
   const moderation = await ap.getByRole("heading", { name: "Moderación" }).boundingBox();
   ok(
