@@ -8,9 +8,9 @@
 ## Por dónde empezar
 
 1. **AVANTE Medios**: es la agencia de medios que conoce las audiencias del país (hace el primer Estudio General de Medios con el INEGE). Pedirle un plan y tarifas para el lanzamiento.
-2. **Tiendas fundadoras**: CFAO Motors (Toyota), Jetour, Casa Mercedes, RYESA, Rock & Noble, Inmo-GUINEA, KITEA y Unicasa llenan las categorías que más se buscan (vehículos, inmuebles y hogar) con anuncios de calidad. Cada una tiene su propuesta personalizada.
+2. **Tiendas fundadoras**: CFAO Motors (Toyota), Jetour, Casa Mercedes, RYESA, Cuattro, Rock & Noble, Inmo-GUINEA, KITEA, Unicasa y The Computer Store llenan las categorías que más se buscan (vehículos, inmuebles y hogar) con anuncios de calidad. Cada una tiene su propuesta personalizada.
 3. **Real Equatorial Guinea**: nota de prensa el día del lanzamiento.
-4. **Patrocinadores** (Muni, GETESA, BANGE, Martínez Hermanos, Ventage, Afri Mall, Galería JM y Vitacana): propuestas personalizadas, a partir del 18 de noviembre (D-069).
+4. **Patrocinadores** (Muni, GETESA, BANGE, Martínez Hermanos, Ventage, Afri Mall, Galería JM y Viteoca Market): propuestas personalizadas, a partir del 18 de noviembre (D-069).
 5. **Centro Cultural de España**: sala para una presentación.
 
 ## Agencias y medios
@@ -47,13 +47,13 @@ Cada patrocinador tiene **su propia propuesta en PDF y su mensaje**, en `C:/User
 | **Ventage Group** | Más de 20 años en Malabo y casi todas las categorías de la web: Ventage Casa, electrónica, construcción, pintura, neumáticos y piezas, alquiler de casas y villas. Patrocinio y, además, sus tiendas como tiendas fundadoras. El acto, en Ventage Mall | ventage@ventagegroup.com · +240 333 090 553 · paseo de los Cocoteros | Propuesta lista |
 | **Afri Mall** | Centro comercial nuevo de San Juan. Patrocinio, el acto en Afri Mall y todas sus tiendas como tiendas fundadoras | Sin contacto publicado: **en persona**, en la dirección del centro | Propuesta lista |
 | **Galería JM & Hermanos** | Galería con secciones y tiendas (peluquería y estética, Sara Shop…); su directora general, Virginia Abeme Mbomio Asangono; sus prácticas con el centro de FP 12 de Octubre | Sin contacto publicado: **en persona**. En el mismo edificio (3.ª planta) está la redacción de Real Equatorial Guinea | Propuesta lista |
-| **Supermercado Vitacana** | Supermercado de Malabo. Patrocinio. Es la propuesta con menos datos: si conoces a alguien dentro, mejor | +240 222 368 560 (de un directorio sin verificar) | Propuesta lista |
+| **Viteoca Market** | Centro comercial que abrió el 4 de marzo de 2026 junto a Timbabé, con 115 tiendas; la frase de Víctor Nsue en la inauguración («un símbolo de que lo local puede ser digno»); la caja de BANGE para sus comerciantes. Patrocinio, sus tiendas como tiendas fundadoras y el acto en Viteoca Market | Sin contacto publicado: **en persona** (también tiene página de Facebook «viteoca») | Propuesta lista |
 | **Ecobank** y **CCEI Bank** | Sin propuesta por ahora. Si BANGE no entra, siguientes bancos a los que escribir | Ecobank: Av. de la Independencia · CCEI: C/ Presidente Nasser (en persona) | Más adelante |
 
 **Exclusividad:** hay patrocinadores que compiten por lo mismo. Se escribe a todos a la vez; si uno firma la exclusividad de su sector, a los demás de ese sector se les avisa con educación y se les ofrece otra forma de colaborar.
 - **Operadores:** Muni y GETESA.
-- **Distribución y comercio:** Martínez Hermanos, Ventage Group y Vitacana.
-- **Centros comerciales:** Afri Mall y Galería JM & Hermanos.
+- **Distribución y comercio:** Martínez Hermanos y Ventage Group.
+- **Centros comerciales:** Afri Mall, Galería JM & Hermanos y Viteoca Market.
 - **Bancos:** BANGE (y, si no entra, Ecobank o CCEI).
 
 **Cuándo enviarlas:** a partir del 18 de noviembre, mejor con una o dos tiendas fundadoras confirmadas para poder nombrarlas en la reunión. Las grandes empresas tardan semanas en aprobar un patrocinio, y para un acto en enero no conviene esperar a diciembre.
@@ -71,8 +71,10 @@ Cada tienda tiene **su propia propuesta en PDF y su mensaje**, con lo que hemos 
 | **Rock & Noble** | Alquiler de pisos y oficinas en Malabo y Bata, gestión de inmuebles | WhatsApp +240 555 884 750 y email direccion@rockandnobleeg.com, a la atención de Kirsha Juncal Chamorro (General Manager); con copia a administracion@ | +240 222 74 71 70 · Alexandra Offices, Paraíso | Propuesta lista |
 | **Inmo-GUINEA** | Venta y alquiler de casas, pisos, terrenos, locales y oficinas, en Malabo y Bata | WhatsApp +240 222 096 886 (no publica email; formulario en inmoguinea.com) | — | Propuesta lista |
 | **KITEA Malabo** | Muebles, cocina, electrodomésticos y decoración | WhatsApp +240 551 80 36 98 (del directorio; no publica email) | Carretera del Aeropuerto, km 6 | Propuesta lista. Confirmar que la tienda sigue abierta |
-| **Jetour** (Supernova SLU) | Coches nuevos Jetour: Dashing, T2, X50, X70, X70 Plus, X90, X90 Plus y X95 | WhatsApp +240 555 700 000 (de jetourautoeg.com); no publica email | Dirección del concesionario: la sabe el cliente | Propuesta lista |
+| **Jetour** (Supernova SLU) | Coches nuevos Jetour: Dashing, T2, X50, X70, X70 Plus, X90, X90 Plus y X95 | Email info@jetourautoeg.com y WhatsApp +240 555 700 000 | Rotonda de Paraíso (zona industrial, carretera del paseo marítimo), Malabo · @jetourautoeg | Propuesta lista |
 | **RYESA** (Recambios y Equipos, S.A.) | Recambios de automoción e industria, ferretería, grupos electrógenos y pesca; más de 30.000 referencias, desde 1988 | Email info@ryesa.com (el dominio recibe correo) | +240 333 092 028 (atención al cliente) · +240 333 092 033 · autopista del aeropuerto, Malabo, y Bata | Propuesta lista |
+| **Cuattro** (Cuattro EG) | Piezas y recambios para automóviles y vehículos industriales, neumáticos, lubricantes y filtración, herramientas de taller; importación de piezas bajo pedido (económica, 1,5–2 meses; express, 1–3 semanas) | Email info@cuattroeg.com (el dominio recibe correo) | +240 333 099 128 · carretera del aeropuerto, km 5,4 | Propuesta lista |
+| **The Computer Store** | Informática, impresoras y consumibles, sillas y mesas de oficina, material de oficina, papelería y material escolar | Por teléfono o en la tienda: +240 333 093 201 · +240 333 098 586 (de un directorio; puede que haya cambiado) | Av. de la Libertad 43, junto a GETESA Central · Edificio DaVinci, Malabo II · Facebook TheComputerStoreGE · Instagram @informaticacomputerstore | Propuesta lista |
 | **Unicasa Malabo** | Cosmética, hogar, farmacia (Unipharm); tienda en unicasa.co con entrega a domicilio | WhatsApp +240 222 999 888 | C/ Alcalde Abilio Balboa 581 y 569 · C/ del Rey 1005 · @unicasa.ge | Propuesta lista |
 | ~~Inmobiliaria Santa Isabel~~ | Alquiler de pisos, chalets y fincas | — | +240 222 212 389 | Descartada por ahora: su web y su email ya no funcionan |
 
@@ -235,10 +237,65 @@ Se envían en la semana del 4 de noviembre de 2026, con el PDF de cada una adjun
 > hello@bklnsoftware.tech · +240 222 798 086
 > bklnsoftware.tech · bklnmarketplace.com
 
-#### Jetour y Unicasa (por WhatsApp)
+#### Jetour
 
-- **Jetour:** +240 555 700 000, con «Propuesta BKLN - Jetour Guinea Ecuatorial.pdf» y el mensaje de «Mensaje - Jetour Guinea Ecuatorial.txt». Los precios de los Jetour de la captura son de ejemplo (su web no los publica), y así lo dice el pie.
-- **Unicasa:** +240 222 999 888, con «Propuesta BKLN - Unicasa Malabo.pdf» y el mensaje de «Mensaje - Unicasa Malabo.txt».
+- **Para:** info@jetourautoeg.com
+- **Asunto:** Propuesta para Jetour: tienda fundadora de BKLN Marketplace
+- **Adjunto:** Propuesta BKLN - Jetour Guinea Ecuatorial.pdf
+- **WhatsApp después:** +240 555 700 000
+
+> Buenos días:
+>
+> Les escribe Leoncio Felipe Mitogo, de BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo.
+>
+> En enero de 2027 abrimos BKLN Marketplace (bklnmarketplace.com), una web para comprar y vender en toda Guinea Ecuatorial, y nos gustaría que Jetour fuera una de sus tiendas fundadoras. Queremos que quien busque un coche en la web encuentre desde el primer día la gama Jetour, del Dashing al T2 y el X95, con ustedes como representantes de la marca, y que pueda pedirles una prueba desde el propio anuncio.
+>
+> Como tienda fundadora, les ofrecemos:
+>
+> - 6 meses de Premium gratis, contados desde la apertura: su propia tienda en la web, con su logo, y sus anuncios entre los destacados.
+> - Presencia en la campaña de lanzamiento como tienda fundadora.
+> - Ayuda para empezar: pasamos por el concesionario de la rotonda de Paraíso, creamos la cuenta con ustedes y subimos juntos los primeros modelos.
+>
+> Les adjunto una propuesta preparada para Jetour, con un ejemplo de cómo se verían sus anuncios (los precios de la captura son de ejemplo). Si les interesa, díganme qué día les viene bien para la visita.
+>
+> Un saludo,
+>
+> Leoncio Felipe Mitogo
+> BKLN Software & Systems · Banapa, Malabo
+> hello@bklnsoftware.tech · +240 222 798 086
+> bklnsoftware.tech · bklnmarketplace.com
+
+#### Cuattro
+
+- **Para:** info@cuattroeg.com
+- **Asunto:** Propuesta para Cuattro: tienda fundadora de BKLN Marketplace
+- **Adjunto:** Propuesta BKLN - Cuattro.pdf
+
+> Buenos días:
+>
+> Les escribe Leoncio Felipe Mitogo, de BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo.
+>
+> En enero de 2027 abrimos BKLN Marketplace (bklnmarketplace.com), una web para comprar y vender en toda Guinea Ecuatorial, y nos gustaría que Cuattro fuera una de sus tiendas fundadoras. Queremos que quien busque una pieza, unos neumáticos o un lubricante para su coche encuentre desde el primer día su catálogo, y que sepa que, si la pieza no está, ustedes se la piden, en modalidad económica o express.
+>
+> Como tienda fundadora, les ofrecemos:
+>
+> - 6 meses de Premium gratis, contados desde la apertura: su propia tienda en la web, con su logo, y sus anuncios entre los destacados.
+> - Presencia en la campaña de lanzamiento como tienda fundadora.
+> - Ayuda para empezar: pasamos por su tienda del km 5,4, creamos la cuenta con ustedes y subimos juntos los primeros anuncios.
+>
+> Les adjunto una propuesta preparada para Cuattro, con un ejemplo de cómo se verían sus anuncios. Si les interesa, díganme qué día les viene bien para la visita.
+>
+> Un saludo,
+>
+> Leoncio Felipe Mitogo
+> BKLN Software & Systems · Banapa, Malabo
+> hello@bklnsoftware.tech · +240 222 798 086
+> bklnsoftware.tech · bklnmarketplace.com
+
+#### Unicasa y The Computer Store (por WhatsApp, teléfono o en persona)
+
+- **Unicasa:** WhatsApp +240 222 999 888, con «Propuesta BKLN - Unicasa Malabo.pdf» y el mensaje de «Mensaje - Unicasa Malabo.txt».
+- **The Computer Store:** no publica WhatsApp ni un email general. Lo mejor es llevar el PDF impreso a la tienda de la avenida de la Libertad, con el mensaje de «Mensaje - The Computer Store.txt» como carta. Un directorio antiguo da un email de su grupo (fidela.bakabo@alduco-ict.com; el dominio recibe correo, pero la persona puede haber cambiado).
 
 ### Seguimiento de las tiendas
 
@@ -398,15 +455,14 @@ Se envían a partir del 18 de noviembre de 2026, cada uno con su PDF adjunto.
 > hello@bklnsoftware.tech · +240 222 798 086
 > bklnsoftware.tech · bklnmarketplace.com
 
-#### Afri Mall, Galería JM & Hermanos y Vitacana (en persona o por WhatsApp)
+#### Afri Mall, Galería JM & Hermanos y Viteoca Market (en persona)
 
-- **Afri Mall** y **Galería JM & Hermanos** no publican contacto: se lleva el PDF impreso a la dirección de cada centro, con el texto del mensaje («Mensaje - Afri Mall.txt», «Mensaje - Galería JM & Hermanos.txt») como carta. Para la Galería, la propuesta va a la atención de su directora general.
-- **Vitacana:** WhatsApp o llamada al +240 222 368 560, con «Propuesta BKLN - Supermercado Vitacana.pdf» y su mensaje.
+- **Afri Mall**, **Galería JM & Hermanos** y **Viteoca Market** no publican contacto: se lleva el PDF impreso a la dirección de cada centro, con el texto del mensaje («Mensaje - Afri Mall.txt», «Mensaje - Galería JM & Hermanos.txt», «Mensaje - Viteoca Market.txt») como carta. Para la Galería, la propuesta va a la atención de su directora general.
 
 ### Acto de presentación (enero de 2027, Malabo)
 
 - **Fecha:** por decidir, en enero de 2027. Hay que fijarla antes de pedir sala.
-- **Sala:** Galambo (Martínez Hermanos), Ventage Mall o Afri Mall, si alguno entra como patrocinador; si no, el Centro Cultural de España o un hotel.
+- **Sala:** Galambo (Martínez Hermanos), Ventage Mall, Afri Mall o Viteoca Market, si alguno entra como patrocinador; si no, el Centro Cultural de España o un hotel.
 - **Invitados:** prensa, tiendas fundadoras, patrocinadores y AVANTE.
 - **Correo al Centro Cultural de España** (cuando haya fecha):
   - **Para:** info.ccemalabo@aecid.es
