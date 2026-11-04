@@ -236,7 +236,7 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
   - Se pide una aportación **económica o en especie**, según la empresa (difusión a sus clientes, la sala o el cóctel del acto, navegar por la web sin gastar datos…).
   - Se ofrece: su marca en la **campaña** y en el **acto de presentación** (en Malabo, en enero de 2027), su **logo en el pie de la web** («Con el apoyo de») y, si la quiere, la **exclusividad**, sea en su sector o como único patrocinador.
   - Las propuestas **no llevan precio**: la cifra se habla en la reunión.
-  - Una propuesta personalizada por empresa (Muni, GETESA, BANGE y Martínez Hermanos), con una maqueta del pie con su logo. Contactos y correos en [LANZAMIENTO-CONTACTOS.md](LANZAMIENTO-CONTACTOS.md).
+  - Una propuesta personalizada por empresa (Muni, GETESA, BANGE, Martínez Hermanos, Ventage Group, Afri Mall, Galería JM & Hermanos y Vitacana), con una maqueta del pie con su logo cuando lo hay. Los grupos y centros comerciales reciben además la oferta de tienda fundadora para sus tiendas. La exclusividad es por sector: operadores, distribución y comercio, centros comerciales y bancos. Contactos y correos en [LANZAMIENTO-CONTACTOS.md](LANZAMIENTO-CONTACTOS.md).
   - El pie con los logos se programa cuando firme el primer patrocinador. Es la única publicidad dentro de la web: los banners entre los anuncios siguen fuera (ALCANCE §8, versión 1.9).
 
   · Decisión del cliente. Con una web que aún no tiene usuarios, es más fácil cerrar algo en especie que en dinero. Y sin precio en el papel, la cifra se ajusta a lo que ofrezca cada empresa.

@@ -162,12 +162,12 @@ Previsto para **enero de 2027** (D-068).
 - [x] El proyecto de Supabase actual es el de producción (2026-11-04, D-067). Funciones de Vercel en Dublín (`dub1`)
 - [ ] Estabilizar las tres pruebas e2e que fallan en la batería completa (chat-browser, moderation-browser y premium-admin-browser)
 - [ ] Sembrar anuncios con vendedores y tiendas fundadoras, con 6 meses de Premium gratis, visibilidad y publicidad (D-065). Empresas, emails y correos en [LANZAMIENTO-CONTACTOS.md](LANZAMIENTO-CONTACTOS.md) (2026-11-04), con medios, agencias y patrocinio para el lanzamiento
-  - [x] Propuesta personalizada en PDF y mensaje para cada tienda (2026-11-04): CFAO Motors, Casa Mercedes, Rock & Noble, Inmo-GUINEA y KITEA. Se generan con el sistema de propuestas de `C:/Users/leonc/PlanEject` (`propuestas/fuentes/marketplace-*.md`)
+  - [x] Propuesta personalizada en PDF y mensaje para cada tienda (2026-11-04): CFAO Motors, Jetour, Casa Mercedes, RYESA, Rock & Noble, Inmo-GUINEA, KITEA y Unicasa. Se generan con el sistema de propuestas de `C:/Users/leonc/PlanEject` (`propuestas/fuentes/marketplace-*.md`)
   - [ ] Cuando publique la primera tienda fundadora, cambiar el aviso de versión previa a «Muchos anuncios son de demostración…» (`preview.notice` en `es.json`, D-066)
   - [ ] Enviar las propuestas por WhatsApp y email, y el correo a AVANTE, la semana del 4 de noviembre (lo hace el cliente desde hello@bklnsoftware.tech; correos en LANZAMIENTO-CONTACTOS)
   - [ ] Seguimiento: recordatorio a los 7–10 días, mensaje a mediados de diciembre y el día de la apertura a principios de enero
   - [ ] Activar Premium a cada tienda que diga que sí: 0 FCFA, referencia `FUNDADORA-<empresa>`, los meses hasta la apertura más 6 (D-065)
-- [x] Propuestas de patrocinio personalizadas (2026-11-04, D-069): Muni, GETESA, BANGE y Martínez Hermanos, con una maqueta del pie con su logo
+- [x] Propuestas de patrocinio personalizadas (2026-11-04, D-069): Muni, GETESA, BANGE, Martínez Hermanos, Ventage Group, Afri Mall, Galería JM & Hermanos y Vitacana
   - [ ] Enviarlas a partir del 18 de noviembre (lo hace el cliente; correos en LANZAMIENTO-CONTACTOS)
   - [ ] Pie «Con el apoyo de» con los logos, cuando firme el primer patrocinador
 - [ ] Acto de presentación en Malabo (enero de 2027): fecha, sala (Galambo, Centro Cultural de España u hotel) e invitados
