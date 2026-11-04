@@ -1566,5 +1566,9 @@
     "expiring": "Tu Premium caduca {count, plural, one {en 1 día} other {en # días}} ({date}). Renueva para no perder tu tienda ni el límite de anuncios Premium: el tiempo nuevo se suma al que te queda.",
     "expired": "Tu Premium caducó el {date} y has vuelto al plan Normal. Si tenías más de {max} anuncios activos, los más antiguos se pausan solos y puedes elegir cuáles reactivar. Tu tienda no se ve, pero no se ha borrado.",
     "renew": "Renovar Premium"
+  },
+  "preview": {
+    "title": "Versión previa.",
+    "notice": "Muchos anuncios son de demostración y se borrarán al abrir."
   }
 }
