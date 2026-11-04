@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { AdminActionForm } from "@/components/admin/action-form";
-import { AdminShell, AdminSkeleton } from "@/components/admin/admin-shell";
+import { AdminColumns, AdminShell, AdminSkeleton } from "@/components/admin/admin-shell";
 import { AdminCheckbox, AdminInput, AdminTextArea } from "@/components/admin/fields";
 import { requireAdmin } from "@/lib/admin/auth";
 import {
@@ -66,176 +66,181 @@ async function AdminSettings() {
     <AdminShell active="settings">
       <h1 className="text-xl font-extrabold">{t("title")}</h1>
 
-      <Section title={t("plansTitle")} hint={t("plansHint")}>
-        {(["normal", "premium"] as const).map((id) => {
-          const plan = plans.data.find((p) => p.id === id);
-          if (!plan) return null;
-          return (
-            <div key={id} className="flex flex-col gap-2">
-              <h3 className="font-sans text-base font-bold">{t(`plan.${id}`)}</h3>
-              <AdminActionForm
-                action={savePlan}
-                pendingLabel={t("working")}
-                buttons={[{ label: t("save"), variant: "secondary" }]}
-              >
-                <input type="hidden" name="id" value={id} />
-                <div className="grid grid-cols-3 gap-2">
-                  <AdminInput
-                    id={`${id}-active`}
-                    name="maxActiveListings"
-                    label={t("maxActive")}
-                    inputMode="numeric"
-                    defaultValue={plan.max_active_listings}
-                  />
-                  <AdminInput
-                    id={`${id}-photos`}
-                    name="maxPhotos"
-                    label={t("maxPhotos")}
-                    inputMode="numeric"
-                    defaultValue={plan.max_photos}
-                  />
-                  <AdminInput
-                    id={`${id}-days`}
-                    name="durationDays"
-                    label={t("duration")}
-                    inputMode="numeric"
-                    defaultValue={plan.listing_duration_days}
-                  />
-                </div>
-              </AdminActionForm>
-            </div>
-          );
-        })}
-      </Section>
+      {/* En pantallas anchas, las secciones de dos en dos. */}
+      <AdminColumns>
+        <Section title={t("plansTitle")} hint={t("plansHint")}>
+          {(["normal", "premium"] as const).map((id) => {
+            const plan = plans.data.find((p) => p.id === id);
+            if (!plan) return null;
+            return (
+              <div key={id} className="flex flex-col gap-2">
+                <h3 className="font-sans text-base font-bold">{t(`plan.${id}`)}</h3>
+                <AdminActionForm
+                  action={savePlan}
+                  pendingLabel={t("working")}
+                  buttons={[{ label: t("save"), variant: "secondary" }]}
+                >
+                  <input type="hidden" name="id" value={id} />
+                  <div className="grid grid-cols-3 gap-2">
+                    <AdminInput
+                      id={`${id}-active`}
+                      name="maxActiveListings"
+                      label={t("maxActive")}
+                      inputMode="numeric"
+                      defaultValue={plan.max_active_listings}
+                    />
+                    <AdminInput
+                      id={`${id}-photos`}
+                      name="maxPhotos"
+                      label={t("maxPhotos")}
+                      inputMode="numeric"
+                      defaultValue={plan.max_photos}
+                    />
+                    <AdminInput
+                      id={`${id}-days`}
+                      name="durationDays"
+                      label={t("duration")}
+                      inputMode="numeric"
+                      defaultValue={plan.listing_duration_days}
+                    />
+                  </div>
+                </AdminActionForm>
+              </div>
+            );
+          })}
+        </Section>
 
-      <Section title={t("pricesTitle")} hint={t("pricesHint")}>
-        {prices.data.map((price) => (
+        <Section title={t("pricesTitle")} hint={t("pricesHint")}>
+          {prices.data.map((price) => (
+            <AdminActionForm
+              key={price.months}
+              action={savePrice}
+              pendingLabel={t("working")}
+              buttons={[{ label: t("save"), variant: "secondary" }]}
+            >
+              <input type="hidden" name="months" value={price.months} />
+              <input type="hidden" name="hasActive" value="1" />
+              <div className="grid grid-cols-[1fr_auto] items-end gap-3">
+                <AdminInput
+                  id={`price-${price.months}`}
+                  name="price"
+                  label={t("priceFor", { count: price.months })}
+                  inputMode="numeric"
+                  defaultValue={price.price_xaf}
+                />
+                <AdminCheckbox
+                  id={`price-${price.months}-active`}
+                  name="isActive"
+                  label={t("offered")}
+                  defaultChecked={price.is_active}
+                />
+              </div>
+            </AdminActionForm>
+          ))}
+          <div className="rounded-card bg-surface p-4">
+            <AdminActionForm
+              action={savePrice}
+              pendingLabel={t("working")}
+              buttons={[{ label: t("addPrice"), variant: "secondary" }]}
+            >
+              <div className="grid grid-cols-2 gap-3">
+                <AdminInput
+                  id="price-new-months"
+                  name="months"
+                  label={t("months")}
+                  inputMode="numeric"
+                  required
+                />
+                <AdminInput
+                  id="price-new-price"
+                  name="price"
+                  label={t("price")}
+                  inputMode="numeric"
+                  required
+                />
+              </div>
+            </AdminActionForm>
+          </div>
+        </Section>
+
+        <Section title={t("officeTitle")} hint={t("officeHint")}>
           <AdminActionForm
-            key={price.months}
-            action={savePrice}
+            action={saveOffice}
             pendingLabel={t("working")}
             buttons={[{ label: t("save"), variant: "secondary" }]}
           >
-            <input type="hidden" name="months" value={price.months} />
-            <input type="hidden" name="hasActive" value="1" />
-            <div className="grid grid-cols-[1fr_auto] items-end gap-3">
-              <AdminInput
-                id={`price-${price.months}`}
-                name="price"
-                label={t("priceFor", { count: price.months })}
-                inputMode="numeric"
-                defaultValue={price.price_xaf}
-              />
-              <AdminCheckbox
-                id={`price-${price.months}-active`}
-                name="isActive"
-                label={t("offered")}
-                defaultChecked={price.is_active}
-              />
-            </div>
+            <AdminInput
+              id="office-name"
+              name="name"
+              label={t("officeName")}
+              maxLength={120}
+              defaultValue={office?.name}
+            />
+            <AdminInput
+              id="office-address"
+              name="address"
+              label={t("officeAddress")}
+              maxLength={120}
+              defaultValue={office?.address}
+            />
+            <AdminInput
+              id="office-hours"
+              name="hours"
+              label={t("officeHours")}
+              maxLength={120}
+              defaultValue={office?.hours}
+            />
+            <AdminInput
+              id="office-whatsapp"
+              name="paymentsWhatsapp"
+              label={t("officeWhatsapp")}
+              inputMode="tel"
+              defaultValue={
+                office?.payments_whatsapp ? formatGqPhone(office.payments_whatsapp) : ""
+              }
+            />
+            <AdminInput
+              id="office-beneficiary"
+              name="agencyBeneficiary"
+              label={t("officeBeneficiary")}
+              maxLength={120}
+              defaultValue={office?.agency_beneficiary}
+            />
           </AdminActionForm>
-        ))}
-        <div className="rounded-card bg-surface p-4">
+        </Section>
+
+        <Section title={t("termsTitle")} hint={t("termsHint")}>
           <AdminActionForm
-            action={savePrice}
+            action={saveBannedTerms}
             pendingLabel={t("working")}
-            buttons={[{ label: t("addPrice"), variant: "secondary" }]}
+            buttons={[{ label: t("save"), variant: "secondary" }]}
           >
-            <div className="grid grid-cols-2 gap-3">
-              <AdminInput
-                id="price-new-months"
-                name="months"
-                label={t("months")}
-                inputMode="numeric"
-                required
-              />
-              <AdminInput
-                id="price-new-price"
-                name="price"
-                label={t("price")}
-                inputMode="numeric"
-                required
-              />
-            </div>
+            <AdminTextArea
+              id="banned-terms"
+              name="terms"
+              label={t("terms", { count: terms.length })}
+              rows={10}
+              defaultValue={terms.join("\n")}
+            />
           </AdminActionForm>
-        </div>
-      </Section>
+        </Section>
 
-      <Section title={t("officeTitle")} hint={t("officeHint")}>
-        <AdminActionForm
-          action={saveOffice}
-          pendingLabel={t("working")}
-          buttons={[{ label: t("save"), variant: "secondary" }]}
-        >
-          <AdminInput
-            id="office-name"
-            name="name"
-            label={t("officeName")}
-            maxLength={120}
-            defaultValue={office?.name}
-          />
-          <AdminInput
-            id="office-address"
-            name="address"
-            label={t("officeAddress")}
-            maxLength={120}
-            defaultValue={office?.address}
-          />
-          <AdminInput
-            id="office-hours"
-            name="hours"
-            label={t("officeHours")}
-            maxLength={120}
-            defaultValue={office?.hours}
-          />
-          <AdminInput
-            id="office-whatsapp"
-            name="paymentsWhatsapp"
-            label={t("officeWhatsapp")}
-            inputMode="tel"
-            defaultValue={office?.payments_whatsapp ? formatGqPhone(office.payments_whatsapp) : ""}
-          />
-          <AdminInput
-            id="office-beneficiary"
-            name="agencyBeneficiary"
-            label={t("officeBeneficiary")}
-            maxLength={120}
-            defaultValue={office?.agency_beneficiary}
-          />
-        </AdminActionForm>
-      </Section>
-
-      <Section title={t("termsTitle")} hint={t("termsHint")}>
-        <AdminActionForm
-          action={saveBannedTerms}
-          pendingLabel={t("working")}
-          buttons={[{ label: t("save"), variant: "secondary" }]}
-        >
-          <AdminTextArea
-            id="banned-terms"
-            name="terms"
-            label={t("terms", { count: terms.length })}
-            rows={10}
-            defaultValue={terms.join("\n")}
-          />
-        </AdminActionForm>
-      </Section>
-
-      <Section title={t("reportsTitle")} hint={t("reportsHint")}>
-        <AdminActionForm
-          action={saveReportThreshold}
-          pendingLabel={t("working")}
-          buttons={[{ label: t("save"), variant: "secondary" }]}
-        >
-          <AdminInput
-            id="report-threshold"
-            name="threshold"
-            label={t("threshold")}
-            inputMode="numeric"
-            defaultValue={threshold}
-          />
-        </AdminActionForm>
-      </Section>
+        <Section title={t("reportsTitle")} hint={t("reportsHint")}>
+          <AdminActionForm
+            action={saveReportThreshold}
+            pendingLabel={t("working")}
+            buttons={[{ label: t("save"), variant: "secondary" }]}
+          >
+            <AdminInput
+              id="report-threshold"
+              name="threshold"
+              label={t("threshold")}
+              inputMode="numeric"
+              defaultValue={threshold}
+            />
+          </AdminActionForm>
+        </Section>
+      </AdminColumns>
     </AdminShell>
   );
 }

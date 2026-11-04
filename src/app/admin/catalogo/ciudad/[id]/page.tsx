@@ -40,7 +40,7 @@ async function CityContent({ params }: Pick<PageProps<"/admin/catalogo/ciudad/[i
   if (!city) notFound();
 
   return (
-    <AdminShell active="catalog">
+    <AdminShell active="catalog" narrow>
       <Link href="/admin/catalogo" className="-mb-2 text-sm font-semibold text-primary">
         {t("back")}
       </Link>

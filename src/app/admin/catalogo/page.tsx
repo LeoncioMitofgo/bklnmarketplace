@@ -60,12 +60,12 @@ async function AdminCatalog() {
             {t("newRoot")}
           </Link>
         </div>
-        <ul className="flex flex-col gap-3">
+        <ul className="flex flex-col gap-3 lg:grid lg:grid-cols-2 lg:items-start xl:grid-cols-3">
           {roots.map((root) => (
             <li key={root.id} className="rounded-card border border-border">
               <Link
                 href={`/admin/catalogo/categoria/${root.id}`}
-                className="flex min-h-12 items-center gap-3 px-4 font-bold"
+                className="flex min-h-12 items-center gap-3 px-4 font-bold hover:bg-surface"
               >
                 <CategoryIcon name={root.icon} className="size-5 shrink-0 text-primary" />
                 <span className="flex-1">{root.name}</span>
@@ -92,7 +92,7 @@ async function AdminCatalog() {
         </ul>
       </section>
 
-      <section className="flex flex-col gap-3">
+      <section className="flex flex-col gap-3 lg:max-w-xl">
         <h2 className="text-lg font-extrabold">{t("cities")}</h2>
         <ul className="flex flex-col divide-y divide-border rounded-card border border-border text-sm">
           {cities.data.map((city) => (
@@ -137,7 +137,10 @@ async function AdminCatalog() {
           </AdminActionForm>
         </div>
       </section>
-      <Link href="/admin/ajustes" className={buttonClasses("ghost")}>
+      <Link
+        href="/admin/ajustes"
+        className={buttonClasses("ghost", "lg:w-auto lg:self-start lg:px-0")}
+      >
         {t("toSettings")}
       </Link>
     </AdminShell>

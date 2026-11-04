@@ -392,10 +392,36 @@ try {
     !authAfter.user?.banned_until || Date.parse(authAfter.user.banned_until) < Date.now(),
     authAfter.user?.banned_until,
   );
+  const history = await text(ap);
   ok(
     "el historial lo recoge",
-    ["Suspendido", "Baneado", "Baneo quitado"].every((v) => text(ap).then((s) => s.includes(v))),
+    ["Suspendido", "Baneado", "Baneo quitado"].every((v) => history.includes(v)),
+    history.slice(-300),
   );
+
+  // En un portátil (D-071): menú a la izquierda, usuarios en tabla y la ficha a dos columnas.
+  await ap.setViewportSize({ width: 1366, height: 860 });
+  await ap.goto(`${BASE}/admin/usuarios`);
+  await waitText(ap, "Los últimos en registrarse");
+  const nav = await ap.locator("aside nav").boundingBox();
+  ok(
+    "portátil: menú del panel a la izquierda",
+    nav && nav.x < 40 && nav.height > nav.width,
+    JSON.stringify(nav),
+  );
+  ok(
+    "portátil: los usuarios en tabla, con el teléfono en su columna",
+    await ap.getByText("Teléfono", { exact: true }).filter({ visible: true }).first().isVisible(),
+  );
+  await ap.goto(`${BASE}/admin/usuarios/${seller.id}`);
+  const premium = await ap.locator("#premium").boundingBox();
+  const moderation = await ap.getByRole("heading", { name: "Moderación" }).boundingBox();
+  ok(
+    "portátil: la ficha del usuario a dos columnas",
+    premium && moderation && moderation.x > premium.x + premium.width,
+    JSON.stringify({ premium, moderation }),
+  );
+  await ap.setViewportSize({ width: 360, height: 740 });
 
   ok("sin errores de JavaScript ni peticiones fallidas", errors.length === 0, errors.join(" | "));
 } catch (error) {

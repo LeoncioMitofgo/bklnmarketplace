@@ -119,7 +119,7 @@ Reglas:
 | 10 | Mensajes | Filtro Comprando / Vendiendo · estados "Vendido", "Usuario eliminado" y "Anuncio eliminado" |
 | 11 | Conversación | Anuncio fijado arriba · aviso de seguridad · foto · "Visto" · bloquear o denunciar desde el menú |
 | 12 | Hazte Premium | Comparativa Normal/Premium · 4 periodos con precio por mes · oficina y agencia · botón de WhatsApp para el código |
-| 13 | Admin | Usable desde el móvil · denuncias con acceso al chat denunciado · pagos por confirmar con referencia única y fecha de fin calculada |
+| 13 | Admin | Usable desde el móvil y, a dos columnas con menú lateral, desde el ordenador (D-071) · denuncias con acceso al chat denunciado · pagos por confirmar con referencia única y fecha de fin calculada |
 
 **Diferencias con los wireframes al implementar la 1.3 (catálogo):**
 - 01 Inicio: "Recientes" de todo el país, sin selector de ciudad (D-044).
@@ -132,4 +132,4 @@ Reglas:
 
 **Al implementar la 1.6 (Premium y admin):**
 - 12 Hazte Premium: el ahorro se muestra en FCFA ("Ahorras 1.700 FCFA") en lugar del porcentaje, y "Mejor precio" (naranja) va en el periodo más barato por mes. Con una solicitud pendiente, arriba aparece una caja con las instrucciones según la forma de pago.
-- 13 Admin: pestañas arriba (Resumen · Pagos · Denuncias · Usuarios). El cobro se registra en la ficha del usuario, con el formulario relleno con su solicitud y la fecha de fin calculada al momento. Cada anuncio denunciado tiene un solo formulario de moderación (Bloquear · Restaurar · Descartar).
+- 13 Admin: pestañas arriba (Resumen · Pagos · Denuncias · Usuarios); en el ordenador, menú a la izquierda y páginas a dos columnas (D-071). El cobro se registra en la ficha del usuario, con el formulario relleno con su solicitud y la fecha de fin calculada al momento. Cada anuncio denunciado tiene un solo formulario de moderación (Bloquear · Restaurar · Descartar).

@@ -41,7 +41,7 @@ async function NewCategory({
   const validParent = parent && parent.parent_id === null ? parent : null;
 
   return (
-    <AdminShell active="catalog">
+    <AdminShell active="catalog" narrow>
       <Link
         href={validParent ? `/admin/catalogo/categoria/${validParent.id}` : "/admin/catalogo"}
         className="-mb-2 text-sm font-semibold text-primary"

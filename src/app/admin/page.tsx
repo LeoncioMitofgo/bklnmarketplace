@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
-import { AdminShell, AdminSkeleton } from "@/components/admin/admin-shell";
+import { AdminColumns, AdminShell, AdminSkeleton } from "@/components/admin/admin-shell";
 import { ChevronRightIcon } from "@/components/icons";
 import { requireAdmin } from "@/lib/admin/auth";
 import { formatNumber } from "@/lib/format";
@@ -67,41 +67,48 @@ async function AdminHome() {
 
   return (
     <AdminShell active="home">
-      <section className="flex flex-col gap-2">
-        <h1 className="text-xl font-extrabold">{t("title")}</h1>
-        <ul className="flex flex-col divide-y divide-border rounded-card border border-border">
-          {queues.map((q) => (
-            <li key={q.label}>
-              <Link href={q.href} className="flex min-h-14 items-center justify-between gap-3 px-4">
-                <span className="text-[15px]">{q.label}</span>
-                <span className="flex items-center gap-2">
-                  <span
-                    className={`min-w-8 rounded-full px-2.5 py-0.5 text-center text-sm font-bold ${
-                      q.value > 0 ? "bg-accent text-text" : "bg-surface text-text-muted"
-                    }`}
-                  >
-                    {formatNumber(q.value)}
+      <AdminColumns>
+        <section className="flex flex-col gap-2">
+          <h1 className="text-xl font-extrabold">{t("title")}</h1>
+          <ul className="flex flex-col divide-y divide-border rounded-card border border-border">
+            {queues.map((q) => (
+              <li key={q.label}>
+                <Link
+                  href={q.href}
+                  className="flex min-h-14 items-center justify-between gap-3 px-4 hover:bg-surface"
+                >
+                  <span className="text-[15px]">{q.label}</span>
+                  <span className="flex items-center gap-2">
+                    <span
+                      className={`min-w-8 rounded-full px-2.5 py-0.5 text-center text-sm font-bold ${
+                        q.value > 0 ? "bg-accent text-text" : "bg-surface text-text-muted"
+                      }`}
+                    >
+                      {formatNumber(q.value)}
+                    </span>
+                    <ChevronRightIcon className="size-5 text-text-muted" />
                   </span>
-                  <ChevronRightIcon className="size-5 text-text-muted" />
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-      <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-extrabold">{t("metrics")}</h2>
-        <ul className="grid grid-cols-2 gap-3">
-          {stats.map((s) => (
-            <li key={s.label} className="flex flex-col gap-1 rounded-card bg-surface p-4">
-              <span className="text-xs text-text-muted">{s.label}</span>
-              <span className="font-display text-2xl font-extrabold">{formatNumber(s.value)}</span>
-              {s.detail ? <span className="text-xs text-text-muted">{s.detail}</span> : null}
-            </li>
-          ))}
-        </ul>
-      </section>
+        <section className="flex flex-col gap-2">
+          <h2 className="text-lg font-extrabold">{t("metrics")}</h2>
+          <ul className="grid grid-cols-2 gap-3">
+            {stats.map((s) => (
+              <li key={s.label} className="flex flex-col gap-1 rounded-card bg-surface p-4">
+                <span className="text-xs text-text-muted">{s.label}</span>
+                <span className="font-display text-2xl font-extrabold">
+                  {formatNumber(s.value)}
+                </span>
+                {s.detail ? <span className="text-xs text-text-muted">{s.detail}</span> : null}
+              </li>
+            ))}
+          </ul>
+        </section>
+      </AdminColumns>
     </AdminShell>
   );
 }

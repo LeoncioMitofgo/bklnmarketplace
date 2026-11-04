@@ -44,7 +44,7 @@ pnpm e2e push-check                                # la de avisos push, aparte
 | `moderation-db-check` | Denuncias, auto‑ocultado a las 3, términos prohibidos y borrar la cuenta (1.5) |
 | `moderation-browser-check` | Denunciar un anuncio y una conversación, términos, privacidad y borrar la cuenta (1.5) |
 | `premium-admin-db-check` | Solicitudes de Premium y las RPC del panel: activar, bloquear, restaurar, suspender y banear (1.6) |
-| `premium-admin-browser-check` | `/premium` y el panel `/admin`: pagos, denuncias con el chat denunciado, y suspender y banear usuarios (1.6) |
+| `premium-admin-browser-check` | `/premium` y el panel `/admin`: pagos, denuncias con el chat denunciado, y suspender y banear usuarios (1.6); el panel en un portátil (D-071) |
 | `profile-browser-check` | Editar el perfil con foto y el acceso (email, teléfono y contraseña) (1.6) |
 | `store-browser-check` | Tienda Premium `/t/<tienda>` y su editor (1.6) |
 | `admin-catalog-browser-check` | Categorías, ciudades, planes, precios y oficina en el panel (1.6) |

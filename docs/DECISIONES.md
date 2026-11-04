@@ -241,3 +241,11 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
 
   · Decisión del cliente. Con una web que aún no tiene usuarios, es más fácil cerrar algo en especie que en dinero. Y sin precio en el papel, la cifra se ajusta a lo que ofrezca cada empresa.
 - **D-070 · 2026-11-04** · **Categoría «Oficina y papelería»** (`oficina-papeleria`, icono de maletín), con tres subcategorías: papelería y material escolar, material de oficina y mobiliario de oficina. Precio obligatorio y estado nuevo/usado, sin atributos propios. Va la 13.ª, antes de «Otros»: sale en «Ver todas», no en la cuadrícula del inicio (12). Se creó con la clave de servicio, igual que la crearía el panel; el icono necesitó código (`category-icon.tsx`). · Petición del cliente: tiendas como The Computer Store, la papelería de Martínez Hermanos o la tienda de electrónica y oficina de Ventage no tenían dónde poner el material de oficina y de papelería.
+- **D-071 · 2026-11-04** · **El panel de admin se adapta al ordenador.** Desde el ancho de un portátil (`lg`, 1024 px), el menú pasa a la izquierda y el contenido usa el ancho de la pantalla:
+  - Resumen, pagos, denuncias, catálogo y ajustes, a dos columnas.
+  - Usuarios, en una tabla con el email y el teléfono en sus columnas.
+  - La ficha del usuario, con Premium a la izquierda y la moderación y el historial a la derecha.
+  - En las denuncias, el formulario de moderación queda a la derecha, siempre a la vista.
+  - Los formularios sueltos (nueva categoría, ciudad) no se estiran.
+
+  En el móvil, el panel sigue igual. Solo cambia el CSS (`AdminShell`, `AdminColumns`), sin datos ni permisos nuevos. · Petición del cliente: el panel se va a usar mucho desde el ordenador, también por recepción o agentes.

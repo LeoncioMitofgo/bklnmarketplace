@@ -12,5 +12,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  return <div className="mx-auto min-h-dvh max-w-2xl">{children}</div>;
+  return <div className="mx-auto min-h-dvh max-w-2xl lg:max-w-none">{children}</div>;
 }

@@ -4,7 +4,12 @@ import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { AdminActionForm } from "@/components/admin/action-form";
-import { AdminShell, AdminSkeleton } from "@/components/admin/admin-shell";
+import {
+  AdminColumn,
+  AdminColumns,
+  AdminShell,
+  AdminSkeleton,
+} from "@/components/admin/admin-shell";
 import { TextAreaField } from "@/components/admin/text-area-field";
 import { closeReport } from "@/lib/admin/actions";
 import { requireAdmin } from "@/lib/admin/auth";
@@ -80,108 +85,115 @@ async function AdminChatReport({ params }: Pick<PageProps<"/admin/denuncias/[id]
       <Link href="/admin/denuncias" className="-mb-2 text-sm font-semibold text-primary">
         {t("back")}
       </Link>
-      <section className="flex flex-col gap-2">
-        <h1 className="text-lg font-extrabold">
-          {report.reported
-            ? t("heading", {
-                name: report.reported.display_name,
-                username: report.reported.username,
-              })
-            : t("deletedUser")}
-        </h1>
-        <p className="text-[15px] font-semibold">{tReasons(report.reason)}</p>
-        {report.details ? (
-          <p className="whitespace-pre-line break-words text-sm">{report.details}</p>
-        ) : null}
-        <p className="text-xs text-text-muted">
-          {t("by", {
-            username: report.reporter?.username ?? t("deletedUser"),
-            date: format.dateTime(new Date(report.created_at), {
-              dateStyle: "short",
-              timeStyle: "short",
-            }),
-          })}
-        </p>
-        {conversation?.data?.listing?.title ? (
-          <p className="text-sm text-text-muted">
-            {t("about", { title: conversation.data.listing.title })}
-          </p>
-        ) : null}
-        {report.reported ? (
-          <Link
-            href={`/admin/usuarios/${report.reported.id}`}
-            className="text-sm font-semibold text-primary"
-          >
-            {t("userActions")}
-          </Link>
-        ) : null}
-      </section>
-
-      <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-extrabold">{t("conversation")}</h2>
-        {rows.length === 0 ? (
-          <p className="text-sm text-text-muted">{t("noMessages")}</p>
-        ) : (
-          <ol className="flex flex-col gap-2 rounded-card bg-surface p-3">
-            {rows.map((m) => (
-              <li
-                key={m.id}
-                className={`flex max-w-[85%] flex-col gap-1 rounded-card px-3 py-2 text-sm ${
-                  m.sender_id === report.reported?.id
-                    ? "self-start bg-bg"
-                    : "self-end bg-primary text-white"
-                }`}
-              >
-                <span className="text-xs font-bold opacity-80">
-                  {nameOf(m.sender_id)} ·{" "}
-                  {format.dateTime(new Date(m.created_at), {
-                    dateStyle: "short",
-                    timeStyle: "short",
-                  })}
-                </span>
-                {m.image_path && imageUrls.get(m.image_path) ? (
-                  // biome-ignore lint/performance/noImgElement: foto del chat con URL firmada.
-                  <img
-                    src={imageUrls.get(m.image_path) ?? undefined}
-                    alt={t("photo")}
-                    className="max-h-60 rounded-control"
-                  />
-                ) : null}
-                {m.body ? <span className="whitespace-pre-line break-words">{m.body}</span> : null}
-              </li>
-            ))}
-          </ol>
-        )}
-      </section>
-
-      <section className="flex flex-col gap-3 rounded-card border border-border p-4">
-        <h2 className="font-sans text-base font-bold">{t("closeTitle")}</h2>
-        {/* El formulario sigue en la página al cerrar la denuncia, para conservar el mensaje. */}
-        <AdminActionForm
-          action={closeReport}
-          pendingLabel={t("working")}
-          buttons={
-            report.status === "open"
-              ? [
-                  { label: t("resolve"), intent: "resolved" },
-                  { label: t("dismiss"), intent: "dismissed", variant: "secondary" },
-                ]
-              : []
-          }
-        >
-          <input type="hidden" name="reportId" value={report.id} />
-          {report.status === "open" ? (
-            <>
-              <p className="text-sm text-text-muted">{t("closeHint")}</p>
-              <TextAreaField id="close-note" name="note" label={t("note")} required={false} />
-            </>
-          ) : (
-            <p className="rounded-control bg-surface px-3.5 py-3 text-sm">
-              {t(`closed.${report.status}`, { note: report.resolution_note ?? "—" })}
+      <AdminColumns>
+        <AdminColumn>
+          <section className="flex flex-col gap-2">
+            <h1 className="text-lg font-extrabold">
+              {report.reported
+                ? t("heading", {
+                    name: report.reported.display_name,
+                    username: report.reported.username,
+                  })
+                : t("deletedUser")}
+            </h1>
+            <p className="text-[15px] font-semibold">{tReasons(report.reason)}</p>
+            {report.details ? (
+              <p className="whitespace-pre-line break-words text-sm">{report.details}</p>
+            ) : null}
+            <p className="text-xs text-text-muted">
+              {t("by", {
+                username: report.reporter?.username ?? t("deletedUser"),
+                date: format.dateTime(new Date(report.created_at), {
+                  dateStyle: "short",
+                  timeStyle: "short",
+                }),
+              })}
             </p>
-          )}
-        </AdminActionForm>
-      </section>
+            {conversation?.data?.listing?.title ? (
+              <p className="text-sm text-text-muted">
+                {t("about", { title: conversation.data.listing.title })}
+              </p>
+            ) : null}
+            {report.reported ? (
+              <Link
+                href={`/admin/usuarios/${report.reported.id}`}
+                className="text-sm font-semibold text-primary"
+              >
+                {t("userActions")}
+              </Link>
+            ) : null}
+          </section>
+
+          <section className="flex flex-col gap-2">
+            <h2 className="text-lg font-extrabold">{t("conversation")}</h2>
+            {rows.length === 0 ? (
+              <p className="text-sm text-text-muted">{t("noMessages")}</p>
+            ) : (
+              <ol className="flex flex-col gap-2 rounded-card bg-surface p-3">
+                {rows.map((m) => (
+                  <li
+                    key={m.id}
+                    className={`flex max-w-[85%] flex-col gap-1 rounded-card px-3 py-2 text-sm ${
+                      m.sender_id === report.reported?.id
+                        ? "self-start bg-bg"
+                        : "self-end bg-primary text-white"
+                    }`}
+                  >
+                    <span className="text-xs font-bold opacity-80">
+                      {nameOf(m.sender_id)} ·{" "}
+                      {format.dateTime(new Date(m.created_at), {
+                        dateStyle: "short",
+                        timeStyle: "short",
+                      })}
+                    </span>
+                    {m.image_path && imageUrls.get(m.image_path) ? (
+                      // biome-ignore lint/performance/noImgElement: foto del chat con URL firmada.
+                      <img
+                        src={imageUrls.get(m.image_path) ?? undefined}
+                        alt={t("photo")}
+                        className="max-h-60 rounded-control"
+                      />
+                    ) : null}
+                    {m.body ? (
+                      <span className="whitespace-pre-line break-words">{m.body}</span>
+                    ) : null}
+                  </li>
+                ))}
+              </ol>
+            )}
+          </section>
+        </AdminColumn>
+        <AdminColumn sticky>
+          <section className="flex flex-col gap-3 rounded-card border border-border p-4">
+            <h2 className="font-sans text-base font-bold">{t("closeTitle")}</h2>
+            {/* El formulario sigue en la página al cerrar la denuncia, para conservar el mensaje. */}
+            <AdminActionForm
+              action={closeReport}
+              pendingLabel={t("working")}
+              buttons={
+                report.status === "open"
+                  ? [
+                      { label: t("resolve"), intent: "resolved" },
+                      { label: t("dismiss"), intent: "dismissed", variant: "secondary" },
+                    ]
+                  : []
+              }
+            >
+              <input type="hidden" name="reportId" value={report.id} />
+              {report.status === "open" ? (
+                <>
+                  <p className="text-sm text-text-muted">{t("closeHint")}</p>
+                  <TextAreaField id="close-note" name="note" label={t("note")} required={false} />
+                </>
+              ) : (
+                <p className="rounded-control bg-surface px-3.5 py-3 text-sm">
+                  {t(`closed.${report.status}`, { note: report.resolution_note ?? "—" })}
+                </p>
+              )}
+            </AdminActionForm>
+          </section>
+        </AdminColumn>
+      </AdminColumns>
     </AdminShell>
   );
 }

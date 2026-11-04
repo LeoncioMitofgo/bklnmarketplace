@@ -1204,6 +1204,12 @@
       "searchPlaceholder": "Nombre, @usuario, email o teléfono",
       "results": "{count, plural, =0 {Ningún resultado} one {# resultado} other {# resultados}}",
       "latest": "Los últimos en registrarse",
+      "columns": {
+        "name": "Nombre",
+        "email": "Email",
+        "phone": "Teléfono",
+        "status": "Estado"
+      },
       "badges": {
         "admin": "Admin",
         "premium": "Premium hasta {date}",
@@ -1260,7 +1266,9 @@
         "suspend_user": "Suspendido",
         "unsuspend_user": "Suspensión quitada",
         "ban_user": "Baneado",
-        "unban_user": "Baneo quitado"
+        "unban_user": "Baneo quitado",
+        "grant_admin": "Rol de admin concedido",
+        "revoke_admin": "Rol de admin retirado"
       }
     },
     "feedback": {

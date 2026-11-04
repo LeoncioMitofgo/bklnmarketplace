@@ -4,7 +4,12 @@ import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { AdminActionForm } from "@/components/admin/action-form";
-import { AdminShell, AdminSkeleton } from "@/components/admin/admin-shell";
+import {
+  AdminColumn,
+  AdminColumns,
+  AdminShell,
+  AdminSkeleton,
+} from "@/components/admin/admin-shell";
 import { PremiumActivateForm } from "@/components/admin/premium-form";
 import { TextAreaField } from "@/components/admin/text-area-field";
 import { UserBadges } from "@/components/admin/user-badges";
@@ -111,177 +116,190 @@ async function AdminUser({ params }: Pick<PageProps<"/admin/usuarios/[id]">, "pa
         ) : null}
       </section>
 
-      <section
-        id="premium"
-        className="flex scroll-mt-4 flex-col gap-3 rounded-card border border-border p-4"
-      >
-        <h2 className="text-lg font-extrabold">{t("premiumTitle")}</h2>
-        <p className="text-sm">
-          {premiumActive && user.premium_until
-            ? t("premiumUntil", { date: date(user.premium_until) })
-            : t("premiumNone")}
-        </p>
-        {pending ? (
-          <p className="rounded-control border-2 border-accent px-3.5 py-3 text-sm font-semibold">
-            {t("pending", {
-              months: pending.months,
-              amount: formatXaf(pending.price_xaf),
-              method: tMethods(pending.payment_method),
-              date: date(pending.created_at),
-            })}
-          </p>
-        ) : null}
-        <PremiumActivateForm
-          userId={user.id}
-          username={user.username}
-          premiumUntil={premiumActive ? user.premium_until : null}
-          prices={offer.prices.map((p) => ({ ...p, label: t("months", { count: p.months }) }))}
-          methods={MVP_PAYMENT_METHODS.map((m) => ({ value: m, label: tMethods(m) }))}
-          defaults={{
-            months: pending?.months ?? offer.prices[0]?.months ?? 1,
-            method: pending?.payment_method ?? "cash_office",
-          }}
-          labels={{
-            months: t("form.months"),
-            amount: t("form.amount"),
-            method: t("form.method"),
-            reference: t("form.reference"),
-            referenceHint: t("form.referenceHint"),
-            notes: t("form.notes"),
-            until: t("form.until", { date: "{date}" }),
-            submit: premiumActive ? t("form.extend") : t("form.activate"),
-            submitting: t("working"),
-          }}
-        />
-        {(activations.data ?? []).length > 0 ? (
-          <div className="flex flex-col gap-1">
-            <h3 className="font-sans text-sm font-bold">{t("history")}</h3>
-            <ul className="flex flex-col divide-y divide-border text-sm">
-              {(activations.data ?? []).map((a) => (
-                <li key={a.id} className="py-2">
-                  {t("activation", {
-                    months: a.months,
-                    amount: formatXaf(a.amount_xaf),
-                    method: tMethods(a.method),
-                    reference: a.reference,
-                    from: date(a.period_start),
-                    to: date(a.period_end),
-                  })}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-      </section>
-
-      <section className="flex flex-col gap-2">
-        <h2 className="text-lg font-extrabold">{t("listingsTitle")}</h2>
-        {counts.size === 0 ? (
-          <p className="text-sm text-text-muted">{t("noListings")}</p>
-        ) : (
-          <ul className="flex flex-wrap gap-2 text-sm">
-            {[...counts].map(([status, count]) => (
-              <li key={status} className="rounded-full bg-surface px-3 py-1">
-                {tStatus(status)}: <strong>{count}</strong>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-
-      {isAdmin ? (
-        <p className="rounded-control bg-surface px-3.5 py-3 text-sm text-text-muted">
-          {t("isAdmin")}
-        </p>
-      ) : (
-        <section className="flex flex-col gap-4 rounded-card border border-border p-4">
-          <h2 className="text-lg font-extrabold">{t("moderationTitle")}</h2>
-          {suspended && user.suspended_until ? (
-            <AdminActionForm
-              action={suspendUser}
-              pendingLabel={t("working")}
-              buttons={[{ label: t("unsuspend"), variant: "secondary" }]}
-            >
-              <p className="text-sm">{t("suspendedUntil", { date: date(user.suspended_until) })}</p>
-              <input type="hidden" name="userId" value={user.id} />
-              <input type="hidden" name="days" value="0" />
-              <TextAreaField id="unsuspend-reason" name="reason" label={t("reason")} />
-            </AdminActionForm>
-          ) : (
-            <AdminActionForm
-              action={suspendUser}
-              pendingLabel={t("working")}
-              buttons={[{ label: t("suspend"), variant: "secondary" }]}
-            >
-              <p className="text-sm text-text-muted">{t("suspendHint")}</p>
-              <input type="hidden" name="userId" value={user.id} />
-              <div className="flex flex-col gap-1.5">
-                <label htmlFor="suspend-days" className="text-sm font-semibold">
-                  {t("days")}
-                </label>
-                <select id="suspend-days" name="days" defaultValue="3" className={inputClasses()}>
-                  {SUSPENSION_DAYS.map((d) => (
-                    <option key={d} value={d}>
-                      {t("daysOption", { count: d })}
-                    </option>
+      <AdminColumns>
+        <AdminColumn>
+          <section
+            id="premium"
+            className="flex scroll-mt-4 flex-col gap-3 rounded-card border border-border p-4"
+          >
+            <h2 className="text-lg font-extrabold">{t("premiumTitle")}</h2>
+            <p className="text-sm">
+              {premiumActive && user.premium_until
+                ? t("premiumUntil", { date: date(user.premium_until) })
+                : t("premiumNone")}
+            </p>
+            {pending ? (
+              <p className="rounded-control border-2 border-accent px-3.5 py-3 text-sm font-semibold">
+                {t("pending", {
+                  months: pending.months,
+                  amount: formatXaf(pending.price_xaf),
+                  method: tMethods(pending.payment_method),
+                  date: date(pending.created_at),
+                })}
+              </p>
+            ) : null}
+            <PremiumActivateForm
+              userId={user.id}
+              username={user.username}
+              premiumUntil={premiumActive ? user.premium_until : null}
+              prices={offer.prices.map((p) => ({ ...p, label: t("months", { count: p.months }) }))}
+              methods={MVP_PAYMENT_METHODS.map((m) => ({ value: m, label: tMethods(m) }))}
+              defaults={{
+                months: pending?.months ?? offer.prices[0]?.months ?? 1,
+                method: pending?.payment_method ?? "cash_office",
+              }}
+              labels={{
+                months: t("form.months"),
+                amount: t("form.amount"),
+                method: t("form.method"),
+                reference: t("form.reference"),
+                referenceHint: t("form.referenceHint"),
+                notes: t("form.notes"),
+                until: t("form.until", { date: "{date}" }),
+                submit: premiumActive ? t("form.extend") : t("form.activate"),
+                submitting: t("working"),
+              }}
+            />
+            {(activations.data ?? []).length > 0 ? (
+              <div className="flex flex-col gap-1">
+                <h3 className="font-sans text-sm font-bold">{t("history")}</h3>
+                <ul className="flex flex-col divide-y divide-border text-sm">
+                  {(activations.data ?? []).map((a) => (
+                    <li key={a.id} className="py-2">
+                      {t("activation", {
+                        months: a.months,
+                        amount: formatXaf(a.amount_xaf),
+                        method: tMethods(a.method),
+                        reference: a.reference,
+                        from: date(a.period_start),
+                        to: date(a.period_end),
+                      })}
+                    </li>
                   ))}
-                </select>
+                </ul>
               </div>
-              <TextAreaField id="suspend-reason" name="reason" label={t("reason")} />
-            </AdminActionForm>
+            ) : null}
+          </section>
+        </AdminColumn>
+
+        <AdminColumn>
+          <section className="flex flex-col gap-2">
+            <h2 className="text-lg font-extrabold">{t("listingsTitle")}</h2>
+            {counts.size === 0 ? (
+              <p className="text-sm text-text-muted">{t("noListings")}</p>
+            ) : (
+              <ul className="flex flex-wrap gap-2 text-sm">
+                {[...counts].map(([status, count]) => (
+                  <li key={status} className="rounded-full bg-surface px-3 py-1">
+                    {tStatus(status)}: <strong>{count}</strong>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+
+          {isAdmin ? (
+            <p className="rounded-control bg-surface px-3.5 py-3 text-sm text-text-muted">
+              {t("isAdmin")}
+            </p>
+          ) : (
+            <section className="flex flex-col gap-4 rounded-card border border-border p-4">
+              <h2 className="text-lg font-extrabold">{t("moderationTitle")}</h2>
+              {suspended && user.suspended_until ? (
+                <AdminActionForm
+                  action={suspendUser}
+                  pendingLabel={t("working")}
+                  buttons={[{ label: t("unsuspend"), variant: "secondary" }]}
+                >
+                  <p className="text-sm">
+                    {t("suspendedUntil", { date: date(user.suspended_until) })}
+                  </p>
+                  <input type="hidden" name="userId" value={user.id} />
+                  <input type="hidden" name="days" value="0" />
+                  <TextAreaField id="unsuspend-reason" name="reason" label={t("reason")} />
+                </AdminActionForm>
+              ) : (
+                <AdminActionForm
+                  action={suspendUser}
+                  pendingLabel={t("working")}
+                  buttons={[{ label: t("suspend"), variant: "secondary" }]}
+                >
+                  <p className="text-sm text-text-muted">{t("suspendHint")}</p>
+                  <input type="hidden" name="userId" value={user.id} />
+                  <div className="flex flex-col gap-1.5">
+                    <label htmlFor="suspend-days" className="text-sm font-semibold">
+                      {t("days")}
+                    </label>
+                    <select
+                      id="suspend-days"
+                      name="days"
+                      defaultValue="3"
+                      className={inputClasses()}
+                    >
+                      {SUSPENSION_DAYS.map((d) => (
+                        <option key={d} value={d}>
+                          {t("daysOption", { count: d })}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <TextAreaField id="suspend-reason" name="reason" label={t("reason")} />
+                </AdminActionForm>
+              )}
+
+              <div className="border-t border-border pt-4">
+                {user.status === "banned" ? (
+                  <AdminActionForm
+                    action={setBanned}
+                    pendingLabel={t("working")}
+                    buttons={[{ label: t("unban"), variant: "secondary" }]}
+                  >
+                    <p className="text-sm">{t("bannedNow")}</p>
+                    <input type="hidden" name="userId" value={user.id} />
+                    <input type="hidden" name="username" value={user.username} />
+                    <input type="hidden" name="banned" value="0" />
+                    <TextAreaField id="unban-reason" name="reason" label={t("reason")} />
+                  </AdminActionForm>
+                ) : (
+                  <AdminActionForm
+                    action={setBanned}
+                    pendingLabel={t("working")}
+                    buttons={[{ label: t("ban"), variant: "danger" }]}
+                  >
+                    <p className="text-sm text-text-muted">{t("banHint")}</p>
+                    <input type="hidden" name="userId" value={user.id} />
+                    <input type="hidden" name="username" value={user.username} />
+                    <input type="hidden" name="banned" value="1" />
+                    <TextAreaField id="ban-reason" name="reason" label={t("reason")} />
+                  </AdminActionForm>
+                )}
+              </div>
+            </section>
           )}
 
-          <div className="border-t border-border pt-4">
-            {user.status === "banned" ? (
-              <AdminActionForm
-                action={setBanned}
-                pendingLabel={t("working")}
-                buttons={[{ label: t("unban"), variant: "secondary" }]}
-              >
-                <p className="text-sm">{t("bannedNow")}</p>
-                <input type="hidden" name="userId" value={user.id} />
-                <input type="hidden" name="username" value={user.username} />
-                <input type="hidden" name="banned" value="0" />
-                <TextAreaField id="unban-reason" name="reason" label={t("reason")} />
-              </AdminActionForm>
-            ) : (
-              <AdminActionForm
-                action={setBanned}
-                pendingLabel={t("working")}
-                buttons={[{ label: t("ban"), variant: "danger" }]}
-              >
-                <p className="text-sm text-text-muted">{t("banHint")}</p>
-                <input type="hidden" name="userId" value={user.id} />
-                <input type="hidden" name="username" value={user.username} />
-                <input type="hidden" name="banned" value="1" />
-                <TextAreaField id="ban-reason" name="reason" label={t("reason")} />
-              </AdminActionForm>
-            )}
-          </div>
-        </section>
-      )}
-
-      {(log.data ?? []).length > 0 ? (
-        <section className="flex flex-col gap-2">
-          <h2 className="text-lg font-extrabold">{t("logTitle")}</h2>
-          <ul className="flex flex-col divide-y divide-border text-sm">
-            {(log.data ?? []).map((entry) => (
-              <li key={entry.id} className="flex flex-col gap-0.5 py-2">
-                <span className="font-semibold">
-                  {t.has(`log.${entry.action}`) ? t(`log.${entry.action}`) : entry.action}
-                </span>
-                {entry.reason ? <span className="text-text-muted">{entry.reason}</span> : null}
-                <span className="text-xs text-text-muted">
-                  {format.dateTime(new Date(entry.created_at), {
-                    dateStyle: "short",
-                    timeStyle: "short",
-                  })}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
+          {(log.data ?? []).length > 0 ? (
+            <section className="flex flex-col gap-2">
+              <h2 className="text-lg font-extrabold">{t("logTitle")}</h2>
+              <ul className="flex flex-col divide-y divide-border text-sm">
+                {(log.data ?? []).map((entry) => (
+                  <li key={entry.id} className="flex flex-col gap-0.5 py-2">
+                    <span className="font-semibold">
+                      {t.has(`log.${entry.action}`) ? t(`log.${entry.action}`) : entry.action}
+                    </span>
+                    {entry.reason ? <span className="text-text-muted">{entry.reason}</span> : null}
+                    <span className="text-xs text-text-muted">
+                      {format.dateTime(new Date(entry.created_at), {
+                        dateStyle: "short",
+                        timeStyle: "short",
+                      })}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+        </AdminColumn>
+      </AdminColumns>
     </AdminShell>
   );
 }

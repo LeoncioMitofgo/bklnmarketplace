@@ -4,7 +4,12 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { AdminActionForm } from "@/components/admin/action-form";
-import { AdminShell, AdminSkeleton } from "@/components/admin/admin-shell";
+import {
+  AdminColumn,
+  AdminColumns,
+  AdminShell,
+  AdminSkeleton,
+} from "@/components/admin/admin-shell";
 import { CategoryFields } from "@/components/admin/category-fields";
 import { AdminCheckbox, AdminInput, AdminSelect, AdminTextArea } from "@/components/admin/fields";
 import { requireAdmin } from "@/lib/admin/auth";
@@ -83,96 +88,102 @@ async function CategoryContent({
         {parent ? t("backTo", { name: parent.name }) : t("back")}
       </Link>
       <h1 className="text-xl font-extrabold">{category.name}</h1>
-      <AdminActionForm
-        action={saveCategory}
-        pendingLabel={t("working")}
-        buttons={[{ label: t("save") }]}
-      >
-        <input type="hidden" name="id" value={category.id} />
-        <CategoryFields category={category} isRoot={isRoot} />
-      </AdminActionForm>
-
-      {isRoot ? (
-        <section className="flex flex-col gap-2">
-          <div className="flex items-center justify-between gap-3">
-            <h2 className="text-lg font-extrabold">{t("children")}</h2>
-            <Link
-              href={`/admin/catalogo/categoria/nueva?padre=${category.id}`}
-              className="text-sm font-semibold text-primary"
-            >
-              {t("newChildLink")}
-            </Link>
-          </div>
-          <ul className="flex flex-col divide-y divide-border rounded-card border border-border text-sm">
-            {(children ?? []).map((child) => (
-              <li key={child.id}>
-                <Link
-                  href={`/admin/catalogo/categoria/${child.id}`}
-                  className="flex min-h-11 items-center px-4"
-                >
-                  <span className={child.is_active ? "" : "text-text-muted line-through"}>
-                    {child.name}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-
-      <section className="flex flex-col gap-3">
-        <h2 className="text-lg font-extrabold">{t("attributes")}</h2>
-        <p className="text-sm text-text-muted">
-          {isRoot ? t("attributesRootHint") : t("attributesHint")}
-        </p>
-        {(attributes ?? []).length === 0 ? (
-          <p className="text-sm text-text-muted">{t("noAttributes")}</p>
-        ) : (
-          <ul className="flex flex-col gap-2">
-            {(attributes as Attribute[]).map((attribute) => (
-              <li key={attribute.id}>
-                <details className="rounded-card border border-border">
-                  <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-2 px-4 [&::-webkit-details-marker]:hidden">
-                    <span className="font-semibold">{attribute.label}</span>
-                    <span className="text-xs text-text-muted">
-                      {attribute.key} · {t(`types.${attribute.type}`)}
-                    </span>
-                  </summary>
-                  <div className="flex flex-col gap-3 border-t border-border p-4">
-                    <AdminActionForm
-                      action={saveAttribute}
-                      pendingLabel={t("working")}
-                      buttons={[{ label: t("save") }]}
-                    >
-                      <input type="hidden" name="id" value={attribute.id} />
-                      <AttributeFields attribute={attribute} />
-                    </AdminActionForm>
-                    <AdminActionForm
-                      action={deleteAttribute}
-                      pendingLabel={t("working")}
-                      buttons={[{ label: t("deleteAttribute"), variant: "ghost" }]}
-                    >
-                      <input type="hidden" name="id" value={attribute.id} />
-                      <p className="text-xs text-text-muted">{t("deleteHint")}</p>
-                    </AdminActionForm>
-                  </div>
-                </details>
-              </li>
-            ))}
-          </ul>
-        )}
-        <div className="flex flex-col gap-3 rounded-card bg-surface p-4">
-          <h3 className="font-sans text-base font-bold">{t("newAttribute")}</h3>
+      <AdminColumns>
+        <AdminColumn>
           <AdminActionForm
-            action={saveAttribute}
+            action={saveCategory}
             pendingLabel={t("working")}
-            buttons={[{ label: t("addAttribute"), variant: "secondary" }]}
+            buttons={[{ label: t("save") }]}
           >
-            <input type="hidden" name="categoryId" value={category.id} />
-            <AttributeFields />
+            <input type="hidden" name="id" value={category.id} />
+            <CategoryFields category={category} isRoot={isRoot} />
           </AdminActionForm>
-        </div>
-      </section>
+        </AdminColumn>
+
+        <AdminColumn>
+          {isRoot ? (
+            <section className="flex flex-col gap-2">
+              <div className="flex items-center justify-between gap-3">
+                <h2 className="text-lg font-extrabold">{t("children")}</h2>
+                <Link
+                  href={`/admin/catalogo/categoria/nueva?padre=${category.id}`}
+                  className="text-sm font-semibold text-primary"
+                >
+                  {t("newChildLink")}
+                </Link>
+              </div>
+              <ul className="flex flex-col divide-y divide-border rounded-card border border-border text-sm">
+                {(children ?? []).map((child) => (
+                  <li key={child.id}>
+                    <Link
+                      href={`/admin/catalogo/categoria/${child.id}`}
+                      className="flex min-h-11 items-center px-4"
+                    >
+                      <span className={child.is_active ? "" : "text-text-muted line-through"}>
+                        {child.name}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+
+          <section className="flex flex-col gap-3">
+            <h2 className="text-lg font-extrabold">{t("attributes")}</h2>
+            <p className="text-sm text-text-muted">
+              {isRoot ? t("attributesRootHint") : t("attributesHint")}
+            </p>
+            {(attributes ?? []).length === 0 ? (
+              <p className="text-sm text-text-muted">{t("noAttributes")}</p>
+            ) : (
+              <ul className="flex flex-col gap-2">
+                {(attributes as Attribute[]).map((attribute) => (
+                  <li key={attribute.id}>
+                    <details className="rounded-card border border-border">
+                      <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-2 px-4 [&::-webkit-details-marker]:hidden">
+                        <span className="font-semibold">{attribute.label}</span>
+                        <span className="text-xs text-text-muted">
+                          {attribute.key} · {t(`types.${attribute.type}`)}
+                        </span>
+                      </summary>
+                      <div className="flex flex-col gap-3 border-t border-border p-4">
+                        <AdminActionForm
+                          action={saveAttribute}
+                          pendingLabel={t("working")}
+                          buttons={[{ label: t("save") }]}
+                        >
+                          <input type="hidden" name="id" value={attribute.id} />
+                          <AttributeFields attribute={attribute} />
+                        </AdminActionForm>
+                        <AdminActionForm
+                          action={deleteAttribute}
+                          pendingLabel={t("working")}
+                          buttons={[{ label: t("deleteAttribute"), variant: "ghost" }]}
+                        >
+                          <input type="hidden" name="id" value={attribute.id} />
+                          <p className="text-xs text-text-muted">{t("deleteHint")}</p>
+                        </AdminActionForm>
+                      </div>
+                    </details>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <div className="flex flex-col gap-3 rounded-card bg-surface p-4">
+              <h3 className="font-sans text-base font-bold">{t("newAttribute")}</h3>
+              <AdminActionForm
+                action={saveAttribute}
+                pendingLabel={t("working")}
+                buttons={[{ label: t("addAttribute"), variant: "secondary" }]}
+              >
+                <input type="hidden" name="categoryId" value={category.id} />
+                <AttributeFields />
+              </AdminActionForm>
+            </div>
+          </section>
+        </AdminColumn>
+      </AdminColumns>
     </AdminShell>
   );
 }
