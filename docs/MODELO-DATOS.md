@@ -304,7 +304,7 @@ Solo puede haber una solicitud `pending` por usuario. `request_premium(months, m
 | `push_subscriptions` | Notificaciones push (una fila por navegador) | `user_id`, `endpoint` (único), `p256dh`, `auth`, `user_agent`, `last_used_at`. Las guarda el servidor (upsert por `endpoint`: si el móvil ya estaba con otra cuenta, pasa a la actual). RLS: cada usuario lee y borra las suyas |
 | `email_verification_tokens` | Verificación propia (D-020) | `token_hash` PK, `user_id`, `email`, `expires_at` (24 h), `used_at` |
 | `rate_limits` | Intentos de login y otros límites | PK (`key`, `window_start`), `count` |
-| `notification_log` | Evita avisos repetidos (crons idempotentes) | `user_id`, `kind` (`notification_kind`), `ref` (texto: el anuncio o la fecha de fin del periodo Premium), `channel` (`push`/`email`), `sent_at`. Único (`user_id`, `kind`, `ref`, `channel`); se apunta antes de enviar (D-061) |
+| `notification_log` | Evita avisos repetidos (crons idempotentes) | `user_id`, `kind` (`notification_kind`), `ref` (texto: el anuncio y su fecha de caducidad, `{id}:{aaaa-mm-dd}`, o la fecha de fin del periodo Premium), `channel` (`push`/`email`), `sent_at`. Único (`user_id`, `kind`, `ref`, `channel`); se apunta antes de enviar (D-061) |
 
 ## 4. Enums
 

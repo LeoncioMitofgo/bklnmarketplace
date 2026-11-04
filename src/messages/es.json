@@ -211,6 +211,16 @@
       "body": "Hemos recibido una petición para cambiar tu contraseña.",
       "button": "Crear nueva contraseña",
       "expiry": "El enlace caduca en 1 hora. Si no lo has pedido tú, ignora este mensaje: tu contraseña no cambia."
+    },
+    "expiry": {
+      "expiringSubject": "{count, plural, one {Tu anuncio caduca pronto} other {Tus anuncios caducan pronto}}",
+      "expiredSubject": "{count, plural, one {Tu anuncio ha caducado} other {Tus anuncios han caducado}}",
+      "greeting": "Hola, {name}:",
+      "expiringBody": "{count, plural, one {Tu anuncio {titles} caduca en los próximos {days} días. Renuévalo para que siga a la vista.} other {Tus anuncios {titles} caducan en los próximos {days} días. Renuévalos para que sigan a la vista.}}",
+      "expiredBody": "{count, plural, one {{titles} ha caducado y ya no se ve. Puedes renovarlo cuando quieras.} other {{titles} han caducado y ya no se ven. Puedes renovarlos cuando quieras.}}",
+      "more": "{count} más",
+      "button": "Ir a Mis anuncios",
+      "note": "Los anuncios se pueden renovar en sus últimos {days} días y después de caducar. Solo te escribimos una vez por anuncio."
     }
   },
   "listings": {

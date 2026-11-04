@@ -263,3 +263,11 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
   - Sin migración (D-067): usa la API de Storage y el RPC `account_storage_objects` del borrado de cuenta, una llamada por usuario. Con muchos usuarios convendrá hacerlo en SQL.
   - `/api/cron/daily?dry=1` (con `CRON_SECRET`) solo calcula lo que borraría, sin borrar ni avisar. El 2026-11-04 en producción: 10 usuarios con ficheros, 86 ficheros y nada que borrar.
   · ROADMAP 1.2 y ARQUITECTURA §5.2 y §5.5; el plan Free de Supabase tiene 1 GB de Storage.
+- **D-074 · 2026-11-04** · **Emails de anuncio por caducar y caducado** (ALCANCE §4.6), en el cron diario (`lib/listings/expiry-reminders.ts`):
+  - **Por caducar:** los anuncios activos que caducan dentro del plazo de renovación (`renew_window_days`, 3 días). No se avisa a Premium si lo sigue siendo al caducar y su plan se renueva solo (`plans.auto_renew`).
+  - **Caducado:** los que caducaron en los dos últimos días (por si un día el cron no corre). Los más antiguos no se avisan.
+  - Un solo email por vendedor y día con todos sus anuncios (hasta 3 títulos y «N más») y el botón a Mis anuncios. Solo por email; el push queda para los mensajes y Premium.
+  - No se escribe a cuentas de demostración (D-047), ni a emails sin confirmar, ni a quien tenga `notify_email` desactivado.
+  - `notification_log` con la referencia `{anuncio}:{fecha de caducidad}`: si se renueva, el siguiente periodo vuelve a avisar. Se apunta antes de enviar; si Resend falla, se quita lo apuntado para reintentarlo al día siguiente. Entre envíos hay 0,6 s, por el límite de Resend en el plan gratuito (2 por segundo; 100 emails al día).
+  - El cron acepta `?only=premium|listings|storage` para lanzar una sola tarea. Lo usan las pruebas e2e, para no tocar lo demás.
+  · ROADMAP 1.2. Sin migración: los tipos `listing_expiring` y `listing_expired` ya existían.

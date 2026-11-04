@@ -1,5 +1,6 @@
 import "server-only";
 import { getTranslations } from "next-intl/server";
+import { siteUrl } from "@/lib/site";
 import type { EmailMessage } from "./send";
 
 // Los emails necesitan estilos en línea: estos valores son copia de los tokens de IDENTIDAD §3.
@@ -85,5 +86,48 @@ export async function resetPasswordMessage(to: string, name: string, url: string
     expiry: t("reset.expiry"),
     footer: t("footer"),
     url,
+  });
+}
+
+/** «A», «B» y 2 más: los títulos de los anuncios, sin alargar el email. */
+function titleList(titles: string[], more: (count: number) => string): string {
+  const shown = titles.slice(0, 3).map((t) => `«${t}»`);
+  if (titles.length > 3) shown.push(more(titles.length - 3));
+  return new Intl.ListFormat("es", { type: "conjunction" }).format(shown);
+}
+
+export async function listingExpiryMessage(
+  to: string,
+  name: string,
+  listings: { expiring: string[]; expired: string[]; days: number },
+) {
+  const t = await getTranslations("emails.expiry");
+  const more = (count: number) => t("more", { count });
+  const body = [
+    listings.expiring.length
+      ? t("expiringBody", {
+          count: listings.expiring.length,
+          titles: titleList(listings.expiring, more),
+          days: listings.days,
+        })
+      : null,
+    listings.expired.length
+      ? t("expiredBody", {
+          count: listings.expired.length,
+          titles: titleList(listings.expired, more),
+        })
+      : null,
+  ].filter(Boolean);
+  return renderActionEmail({
+    to,
+    subject: listings.expiring.length
+      ? t("expiringSubject", { count: listings.expiring.length })
+      : t("expiredSubject", { count: listings.expired.length }),
+    greeting: t("greeting", { name }),
+    body: body.join(" "),
+    button: t("button"),
+    expiry: t("note", { days: listings.days }),
+    footer: (await getTranslations("emails"))("footer"),
+    url: `${siteUrl()}/mis-anuncios`,
   });
 }

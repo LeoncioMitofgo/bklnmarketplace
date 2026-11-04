@@ -1,8 +1,10 @@
+import { sendListingExpiryEmails } from "@/lib/listings/expiry-reminders";
 import { sendPremiumExpiringReminders } from "@/lib/push/reminders";
 import { cleanupStorage } from "@/lib/storage/cleanup";
 
 // Cron diario de Vercel (vercel.ts → crons). Vercel manda "Authorization: Bearer <CRON_SECRET>".
 // Sin CRON_SECRET en las variables no hace nada: así nadie puede lanzarlo desde fuera.
+// Tareas: aviso de Premium por caducar (push), emails de anuncios por caducar y limpieza de Storage.
 // Con ?dry=1 solo calcula la limpieza de Storage, sin borrar ni avisar: para revisarla a mano.
 
 export async function GET(request: Request) {
@@ -17,10 +19,15 @@ export async function GET(request: Request) {
     });
     return new Response("Unauthorized", { status: 401 });
   }
-  if (new URL(request.url).searchParams.get("dry") === "1") {
+  const params = new URL(request.url).searchParams;
+  if (params.get("dry") === "1") {
     return Response.json({ storage: await cleanupStorage({ dryRun: true }) });
   }
-  const premium = await sendPremiumExpiringReminders();
-  const storage = await cleanupStorage();
-  return Response.json({ premium, storage });
+  // ?only=premium|listings|storage lanza una sola tarea: las pruebas e2e, para no tocar lo demás.
+  const only = params.get("only");
+  const run = (job: string) => !only || only === job;
+  const premium = run("premium") ? await sendPremiumExpiringReminders() : undefined;
+  const listings = run("listings") ? await sendListingExpiryEmails() : undefined;
+  const storage = run("storage") ? await cleanupStorage() : undefined;
+  return Response.json({ premium, listings, storage });
 }

@@ -168,10 +168,10 @@ Criterios:
 | Renovar automáticamente los anuncios de Premium | pg_cron (SQL) | Diaria |
 | Al caducar Premium, pausar los anuncios que pasen del límite Normal | pg_cron (SQL) | Diaria |
 | Email por mensajes sin leer | Vercel Cron → `/api/cron/...` | Cada 10–15 min (en producción, plan Pro) |
-| Avisos: Premium a 7 días de caducar (hecho, D-061); anuncio por caducar (pendiente) | Vercel Cron → `/api/cron/daily` (08:00 UTC) | Diaria |
+| Avisos: Premium a 7 días de caducar, por push (hecho, D-061); anuncio por caducar y caducado, por email (hecho, D-074) | Vercel Cron → `/api/cron/daily` (08:00 UTC) | Diaria |
 | Limpiar Storage: ficheros sin uso de más de 24 h, fotos de anuncios borrados hace más de 30 días y restos de cuentas borradas (hecho, D-073; las fotos de una cuenta borrada se borran en el momento, D-055). Los tokens caducados los borra `cleanup_technical_tables()` | Vercel Cron → `/api/cron/daily` (API de Storage) | Diaria |
 
-Las rutas de cron se protegen con `CRON_SECRET`: Vercel lo manda como `Authorization: Bearer …`, y sin la variable la ruta responde 401. El cron está en `vercel.ts` (`crons`). En desarrollo (plan Hobby, como mucho un cron al día) se lanzan a mano con esa cabecera.
+Las rutas de cron se protegen con `CRON_SECRET`: Vercel lo manda como `Authorization: Bearer …`, y sin la variable la ruta responde 401. El cron está en `vercel.ts` (`crons`). En desarrollo (plan Hobby, como mucho un cron al día) se lanzan a mano con esa cabecera; `?only=premium|listings|storage` lanza una sola tarea y `?dry=1` solo calcula la limpieza de Storage.
 
 ### 5.6 Panel de administración (D-057)
 - `/admin`, sin barra inferior y pensado para el móvil. El proxy exige sesión y cada página comprueba `is_admin()`: a quien no es admin le responde "no existe".

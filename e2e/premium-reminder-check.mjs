@@ -54,7 +54,9 @@ try {
   ok("sin el secreto → 401", res.status === 401, String(res.status));
   res = await fetch(`${BASE}/api/cron/daily`, { headers: { authorization: "Bearer otro" } });
   ok("con otro secreto → 401", res.status === 401, String(res.status));
-  res = await fetch(`${BASE}/api/cron/daily`, { headers: { authorization: `Bearer ${SECRET}` } });
+  res = await fetch(`${BASE}/api/cron/daily?only=premium`, {
+    headers: { authorization: `Bearer ${SECRET}` },
+  });
   const body = await res.json().catch(() => null);
   ok(
     "con el secreto → 200 y resumen",
@@ -76,7 +78,9 @@ try {
       (await logRows(expired.id)).length === 0 &&
       (await logRows(normal.id)).length === 0,
   );
-  res = await fetch(`${BASE}/api/cron/daily`, { headers: { authorization: `Bearer ${SECRET}` } });
+  res = await fetch(`${BASE}/api/cron/daily?only=premium`, {
+    headers: { authorization: `Bearer ${SECRET}` },
+  });
   ok(
     "el día siguiente no repite el aviso",
     res.status === 200 && (await logRows(soon.id)).length === 1,
@@ -85,7 +89,9 @@ try {
   // Al renovar cambia la fecha de fin: el periodo nuevo tendrá su propio aviso.
   const renewed = new Date(Date.now() + 5 * DAY).toISOString();
   await admin.from("profiles").update({ premium_until: renewed }).eq("id", soon.id);
-  await fetch(`${BASE}/api/cron/daily`, { headers: { authorization: `Bearer ${SECRET}` } });
+  await fetch(`${BASE}/api/cron/daily?only=premium`, {
+    headers: { authorization: `Bearer ${SECRET}` },
+  });
   ok("con otra fecha de fin, vuelve a avisar una vez", (await logRows(soon.id)).length === 2);
 
   // ─── Avisos en la web ───────────────────────────────────────────────────────

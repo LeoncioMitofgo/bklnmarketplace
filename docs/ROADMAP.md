@@ -58,7 +58,7 @@
   - Borrador en la base de datos y atributos según la categoría.
 - [x] Mis anuncios (`/mis-anuncios`): pestañas por estado, editar, pausar/reactivar, vendido, renovar y eliminar (2026-10-16)
 - [x] Caducidad automática y renovación automática Premium con pg_cron, más el reajuste diario de límites (2026-10-16)
-- [ ] Avisos de caducidad por email (Resend ya está; irían en el cron diario `/api/cron/daily`, D-061)
+- [x] Avisos de caducidad por email (2026-11-04, D-074): en el cron diario, un email por vendedor con sus anuncios por caducar (últimos 3 días) y los recién caducados, sin repetir ni escribir a Premium con renovación automática. Probado con `listing-expiry-check`
 - [x] Control de límites por plan, aplicado en la base de datos (2026-10-16): anuncios activos, fotos, duración y ritmo diario
 - [x] Capa de datos de anuncios probada de extremo a extremo (2026-10-16): 37 comprobaciones de la base de datos y 11 de páginas con sesión
 - [x] Probar en el móvil el asistente completo y la subida de fotos en Android (2026-10-16): primer anuncio real, 3 fotos WebP de 14–127 KB
