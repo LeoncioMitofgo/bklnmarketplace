@@ -221,6 +221,21 @@
       "more": "{count} más",
       "button": "Ir a Mis anuncios",
       "note": "Los anuncios se pueden renovar en sus últimos {days} días y después de caducar. Solo te escribimos una vez por anuncio."
+    },
+    "unread": {
+      "subjectOne": "{sender} te ha escrito en BKLN Marketplace",
+      "subjectMany": "Tienes mensajes sin leer en {count} conversaciones",
+      "greeting": "Hola, {name}:",
+      "oneAbout": "{sender} te ha escrito sobre «{listing}».",
+      "one": "{sender} te ha escrito.",
+      "preview": "Su último mensaje: «{preview}»",
+      "photo": "Te ha enviado una foto.",
+      "many": "Tienes mensajes sin leer de {senders}.",
+      "more": "{count} más",
+      "someone": "Alguien",
+      "buttonOne": "Responder",
+      "buttonMany": "Ver mis mensajes",
+      "note": "Te escribimos cuando un mensaje lleva más de {minutes} minutos sin leer, como mucho una vez por hora. Si contestas rápido, vendes antes."
     }
   },
   "listings": {

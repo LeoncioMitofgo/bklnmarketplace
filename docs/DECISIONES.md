@@ -276,3 +276,9 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
   - La precompilación solo admite textos, no listas. Por eso el cuerpo de los términos y la privacidad pasa de `es.json` a `src/content/legal/es.json`, que solo lee el servidor (`LegalDocument`). Los títulos siguen en `es.json`. El francés irá en `content/legal/fr.json`.
   - Es una opción experimental de next-intl 4.14. Si una versión nueva la rompe, se quita la línea y todo vuelve a funcionar igual, con 9 KB más.
   · ROADMAP 1.7 y la regla de poco peso en 3G (ALCANCE §7).
+- **D-076 · 2026-11-04** · **Email de mensajes sin leer, listo para Vercel Pro** (ALCANCE §4.6, ARQUITECTURA §5.3; `lib/chat/unread-emails.ts`, ruta `/api/cron/unread`):
+  - Si un mensaje lleva **más de 15 minutos sin leer**, se manda un email con todas las conversaciones pendientes, **como mucho uno por hora** y usuario. Si es una sola conversación, el email dice quién escribe, el anuncio y el último mensaje, con el botón «Responder». Si son varias, quién escribe y el botón «Ver mis mensajes».
+  - Solo se mira la actividad de las últimas 24 h. `notification_log` apunta cada conversación con la hora de su último mensaje: un mensaje nuevo vuelve a avisar y lo ya avisado no se repite.
+  - No se escribe a cuentas de demostración, ni a emails sin confirmar, ni a quien tenga `notify_email` desactivado, ni a cuentas baneadas. Es la misma comprobación que en los emails de caducidad (`lib/email/recipient.ts`).
+  - **Todavía no está programado.** En Hobby, un cron más frecuente que diario hace fallar el despliegue. Al pasar a Vercel Pro se añade `{ path: "/api/cron/unread", schedule: "*/15 * * * *" }` en `vercel.ts` (lo dice un comentario allí). Hasta la apertura no hay usuarios reales que lo necesiten. · Elección del cliente («la A»), frente a un resumen diario desde ya.
+  - Las rutas de cron comparten la comprobación de `CRON_SECRET` (`lib/cron.ts`).

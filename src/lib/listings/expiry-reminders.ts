@@ -1,4 +1,5 @@
 import "server-only";
+import { emailRecipient, waitBetweenEmails } from "@/lib/email/recipient";
 import { sendEmail } from "@/lib/email/send";
 import { listingExpiryMessage } from "@/lib/email/templates";
 import { getRenewWindowDays } from "@/lib/settings";
@@ -11,14 +12,11 @@ import { createAdminClient } from "@/lib/supabase/admin";
 const DAY = 86_400_000;
 /** Se avisa de lo que caducó en los dos últimos días: cubre un día en que el cron no corra. */
 const EXPIRED_LOOKBACK_DAYS = 2;
-/** Resend deja 2 envíos por segundo en el plan gratuito. */
-const SEND_GAP_MS = 600;
 
 type Due = { id: string; userId: string; title: string; expiresAt: string };
 type Kind = "listing_expiring" | "listing_expired";
 
 const ref = (l: Due) => `${l.id}:${l.expiresAt.slice(0, 10)}`;
-const pause = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export async function sendListingExpiryEmails(): Promise<{ users: number; sent: number }> {
   const admin = createAdminClient();
@@ -62,19 +60,8 @@ export async function sendListingExpiryEmails(): Promise<{ users: number; sent: 
 
   let sent = 0;
   for (const [userId, due] of byUser) {
-    const [{ data: auth }, { data: settings }, { data: profile }] = await Promise.all([
-      admin.auth.admin.getUserById(userId),
-      admin
-        .from("profile_private")
-        .select("email_verified_at, notify_email")
-        .eq("user_id", userId)
-        .single(),
-      admin.from("profiles").select("display_name").eq("id", userId).single(),
-    ]);
-    const email = auth.user?.email;
-    // Ni cuentas de demostración (D-047) ni emails sin confirmar: rebotarían.
-    if (!email || auth.user?.user_metadata?.demo || !settings?.email_verified_at) continue;
-    if (!settings.notify_email) continue;
+    const recipient = await emailRecipient(admin, userId);
+    if (!recipient) continue;
 
     // Primero se apunta: lo que ya estaba (otro día u otro cron a la vez) no se repite.
     const rows = (Object.keys(due) as Kind[]).flatMap((kind) =>
@@ -96,10 +83,10 @@ export async function sendListingExpiryEmails(): Promise<{ users: number; sent: 
     };
     if (!fresh.expiring.length && !fresh.expired.length) continue;
 
-    if (sent) await pause(SEND_GAP_MS);
+    if (sent) await waitBetweenEmails();
     try {
       await sendEmail(
-        await listingExpiryMessage(email, profile?.display_name ?? "", { ...fresh, days }),
+        await listingExpiryMessage(recipient.email, recipient.name, { ...fresh, days }),
       );
       sent++;
     } catch (sendError) {

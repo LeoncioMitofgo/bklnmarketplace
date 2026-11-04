@@ -6,5 +6,7 @@ export const config: VercelConfig = {
   framework: "nextjs",
   regions: ["dub1"],
   // Avisos programados (D-061): a las 08:00 UTC, las 09:00 en Malabo. El plan Hobby permite uno al día.
+  // Con el plan Pro se añade { path: "/api/cron/unread", schedule: "*/15 * * * *" } (D-076): el email
+  // de mensajes sin leer. En Hobby, un cron más frecuente que diario hace fallar el despliegue.
   crons: [{ path: "/api/cron/daily", schedule: "0 8 * * *" }],
 };

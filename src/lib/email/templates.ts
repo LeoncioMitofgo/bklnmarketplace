@@ -89,12 +89,19 @@ export async function resetPasswordMessage(to: string, name: string, url: string
   });
 }
 
-/** «A», «B» y 2 más: los títulos de los anuncios, sin alargar el email. */
-function titleList(titles: string[], more: (count: number) => string): string {
-  const shown = titles.slice(0, 3).map((t) => `«${t}»`);
-  if (titles.length > 3) shown.push(more(titles.length - 3));
+/** A, B y 2 más: una lista corta, sin alargar el email. */
+function shortList(items: string[], more: (count: number) => string): string {
+  const shown = items.slice(0, 3);
+  if (items.length > 3) shown.push(more(items.length - 3));
   return new Intl.ListFormat("es", { type: "conjunction" }).format(shown);
 }
+
+/** «A», «B» y 2 más: los títulos de los anuncios. */
+const titleList = (titles: string[], more: (count: number) => string) =>
+  shortList(
+    titles.map((t) => `«${t}»`),
+    more,
+  );
 
 export async function listingExpiryMessage(
   to: string,
@@ -129,5 +136,41 @@ export async function listingExpiryMessage(
     expiry: t("note", { days: listings.days }),
     footer: (await getTranslations("emails"))("footer"),
     url: `${siteUrl()}/mis-anuncios`,
+  });
+}
+
+export async function unreadMessagesMessage(
+  to: string,
+  name: string,
+  conversations: { id: string; sender: string; listing: string | null; preview: string | null }[],
+  minutes: number,
+) {
+  const t = await getTranslations("emails.unread");
+  const sender = (value: string) => value || t("someone");
+  const [first] = conversations;
+  const single = conversations.length === 1;
+  const body = single
+    ? [
+        first.listing
+          ? t("oneAbout", { sender: sender(first.sender), listing: first.listing })
+          : t("one", { sender: sender(first.sender) }),
+        first.preview ? t("preview", { preview: first.preview }) : t("photo"),
+      ].join(" ")
+    : t("many", {
+        senders: shortList([...new Set(conversations.map((c) => sender(c.sender)))], (count) =>
+          t("more", { count }),
+        ),
+      });
+  return renderActionEmail({
+    to,
+    subject: single
+      ? t("subjectOne", { sender: sender(first.sender) })
+      : t("subjectMany", { count: conversations.length }),
+    greeting: t("greeting", { name }),
+    body,
+    button: single ? t("buttonOne") : t("buttonMany"),
+    expiry: t("note", { minutes }),
+    footer: (await getTranslations("emails"))("footer"),
+    url: single ? `${siteUrl()}/mensajes/${first.id}` : `${siteUrl()}/mensajes`,
   });
 }

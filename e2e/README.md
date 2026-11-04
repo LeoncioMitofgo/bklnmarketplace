@@ -57,6 +57,7 @@ pnpm e2e monitoring-check
 | `store-browser-check` | Tienda Premium `/t/<tienda>` y su editor (1.6) |
 | `admin-catalog-browser-check` | Categorías, ciudades, planes, precios y oficina en el panel (1.6) |
 | `premium-reminder-check` | Cron diario (solo esa tarea, `?only=premium`) y aviso de Premium por caducar, en la web y por push (1.6) |
+| `unread-email-check` | Email de mensajes sin leer (`/api/cron/unread`): avisa a los 15 minutos, no de lo reciente ni de lo leído, como mucho uno por hora y sin repetir (D-076). En local el email sale en la consola del servidor; al terminar quita los avisos que apuntó a quien no es de la prueba |
 | `listing-expiry-check` | Emails de anuncio por caducar y caducado en el cron (`?only=listings`): los apunta, no escribe a Premium ni a emails sin confirmar, y no repite (D-074). En local el email sale en la consola del servidor. Apunta los avisos de todos los vendedores que toque ese día |
 | `storage-cleanup-check` | Limpieza de Storage en modo prueba (`/api/cron/daily?dry=1`): deja lo que se usa y las subidas recientes, y borraría lo de anuncios borrados hace 40 días y lo de anuncios y cuentas que no existen (D-073). No borra nada |
 | `brand-check` | Iconos, manifiesto, Open Graph, logo y que Chrome pueda instalar la web (1.7) |

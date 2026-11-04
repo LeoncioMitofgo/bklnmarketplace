@@ -91,7 +91,8 @@
   - Probado con Chrome real: el servidor envía y FCM acepta; el service worker muestra el aviso.
 - [x] Claves VAPID en Vercel (Production) y nuevo despliegue (2026-10-17). Comprobado contra bklnmarketplace.com: FCM acepta los avisos firmados por el servidor
 - [ ] Probar los avisos push en iPhone (lo hace el usuario): solo funcionan con la web instalada en la pantalla de inicio, posible desde la 1.7 (D-063), en iOS 16.4 o posterior
-- [ ] Email de respaldo por mensajes sin leer (Resend ya está; el plan Hobby solo permite un cron al día, así que puede esperar a Vercel Pro)
+- [x] Email de respaldo por mensajes sin leer (2026-11-04, D-076): `/api/cron/unread`, con un email agrupado si un mensaje lleva más de 15 minutos sin leer, como mucho uno por hora. Probado con `unread-email-check`
+  - [ ] Programarlo cada 15 minutos en `vercel.ts` al pasar a Vercel Pro (Hobby no lo permite)
 - [ ] Probar el chat en el móvil entre dos cuentas (lo hace el usuario)
 
 ### 1.5 Confianza y moderación
@@ -180,7 +181,7 @@ Previsto para **enero de 2027** (D-068).
 - [ ] Limpiar los restos de pruebas e2e fallidas en producción, con el visto bueno del cliente: cuentas `pnav+…` y `perfil+…`, las denuncias abiertas que dejaron, anuncios bloqueados «Móvil revisado…» y cobros de prueba de Premium
 - [ ] Decidir si se quedan los anuncios de prueba del cliente («Coche en venta», «Camisa y Chaleco», «POS en venta…»): no son de demostración y no se borran con ellas
 - [ ] Antes de abrir, borrar las cuentas de demostración (D-047): son las de `user_metadata.demo = true` en Supabase Auth; al borrarlas desaparecen sus anuncios, y sus fotos hay que quitarlas de Storage (si se borran desde el panel de Supabase, el cron las quita al día siguiente, D-073; como son muchas, puede saltar el freno y habrá que borrarlas a mano)
-- [ ] Supabase Pro en el proyecto actual y Vercel Pro, antes de abrir (D-067). Antes, mover el proyecto de la web de BKLN a una organización gratuita: en Pro, cada proyecto de la organización paga su cómputo
+- [ ] Supabase Pro en el proyecto actual y Vercel Pro, antes de abrir (D-067). Con Vercel Pro, programar el cron de mensajes sin leer (D-076). Antes, mover el proyecto de la web de BKLN a una organización gratuita: en Pro, cada proyecto de la organización paga su cómputo
 - [ ] Proyecto de Supabase de desarrollo (Irlanda), antes de la próxima migración y antes de abrir: las migraciones y las pruebas e2e no deben tocar producción (D-067)
 - [ ] Abrir la indexación: `SITE_INDEXABLE=true` en las variables de producción de Vercel (D-043)
 - [ ] Despliegue en producción
