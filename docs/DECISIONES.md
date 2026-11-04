@@ -218,7 +218,7 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
 
   · Hasta ahora vivían en una carpeta temporal y se borraron. Se recuperaron del historial de la sesión y se pasaron tal cual, para no reescribir más de 500 comprobaciones que ya funcionaban. Al ejecutarlas de nuevo se actualizaron las que habían quedado atrás de la web (el formulario único del panel, la redirección a entrar en el proxy y las páginas que Next deja montadas).
 - **D-065 · 2026-11-04** · **Tiendas fundadoras:** a las primeras empresas que suban sus anuncios antes del lanzamiento se les ofrece:
-  - **6 meses de Premium gratis** (valen 23.250 FCFA, D-022). Se registra en el panel como un cobro de 0 FCFA con la referencia `FUNDADORA-<empresa>` (D-057).
+  - **6 meses de Premium gratis** (valen 23.250 FCFA, D-022), **contados desde la apertura** (D-068). Se activa al registrarse, para que preparen su tienda, con un solo cobro de 0 FCFA en el panel por los meses que falten hasta la apertura más 6 (8 si se activa en noviembre, 7 en diciembre). La referencia es `FUNDADORA-<empresa>` (D-057).
   - **Visibilidad**: con Premium, sus anuncios salen en Destacados y tienen su tienda en `/t/<tienda>`.
   - **Publicidad**: se las nombra como tiendas fundadoras en la campaña del lanzamiento (nota de prensa y redes).
 
@@ -231,3 +231,4 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
   - Las propuestas y los correos del lanzamiento llevan el WhatsApp de BKLN, +240 222 798 086. El de los pagos de Premium sigue siendo el +240 555 220 846 (D-025).
 
   · Decisión del cliente. Las tiendas fundadoras (D-065) pueden registrarse ya sin tener que trasladar sus cuentas después, y los anuncios de demostración se quedan hasta el lanzamiento. A cambio, la región ya no se puede cambiar: en la medición de ARQUITECTURA §1, Irlanda daba 11 ms más de mediana que Londres y picos peores.
+- **D-068 · 2026-11-04** · **Lanzamiento previsto para enero de 2027**, sin día fijo todavía. Las propuestas a las tiendas fundadoras salen la semana del 4 de noviembre, y el día exacto se les anuncia a principios de enero. · Decisión del cliente. Quedan unas cinco o seis semanas útiles antes de las fiestas para que las tiendas suban sus anuncios: esperar a diciembre sería abrir con la web casi vacía.

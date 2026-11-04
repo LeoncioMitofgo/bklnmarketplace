@@ -3,6 +3,7 @@
 > Empresas de Malabo para dar a conocer la plataforma, buscar patrocinio y conseguir las primeras tiendas (ROADMAP 1.7: «Sembrar anuncios con vendedores y tiendas fundadoras»). Investigado el 2026-11-04 con fuentes públicas.
 > **Solo se apuntan correos publicados por la propia empresa o por un directorio, y se ha comprobado que su dominio recibe correo.** Aun así, hay que confirmarlos: muchas empresas de Guinea Ecuatorial contestan antes por teléfono o WhatsApp que por email.
 > Los proveedores de pago (Rosa Money, Muni Dinero, Bonafide) están en [PAGOS-PROVEEDORES.md](PAGOS-PROVEEDORES.md).
+> **Lanzamiento previsto: enero de 2027 (D-068).**
 
 ## Por dónde empezar
 
@@ -43,7 +44,7 @@ Directorios y guías que venden publicidad:
 
 ## Tiendas fundadoras
 
-Los primeros anuncios de calidad. **Oferta (D-065): 6 meses de Premium gratis, visibilidad (Destacados y tienda propia) y publicidad (se las nombra como tiendas fundadoras en la campaña del lanzamiento).**
+Los primeros anuncios de calidad. **Oferta (D-065): 6 meses de Premium gratis, contados desde la apertura, visibilidad (Destacados y tienda propia) y publicidad (se las nombra como tiendas fundadoras en la campaña del lanzamiento).**
 
 Cada tienda tiene **su propia propuesta en PDF y su mensaje**, con lo que hemos visto de ella (sus productos, sus precios, su dirección), en `C:/Users/leonc/PlanEject/propuestas` («Propuesta BKLN - <empresa>.pdf» y «Mensaje - <empresa>.txt»). Las fuentes están en `propuestas/fuentes/marketplace-*.md` y se regeneran con `node scripts/propuesta_md.mjs <archivo>`. Cada una lleva capturas de su sector, no genéricas: su búsqueda o su categoría, la ficha de un anuncio como los suyos (una Hilux, un Mercedes, un piso, un sofá) y la conversación vista desde la tienda. Se hacen con `PlanEject/scripts/capturas-marketplace.mjs` contra la web en local, con cuentas temporales que se borran al terminar.
 
@@ -56,7 +57,7 @@ Cada tienda tiene **su propia propuesta en PDF y su mensaje**, con lo que hemos 
 | **KITEA Malabo** | Muebles, cocina, electrodomésticos y decoración | WhatsApp +240 551 80 36 98 (del directorio; no publica email) | Carretera del Aeropuerto, km 6 | Propuesta lista. Confirmar que la tienda sigue abierta |
 | ~~Inmobiliaria Santa Isabel~~ | Alquiler de pisos, chalets y fincas | — | +240 222 212 389 | Descartada por ahora: su web y su email ya no funcionan |
 
-Los teléfonos que vienen de un directorio pueden haber cambiado. Por email se manda el texto del mensaje de cada una, con su PDF adjunto y el asunto «Propuesta para <empresa>: tienda fundadora de BKLN Marketplace».
+Los teléfonos que vienen de un directorio pueden haber cambiado. Los correos y los mensajes de cada una están abajo, en «Correos → Tiendas fundadoras».
 
 ## Lugar y comunidad
 
@@ -70,13 +71,138 @@ Los teléfonos que vienen de un directorio pueden haber cambiado. Por email se m
 
 Se envían desde **hello@bklnsoftware.tech**, con el WhatsApp de BKLN, +240 222 798 086 (D-067); el de pagos de Premium es otro. Hay que poner el nombre de quien firma y la fecha del lanzamiento cuando se sepa.
 
+### Tiendas fundadoras
+
+Se envían en la semana del 4 de noviembre de 2026, con el PDF de cada una adjunto. Después del correo va el mensaje de WhatsApp con el mismo PDF (`Mensaje - <empresa>.txt` en `C:/Users/leonc/PlanEject/propuestas`).
+
+#### CFAO Motors (Toyota)
+
+- **Para:** cfaomotorsgq@cfao.com
+- **Asunto:** Propuesta para CFAO Motors: tienda fundadora de BKLN Marketplace
+- **Adjunto:** Propuesta BKLN - CFAO Motors Guinea Ecuatorial.pdf
+- **WhatsApp:** +240 552 220 763
+
+> Buenos días:
+>
+> Les escribe Leoncio Felipe Mitogo, de BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo.
+>
+> En enero de 2027 abrimos BKLN Marketplace (bklnmarketplace.com), una web para comprar y vender en toda Guinea Ecuatorial, y nos gustaría que CFAO Motors fuera una de sus tiendas fundadoras. Queremos que quien busque un coche en la web encuentre desde el primer día la gama Toyota, de la Hilux al Land Cruiser, con sus precios y con ustedes como concesionario oficial.
+>
+> Como tienda fundadora, les ofrecemos:
+>
+> - 6 meses de Premium gratis, contados desde la apertura: su propia tienda en la web, con su logo, y sus anuncios entre los destacados.
+> - Presencia en la campaña de lanzamiento como tienda fundadora.
+> - Ayuda para empezar: pasamos por el concesionario del km 4, creamos la cuenta con ustedes y subimos juntos los primeros modelos.
+>
+> Les adjunto una propuesta preparada para CFAO Motors, con un ejemplo de cómo se verían sus anuncios. Si les interesa, díganme qué día les viene bien para la visita.
+>
+> Un saludo,
+>
+> Leoncio Felipe Mitogo
+> BKLN Software & Systems · Banapa, Malabo
+> hello@bklnsoftware.tech · +240 222 798 086
+> bklnsoftware.tech · bklnmarketplace.com
+
+#### Casa Mercedes (SDEGE)
+
+- **Para:** info@sdege-sa.com
+- **Asunto:** Propuesta para Casa Mercedes: tienda fundadora de BKLN Marketplace
+- **Adjunto:** Propuesta BKLN - SDEGE · Casa Mercedes.pdf
+- **WhatsApp:** +240 222 74 82 14
+
+> Buenos días:
+>
+> Les escribe Leoncio Felipe Mitogo, de BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo.
+>
+> En enero de 2027 abrimos BKLN Marketplace (bklnmarketplace.com), una web para comprar y vender en toda Guinea Ecuatorial, y nos gustaría que Casa Mercedes fuera una de sus tiendas fundadoras. Queremos que quien busque un vehículo, una pieza o un taller en la web encuentre desde el primer día al representante oficial de Mercedes-Benz en Guinea Ecuatorial.
+>
+> Como tienda fundadora, les ofrecemos:
+>
+> - 6 meses de Premium gratis, contados desde la apertura: su propia tienda en la web, con su logo, espacio para sus vehículos, sus piezas y su taller, y sus anuncios entre los destacados.
+> - Presencia en la campaña de lanzamiento como tienda fundadora.
+> - Ayuda para empezar: pasamos por Caracolas, creamos la cuenta con ustedes y subimos juntos los primeros anuncios.
+>
+> Les adjunto una propuesta preparada para Casa Mercedes, con un ejemplo de cómo se verían sus anuncios. Si les interesa, díganme qué día les viene bien para la visita.
+>
+> Un saludo,
+>
+> Leoncio Felipe Mitogo
+> BKLN Software & Systems · Banapa, Malabo
+> hello@bklnsoftware.tech · +240 222 798 086
+> bklnsoftware.tech · bklnmarketplace.com
+
+#### Rock & Noble
+
+- **Para:** direccion@rockandnobleeg.com
+- **CC:** administracion@rockandnobleeg.com
+- **Asunto:** Propuesta para Rock & Noble: tienda fundadora de BKLN Marketplace
+- **Adjunto:** Propuesta BKLN - Rock & Noble.pdf
+- **WhatsApp:** +240 555 884 750
+
+> A la atención de Kirsha Juncal Chamorro, General Manager
+>
+> Buenos días:
+>
+> Les escribe Leoncio Felipe Mitogo, de BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo.
+>
+> En enero de 2027 abrimos BKLN Marketplace (bklnmarketplace.com), una web para comprar, vender y alquilar en toda Guinea Ecuatorial, y nos gustaría que Rock & Noble fuera una de sus tiendas fundadoras. Queremos que quien busque piso u oficina en Malabo o en Bata encuentre desde el primer día inmuebles como Alexandra Place, Abbey Place o Bedford Court, con ustedes detrás.
+>
+> Como tienda fundadora, les ofrecemos:
+>
+> - 6 meses de Premium gratis, contados desde la apertura: su propia tienda en la web, con su logo, todos sus inmuebles con hasta 15 fotos cada uno y sus anuncios entre los destacados.
+> - Presencia en la campaña de lanzamiento como tienda fundadora.
+> - Ayuda para empezar: pasamos por Alexandra Offices, creamos la cuenta con ustedes y subimos juntos los primeros inmuebles.
+>
+> Les adjunto una propuesta preparada para Rock & Noble, con un ejemplo de cómo se verían sus anuncios. Si les interesa, díganme qué día les viene bien para la visita.
+>
+> Un saludo,
+>
+> Leoncio Felipe Mitogo
+> BKLN Software & Systems · Banapa, Malabo
+> hello@bklnsoftware.tech · +240 222 798 086
+> bklnsoftware.tech · bklnmarketplace.com
+
+#### Inmo-GUINEA (sin email: por WhatsApp)
+
+- **WhatsApp:** +240 222 096 886, con «Propuesta BKLN - Inmo-GUINEA.pdf» y el mensaje de «Mensaje - Inmo-GUINEA.txt».
+- **Si no contestan:** el formulario de inmoguinea.com/contacto, con el asunto «Propuesta para Inmo-GUINEA: tienda fundadora de BKLN Marketplace» y este texto (el formulario no deja adjuntar el PDF):
+
+> Buenos días:
+>
+> Les escribe Leoncio Felipe Mitogo, de BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo.
+>
+> En enero de 2027 abrimos BKLN Marketplace (bklnmarketplace.com), una web para comprar, vender y alquilar en toda Guinea Ecuatorial, y nos gustaría que Inmo-GUINEA fuera una de sus tiendas fundadoras. Queremos que quien busque casa, piso o terreno en Malabo o en Bata encuentre desde el primer día su catálogo, con ustedes detrás.
+>
+> Como tienda fundadora, les ofrecemos 6 meses de Premium gratis, contados desde la apertura (su propia tienda en la web y sus anuncios entre los destacados), presencia en la campaña de lanzamiento y ayuda para empezar: pasamos por su oficina, creamos la cuenta con ustedes y subimos juntos los primeros inmuebles.
+>
+> Tenemos preparada una propuesta para Inmo-GUINEA, con un ejemplo de cómo se verían sus anuncios. Se la enviamos por WhatsApp o por email, como prefieran.
+>
+> Un saludo,
+>
+> Leoncio Felipe Mitogo
+> BKLN Software & Systems · Banapa, Malabo
+> hello@bklnsoftware.tech · +240 222 798 086
+> bklnsoftware.tech · bklnmarketplace.com
+
+#### KITEA Malabo (sin email: por WhatsApp)
+
+- **Antes:** confirmar que la tienda del km 6 sigue abierta (una llamada o pasar por allí).
+- **WhatsApp:** +240 551 80 36 98 (del directorio), con «Propuesta BKLN - KITEA Malabo.pdf» y el mensaje de «Mensaje - KITEA Malabo.txt».
+
+### Seguimiento de las tiendas
+
+- **A los 7–10 días (13–15 de noviembre):** a quien no haya contestado, un WhatsApp corto o una visita:
+  > Buenos días. Le escribí la semana pasada sobre BKLN Marketplace y la propuesta de tienda fundadora para <empresa>. ¿Ha podido verla? Si le viene bien, pasamos por <su oficina> esta semana y se la explicamos en diez minutos.
+- **Mediados de diciembre:** a las que ya están dentro, cómo van sus anuncios y qué les falta. Antes de las fiestas.
+- **Principios de enero:** el día exacto de la apertura y que la campaña de lanzamiento las nombra.
+
 ### Agencia de medios (AVANTE)
 
 **Asunto:** Plan de medios para el lanzamiento de BKLN Marketplace
 
 > Buenos días:
 >
-> Les escribimos desde BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo. En las próximas semanas lanzamos BKLN Marketplace (bklnmarketplace.com), una web de anuncios clasificados para comprar y vender de todo en Guinea Ecuatorial: coches, inmuebles, móviles, muebles y más. Publicar es gratis, funciona desde el móvil y los compradores escriben al vendedor por el chat de la web o, si el vendedor quiere, por WhatsApp.
+> Les escribimos desde BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo. En enero de 2027 lanzamos BKLN Marketplace (bklnmarketplace.com), una web de anuncios clasificados para comprar y vender de todo en Guinea Ecuatorial: coches, inmuebles, móviles, muebles y más. Publicar es gratis, funciona desde el móvil y los compradores escriben al vendedor por el chat de la web o, si el vendedor quiere, por WhatsApp.
 >
 > Queremos darla a conocer en Malabo y Bata y nos gustaría que nos propusieran un plan de medios para el lanzamiento: qué medios recomiendan para llegar a quien compra y vende desde el móvil, y con qué presupuesto.
 >
@@ -95,7 +221,7 @@ Se envían desde **hello@bklnsoftware.tech**, con el WhatsApp de BKLN, +240 222 
 
 > Buenos días:
 >
-> Les escribimos desde BKLN Software & Systems, empresa de desarrollo de software de Malabo. El [fecha] lanzamos BKLN Marketplace (bklnmarketplace.com), una web de anuncios clasificados hecha en Guinea Ecuatorial para Guinea Ecuatorial: cualquiera puede publicar gratis lo que vende y los compradores le escriben por el chat de la web o, si el vendedor quiere, por WhatsApp. Está pensada para el móvil y para conexiones lentas, con precios en FCFA y teléfonos +240.
+> Les escribimos desde BKLN Software & Systems, empresa de desarrollo de software de Malabo. El [día] de enero de 2027 abrimos BKLN Marketplace (bklnmarketplace.com), una web de anuncios clasificados hecha en Guinea Ecuatorial para Guinea Ecuatorial: cualquiera puede publicar gratis lo que vende y los compradores le escriben por el chat de la web o, si el vendedor quiere, por WhatsApp. Está pensada para el móvil y para conexiones lentas, con precios en FCFA y teléfonos +240.
 >
 > Les adjuntamos la nota de prensa y algunas imágenes. Estaremos encantados de atenderles para una entrevista o una demostración.
 >
@@ -109,7 +235,7 @@ Se envían desde **hello@bklnsoftware.tech**, con el WhatsApp de BKLN, +240 222 
 
 > Buenos días:
 >
-> Les escribimos desde BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo. En las próximas semanas lanzamos BKLN Marketplace (bklnmarketplace.com), una web de anuncios clasificados para comprar y vender en toda Guinea Ecuatorial, gratis y pensada para el móvil.
+> Les escribimos desde BKLN Software & Systems, empresa de desarrollo de software con oficina en Banapa, Malabo. En enero de 2027 lanzamos BKLN Marketplace (bklnmarketplace.com), una web de anuncios clasificados para comprar y vender en toda Guinea Ecuatorial, gratis y pensada para el móvil.
 >
 > Nos gustaría que [empresa] estuviera con nosotros en el lanzamiento. Podemos hablar de patrocinar la presentación o de una acción conjunta para sus clientes. Nos adaptamos a lo que les encaje mejor.
 >

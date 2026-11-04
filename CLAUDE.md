@@ -23,7 +23,7 @@ Las pruebas en el móvil que quedan pendientes del usuario son las casillas sin 
 
 - 1.7, preparar el lanzamiento (2026-11-04): empresas y correos en `docs/LANZAMIENTO-CONTACTOS.md`, tiendas fundadoras con 6 meses de Premium y propuestas personalizadas (D-065), aviso de versión previa (D-066) y **el proyecto de Supabase actual es el de producción** (D-067).
 
-**Siguiente:** 1.7, lanzamiento (ROADMAP): analítica básica y monitorización de errores.
+**Siguiente:** 1.7, lanzamiento, previsto para **enero de 2027** (D-068). Pendiente (ROADMAP): analítica básica y monitorización de errores, y lo que falta antes de abrir.
 
 ## Recursos
 

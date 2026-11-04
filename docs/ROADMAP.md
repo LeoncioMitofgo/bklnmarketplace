@@ -150,6 +150,7 @@
 - [x] `CRON_SECRET` en Vercel (Production, *Sensitive*) y nuevo despliegue, hechos por el usuario (2026-11-03)
 
 ### 1.7 Lanzamiento
+Previsto para **enero de 2027** (D-068).
 - [x] Pruebas de extremo a extremo en el repo (2026-11-04, D-064): `e2e/`, con `pnpm e2e todas`. Se recuperaron del historial las que se habían borrado; son 17 scripts. Por separado pasan; en la batería completa fallaron tres por tiempos de espera (chat, moderación y panel de Premium)
 - [x] Marca nueva (2026-11-03, D-063): la "b" con la etiqueta de precio, que diseñó el cliente con ChatGPT y se redibujó en SVG. Logo de la web, favicon, iconos de la app (Android e iPhone), icono de las notificaciones e imagen para compartir. SVG maestros en `docs/marca/`
 - [x] La web se puede instalar en el móvil (2026-11-03, D-063): manifiesto con nombre, colores e iconos. Chrome la da por instalable (comprobado con su herramienta de depuración)
@@ -163,7 +164,9 @@
 - [ ] Sembrar anuncios con vendedores y tiendas fundadoras, con 6 meses de Premium gratis, visibilidad y publicidad (D-065). Empresas, emails y correos en [LANZAMIENTO-CONTACTOS.md](LANZAMIENTO-CONTACTOS.md) (2026-11-04), con medios, agencias y patrocinio para el lanzamiento
   - [x] Propuesta personalizada en PDF y mensaje para cada tienda (2026-11-04): CFAO Motors, Casa Mercedes, Rock & Noble, Inmo-GUINEA y KITEA. Se generan con el sistema de propuestas de `C:/Users/leonc/PlanEject` (`propuestas/fuentes/marketplace-*.md`)
   - [ ] Cuando publique la primera tienda fundadora, cambiar el aviso de versión previa a «Muchos anuncios son de demostración…» (`preview.notice` en `es.json`, D-066)
-  - [ ] Enviar las propuestas por WhatsApp y email, y el correo a AVANTE (lo hace el cliente desde hello@bklnsoftware.tech)
+  - [ ] Enviar las propuestas por WhatsApp y email, y el correo a AVANTE, la semana del 4 de noviembre (lo hace el cliente desde hello@bklnsoftware.tech; correos en LANZAMIENTO-CONTACTOS)
+  - [ ] Seguimiento: recordatorio a los 7–10 días, mensaje a mediados de diciembre y el día de la apertura a principios de enero
+  - [ ] Activar Premium a cada tienda que diga que sí: 0 FCFA, referencia `FUNDADORA-<empresa>`, los meses hasta la apertura más 6 (D-065)
 - [ ] Antes de abrir, borrar las cuentas de demostración (D-047): son las de `user_metadata.demo = true` en Supabase Auth; al borrarlas desaparecen sus anuncios, y sus fotos hay que quitarlas de Storage
 - [ ] Supabase Pro en el proyecto actual y Vercel Pro, antes de abrir (D-067). Antes, mover el proyecto de la web de BKLN a una organización gratuita: en Pro, cada proyecto de la organización paga su cómputo
 - [ ] Proyecto de Supabase de desarrollo (Irlanda), antes de la próxima migración y antes de abrir: las migraciones y las pruebas e2e no deben tocar producción (D-067)
