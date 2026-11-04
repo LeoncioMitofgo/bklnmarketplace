@@ -45,7 +45,7 @@ Directorios y guías que venden publicidad:
 
 Los primeros anuncios de calidad. **Oferta (D-065): 6 meses de Premium gratis, visibilidad (Destacados y tienda propia) y publicidad (se las nombra como tiendas fundadoras en la campaña del lanzamiento).**
 
-Cada tienda tiene **su propia propuesta en PDF y su mensaje**, con lo que hemos visto de ella (sus productos, sus precios, su dirección), en `C:/Users/leonc/PlanEject/propuestas` («Propuesta BKLN - <empresa>.pdf» y «Mensaje - <empresa>.txt»). Las fuentes están en `propuestas/fuentes/marketplace-*.md` y se regeneran con `node scripts/propuesta_md.mjs <archivo>`.
+Cada tienda tiene **su propia propuesta en PDF y su mensaje**, con lo que hemos visto de ella (sus productos, sus precios, su dirección), en `C:/Users/leonc/PlanEject/propuestas` («Propuesta BKLN - <empresa>.pdf» y «Mensaje - <empresa>.txt»). Las fuentes están en `propuestas/fuentes/marketplace-*.md` y se regeneran con `node scripts/propuesta_md.mjs <archivo>`. Cada una lleva capturas de su sector, no genéricas: su búsqueda o su categoría, la ficha de un anuncio como los suyos (una Hilux, un Mercedes, un piso, un sofá) y la conversación vista desde la tienda. Se hacen con `PlanEject/scripts/capturas-marketplace.mjs` contra la web en local, con cuentas temporales que se borran al terminar.
 
 | Empresa | Qué venden | Por dónde | Otros contactos | Estado |
 |---|---|---|---|---|
