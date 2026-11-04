@@ -25,7 +25,7 @@
 - [x] Proyecto de Vercel conectado al repo de GitHub, con los dominios `bklnmarketplace.com` y `www` añadidos (2026-10-16)
 - [x] Acceso de Claude a Vercel con el conector MCP (2026-10-16)
 - [x] Vercel: variables públicas, más `framework: nextjs` y región `lhr1` en `vercel.ts` (2026-10-16)
-- [ ] Vercel: `SUPABASE_SECRET_KEY`, que añade el usuario en el panel como *Sensitive*
+- [x] Vercel: `SUPABASE_SECRET_KEY` (2026-10-16, la añadió el usuario). Está como *Encrypted*: conviene recrearla como *Sensitive*
 - [x] DNS en Hostinger apuntando a Vercel (2026-10-16)
 - [x] Resend: cuenta, `RESEND_API_KEY` en Vercel y dominio verificado en Hostinger (2026-11-03, lo hizo el usuario). Los emails de confirmación y de recuperar la contraseña ya salen en producción y se confirman bien
 
@@ -43,7 +43,7 @@
 - [x] Confirmación de email propia (`/verificar-email`), recuperación de contraseña (`/recuperar` → `/nueva-contrasena`) y límite de intentos (2026-10-16)
 - [x] Perfil público `/u/<usuario>` (cacheado), `/cuenta` y vuelta al punto de origen tras el login (2026-10-16)
 - [x] Capa de datos de auth probada de extremo a extremo contra el proyecto dev: 22 comprobaciones de registro, login, RLS, tokens, límites y recuperación (2026-10-16)
-- [ ] Probar los formularios en el navegador (lo hace el usuario). Los emails de verificación y recuperación solo salen cuando se configure Resend; en local (`pnpm dev`) se escriben en la terminal
+- [ ] Probar los formularios en el navegador (lo hace el usuario): registro, entrar con usuario, email o teléfono, y recuperar la contraseña. Resend ya envía los emails desde el 2026-11-03; en local (`pnpm dev`) se escriben en la terminal
 - [x] Configuración de planes: tablas `plans` y `plan_prices` + `current_plan()` (2026-10-16)
 - [x] Datos iniciales: 13 categorías, 49 subcategorías, 40 atributos, 16 ciudades y ajustes (2026-10-16)
 - [x] Base de datos de usuarios (2026-10-16):
@@ -173,6 +173,8 @@ Previsto para **enero de 2027** (D-068).
   - [ ] Enviarlas a partir del 18 de noviembre (lo hace el cliente; correos en LANZAMIENTO-CONTACTOS)
   - [ ] Pie «Con el apoyo de» con los logos, cuando firme el primer patrocinador
 - [ ] Acto de presentación en Malabo (enero de 2027): fecha, sala (Galambo, Centro Cultural de España u hotel) e invitados
+- [ ] Limpiar los restos de pruebas e2e fallidas en producción, con el visto bueno del cliente: cuentas `pnav+…` y `perfil+…`, las denuncias abiertas que dejaron, anuncios bloqueados «Móvil revisado…» y cobros de prueba de Premium
+- [ ] Decidir si se quedan los anuncios de prueba del cliente («Coche en venta», «Camisa y Chaleco», «POS en venta…»): no son de demostración y no se borran con ellas
 - [ ] Antes de abrir, borrar las cuentas de demostración (D-047): son las de `user_metadata.demo = true` en Supabase Auth; al borrarlas desaparecen sus anuncios, y sus fotos hay que quitarlas de Storage
 - [ ] Supabase Pro en el proyecto actual y Vercel Pro, antes de abrir (D-067). Antes, mover el proyecto de la web de BKLN a una organización gratuita: en Pro, cada proyecto de la organización paga su cómputo
 - [ ] Proyecto de Supabase de desarrollo (Irlanda), antes de la próxima migración y antes de abrir: las migraciones y las pruebas e2e no deben tocar producción (D-067)
