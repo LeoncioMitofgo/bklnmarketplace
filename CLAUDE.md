@@ -23,12 +23,15 @@ Las pruebas en el móvil que quedan pendientes del usuario son las casillas sin 
 
 - 1.7, preparar el lanzamiento (2026-11-04): empresas y correos en `docs/LANZAMIENTO-CONTACTOS.md`, tiendas fundadoras con 6 meses de Premium y propuestas personalizadas (D-065), aviso de versión previa (D-066) y **el proyecto de Supabase actual es el de producción** (D-067).
 
+- 1.7, 2026-11-05: «Todas las categorías» (D-077), Alimentación separada de Agricultura (D-078), **anuncios por encargo** (D-079) y el proyecto de Supabase de desarrollo.
+
 **Siguiente:** 1.7, lanzamiento, previsto para **enero de 2027** (D-068). Pendiente (ROADMAP): lo que falta antes de abrir. La analítica y los errores están desde el 2026-11-04 (D-072), con Sentry en marcha (proyecto `bkln-marketplace`, `SENTRY_DSN` en Vercel).
 
 ## Recursos
 
 - Repo: https://github.com/LeoncioMitofgo/bklnmarketplace (rama principal `main`).
-- Supabase **producción**: proyecto `xujlsrezhctlovncsywu` ("BKLNMarketplace") en Irlanda `eu-west-1` (https://xujlsrezhctlovncsywu.supabase.co), enlazado con la CLI (D-067). Plan Free hasta el lanzamiento; Pro antes de abrir. **No hay proyecto de desarrollo**: se crea antes de la próxima migración.
+- Supabase **producción**: proyecto `xujlsrezhctlovncsywu` ("BKLNMarketplace") en Irlanda `eu-west-1` (https://xujlsrezhctlovncsywu.supabase.co), enlazado con la CLI (D-067). Plan Free hasta el lanzamiento; Pro antes de abrir.
+- Supabase **desarrollo**: proyecto `ioqnwiuuquekpybpwvlt` ("BKLNMarketplace-dev"), también en Irlanda y gratis, creado el 2026-11-05 con todas las migraciones. Sus claves están en `.env.dev` (ignorado por git), que no se carga solo. En el plan gratuito solo caben 2 proyectos activos, así que para usarlo hay que pausar "Bkln-software" (el formulario de bklnsoftware.tech) y, al terminar, pausar el de desarrollo y reactivar el de la web. Su catálogo no tiene los cambios hechos a mano en producción.
 - Dominio: `bklnmarketplace.com`, registrado en Hostinger; el DNS apunta a Vercel desde el 2026-10-16.
 - Oficina (pagos Premium): BKLN Software & Systems, Banapa, Malabo. Lunes a viernes de 8:00 a 16:00 y sábados de 11:00 a 14:00. WhatsApp de pagos: +240 555 220 846. Beneficiario de los envíos por agencia: BKLN Marketplace.
 - Vercel: equipo `bkln-software` (`team_ncnI0qZKscFu7lW1UFjajnqS`, plan Hobby), proyecto `bkln_marketplace` (`prj_LhOB2RneFwbTVUs5cnaWUCdHfL5T`), accesible con el conector MCP. Está conectado al repo: **cada push a `main` despliega a producción**. Dominio principal `www.bklnmarketplace.com`; la raíz redirige con 308. Registros DNS en ARQUITECTURA §6.
@@ -62,7 +65,7 @@ Next.js (App Router) + TypeScript · Tailwind + shadcn/ui · Supabase (Postgres 
 
 - **Región: Irlanda** (Supabase `eu-west-1`, funciones de Vercel `dub1`, D-067). Cada viaje Malabo↔Europa cuesta unos 150 ms, así que: Server Components por defecto, una sola ida y vuelta por página y nada de cascadas de peticiones desde el cliente.
 - **RLS en todas las tablas.** Migraciones SQL escritas a mano en `supabase/migrations/`. No hay Docker local, así que no se usa `supabase db diff`.
-- **El proyecto de Supabase enlazado es el de producción** (D-067). Nunca se prueba una migración directamente en producción: antes de la próxima hay que crear el proyecto de desarrollo y probarla allí. Las pruebas `e2e/` también escriben en producción (cada una borra lo suyo): lanzar solo las de lo que se ha tocado, y no lanzarlas con usuarios reales hasta tener el proyecto de desarrollo.
+- **El proyecto de Supabase enlazado es el de producción** (D-067). Nunca se prueba una migración directamente en producción: primero va al de desarrollo, con la CLI en una copia de `supabase/` aparte (`supabase --workdir <copia> link --project-ref ioqnwiuuquekpybpwvlt` y `db push`), para no cambiar el enlace del repo. Las pruebas `e2e/` van contra desarrollo cargando `.env.dev` en el entorno (`set -a; . ./.env.dev; set +a`) antes de `pnpm build`, `pnpm start` y `pnpm e2e`. Sin eso escriben en producción (cada una borra lo suyo): ahí, solo las de lo que se ha tocado.
 - Imágenes: variantes WebP generadas en el móvil, sin optimizador de imágenes en el servidor.
 
 ## Comandos

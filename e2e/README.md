@@ -4,7 +4,7 @@ Scripts de Node que prueban cada parte de la web de verdad: la base de datos (RL
 
 ## Antes de empezar
 
-- **Contra qué prueban.** Usan el proyecto Supabase de `.env.local`, que **es el de producción** (D-067) mientras no exista uno de desarrollo.
+- **Contra qué prueban.** Usan el proyecto Supabase de `.env.local`, que **es el de producción** (D-067), salvo que se cargue antes `.env.dev`, el de desarrollo: `set -a; . ./.env.dev; set +a` en la misma terminal, antes de `pnpm build`, `pnpm start` y `pnpm e2e`. Para que el de desarrollo esté activo hay que pausar el proyecto de la web (plan gratuito). Su catálogo no tiene los cambios hechos a mano en producción, así que allí `catalog-check` falla en lo de Alimentación, Oficina y papelería y los anuncios de demostración.
   - Cada prueba crea sus propios usuarios (`…@bklnmarketplace.com`) y anuncios, y los borra al terminar.
   - `admin-catalog-browser-check` cambia la configuración compartida (planes, precios y oficina) y la deja como estaba.
   - Los cobros de Premium de las pruebas se quedan en `premium_activations`, sin usuario: es un registro que no se borra.

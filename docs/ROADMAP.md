@@ -167,8 +167,7 @@ Previsto para **enero de 2027** (D-068).
 - [x] Categoría «Oficina y papelería» con tres subcategorías (2026-11-04, D-070)
 - [x] Página «Todas las categorías» (`/categorias`), a la que lleva el «Ver todas» del inicio (2026-11-05, D-077)
 - [x] Alimentación separada de Agricultura, con Panadería y pastelería y Comida preparada (2026-11-05, D-078)
-- [ ] Anuncios por encargo (D-079): «¿Lo tienes ya?» y el plazo al publicar, la insignia «POR ENCARGO», «Por encargo · plazo» en la ficha, un aviso de seguridad propio en la ficha, el chat y la revisión, y los términos. El código, la migración `20261105120000_order_listings.sql` y la prueba `order-check` están listos desde el 2026-11-05, en la rama `por-encargo`
-  - [ ] Probar la migración en el proyecto de desarrollo, aplicarla en producción, regenerar los tipos, pasar `order-check` y desplegar
+- [x] Anuncios por encargo (2026-11-05, D-079): «¿Lo tienes ya?» y el plazo al publicar, la insignia «POR ENCARGO», «Por encargo · plazo» en la ficha, un aviso de seguridad propio en la ficha, el chat y la revisión, y los términos. Migración `20261105120000_order_listings.sql`, probada antes en el proyecto de desarrollo. Prueba: `order-check`
   - [ ] Probarlo en el móvil (lo hace el usuario)
 - [x] Panel de admin adaptado al ordenador: menú lateral y páginas a dos columnas (2026-11-04, D-071)
 - [x] El proyecto de Supabase actual es el de producción (2026-11-04, D-067). Funciones de Vercel en Dublín (`dub1`)
@@ -187,7 +186,8 @@ Previsto para **enero de 2027** (D-068).
 - [ ] Decidir si se quedan los anuncios de prueba del cliente («Coche en venta», «Camisa y Chaleco», «POS en venta…»): no son de demostración y no se borran con ellas
 - [ ] Antes de abrir, borrar las cuentas de demostración (D-047): son las de `user_metadata.demo = true` en Supabase Auth; al borrarlas desaparecen sus anuncios, y sus fotos hay que quitarlas de Storage (si se borran desde el panel de Supabase, el cron las quita al día siguiente, D-073; como son muchas, puede saltar el freno y habrá que borrarlas a mano)
 - [ ] Supabase Pro en el proyecto actual y Vercel Pro, antes de abrir (D-067). Con Vercel Pro, programar el cron de mensajes sin leer (D-076). Antes, mover el proyecto de la web de BKLN a una organización gratuita: en Pro, cada proyecto de la organización paga su cómputo
-- [ ] Proyecto de Supabase de desarrollo (Irlanda), antes de la próxima migración y antes de abrir: las migraciones y las pruebas e2e no deben tocar producción (D-067)
+- [x] Proyecto de Supabase de desarrollo (2026-11-05, D-067): «BKLNMarketplace-dev» (`ioqnwiuuquekpybpwvlt`), en Irlanda y gratis, con todas las migraciones. Sus claves están en `.env.dev`. En el plan gratuito solo caben 2 proyectos activos: para usarlo hay que pausar «Bkln-software» (el formulario de la web), y al terminar, al revés
+  - [ ] Copiar a desarrollo el catálogo de producción (categorías cambiadas a mano: Oficina y papelería, Alimentación…): sin eso, `catalog-check` da 6 fallos allí
 - [ ] Abrir la indexación: `SITE_INDEXABLE=true` en las variables de producción de Vercel (D-043)
 - [ ] Despliegue en producción
 
