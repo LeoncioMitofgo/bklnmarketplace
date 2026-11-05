@@ -342,6 +342,26 @@ try {
     String(p.status),
   );
 
+  // Alimentación, separada de Agricultura (D-078).
+  p = await page("/categoria/alimentacion");
+  ok(
+    "Alimentación con panadería, comida preparada y alimentos",
+    p.status === 200 &&
+      ["Panadería y pastelería", "Comida preparada", "Alimentos y bebidas"].every((s) =>
+        p.body.includes(s),
+      ),
+    String(p.status),
+  );
+  p = await page("/categoria/agricultura");
+  ok(
+    "Agricultura, sin la alimentación",
+    // Por los enlaces de las subcategorías: el desplegable de filtros lleva todas las categorías.
+    p.status === 200 &&
+      p.body.includes('href="/categoria/productos-agricolas"') &&
+      !p.body.includes('href="/categoria/panaderia-pasteleria"'),
+    String(p.status),
+  );
+
   // Oficina y papelería (D-070): la categoría y sus tres subcategorías.
   p = await page("/categoria/oficina-papeleria");
   ok(

@@ -1,6 +1,6 @@
 # BKLN Marketplace — Documento de alcance
 
-> **Fuente de verdad del producto.** Versión 1.10 — 2026-11-04 (1.1: registro e inicio de sesión · 1.2–1.4: precios y pago de Premium, nombre y dominio · 1.5: ajustes del modelo de datos · 1.6: ajustes de los wireframes · 1.7: candidatos de pago para la fase 3 · 1.8: la web se puede instalar desde el MVP · 1.9: logos de los patrocinadores del lanzamiento en el pie · 1.10: categoría Oficina y papelería).
+> **Fuente de verdad del producto.** Versión 1.11 — 2026-11-05 (1.1: registro e inicio de sesión · 1.2–1.4: precios y pago de Premium, nombre y dominio · 1.5: ajustes del modelo de datos · 1.6: ajustes de los wireframes · 1.7: candidatos de pago para la fase 3 · 1.8: la web se puede instalar desde el MVP · 1.9: logos de los patrocinadores del lanzamiento en el pie · 1.10: categoría Oficina y papelería · 1.11: Alimentación separada de Agricultura).
 > Cualquier cambio de alcance se refleja aquí y se registra en [DECISIONES.md](DECISIONES.md).
 
 ---
@@ -230,7 +230,8 @@ Generalista tipo Jiji. Los atributos se definen **por categoría** (configurable
 | Moda y belleza | Ropa de hombre/mujer/niños, calzado, bolsos, joyas, cosmética | Talla, género |
 | Bebés y niños | Ropa, carritos, juguetes | — |
 | Construcción y herramientas | Materiales, herramientas, generadores, fontanería y electricidad | — |
-| Agricultura y alimentación | Productos agrícolas, maquinaria, alimentación | — |
+| Alimentación | Panadería y pastelería, comida preparada, alimentos y bebidas | Precio opcional en panadería y comida preparada (encargos) |
+| Agricultura | Productos agrícolas, maquinaria agrícola | — |
 | Animales y mascotas | Mascotas, accesorios (con restricciones) | — |
 | Deporte y ocio | Deporte, instrumentos, libros | — |
 | Oficina y papelería | Papelería y material escolar, material de oficina, mobiliario de oficina | — |

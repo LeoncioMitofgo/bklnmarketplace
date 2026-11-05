@@ -166,6 +166,7 @@ Previsto para **enero de 2027** (D-068).
 - [x] Aviso de versión previa (2026-11-04, D-066): se quita solo al abrir la indexación
 - [x] Categoría «Oficina y papelería» con tres subcategorías (2026-11-04, D-070)
 - [x] Página «Todas las categorías» (`/categorias`), a la que lleva el «Ver todas» del inicio (2026-11-05, D-077)
+- [x] Alimentación separada de Agricultura, con Panadería y pastelería y Comida preparada (2026-11-05, D-078)
 - [x] Panel de admin adaptado al ordenador: menú lateral y páginas a dos columnas (2026-11-04, D-071)
 - [x] El proyecto de Supabase actual es el de producción (2026-11-04, D-067). Funciones de Vercel en Dublín (`dub1`)
 - [x] Estabilizar las pruebas e2e que fallaban en la batería completa (2026-11-04). Todas entraban desde `::1` y, al acumularse los logins, saltaba el límite de 30 por IP cada 15 minutos: ahora cada prueba usa su propia IP (`TEST_IP` en `e2e/lib.mjs`). También se corrigieron cuatro comprobaciones que miraban antes de tiempo (contenido en streaming o borrador que vuelve al hidratar) o sin await. La batería completa pasa (18 pruebas)
