@@ -168,7 +168,7 @@ Previsto para **enero de 2027** (D-068).
 - [x] Página «Todas las categorías» (`/categorias`), a la que lleva el «Ver todas» del inicio (2026-11-05, D-077)
 - [x] Alimentación separada de Agricultura, con Panadería y pastelería y Comida preparada (2026-11-05, D-078)
 - [x] Anuncios por encargo (2026-11-05, D-079): «¿Lo tienes ya?» y el plazo al publicar, la insignia «POR ENCARGO», «Por encargo · plazo» en la ficha, un aviso de seguridad propio en la ficha, el chat y la revisión, y los términos. Migración `20261105120000_order_listings.sql`, probada antes en el proyecto de desarrollo. Prueba: `order-check`
-  - [ ] Probarlo en el móvil (lo hace el usuario)
+  - [x] Probarlo en el móvil (2026-11-05, el usuario): publicó un anuncio por encargo y todo bien
 - [x] Panel de admin adaptado al ordenador: menú lateral y páginas a dos columnas (2026-11-04, D-071)
 - [x] El proyecto de Supabase actual es el de producción (2026-11-04, D-067). Funciones de Vercel en Dublín (`dub1`)
 - [x] Estabilizar las pruebas e2e que fallaban en la batería completa (2026-11-04). Todas entraban desde `::1` y, al acumularse los logins, saltaba el límite de 30 por IP cada 15 minutos: ahora cada prueba usa su propia IP (`TEST_IP` en `e2e/lib.mjs`). También se corrigieron cuatro comprobaciones que miraban antes de tiempo (contenido en streaming o borrador que vuelve al hidratar) o sin await. La batería completa pasa (18 pruebas)
