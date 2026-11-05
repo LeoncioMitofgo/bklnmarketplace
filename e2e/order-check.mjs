@@ -63,10 +63,19 @@ async function makeUser(label) {
   };
 }
 
+// `html` es lo que se pinta: sin los <script>, que llevan los textos de next-intl para el navegador
+// (también los de los encargos) y los datos de RSC, con todo repetido. `jsonLd`, los datos
+// estructurados.
 const get = async (path, cookie) => {
   const res = await fetch(`${BASE}${path}`, { headers: cookie ? { cookie } : {} });
-  return { status: res.status, body: await res.text() };
+  const body = await res.text();
+  return {
+    status: res.status,
+    html: body.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, ""),
+    jsonLd: body.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1] ?? "",
+  };
 };
+const count = (text, part) => text.split(part).length - 1;
 
 try {
   const seller = await makeUser("Vendedora Encargos");
@@ -105,44 +114,51 @@ try {
 
   // ─── Páginas públicas ──────────────────────────────────────────────────────
 
-  const orderPage = await get(`/anuncio/${order.code}`);
-  ok("ficha del encargo", orderPage.status === 200, String(orderPage.status));
-  ok("…con «Por encargo · 2–4 semanas»", orderPage.body.includes("Por encargo · 2–4 semanas"));
-  ok(
-    "…y los consejos de los encargos, no los de siempre",
-    orderPage.body.includes(ORDER_TIPS) && !orderPage.body.includes(NORMAL_TIP),
-  );
-  ok("…y BackOrder en los datos estructurados", orderPage.body.includes("schema.org/BackOrder"));
-
-  const normalPage = await get(`/anuncio/${normal.code}`);
-  ok(
-    "la ficha de lo que ya tiene: sin marca y con los consejos de siempre",
-    normalPage.status === 200 &&
-      !normalPage.body.includes("Por encargo ·") &&
-      normalPage.body.includes(NORMAL_TIP) &&
-      normalPage.body.includes("schema.org/InStock"),
-  );
-
+  // La búsqueda da además la URL canónica de cada ficha: /anuncio/<código> a secas redirige dentro
+  // del streaming y no trae el contenido.
   const search = await get(`/buscar?q=${tag}`);
+  const pathOf = (code) => search.html.match(new RegExp(`href="(/anuncio/[^"]*-${code})"`))?.[1];
   ok(
-    "en la búsqueda, el encargo lleva la insignia",
-    search.body.includes(`Galaxy encargo ${tag}`) && search.body.includes("POR ENCARGO"),
+    "en la búsqueda salen los dos, y solo el encargo lleva la insignia",
+    pathOf(order.code) && pathOf(normal.code) && count(search.html, ">POR ENCARGO<") === 1,
+    String(count(search.html, ">POR ENCARGO<")),
   );
   const profile = await get(`/u/${seller.username}`);
   ok(
     "en el perfil, una sola insignia (la del encargo)",
-    profile.body.split("POR ENCARGO").length - 1 === 1,
-    String(profile.body.split("POR ENCARGO").length - 1),
+    count(profile.html, ">POR ENCARGO<") === 1,
+    String(count(profile.html, ">POR ENCARGO<")),
+  );
+
+  const orderPage = await get(pathOf(order.code));
+  ok("ficha del encargo", orderPage.status === 200, String(orderPage.status));
+  ok("…con «Por encargo · 2–4 semanas»", orderPage.html.includes("Por encargo · 2–4 semanas"));
+  ok(
+    "…y los consejos de los encargos, no los de siempre",
+    orderPage.html.includes(ORDER_TIPS) && !orderPage.html.includes(NORMAL_TIP),
+  );
+  ok("…y BackOrder en los datos estructurados", orderPage.jsonLd.includes("schema.org/BackOrder"));
+
+  const normalPage = await get(pathOf(normal.code));
+  ok(
+    "la ficha de lo que ya tiene: sin marca y con los consejos de siempre",
+    normalPage.status === 200 &&
+      !normalPage.html.includes("Por encargo ·") &&
+      normalPage.html.includes(NORMAL_TIP) &&
+      normalPage.jsonLd.includes("schema.org/InStock"),
   );
 
   // ─── Chat ──────────────────────────────────────────────────────────────────
 
   const newChat = await get(`/mensajes/anuncio/${order.code}`, buyer.header);
-  ok("chat nuevo de un encargo: su aviso", newChat.body.includes(CHAT_ORDER));
+  ok(
+    "chat nuevo de un encargo: su aviso, no el de siempre",
+    newChat.html.includes(CHAT_ORDER) && !newChat.html.includes(CHAT_NORMAL),
+  );
   const newNormalChat = await get(`/mensajes/anuncio/${normal.code}`, buyer.header);
   ok(
     "chat nuevo de lo que ya tiene: el aviso de siempre",
-    newNormalChat.body.includes(CHAT_NORMAL) && !newNormalChat.body.includes(CHAT_ORDER),
+    newNormalChat.html.includes(CHAT_NORMAL) && !newNormalChat.html.includes(CHAT_ORDER),
   );
 
   const { data: conversationId } = await buyer.client.rpc("start_conversation", {
@@ -153,9 +169,12 @@ try {
     p_body: "Hola, ¿cuánto de anticipo?",
   });
   const chat = await get(`/mensajes/${conversationId}`, buyer.header);
-  ok("conversación de un encargo: su aviso", chat.body.includes(CHAT_ORDER));
+  ok(
+    "conversación de un encargo: su aviso",
+    chat.html.includes(CHAT_ORDER) && !chat.html.includes(CHAT_NORMAL),
+  );
   const sellerChat = await get(`/mensajes/${conversationId}`, seller.header);
-  ok("…también para la vendedora", sellerChat.body.includes(CHAT_ORDER));
+  ok("…también para la vendedora", sellerChat.html.includes(CHAT_ORDER));
 
   // ─── Asistente: marcar y desmarcar ─────────────────────────────────────────
 
@@ -201,8 +220,11 @@ try {
     saved.order_lead_time === "weeks_1_2" && saved.status === "active",
     JSON.stringify(saved),
   );
-  const nowOrder = await get(`/anuncio/${normal.code}`);
-  ok("la ficha ya lo enseña", nowOrder.body.includes("Por encargo · 1–2 semanas"));
+  const nowOrder = await get(pathOf(normal.code));
+  ok(
+    "la ficha ya lo enseña, con los consejos de los encargos",
+    nowOrder.html.includes("Por encargo · 1–2 semanas") && nowOrder.html.includes(ORDER_TIPS),
+  );
 
   await page.getByRole("button", { name: "Detalles ›" }).click();
   await page.getByText("¿Lo tienes ya?").waitFor();

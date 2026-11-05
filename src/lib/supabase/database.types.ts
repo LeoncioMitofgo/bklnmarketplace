@@ -430,7 +430,9 @@ export type Database = {
           is_negotiable?: boolean
           moderation_reason?: string | null
           neighborhood?: string | null
-          order_lead_time?: Database["public"]["Enums"]["order_lead_time"] | null
+          order_lead_time?:
+            | Database["public"]["Enums"]["order_lead_time"]
+            | null
           price_xaf?: number | null
           published_at?: string | null
           root_category_id?: number | null
@@ -457,7 +459,9 @@ export type Database = {
           is_negotiable?: boolean
           moderation_reason?: string | null
           neighborhood?: string | null
-          order_lead_time?: Database["public"]["Enums"]["order_lead_time"] | null
+          order_lead_time?:
+            | Database["public"]["Enums"]["order_lead_time"]
+            | null
           price_xaf?: number | null
           published_at?: string | null
           root_category_id?: number | null
