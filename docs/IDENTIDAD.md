@@ -92,7 +92,7 @@ Reglas:
 
 - **Barra inferior:** Inicio · Buscar · **Publicar** (botón redondo naranja) · Mensajes (con contador de no leídos) · Perfil.
 - **Tarjeta de anuncio:**
-  - Foto en 4:3, insignia PREMIUM y botón de favorito.
+  - Foto en 4:3, insignia PREMIUM y botón de favorito. Los encargos llevan la insignia POR ENCARGO en azul primario con texto blanco, para no confundirla con la naranja de Premium (D-079).
   - Precio (Plus Jakarta Sans, azul).
   - Título en un máximo de 2 líneas.
   - "Barrio · hace X".

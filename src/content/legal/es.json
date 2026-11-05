@@ -27,11 +27,12 @@
       "blocks": [
         "Publicar es gratis y los anuncios aparecen al momento, sin revisión previa. Por eso eres responsable de lo que publicas.",
         [
-          "Anuncia solo cosas que existen, que puedes vender y que están en Guinea Ecuatorial.",
-          "Usa fotos reales del producto y una descripción honesta.",
+          "Anuncia solo cosas que existen, que puedes vender y que están en Guinea Ecuatorial, o que traes por encargo y entregas aquí.",
+          "Usa fotos reales del producto y una descripción honesta. En un encargo pueden ser las fotos del proveedor.",
           "Pon el precio en francos CFA y elige la categoría correcta.",
           "No publiques el mismo anuncio varias veces."
         ],
+        "Si traes las cosas cuando te las piden, de fuera o de un proveedor, marca el anuncio como «Por encargo» y pon un plazo de entrega realista. Como ciudad, pon dónde lo entregas. Presentar un encargo como si ya lo tuvieras es engañoso, y retiramos esos anuncios. Las falsificaciones siguen prohibidas aunque sean por encargo.",
         "Los anuncios caducan pasado un tiempo, y cada plan tiene un límite de anuncios activos y de fotos. Lo verás al publicar."
       ]
     },
@@ -66,7 +67,7 @@
       "title": "Compra y vende con seguridad",
       "blocks": [
         [
-          "No pagues nada por adelantado, ni por el envío ni por la reserva.",
+          "No pagues nada por adelantado, ni por el envío ni por la reserva. La excepción son los anuncios «Por encargo»: ahí es normal un anticipo, pero paga solo una parte, a alguien a quien puedas localizar en Guinea, pide el justificante de compra y el seguimiento del envío, y paga el resto al recibirlo.",
           "Queda en un lugar público y concurrido, mejor de día.",
           "Revisa el producto antes de pagar.",
           "Desconfía de los precios demasiado buenos y de quien te mete prisa.",

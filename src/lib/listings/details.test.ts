@@ -76,6 +76,8 @@ const valid: DetailsInput = {
   condition: "used",
   price: "350.000",
   negotiable: true,
+  availability: "stock",
+  leadTime: "",
   cityId: "1",
   neighborhood: "Ela Nguema",
   attributes: { brand: "Apple", storage: "", year: "2021", boxed: "on" },
@@ -106,6 +108,7 @@ describe("validateDetails", () => {
       condition: "used",
       price_xaf: 350000,
       is_negotiable: true,
+      order_lead_time: null,
       city_id: 1,
       neighborhood: "Ela Nguema",
       attributes: { brand: "Apple", year: 2021, boxed: true },
@@ -154,5 +157,43 @@ describe("validateDetails", () => {
   it("exige los atributos obligatorios", () => {
     const { errors } = validateDetails({ ...valid, attributes: {} }, phones, attrs, cities);
     expect(errors).toEqual({ attr_brand: "attribute_required" });
+  });
+
+  describe("por encargo (D-079)", () => {
+    it("guarda el plazo", () => {
+      const { data, errors } = validateDetails(
+        { ...valid, availability: "order", leadTime: "weeks_2_4" },
+        phones,
+        attrs,
+        cities,
+      );
+      expect(errors).toEqual({});
+      expect(data?.order_lead_time).toBe("weeks_2_4");
+    });
+
+    it("exige un plazo válido", () => {
+      for (const leadTime of ["", "mañana"]) {
+        const { data, errors } = validateDetails(
+          { ...valid, availability: "order", leadTime },
+          phones,
+          attrs,
+          cities,
+        );
+        expect(data).toBeUndefined();
+        expect(errors).toEqual({ leadTime: "lead_time_required" });
+      }
+    });
+
+    it("si lo tiene ya, o no elige nada, ignora el plazo", () => {
+      for (const availability of ["stock", ""]) {
+        const { data } = validateDetails(
+          { ...valid, availability, leadTime: "weeks_1_2" },
+          phones,
+          attrs,
+          cities,
+        );
+        expect(data?.order_lead_time).toBeNull();
+      }
+    });
   });
 });

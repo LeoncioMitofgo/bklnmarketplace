@@ -32,8 +32,18 @@ async function cardData({ listing, catalog, now }: CardProps) {
   };
 }
 
-function Badge({ tone, children }: { tone: "premium" | "sold"; children: React.ReactNode }) {
-  const tones = { premium: "bg-accent text-text", sold: "bg-text text-white" };
+function Badge({
+  tone,
+  children,
+}: {
+  tone: "premium" | "sold" | "order";
+  children: React.ReactNode;
+}) {
+  const tones = {
+    premium: "bg-accent text-text",
+    sold: "bg-text text-white",
+    order: "bg-primary text-white",
+  };
   return (
     <span className={`rounded-full px-2 py-0.5 text-[11px] font-extrabold ${tones[tone]}`}>
       {children}
@@ -56,10 +66,13 @@ export async function ListingCard(props: CardProps & { hidePremium?: boolean }) 
     <Link href={href} className="flex min-w-0 flex-col gap-1">
       <div className="relative aspect-[4/3] overflow-hidden rounded-card bg-placeholder">
         <Cover src={cover} />
-        <div className="absolute left-2 top-2 flex gap-1">
+        <div className="absolute inset-x-2 top-2 flex flex-wrap gap-1">
           {listing.status === "sold" ? <Badge tone="sold">{t("sold")}</Badge> : null}
           {listing.seller_is_premium && !props.hidePremium ? (
             <Badge tone="premium">{t("premium")}</Badge>
+          ) : null}
+          {listing.order_lead_time && listing.status !== "sold" ? (
+            <Badge tone="order">{t("onOrder")}</Badge>
           ) : null}
         </div>
       </div>
@@ -94,9 +107,10 @@ export async function ListingRow(props: CardProps & { id?: string }) {
         <p className="truncate text-xs text-text-muted">
           {[condition, place, time].filter(Boolean).join(" · ")}
         </p>
-        {listing.seller_is_premium ? (
-          <span className="mt-1 self-start">
-            <Badge tone="premium">{t("premium")}</Badge>
+        {listing.seller_is_premium || listing.order_lead_time ? (
+          <span className="mt-1 flex flex-wrap gap-1">
+            {listing.seller_is_premium ? <Badge tone="premium">{t("premium")}</Badge> : null}
+            {listing.order_lead_time ? <Badge tone="order">{t("onOrder")}</Badge> : null}
           </span>
         ) : null}
       </div>

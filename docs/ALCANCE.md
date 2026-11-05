@@ -1,6 +1,6 @@
 # BKLN Marketplace — Documento de alcance
 
-> **Fuente de verdad del producto.** Versión 1.11 — 2026-11-05 (1.1: registro e inicio de sesión · 1.2–1.4: precios y pago de Premium, nombre y dominio · 1.5: ajustes del modelo de datos · 1.6: ajustes de los wireframes · 1.7: candidatos de pago para la fase 3 · 1.8: la web se puede instalar desde el MVP · 1.9: logos de los patrocinadores del lanzamiento en el pie · 1.10: categoría Oficina y papelería · 1.11: Alimentación separada de Agricultura).
+> **Fuente de verdad del producto.** Versión 1.12 — 2026-11-05 (1.1: registro e inicio de sesión · 1.2–1.4: precios y pago de Premium, nombre y dominio · 1.5: ajustes del modelo de datos · 1.6: ajustes de los wireframes · 1.7: candidatos de pago para la fase 3 · 1.8: la web se puede instalar desde el MVP · 1.9: logos de los patrocinadores del lanzamiento en el pie · 1.10: categoría Oficina y papelería · 1.11: Alimentación separada de Agricultura · 1.12: anuncios por encargo).
 > Cualquier cambio de alcance se refleja aquí y se registra en [DECISIONES.md](DECISIONES.md).
 
 ---
@@ -48,10 +48,10 @@ Una sola cuenta sirve para comprar y vender. "Vendedor" no es un tipo de cuenta:
 - Listados paginados con un botón **"Ver más"** y sin scroll infinito, para que el usuario decida cuándo gasta datos. Miniaturas ligeras.
 
 ### 4.2 Ficha de anuncio
-- Galería de fotos ligera, título, precio (o "Negociable" / "A consultar" en servicios), descripción, atributos, ciudad + barrio, fecha y número de vistas.
+- Galería de fotos ligera, título, precio (o "Negociable" / "A consultar" en servicios), descripción, atributos, ciudad + barrio, fecha y número de vistas. Si es por encargo, "Por encargo · plazo" junto al precio (§5.8).
 - Tarjeta del vendedor: foto, nombre, insignia Premium, ciudad, miembro desde, tiempo de respuesta y enlace a su perfil o tienda.
 - Acciones: **Chatear**, WhatsApp/llamar (si está activado y hay sesión), favorito, compartir y reportar.
-- Bloque fijo de consejos de seguridad.
+- Bloque fijo de consejos de seguridad, distinto en los encargos (§5.8).
 - Anuncios similares.
 
 ### 4.3 Cuentas y perfil
@@ -63,7 +63,7 @@ Una sola cuenta sirve para comprar y vender. "Vendedor" no es un tipo de cuenta:
 - Ajustes: notificaciones, cambiar datos (usuario, email y teléfono con las mismas reglas de unicidad), cambiar contraseña y **borrar cuenta**.
 
 ### 4.4 Publicación y gestión de anuncios
-- Asistente de publicación en **4 pasos** pensado para móvil: fotos → categoría → detalles (atributos, descripción, precio y ubicación) → revisar y publicar.
+- Asistente de publicación en **4 pasos** pensado para móvil: fotos → categoría → detalles (atributos, descripción, precio, si es por encargo y ubicación) → revisar y publicar.
 - Fotos comprimidas en el dispositivo antes de subir, con progreso, reintento y metadatos EXIF (GPS) eliminados.
 - Guardado de borrador, para no perder nada si se cae la conexión.
 - "Mis anuncios": activos, pausados, vendidos, caducados. Acciones: editar, pausar/reactivar, marcar como vendido, renovar y eliminar.
@@ -74,7 +74,7 @@ Una sola cuenta sirve para comprar y vender. "Vendedor" no es un tipo de cuenta:
 - Mensajes de texto e imagen. Cada conversación muestra arriba la tarjeta del anuncio.
 - Bandeja de mensajes con contador de no leídos y estado leído/no leído.
 - Bloquear y reportar usuario desde el chat.
-- Aviso anti‑estafa al iniciar una conversación.
+- Aviso anti‑estafa al iniciar una conversación, el de los encargos si el anuncio lo es (§5.8).
 - Si el anuncio se vende o se elimina, la conversación se conserva y muestra su nuevo estado.
 
 ### 4.6 Notificaciones
@@ -216,6 +216,16 @@ Estos valores viven en **una única configuración de planes** y el código nunc
   - Sus mensajes en conversaciones con otros se conservan como "Usuario eliminado", para que la otra persona no pierda su historial ni las pruebas si hubo una estafa.
   - Los cobros de Premium se guardan por contabilidad.
 
+### 5.8 Anuncios por encargo
+Para quien trae las cosas cuando se las piden: un estudiante que compra fuera y lo envía, o alguien de aquí que trabaja con un proveedor de fuera (D-079).
+- Al publicar, el vendedor indica si **lo tiene ya** (por defecto) o es **por encargo**. En un encargo elige el **plazo aproximado**: menos de 1 semana, 1–2 semanas, 2–4 semanas o más de 1 mes. Vale en todas las categorías; no es una categoría aparte.
+- La **ciudad** del anuncio es dónde se entrega. Puede usar fotos del proveedor.
+- Se ve en la tarjeta (insignia "POR ENCARGO") y en la ficha ("Por encargo · 2–4 semanas").
+- **Seguridad:** en un encargo lo normal es un anticipo. La ficha, el chat y la revisión cambian el "no pagues nada por adelantado" por: paga solo una parte, a alguien a quien puedas localizar en Guinea, pide el justificante de compra y el seguimiento del envío, y paga el resto al recibirlo.
+- **Normas:** quien trabaja por encargo tiene que marcarlo, con un plazo realista. Presentar un encargo como disponible es engañoso y se retira. Las falsificaciones siguen prohibidas.
+- El teléfono sigue siendo **solo +240** (§5.7): quien vive fuera se registra con un número de aquí, suyo o de quien entrega y cobra.
+- Sin filtro "por encargo" en la búsqueda por ahora. Con los pagos de la fase 3, el anticipo podría quedar guardado hasta la entrega.
+
 ## 6. Categorías iniciales
 
 Generalista tipo Jiji. Los atributos se definen **por categoría** (configurables desde el admin, sin tocar código):
@@ -288,6 +298,7 @@ Todos los anuncios tienen además: estado (nuevo/usado, cuando aplique), precio,
 |---|---|
 | Los vendedores no se enteran de los mensajes y el chat muere | Push web + email desde el MVP; aviso por WhatsApp/SMS en fase 2; mostrar el tiempo de respuesta en el perfil |
 | Estafas, porque el pago va fuera de la app | Avisos de seguridad, reportes, bloqueo, auto‑ocultado y verificación de vendedores (fase 2) |
+| Anticipos de encargos que nunca llegan | Marca "Por encargo" con plazo, aviso propio (solo una parte, a alguien localizable en Guinea, con justificante y seguimiento) y teléfono +240 obligatorio (§5.8); con los pagos de la fase 3, anticipo guardado hasta la entrega |
 | Huevo y gallina: pocos anuncios al principio | Sembrar con vendedores y tiendas fundadoras (por ejemplo, Premium gratis los primeros meses) y compartir por WhatsApp sin fricción |
 | Conexión lenta y datos caros | El rendimiento es un requisito; imágenes comprimidas en el dispositivo |
 | Coste o entrega poco fiable de los SMS | Login con contraseña, sin códigos por SMS; recuperación por email; verificación de teléfono en fase 2 (SMS o WhatsApp) |

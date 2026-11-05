@@ -115,7 +115,7 @@ async function ConversationContent({
             </Link>
           ) : (
             <>
-              <ChatSafetyNotice />
+              <ChatSafetyNotice onOrder={conversation.listing_order_lead_time !== null} />
               <div className="mb-2 empty:hidden">
                 <PushPrompt />
               </div>

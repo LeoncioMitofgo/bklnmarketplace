@@ -1,5 +1,6 @@
 import "server-only";
 import { createClient } from "@/lib/supabase/server";
+import type { OrderLeadTime } from "./details";
 
 // Consultas con la sesión del usuario (RLS): solo devuelven lo suyo. Usar dentro de <Suspense>.
 
@@ -34,12 +35,13 @@ export type EditableListing = {
   price_xaf: number | null;
   is_negotiable: boolean;
   condition: "new" | "used" | null;
+  order_lead_time: OrderLeadTime | null;
   attributes: Record<string, string | number | boolean>;
   updated_at: string;
 };
 
 const EDITABLE_COLUMNS =
-  "id, code, status, category_id, city_id, neighborhood, title, description, price_xaf, is_negotiable, condition, attributes, updated_at";
+  "id, code, status, category_id, city_id, neighborhood, title, description, price_xaf, is_negotiable, condition, order_lead_time, attributes, updated_at";
 
 export async function getEditableListing(listingId: string, userId: string) {
   const supabase = await createClient();

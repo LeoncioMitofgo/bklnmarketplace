@@ -8,7 +8,7 @@ import { describedBy, FieldShell, inputClasses, TextField } from "@/components/u
 import { SubmitButton } from "@/components/ui/submit-button";
 import { attributesFor, type Catalog } from "@/lib/catalog-types";
 import { type DetailsState, saveDetails } from "@/lib/listings/actions";
-import { parsePrice } from "@/lib/listings/details";
+import { ORDER_LEAD_TIMES, type OrderLeadTime, parsePrice } from "@/lib/listings/details";
 import type { EditableListing } from "@/lib/listings/queries";
 
 type DetailsStepProps = {
@@ -29,6 +29,8 @@ function valuesFromListing(listing: EditableListing): Values {
     condition: listing.condition ?? "",
     price: listing.price_xaf === null ? "" : String(listing.price_xaf),
     negotiable: listing.is_negotiable ? "on" : "",
+    availability: listing.order_lead_time ? "order" : "stock",
+    leadTime: listing.order_lead_time ?? "",
     cityId: listing.city_id === null ? "" : String(listing.city_id),
     neighborhood: listing.neighborhood ?? "",
   };
@@ -54,6 +56,7 @@ export function DetailsStep({ listing, catalog, onSaved, onBack }: DetailsStepPr
   const t = useTranslations("listings.details");
   const tWizard = useTranslations("listings.wizard");
   const tErrors = useTranslations("listings.errors");
+  const tOrder = useTranslations("listings.order");
   const formRef = useRef<HTMLFormElement>(null);
   const [values, setValues] = useState<Values>(() => valuesFromListing(listing));
   const [restored, setRestored] = useState(false);
@@ -105,6 +108,8 @@ export function DetailsStep({ listing, catalog, onSaved, onBack }: DetailsStepPr
             condition: (submitted.condition || null) as EditableListing["condition"],
             price_xaf: parsePrice(submitted.price ?? ""),
             is_negotiable: submitted.negotiable === "on",
+            order_lead_time:
+              submitted.availability === "order" ? (submitted.leadTime as OrderLeadTime) : null,
             city_id: Number(submitted.cityId),
             neighborhood: submitted.neighborhood?.trim() || null,
             attributes,
@@ -270,6 +275,57 @@ export function DetailsStep({ listing, catalog, onSaved, onBack }: DetailsStepPr
           {t("negotiable")}
         </label>
       </div>
+
+      {/* Por encargo (D-079). El plazo solo se ve al elegir "Por encargo", sin JavaScript (:has). */}
+      <fieldset className="group flex flex-col gap-1.5">
+        <legend className="mb-1.5 text-sm font-semibold">{t("availability")}</legend>
+        <div className="grid grid-cols-2 overflow-hidden rounded-control border border-border">
+          {(["stock", "order"] as const).map((value) => (
+            <label
+              key={value}
+              className="flex min-h-[48px] cursor-pointer items-center justify-center text-base has-[:checked]:bg-primary has-[:checked]:font-semibold has-[:checked]:text-white"
+            >
+              <input
+                type="radio"
+                id={`availability-${value}`}
+                name="availability"
+                value={value}
+                defaultChecked={(values.availability || "stock") === value}
+                className="sr-only"
+              />
+              {t(value === "stock" ? "inStock" : "onOrder")}
+            </label>
+          ))}
+        </div>
+        <div className="mt-2 hidden group-has-[#availability-order:checked]:block">
+          <FieldShell
+            id="listing-lead-time"
+            label={t("leadTime")}
+            hint={t("leadTimeHint")}
+            error={error("leadTime")}
+          >
+            <select
+              id="listing-lead-time"
+              name="leadTime"
+              defaultValue={values.leadTime ?? ""}
+              aria-invalid={error("leadTime") ? true : undefined}
+              aria-describedby={describedBy(
+                "listing-lead-time",
+                t("leadTimeHint"),
+                error("leadTime"),
+              )}
+              className={inputClasses()}
+            >
+              <option value="">{t("leadTimePlaceholder")}</option>
+              {ORDER_LEAD_TIMES.map((time) => (
+                <option key={time} value={time}>
+                  {tOrder(`options.${time}`)}
+                </option>
+              ))}
+            </select>
+          </FieldShell>
+        </div>
+      </fieldset>
 
       <div className="grid grid-cols-2 gap-2.5">
         <FieldShell id="listing-city" label={t("city")} error={error("cityId")}>

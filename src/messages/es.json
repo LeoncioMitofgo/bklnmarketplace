@@ -301,6 +301,12 @@
       "pricePerMonth": "Precio al mes",
       "priceHint": "En FCFA, sin decimales.",
       "negotiable": "Precio negociable",
+      "availability": "¿Lo tienes ya?",
+      "inStock": "Lo tengo ya",
+      "onOrder": "Por encargo",
+      "leadTime": "Plazo de entrega aproximado",
+      "leadTimePlaceholder": "Elige el plazo",
+      "leadTimeHint": "Para lo que traes cuando te lo piden. Como ciudad, pon dónde lo entregas.",
       "city": "Ciudad",
       "cityPlaceholder": "Elige ciudad",
       "neighborhood": "Barrio o zona",
@@ -309,6 +315,21 @@
       "restored": "Hemos recuperado lo que estabas escribiendo.",
       "save": "Siguiente",
       "saving": "Guardando…"
+    },
+    "order": {
+      "badge": "Por encargo · {time}",
+      "times": {
+        "under_week": "menos de 1 semana",
+        "weeks_1_2": "1–2 semanas",
+        "weeks_2_4": "2–4 semanas",
+        "over_month": "más de 1 mes"
+      },
+      "options": {
+        "under_week": "Menos de 1 semana",
+        "weeks_1_2": "1–2 semanas",
+        "weeks_2_4": "2–4 semanas",
+        "over_month": "Más de 1 mes"
+      }
     },
     "review": {
       "title": "Revisa tu anuncio",
@@ -319,6 +340,7 @@
       "done": "Guardar y salir",
       "verifyNotice": "Para publicar tienes que confirmar tu email. Te enviamos un enlace al registrarte.",
       "safety": "Recuerda: nunca pidas ni hagas pagos por adelantado.",
+      "safetyOrder": "Por encargo: pide como mucho un anticipo, da un recibo y enseña el justificante de compra y el seguimiento del envío.",
       "no": "No",
       "rules": "Al publicar aceptas las normas: revisa <link>qué no se puede anunciar</link>."
     },
@@ -399,6 +421,7 @@
       "price_required": "Escribe el precio.",
       "price_format": "Escribe el precio solo con números, p. ej. 150000.",
       "city_required": "Elige la ciudad.",
+      "lead_time_required": "Elige en cuánto tiempo lo entregas.",
       "neighborhood_length": "Como mucho 80 caracteres.",
       "attribute_required": "Este dato es obligatorio.",
       "attribute_number": "Escribe solo números.",
@@ -416,6 +439,7 @@
     "card": {
       "premium": "PREMIUM",
       "sold": "VENDIDO",
+      "onOrder": "POR ENCARGO",
       "negotiable": "Negociable"
     },
     "shortNames": {
@@ -527,6 +551,11 @@
         "tip2": "Queda en un lugar público y concurrido.",
         "tip3": "Revisa el producto antes de pagar."
       },
+      "safetyOrder": {
+        "tip1": "Es un encargo: es normal que te pidan un anticipo, pero paga solo una parte, nunca el total.",
+        "tip2": "Paga a alguien a quien puedas localizar en Guinea y pide un recibo.",
+        "tip3": "Pide el justificante de compra y el seguimiento del envío, y paga el resto al recibirlo."
+      },
       "report": "Denunciar este anuncio"
     },
     "favorites": {
@@ -621,6 +650,7 @@
       "placeholder": "Escribe un mensaje",
       "send": "Enviar",
       "safety": "Por tu seguridad: no pagues nada por adelantado, queda en un lugar público y revisa el producto antes de pagar.",
+      "safetyOrder": "Por tu seguridad: es un encargo, así que es normal un anticipo. Paga solo una parte, a alguien a quien puedas localizar en Guinea; pide el justificante de compra y el seguimiento del envío, y paga el resto al recibirlo.",
       "blockedByMe": "Has bloqueado a esta persona. Desbloquéala desde el menú de arriba para volver a escribiros.",
       "blockedMe": "No puedes responder a esta conversación.",
       "recipientDeleted": "Esta persona ha borrado su cuenta.",
@@ -787,16 +817,17 @@
     }
   },
   "legal": {
-    "updated": "Última actualización: 17/10/2026",
     "contents": "En esta página",
     "footer": "BKLN Software & Systems · Malabo",
     "terms": {
+      "updated": "Última actualización: 05/11/2026",
       "metaTitle": "Términos de uso",
       "title": "Términos de uso",
       "description": "Las normas de BKLN Marketplace: cuentas, anuncios, qué no se puede vender, chat, seguridad y moderación.",
       "intro": "Estos términos explican cómo funciona BKLN Marketplace y qué normas hay que cumplir para usarlo. Al crear una cuenta los aceptas. Están escritos para que se entiendan; si algo no te queda claro, escríbenos."
     },
     "privacy": {
+      "updated": "Última actualización: 17/10/2026",
       "metaTitle": "Política de privacidad",
       "title": "Política de privacidad",
       "description": "Qué datos guarda BKLN Marketplace, para qué, con quién los comparte y cómo borrar tu cuenta.",

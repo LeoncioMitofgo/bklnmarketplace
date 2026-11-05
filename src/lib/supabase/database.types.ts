@@ -403,6 +403,7 @@ export type Database = {
           is_negotiable: boolean
           moderation_reason: string | null
           neighborhood: string | null
+          order_lead_time: Database["public"]["Enums"]["order_lead_time"] | null
           price_xaf: number | null
           published_at: string | null
           root_category_id: number | null
@@ -429,6 +430,7 @@ export type Database = {
           is_negotiable?: boolean
           moderation_reason?: string | null
           neighborhood?: string | null
+          order_lead_time?: Database["public"]["Enums"]["order_lead_time"] | null
           price_xaf?: number | null
           published_at?: string | null
           root_category_id?: number | null
@@ -455,6 +457,7 @@ export type Database = {
           is_negotiable?: boolean
           moderation_reason?: string | null
           neighborhood?: string | null
+          order_lead_time?: Database["public"]["Enums"]["order_lead_time"] | null
           price_xaf?: number | null
           published_at?: string | null
           root_category_id?: number | null
@@ -1088,6 +1091,7 @@ export type Database = {
           id: string | null
           is_negotiable: boolean | null
           neighborhood: string | null
+          order_lead_time: Database["public"]["Enums"]["order_lead_time"] | null
           price_xaf: number | null
           published_at: string | null
           root_category_id: number | null
@@ -1266,6 +1270,7 @@ export type Database = {
           is_negotiable: boolean
           moderation_reason: string | null
           neighborhood: string | null
+          order_lead_time: Database["public"]["Enums"]["order_lead_time"] | null
           price_xaf: number | null
           published_at: string | null
           root_category_id: number | null
@@ -1309,6 +1314,7 @@ export type Database = {
           listing_code: string
           listing_id: string
           listing_is_negotiable: boolean
+          listing_order_lead_time: Database["public"]["Enums"]["order_lead_time"]
           listing_price_xaf: number
           listing_status: Database["public"]["Enums"]["listing_status"]
           listing_title: string
@@ -1402,6 +1408,7 @@ export type Database = {
           id: string
           is_negotiable: boolean
           neighborhood: string
+          order_lead_time: Database["public"]["Enums"]["order_lead_time"]
           price_xaf: number
           published_at: string
           seller_is_premium: boolean
@@ -1458,6 +1465,7 @@ export type Database = {
         | "premium_expiring"
         | "premium_activated"
         | "listing_blocked"
+      order_lead_time: "under_week" | "weeks_1_2" | "weeks_2_4" | "over_month"
       payment_method:
         | "cash_office"
         | "money_transfer_agency"
@@ -1622,6 +1630,7 @@ export const Constants = {
         "premium_activated",
         "listing_blocked",
       ],
+      order_lead_time: ["under_week", "weeks_1_2", "weeks_2_4", "over_month"],
       payment_method: [
         "cash_office",
         "money_transfer_agency",

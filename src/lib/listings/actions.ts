@@ -254,6 +254,8 @@ export async function saveDetails(_prev: DetailsState, formData: FormData): Prom
       condition: text("condition"),
       price: text("price"),
       negotiable: formData.get("negotiable") === "on",
+      availability: text("availability"),
+      leadTime: text("leadTime"),
       cityId: text("cityId"),
       neighborhood: text("neighborhood"),
       attributes: Object.fromEntries(defs.map((d) => [d.key, text(`attr_${d.key}`)])),

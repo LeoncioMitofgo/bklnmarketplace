@@ -116,11 +116,12 @@ async function ListingContent({ params }: Pick<PageProps<"/anuncio/[slug]">, "pa
   const { listing, catalog, city, category, path } = data;
   if (`/anuncio/${slug}` !== path) permanentRedirect(path);
 
-  const [t, tPrice, tCard, tDetails, format] = await Promise.all([
+  const [t, tPrice, tCard, tDetails, tOrder, format] = await Promise.all([
     getTranslations("catalog.listing"),
     getTranslations("price"),
     getTranslations("catalog.card"),
     getTranslations("listings.details"),
+    getTranslations("listings.order"),
     getFormatter(),
   ]);
   const now = listing.fetchedAt;
@@ -184,6 +185,11 @@ async function ListingContent({ params }: Pick<PageProps<"/anuncio/[slug]">, "pa
                 {tCard("negotiable")}
               </span>
             ) : null}
+            {listing.order_lead_time ? (
+              <span className="rounded-full bg-primary px-2.5 py-1 text-xs font-semibold text-white">
+                {tOrder("badge", { time: tOrder(`times.${listing.order_lead_time}`) })}
+              </span>
+            ) : null}
           </p>
           <h1 className="text-xl font-extrabold leading-snug">{title}</h1>
           <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-text-muted">
@@ -242,7 +248,7 @@ async function ListingContent({ params }: Pick<PageProps<"/anuncio/[slug]">, "pa
         ) : null}
 
         <SellerCard seller={listing.seller} now={now} />
-        <SafetyTips />
+        <SafetyTips onOrder={listing.order_lead_time !== null} />
         <Link
           href={`${path}/denunciar`}
           prefetch={false}
@@ -415,7 +421,9 @@ function ProductJsonLd({
             availability:
               listing.status === "sold"
                 ? "https://schema.org/SoldOut"
-                : "https://schema.org/InStock",
+                : listing.order_lead_time
+                  ? "https://schema.org/BackOrder"
+                  : "https://schema.org/InStock",
             itemCondition:
               listing.condition === "new"
                 ? "https://schema.org/NewCondition"

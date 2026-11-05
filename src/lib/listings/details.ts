@@ -5,12 +5,22 @@ import type { AttributeDef, Category } from "@/lib/catalog-types";
 
 export type AttributeValue = string | number | boolean;
 
+/** Plazos de un anuncio por encargo (D-079), en el orden del desplegable. */
+export const ORDER_LEAD_TIMES = ["under_week", "weeks_1_2", "weeks_2_4", "over_month"] as const;
+export type OrderLeadTime = (typeof ORDER_LEAD_TIMES)[number];
+
+const isOrderLeadTime = (value: string): value is OrderLeadTime =>
+  (ORDER_LEAD_TIMES as readonly string[]).includes(value);
+
 export type DetailsInput = {
   title: string;
   description: string;
   condition: string;
   price: string;
   negotiable: boolean;
+  /** "stock" (lo tiene ya) u "order" (por encargo). */
+  availability: string;
+  leadTime: string;
   cityId: string;
   neighborhood: string;
   attributes: Record<string, string>;
@@ -22,6 +32,7 @@ export type ParsedDetails = {
   condition: "new" | "used" | null;
   price_xaf: number | null;
   is_negotiable: boolean;
+  order_lead_time: OrderLeadTime | null;
   city_id: number;
   neighborhood: string | null;
   attributes: Record<string, AttributeValue>;
@@ -84,6 +95,13 @@ export function validateDetails(
     errors.price = "price_format";
   }
 
+  // Sin elegir nada cuenta como "lo tengo ya": es lo que traía el formulario antes de D-079.
+  let orderLeadTime: OrderLeadTime | null = null;
+  if (input.availability === "order") {
+    if (isOrderLeadTime(input.leadTime)) orderLeadTime = input.leadTime;
+    else errors.leadTime = "lead_time_required";
+  }
+
   const cityId = Number(input.cityId);
   if (!cityIds.has(cityId)) errors.cityId = "city_required";
 
@@ -108,6 +126,7 @@ export function validateDetails(
       condition,
       price_xaf: price === null || Number.isNaN(price) ? null : price,
       is_negotiable: input.negotiable,
+      order_lead_time: orderLeadTime,
       city_id: cityId,
       neighborhood: neighborhood || null,
       attributes,

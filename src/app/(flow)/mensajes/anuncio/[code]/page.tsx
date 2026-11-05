@@ -77,7 +77,7 @@ async function NewConversationContent({
         }}
       />
       <div className="px-4 pt-3">
-        <ChatSafetyNotice />
+        <ChatSafetyNotice onOrder={listing.order_lead_time !== null} />
       </div>
       {isOwn || !available ? (
         <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center">

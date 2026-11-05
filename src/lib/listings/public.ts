@@ -2,6 +2,7 @@ import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
 import type { Database } from "@/lib/supabase/database.types";
 import { createPublicClient } from "@/lib/supabase/public";
+import type { OrderLeadTime } from "./details";
 import { LISTINGS_TAG, listingTag } from "./tags";
 
 // Consultas públicas (rol anon, RLS: activos y vendidos recientes), cacheadas por etiquetas.
@@ -27,10 +28,11 @@ export type ListingCardData = {
   cover_path: string | null;
   cover_format: string | null;
   seller_is_premium: boolean;
+  order_lead_time: OrderLeadTime | null;
 };
 
 const CARD_COLUMNS =
-  "id, code, status, title, price_xaf, is_negotiable, condition, category_id, city_id, neighborhood, published_at, sold_at, cover_path, cover_format, seller_is_premium";
+  "id, code, status, title, price_xaf, is_negotiable, condition, category_id, city_id, neighborhood, published_at, sold_at, cover_path, cover_format, seller_is_premium, order_lead_time";
 
 // Las columnas de una vista llegan como opcionales en los tipos generados.
 const asCards = (rows: unknown) => (rows ?? []) as ListingCardData[];
@@ -106,7 +108,7 @@ export async function getPublicListing(code: string) {
   const { data: listing, error } = await supabase
     .from("listings")
     .select(
-      "id, code, user_id, status, title, description, price_xaf, is_negotiable, condition, category_id, city_id, neighborhood, attributes, view_count, published_at, sold_at, updated_at, listing_images(storage_path, format, width, height, position), seller:profiles!listings_user_id_fkey(username, display_name, avatar_path, created_at, premium_until, response_time_minutes, city:cities(name), store:stores(slug))",
+      "id, code, user_id, status, title, description, price_xaf, is_negotiable, condition, order_lead_time, category_id, city_id, neighborhood, attributes, view_count, published_at, sold_at, updated_at, listing_images(storage_path, format, width, height, position), seller:profiles!listings_user_id_fkey(username, display_name, avatar_path, created_at, premium_until, response_time_minutes, city:cities(name), store:stores(slug))",
     )
     .eq("code", code)
     .in("status", ["active", "sold"])

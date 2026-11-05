@@ -28,6 +28,7 @@ export function ReviewStep({ listing, images, catalog, emailVerified, onEdit }: 
   const tDetails = useTranslations("listings.details");
   const tPrice = useTranslations("price");
   const tErrors = useTranslations("listings.errors");
+  const tOrder = useTranslations("listings.order");
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
@@ -86,6 +87,11 @@ export function ReviewStep({ listing, images, catalog, emailVerified, onEdit }: 
           {listing.is_negotiable && listing.price_xaf !== null ? (
             <p className="text-xs font-semibold text-text-muted">{tPrice("negotiable")}</p>
           ) : null}
+          {listing.order_lead_time ? (
+            <p className="self-start rounded-full bg-primary px-2.5 py-1 text-xs font-semibold text-white">
+              {tOrder("badge", { time: tOrder(`times.${listing.order_lead_time}`) })}
+            </p>
+          ) : null}
           <p className="text-lg leading-snug">{listing.title}</p>
           <p className="text-sm text-text-muted">
             {[root?.name, category?.name].filter(Boolean).join(" › ")}
@@ -128,7 +134,7 @@ export function ReviewStep({ listing, images, catalog, emailVerified, onEdit }: 
             </Link>
           ),
         })}{" "}
-        {t("safety")}
+        {t(listing.order_lead_time ? "safetyOrder" : "safety")}
       </p>
 
       {error ? <Alert tone="error">{error}</Alert> : null}

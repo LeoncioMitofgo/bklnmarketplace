@@ -31,7 +31,7 @@ export async function LegalDocument({ doc }: { doc: "terms" | "privacy" }) {
     <main className="flex flex-col gap-6 px-4 pt-6 pb-10">
       <header className="flex flex-col gap-1.5">
         <h1 className="text-2xl font-extrabold">{t(`${doc}.title`)}</h1>
-        <p className="text-sm text-text-muted">{t("updated")}</p>
+        <p className="text-sm text-text-muted">{t(`${doc}.updated`)}</p>
       </header>
       <p className="text-[15px] leading-relaxed">{t(`${doc}.intro`)}</p>
 

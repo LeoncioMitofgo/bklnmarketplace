@@ -185,6 +185,7 @@ Lleva también `is_active boolean`, para retirar una modalidad sin borrarla.
 | `price_xaf` | `bigint` null | ≥ 0. Solo puede ser null si la categoría no exige precio |
 | `is_negotiable` | `boolean` | |
 | `condition` | `item_condition` null | `new` · `used`. Solo si la categoría lo usa |
+| `order_lead_time` | `order_lead_time` null | Null: lo tiene ya. Con valor: por encargo, con el plazo aproximado (ALCANCE §5.8, D-079). Columna de contenido: la cambia el dueño |
 | `attributes` | `jsonb` | Objeto validado en el servidor contra `category_attributes` |
 | `status` | `listing_status` | §5.3 |
 | `moderation_reason` | `text` null | Motivo visible para el vendedor si se bloquea |
@@ -314,6 +315,7 @@ Solo puede haber una solicitud `pending` por usuario. `request_premium(months, m
 | `user_role` | `user`, `admin` |
 | `listing_status` | `draft`, `active`, `paused`, `sold`, `expired`, `under_review`, `blocked`, `deleted` |
 | `item_condition` | `new`, `used` |
+| `order_lead_time` | `under_week`, `weeks_1_2`, `weeks_2_4`, `over_month` |
 | `price_period` | `total`, `month` |
 | `attribute_type` | `text`, `number`, `select`, `boolean` |
 | `report_reason` | `scam`, `prohibited`, `duplicate`, `wrong_category`, `offensive`, `other` |
@@ -361,7 +363,7 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
 - **`start_conversation(listing_id)`**: devuelve la conversación existente o crea una nueva. Comprueba que el anuncio está activo, que quien escribe no es el vendedor, que su cuenta está activa, que no hay bloqueo en ninguno de los dos sentidos y el límite de conversaciones nuevas por hora (más estricto para cuentas nuevas).
 - **`send_message(conversation_id, body, image_path)`**: los usuarios no insertan en `messages` directamente (D-048). Comprueba que quien escribe participa, que la otra persona no ha borrado la cuenta, que no hay bloqueo, el tamaño del texto, que la foto está en la carpeta de la conversación y existe en Storage, y el límite `messages_per_minute`. Un trigger actualiza `last_message_*` (y la lectura de quien envía) y emite los eventos de Realtime (§8).
 - **`mark_conversation_read(id)`** y **`unread_count()`** sirven para los contadores de no leídos.
-- **`my_conversations(role, conversation_id, limit)`**: la bandeja, o una conversación, con la otra persona, el anuncio y su estado aunque ya no sea público, los no leídos, cuándo leyó la otra persona y los bloqueos. Es `security definer` y solo devuelve conversaciones propias.
+- **`my_conversations(role, conversation_id, limit)`**: la bandeja, o una conversación, con la otra persona, el anuncio y su estado aunque ya no sea público (con `listing_order_lead_time`, para el aviso de los encargos), los no leídos, cuándo leyó la otra persona y los bloqueos. Es `security definer` y solo devuelve conversaciones propias.
 - **`listing_whatsapp_enabled(listing_id)`** dice si mostrar el botón. **`whatsapp_contact(listing_id)`** devuelve el teléfono del vendedor solo al pulsarlo: hace falta sesión y la cuenta activa, que el vendedor tenga `show_whatsapp` y que no haya bloqueo, y hay un límite diario (`whatsapp_reveals_per_day`) para evitar que se recolecten teléfonos (D-050).
 - Los límites de ritmo del chat (`conversations_per_hour`, más estricto en cuentas nuevas, y `messages_per_minute`) están en `app_settings.rate_limits`.
 
@@ -438,7 +440,7 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
 - `conversations`: (`buyer_id`, `last_message_at desc`) · (`seller_id`, `last_message_at desc`).
 - `reports`: (`listing_id`) donde `status = 'open'`.
 - `f_unaccent()` es una función envoltorio `IMMUTABLE` de `unaccent`, necesaria para la columna generada y los índices.
-- Las tarjetas de los listados salen de una vista `listing_cards` (`security_invoker`): anuncio + portada (`cover_path`, `cover_format`) + `seller_is_premium`. La ciudad se pone en la aplicación con el catálogo, que ya está cacheado.
+- Las tarjetas de los listados salen de una vista `listing_cards` (`security_invoker`): anuncio + portada (`cover_path`, `cover_format`) + `seller_is_premium` + `order_lead_time` (D-079). `search_listings` devuelve las mismas columnas. La ciudad se pone en la aplicación con el catálogo, que ya está cacheado.
 - `favorites`: (`listing_id`) para el borrado en cascada y (`user_id`, `created_at desc`) para la lista.
 
 ## 10. Tareas programadas en SQL (pg_cron)
