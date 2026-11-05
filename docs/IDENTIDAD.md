@@ -107,7 +107,7 @@ Reglas:
 
 | # | Pantalla | Decisiones de diseño |
 |---|---|---|
-| 01 | Inicio | Categorías en rejilla de 4×3 · "Destacados" (Premium) en carrusel · "Recientes en <ciudad>" · botón **"Ver más anuncios"** en lugar de scroll infinito, para que el usuario decida cuándo gasta datos |
+| 01 | Inicio | Categorías en rejilla de 4×3, con «Ver todas» a `/categorias` (todas, con sus subcategorías, D-077) · "Destacados" (Premium) en carrusel · "Recientes en <ciudad>" · botón **"Ver más anuncios"** en lugar de scroll infinito, para que el usuario decida cuándo gasta datos |
 | 02 | Resultados | Filtros activos como chips que se pueden quitar · lista con miniatura a la izquierda · orden |
 | 03 | Filtros | Hoja inferior con los atributos de la categoría · el botón muestra cuántos resultados hay ("Ver 37 resultados") |
 | 04 | Ficha | Galería con contador · precio + "Negociable" · detalles · vendedor con tiempo de respuesta · consejos de seguridad · similares · denunciar |

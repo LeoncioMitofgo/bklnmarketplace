@@ -327,6 +327,21 @@ try {
   p = await page(`/u/${seller.username}`);
   ok("perfil con su anuncio en venta", p.body.includes(title) && p.body.includes("En venta (1)"));
 
+  // Todas las categorías (D-077): el «Ver todas» del inicio lleva a la lista con sus subcategorías.
+  p = await page("/");
+  ok("«Ver todas» del inicio lleva a /categorias", p.body.includes('href="/categorias"'));
+  p = await page("/categorias");
+  ok(
+    "/categorias lista las principales y sus subcategorías, con enlace",
+    p.status === 200 &&
+      ["Vehículos", "Inmuebles", "Servicios", "Oficina y papelería", "Otros"].every((s) =>
+        p.body.includes(s),
+      ) &&
+      p.body.includes('href="/categoria/casas-pisos-alquiler"') &&
+      p.body.includes('href="/categoria/transporte-mudanzas"'),
+    String(p.status),
+  );
+
   // Oficina y papelería (D-070): la categoría y sus tres subcategorías.
   p = await page("/categoria/oficina-papeleria");
   ok(

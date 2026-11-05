@@ -545,6 +545,10 @@
         "expired": "Caducado",
         "unavailable": "Ya no está disponible"
       }
+    },
+    "all": {
+      "title": "Todas las categorías",
+      "metaDescription": "Todas las categorías de BKLN Marketplace: vehículos, inmuebles, móviles, hogar, moda, servicios y más, para comprar, vender y alquilar en Guinea Ecuatorial."
     }
   },
   "errorPage": {

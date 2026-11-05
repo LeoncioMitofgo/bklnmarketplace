@@ -52,7 +52,11 @@ async function Categories() {
 
   return (
     <section className="flex flex-col gap-3 px-4">
-      <SectionHeader title={t("home.categories")} href="/buscar" more={t("home.allCategories")} />
+      <SectionHeader
+        title={t("home.categories")}
+        href="/categorias"
+        more={t("home.allCategories")}
+      />
       <ul className="grid grid-cols-4 gap-x-2 gap-y-3">
         {roots.map((category) => (
           <li key={category.id}>
