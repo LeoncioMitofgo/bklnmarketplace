@@ -174,7 +174,8 @@ Previsto para **enero de 2027** (D-068).
   - [x] Tienda de pruebas «Farmacia Mama Candy» (`@mama_candy`, de demostración, `/t/farmacia-mama-candy`), con 5 anuncios de parafarmacia. En desarrollo es admin y Premium (credenciales en `.env.dev`); en producción, solo Premium (credenciales en `.env.cuentas-prueba`). Su teléfono para llamadas es el de BKLN. Se borra antes de abrir con las demás cuentas de demostración
   - [ ] Probarlo en el móvil (lo hace el usuario)
   - [ ] Dar de alta bklnmarketplace.com en Google Search Console y en Bing Webmaster Tools (se verifica con un registro TXT en el DNS de Hostinger) y enviarles el sitemap, en cuanto publique la primera tienda fundadora
-  - [ ] Venderlo: «Tu tienda en Google» como primera ventaja en `/premium` y un mensaje de seguimiento a las tiendas fundadoras con ese argumento
+  - [x] «Tu tienda, en Google» como primera ventaja en `/premium` (2026-11-10): bloque destacado tras la cabecera, entradilla y fila de la tabla
+  - [ ] Mensaje de seguimiento a las tiendas fundadoras con ese argumento (el recordatorio de los 7–10 días; lo dejamos para más adelante, a petición del cliente)
 - [x] Panel de admin adaptado al ordenador: menú lateral y páginas a dos columnas (2026-11-04, D-071)
 - [x] El proyecto de Supabase actual es el de producción (2026-11-04, D-067). Funciones de Vercel en Dublín (`dub1`)
 - [x] Estabilizar las pruebas e2e que fallaban en la batería completa (2026-11-04). Todas entraban desde `::1` y, al acumularse los logins, saltaba el límite de 30 por IP cada 15 minutos: ahora cada prueba usa su propia IP (`TEST_IP` en `e2e/lib.mjs`). También se corrigieron cuatro comprobaciones que miraban antes de tiempo (contenido en streaming o borrador que vuelve al hidratar) o sin await. La batería completa pasa (18 pruebas)

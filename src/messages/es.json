@@ -837,10 +837,18 @@
   },
   "premium": {
     "metaTitle": "Hazte Premium",
-    "description": "Más anuncios, más tiempo publicados, más visibilidad y tu propia tienda en BKLN Marketplace.",
+    "description": "Tu propia tienda en BKLN Marketplace, que también encuentra Google, más anuncios, más tiempo publicados y más visibilidad.",
     "title": "Hazte Premium",
-    "subtitle": "Vende más: más anuncios a la vez, más tiempo publicados, primero en las búsquedas y con tu propia tienda.",
+    "subtitle": "Que te encuentren: tu propia tienda, también en Google, más anuncios a la vez, más tiempo publicados y primero en las búsquedas.",
     "active": "Eres Premium hasta el {date}. Si renuevas ahora, el tiempo nuevo se suma al que te queda.",
+    "google": {
+      "title": "Tu tienda, en Google",
+      "lead": "Cuando alguien busque en Google lo que vendes, que aparezca tu tienda.",
+      "address": "Tu tienda tiene su propia dirección, bklnmarketplace.com/t/tu-tienda, con tu horario y dónde encontrarte.",
+      "products": "Cada producto tiene su página, con foto, precio y ciudad. Google y los asistentes como ChatGPT pueden encontrarla.",
+      "phone": "Pon tu teléfono para llamadas, el de tus carteles, y te llamarán directamente.",
+      "whatsapp": "Un estado de WhatsApp dura 24 horas y solo lo ven tus contactos. En tu tienda, lo que publicas se queda y te pueden encontrar."
+    },
     "compare": {
       "title": "Normal o Premium",
       "feature": "Ventaja",
@@ -855,7 +863,7 @@
       "renewAuto": "Automática",
       "featured": "En «Destacados» del inicio y primero en las búsquedas",
       "badge": "Insignia Premium",
-      "store": "Tienda con dirección propia (/t/tu-tienda)",
+      "store": "Tienda propia que encuentra Google",
       "yes": "Sí",
       "no": "No"
     },

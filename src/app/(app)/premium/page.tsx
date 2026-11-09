@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { cache, Suspense } from "react";
-import { CheckIcon } from "@/components/icons";
+import { CheckIcon, SearchIcon } from "@/components/icons";
 import { PremiumRequestForm } from "@/components/premium/request-form";
 import { Alert } from "@/components/ui/alert";
 import { buttonClasses } from "@/components/ui/button";
@@ -64,6 +64,7 @@ export default async function PremiumPage() {
       <Suspense fallback={null}>
         <MyStatus offer={offer} />
       </Suspense>
+      <InGoogle />
       <ComparisonTable offer={offer} />
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-extrabold">{t("choose.title")}</h2>
@@ -209,6 +210,29 @@ async function ComparisonTable({ offer }: { offer: PremiumOffer }) {
           ))}
         </tbody>
       </table>
+    </section>
+  );
+}
+
+/** La primera ventaja: la tienda se puede encontrar en Google y en los asistentes (D-081). */
+async function InGoogle() {
+  const t = await getTranslations("premium.google");
+  return (
+    <section className="flex flex-col gap-3 rounded-card bg-surface p-4">
+      <h2 className="flex items-center gap-2 text-lg font-extrabold">
+        <SearchIcon className="size-5 shrink-0 text-primary" />
+        {t("title")}
+      </h2>
+      <p className="text-[15px] font-semibold leading-relaxed">{t("lead")}</p>
+      <ul className="flex flex-col gap-2 text-sm leading-relaxed">
+        {(["address", "products", "phone"] as const).map((key) => (
+          <li key={key} className="flex gap-2">
+            <CheckIcon className="mt-0.5 size-4 shrink-0 text-success" />
+            {t(key)}
+          </li>
+        ))}
+      </ul>
+      <p className="text-sm leading-relaxed text-text-muted">{t("whatsapp")}</p>
     </section>
   );
 }
