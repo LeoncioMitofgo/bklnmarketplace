@@ -43,7 +43,7 @@ export async function AdminShell({
         </header>
         <nav
           aria-label={t("label")}
-          className="flex gap-1 overflow-x-auto border-b border-border px-2 lg:flex-1 lg:flex-col lg:overflow-visible lg:border-b-0 lg:px-3"
+          className="scrollbar-none flex gap-1 overflow-x-auto border-b border-border px-2 lg:flex-1 lg:flex-col lg:overflow-visible lg:border-b-0 lg:px-3"
         >
           {TABS.map((tab) => (
             <Link

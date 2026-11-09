@@ -19,7 +19,7 @@ export function Gallery({
   if (images.length === 0) return <div className="aspect-[4/3] bg-placeholder" />;
 
   return (
-    <ul className="flex aspect-[4/3] snap-x snap-mandatory overflow-x-auto bg-surface [scrollbar-width:none]">
+    <ul className="flex aspect-[4/3] snap-x snap-mandatory scrollbar-none overflow-x-auto bg-surface">
       {images.map((image, index) => {
         const scale = Math.min(1, THUMB_MAX / Math.max(image.width, image.height));
         const thumbWidth = Math.round(image.width * scale);

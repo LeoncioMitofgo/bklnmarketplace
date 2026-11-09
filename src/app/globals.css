@@ -30,6 +30,15 @@
   --font-display: var(--font-jakarta), system-ui, sans-serif;
 }
 
+/* Filas con scroll horizontal (destacados, chips, pestañas, galería): se desliza igual, pero sin la
+   barra, que se veía fea. Lo que hay de más se nota porque asoma el siguiente elemento. */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;

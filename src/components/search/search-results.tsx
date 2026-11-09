@@ -59,7 +59,7 @@ export async function SearchResults({ filters, catalog, basePath, title }: Props
 
       <CategoryChips filters={filters} catalog={catalog} href={href} />
 
-      <div className="-mt-1 flex gap-2 overflow-x-auto px-4 pb-1">
+      <div className="scrollbar-none -mt-1 flex gap-2 overflow-x-auto px-4 pb-1">
         <a
           href="#filtros"
           className="inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-full border border-primary px-3.5 text-sm font-semibold text-primary"
@@ -171,7 +171,10 @@ async function CategoryChips({
     href({ category, attributes: {}, ranges: {} }, `/categoria/${category.slug}`);
 
   return (
-    <nav aria-label={t("categories")} className="-mt-1 flex gap-2 overflow-x-auto px-4 pb-1">
+    <nav
+      aria-label={t("categories")}
+      className="scrollbar-none -mt-1 flex gap-2 overflow-x-auto px-4 pb-1"
+    >
       {parent ? (
         <Link
           href={to(parent)}

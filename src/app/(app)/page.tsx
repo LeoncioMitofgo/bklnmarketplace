@@ -111,9 +111,10 @@ async function Listings() {
           <div className="px-4">
             <SectionHeader title={t("featured")} href="/buscar" more={t("featuredMore")} />
           </div>
-          <ul className="flex snap-x scroll-px-4 gap-3 overflow-x-auto px-4 pb-1">
+          <ul className="scrollbar-none flex snap-x scroll-px-4 gap-3 overflow-x-auto px-4 pb-1">
             {featured.map((listing) => (
-              <li key={listing.id} className="w-40 shrink-0 snap-start">
+              // 44 % del ancho: siempre asoma la tercera tarjeta, y así se ve que hay más.
+              <li key={listing.id} className="w-[44%] shrink-0 snap-start">
                 <ListingCard listing={listing} catalog={catalog} now={now} />
               </li>
             ))}

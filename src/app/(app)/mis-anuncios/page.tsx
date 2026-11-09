@@ -126,7 +126,10 @@ async function MyListingsContent({
       {params.publicado ? <Alert tone="success">{t("mine.published")}</Alert> : null}
       {params.aviso === "borradores" ? <Alert tone="info">{t("mine.draftsLimit")}</Alert> : null}
 
-      <nav aria-label={t("mine.title")} className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1">
+      <nav
+        aria-label={t("mine.title")}
+        className="scrollbar-none -mx-4 flex gap-2 overflow-x-auto px-4 pb-1"
+      >
         {(Object.keys(TABS) as Tab[]).map((name) => {
           const count = listings.filter((l) => inTab(name, l)).length;
           const active = name === tab;
