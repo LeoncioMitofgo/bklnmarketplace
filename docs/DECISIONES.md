@@ -296,3 +296,9 @@ Si una decisión se revierte, no se borra: se marca como ~~sustituida~~ y se enl
   - **Términos:** se puede anunciar lo que se trae por encargo y se entrega aquí, con fotos del proveedor si hace falta. Quien trabaja por encargo tiene que marcarlo, con un plazo realista, y presentarlo como disponible es engañoso. Las falsificaciones siguen prohibidas. La ciudad del anuncio es dónde se entrega.
   - **Teléfono:** sigue siendo solo +240 (ALCANCE §5.7). Quien vive fuera se registra con un número de aquí, suyo o del familiar que entrega y cobra, y así siempre hay alguien localizable en Guinea, como pide el aviso. Los números extranjeros se estudiarán si hace falta.
   - **Más adelante:** con los pagos de la fase 3, la plataforma podría guardar el anticipo hasta la entrega. El diseño no lo impide. · Petición del cliente: varias personas lo han preguntado.
+- **D-080 · 2026-11-09** · **Me gusta, comentarios, seguir y valoraciones** (ALCANCE §8):
+  - **Me gusta:** son los favoritos, privados. El número de veces que se guarda un anuncio entra en las estadísticas para Premium (fase 2). No habrá contador público: al abrir, casi todo marcaría «0».
+  - **Comentarios públicos en los anuncios: no.** La gente pondría su teléfono a la vista, habría spam e insultos que moderar y quitarían conversaciones al chat, que es lo que se mide para validar el mercado.
+  - **Valoraciones:** siguen ligadas a una conversación real y pasan a ser lo primero de la fase 2, unas semanas después de abrir, cuando ya haya conversaciones. Dan confianza, sobre todo en los encargos (D-079).
+  - **Seguir tiendas:** entra en la fase 2, con aviso por push cuando la tienda publica algo. Es un argumento para Premium y para las tiendas fundadoras.
+  · Pregunta del cliente; aceptó la propuesta.

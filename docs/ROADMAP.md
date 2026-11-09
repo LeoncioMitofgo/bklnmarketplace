@@ -200,9 +200,10 @@ Detalle, contactos y correos en [PAGOS-PROVEEDORES.md](PAGOS-PROVEEDORES.md).
 
 ## Fase 2 — Crecimiento
 
+- [ ] Valoraciones ligadas a una conversación real: lo primero tras la apertura (D-080)
+- [ ] Seguir tiendas, con aviso por push cuando publican (D-080)
 - [ ] Estadísticas por anuncio (Premium)
 - [ ] Respuestas rápidas en el chat (Premium)
-- [ ] Valoraciones ligadas a una conversación real
 - [ ] Verificación de vendedores (insignia "Verificado")
 - [ ] Verificación de teléfono (OTP por SMS o WhatsApp) y recuperación de contraseña por teléfono
 - [ ] Alertas de búsqueda guardada

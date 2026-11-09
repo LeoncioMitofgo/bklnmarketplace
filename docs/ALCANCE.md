@@ -270,7 +270,8 @@ Todos los anuncios tienen además: estado (nuevo/usado, cuando aplique), precio,
 |---|---|
 | Estadísticas por anuncio para Premium (vistas, contactos, favoritos) | 2 |
 | Respuestas rápidas en el chat (Premium) | 2 |
-| Valoraciones de vendedores (ligadas a una conversación real) | 2 |
+| Valoraciones de vendedores (ligadas a una conversación real), lo primero tras la apertura (D-080) | 2 |
+| Seguir tiendas, con aviso cuando publican (D-080) | 2 |
 | Verificación de vendedores (insignia "Verificado") | 2 |
 | Verificación de teléfono (OTP por SMS o WhatsApp) y recuperación de contraseña por teléfono | 2 |
 | Alertas de búsqueda guardada | 2 |
@@ -282,6 +283,7 @@ Todos los anuncios tienen además: estado (nuevo/usado, cuando aplique), precio,
 | Envíos / integración con delivery | 3 |
 | App móvil nativa | 3 |
 | Expansión a otros países (CEMAC) | 3+ |
+| Descartado (D-080): comentarios públicos en los anuncios (las preguntas van por el chat) y contador público de «me gusta» | — |
 | Ideas a evaluar (no comprometidas): destacados sueltos de pago, niveles Pro/Tienda, ofertas formales de precio, banners publicitarios entre los anuncios. Los logos de los patrocinadores del lanzamiento en el pie («Con el apoyo de») sí entran (D-069) | — |
 
 ## 9. Métricas de validación
