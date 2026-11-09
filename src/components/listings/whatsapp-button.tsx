@@ -17,9 +17,11 @@ type WhatsAppAction = (
 export function WhatsAppButton({
   action: serverAction,
   fields,
+  compact = false,
 }: {
   action: WhatsAppAction;
   fields: Record<string, string>;
+  compact?: boolean;
 }) {
   const t = useTranslations("chat");
   const [state, action, pending] = useActionState(serverAction, {});
@@ -28,7 +30,7 @@ export function WhatsAppButton({
       {Object.entries(fields).map(([name, value]) => (
         <input key={name} type="hidden" name={name} value={value} />
       ))}
-      <button type="submit" disabled={pending} className={buttonClasses("secondary")}>
+      <button type="submit" disabled={pending} className={buttonClasses("secondary", "", compact)}>
         <PhoneIcon className="size-5" />
         {pending ? t("contact.opening") : t("contact.whatsapp")}
       </button>

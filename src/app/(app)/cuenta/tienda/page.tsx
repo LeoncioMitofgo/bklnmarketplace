@@ -11,6 +11,7 @@ import { Alert } from "@/components/ui/alert";
 import { buttonClasses } from "@/components/ui/button";
 import { pickMessages } from "@/i18n/client-messages";
 import { getSessionUser } from "@/lib/auth/session";
+import { formatGqPhone } from "@/lib/format";
 import { defaultStoreSlug } from "@/lib/stores/slug";
 import { createClient } from "@/lib/supabase/server";
 
@@ -54,7 +55,7 @@ async function MyStoreContent() {
       .single(),
     supabase
       .from("stores")
-      .select("slug, name, description, address, opening_hours, logo_path, cover_path")
+      .select("slug, name, description, address, opening_hours, call_phone, logo_path, cover_path")
       .eq("user_id", user.id)
       .maybeSingle(),
     getTranslations("store.edit"),
@@ -96,6 +97,8 @@ async function MyStoreContent() {
           description: store?.description ?? "",
           address: store?.address ?? "",
           openingHours: store?.opening_hours ?? "",
+          // Sin el +240, que ya va delante del campo: "222 123 456".
+          callPhone: store?.call_phone ? formatGqPhone(store.call_phone).slice(5) : "",
         }}
       />
       {store ? (

@@ -61,6 +61,7 @@ erDiagram
 | `premium_until` | `timestamptz` null | **Es Premium si `premium_until > now()`.** Solo lo cambia el RPC del admin |
 | `response_time_minutes` | `integer` null | Mediana de la primera respuesta; se recalcula a diario (§10) |
 | `status` | `account_status` | `active` · `suspended` · `banned` |
+| `is_demo` | `boolean` | Cuenta de demostración (D-047). Hasta el lanzamiento, sus tiendas y anuncios no se indexan y las de las cuentas reales sí (D-081). El usuario no la cambia |
 | `created_at`, `updated_at` | `timestamptz` | "Miembro desde" = `created_at` |
 
 **`profile_private`**: solo el dueño y el admin.
@@ -90,6 +91,7 @@ El email no se duplica aquí: vive en `auth.users` y solo lo leen las funciones 
 | `logo_path`, `cover_path` | `text` null | Bucket `profile-media` |
 | `address` | `text` null | Texto libre |
 | `opening_hours` | `text` null | Texto libre ("L–V 8:00–18:00") |
+| `call_phone` | `text` null | Teléfono para llamadas, **público** (D-081): `+240` y 9 cifras. Lo pone el dueño; se ve sin sesión en la tienda, en sus anuncios y en los datos estructurados. No es el de la cuenta, que sigue privado |
 | `created_at`, `updated_at` | `timestamptz` | |
 
 El botón de WhatsApp de la tienda usa el mismo teléfono y el mismo ajuste `show_whatsapp` del perfil: `store_whatsapp_enabled(user_id)` y `store_whatsapp_contact(user_id)`, con las mismas reglas y el mismo tope diario que el de la ficha (D-059). El trigger `stores_check_media` comprueba que `logo_path` y `cover_path` son fotos del dueño (`{user_id}/logo-{uuid}` y `cover-{uuid}`).
@@ -305,6 +307,7 @@ Solo puede haber una solicitud `pending` por usuario. `request_premium(months, m
 | `push_subscriptions` | Notificaciones push (una fila por navegador) | `user_id`, `endpoint` (único), `p256dh`, `auth`, `user_agent`, `last_used_at`. Las guarda el servidor (upsert por `endpoint`: si el móvil ya estaba con otra cuenta, pasa a la actual). RLS: cada usuario lee y borra las suyas |
 | `email_verification_tokens` | Verificación propia (D-020) | `token_hash` PK, `user_id`, `email`, `expires_at` (24 h), `used_at` |
 | `rate_limits` | Intentos de login y otros límites | PK (`key`, `window_start`), `count` |
+| `call_clicks` | Pulsaciones de «Llamar» (D-081), que cuentan como contacto en las métricas de validación | `store_user_id` (→ `profiles`, en cascada), `listing_id` null (→ `listings`; null si se llamó desde la tienda), `created_at`. Se escribe con `register_call` y la lee el panel con la clave de servicio |
 | `notification_log` | Evita avisos repetidos (crons idempotentes) | `user_id`, `kind` (`notification_kind`), `ref` (texto: el anuncio y su fecha de caducidad, `{id}:{aaaa-mm-dd}`, o la fecha de fin del periodo Premium), `channel` (`push`/`email`), `sent_at`. Único (`user_id`, `kind`, `ref`, `channel`); se apunta antes de enviar (D-061) |
 
 ## 4. Enums
@@ -383,6 +386,7 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
   - Cierra la solicitud pendiente del usuario, si la hay, y lo apunta en `moderation_log`. Todo en una sola transacción.
 
 ### 5.8 Otros RPC
+- `register_call(store_user_id, listing_id?)`: apunta una pulsación de «Llamar» en `call_clicks` (D-081). Solo si la tienda se ve y tiene `call_phone`, y no si llama el propio dueño; el anuncio se guarda solo si es suyo y está activo. La pueden llamar visitantes sin sesión.
 - `register_listing_view(listing_id)`: suma una vista a un anuncio activo; las del propio vendedor no cuentan. La ficha la pide después de cargar, una vez por anuncio y sesión del navegador. El trigger de `updated_at` no salta cuando solo cambia `view_count`.
 - `search_listings(query, category_id, city_id, price_min, price_max, condition, attributes, ranges, sort, limit)`: búsqueda de anuncios activos con filtros y orden (ARQUITECTURA §5.4). `security invoker`: se aplica la RLS de quien busca. Devuelve las tarjetas ya preparadas (como `listing_cards`) y `total_count`. `attributes` es una coincidencia exacta (`{"brand": "Toyota"}`) y `ranges` son rangos de atributos numéricos (`{"year": [2015, null]}`). Como mucho 200 filas (D-041).
 - `my_favorites(limit)`: favoritos del usuario con su disponibilidad (`active`, `sold`, `paused`, `expired` o `unavailable`). Es `security definer` porque la RLS ya no deja ver los anuncios pausados o caducados de otros; de los bloqueados, en revisión o eliminados no devuelve el contenido.
@@ -415,7 +419,7 @@ Al **editar el contenido** de un anuncio activo (permitido por columna), un trig
 | `premium_requests` | Dueño · admin | RPC (`request_premium`) | RPC (cambiar o cancelar) · admin al activar | — |
 | `premium_activations` | Dueño · admin | RPC de admin | — | — |
 | `push_subscriptions` | Dueño | Dueño | Dueño | Dueño |
-| `email_verification_tokens`, `rate_limits`, `notification_log` | Solo servidor | Solo servidor | Solo servidor | Solo servidor |
+| `email_verification_tokens`, `rate_limits`, `notification_log`, `call_clicks` | Solo servidor | Solo servidor | Solo servidor | Solo servidor |
 
 `is_admin()` es una función `security definer` que lee `profile_private.role`.
 
@@ -459,7 +463,7 @@ Los avisos por email y la limpieza de imágenes de Storage los hace Vercel Cron 
 
 Lo ejecuta el servidor (`auth.admin.deleteUser`) y las claves foráneas hacen el resto:
 
-- **Se borra en cascada:** perfil, datos privados, tienda, anuncios y sus fotos, favoritos, bloqueos, solicitudes de Premium y suscripciones push. Los ficheros de Storage (`listing-images` y `profile-media`) los borra el servidor justo después, con la lista de `account_storage_objects()` (D-055).
+- **Se borra en cascada:** perfil, datos privados, tienda, anuncios y sus fotos, favoritos, bloqueos, solicitudes de Premium, suscripciones push y las llamadas apuntadas a su tienda. Los ficheros de Storage (`listing-images` y `profile-media`) los borra el servidor justo después, con la lista de `account_storage_objects()` (D-055).
 - **Las denuncias** se conservan, con `set null` en quien denunció, el anuncio y la persona denunciada.
 - **Se conserva, anonimizado (`set null`):** los mensajes que ya envió y las conversaciones con otros usuarios, que aparecen como "Usuario eliminado" y "Anuncio eliminado". La otra persona conserva su historial y, si hubo estafa, las pruebas.
 - **Se conserva por contabilidad:** `premium_activations`, con `user_id = null`. También `moderation_log`.

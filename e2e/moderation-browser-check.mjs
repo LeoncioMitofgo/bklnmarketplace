@@ -293,10 +293,16 @@ try {
     "el inicio tiene los enlaces al pie",
     (await visitor.locator('footer a[href="/terminos"]').count()) === 1,
   );
+  // Antes del lanzamiento el sitemap solo trae las tiendas reales y sus anuncios (D-081).
+  const prelaunch = (await (await fetch(`${BASE}/robots.txt`)).text()).includes("Allow: /t/");
   const sitemap = await (await fetch(`${BASE}/sitemap.xml`)).text();
   ok(
-    "sitemap con términos y privacidad",
-    sitemap.includes("/terminos") && sitemap.includes("/privacidad"),
+    prelaunch
+      ? "sitemap antes del lanzamiento: sin términos ni privacidad"
+      : "sitemap con términos y privacidad",
+    prelaunch
+      ? !sitemap.includes("/terminos") && !sitemap.includes("/privacidad")
+      : sitemap.includes("/terminos") && sitemap.includes("/privacidad"),
   );
 
   // ─── Borrar la cuenta (la vendedora) ────────────────────────────────────────

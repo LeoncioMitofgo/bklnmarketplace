@@ -169,6 +169,11 @@ Previsto para **enero de 2027** (D-068).
 - [x] Alimentación separada de Agricultura, con Panadería y pastelería y Comida preparada (2026-11-05, D-078)
 - [x] Anuncios por encargo (2026-11-05, D-079): «¿Lo tienes ya?» y el plazo al publicar, la insignia «POR ENCARGO», «Por encargo · plazo» en la ficha, un aviso de seguridad propio en la ficha, el chat y la revisión, y los términos. Migración `20261105120000_order_listings.sql`, probada antes en el proyecto de desarrollo. Prueba: `order-check`
   - [x] Probarlo en el móvil (2026-11-05, el usuario): publicó un anuncio por encargo y todo bien
+- [ ] Teléfono para llamadas de las tiendas y tiendas reales en Google antes de abrir (D-081): campo opcional en `/cuenta/tienda`, el número y «Llamar» en la tienda, «Llamar» en la barra de sus anuncios, llamadas contadas como contacto en el panel, datos de negocio (Store) y título con la ciudad. Antes del lanzamiento, robots.txt y el sitemap dejan pasar solo las tiendas reales y sus anuncios. Migración `20261109120000_store_call_phone.sql`. Prueba: `store-call-check`
+  - [ ] Probar la migración en desarrollo, aplicarla en producción, regenerar los tipos y desplegar
+  - [ ] Probarlo en el móvil (lo hace el usuario)
+  - [ ] Dar de alta bklnmarketplace.com en Google Search Console y en Bing Webmaster Tools (se verifica con un registro TXT en el DNS de Hostinger) y enviarles el sitemap, en cuanto publique la primera tienda fundadora
+  - [ ] Venderlo: «Tu tienda en Google» como primera ventaja en `/premium` y un mensaje de seguimiento a las tiendas fundadoras con ese argumento
 - [x] Panel de admin adaptado al ordenador: menú lateral y páginas a dos columnas (2026-11-04, D-071)
 - [x] El proyecto de Supabase actual es el de producción (2026-11-04, D-067). Funciones de Vercel en Dublín (`dub1`)
 - [x] Estabilizar las pruebas e2e que fallaban en la batería completa (2026-11-04). Todas entraban desde `::1` y, al acumularse los logins, saltaba el límite de 30 por IP cada 15 minutos: ahora cada prueba usa su propia IP (`TEST_IP` en `e2e/lib.mjs`). También se corrigieron cuatro comprobaciones que miraban antes de tiempo (contenido en streaming o borrador que vuelve al hidratar) o sin await. La batería completa pasa (18 pruebas)
@@ -184,11 +189,11 @@ Previsto para **enero de 2027** (D-068).
 - [ ] Acto de presentación en Malabo (enero de 2027): fecha, sala (Galambo, Centro Cultural de España u hotel) e invitados
 - [ ] Limpiar los restos de pruebas e2e fallidas en producción, con el visto bueno del cliente: cuentas `pnav+…` y `perfil+…`, las denuncias abiertas que dejaron, anuncios bloqueados «Móvil revisado…» y cobros de prueba de Premium
 - [ ] Decidir si se quedan los anuncios de prueba del cliente («Coche en venta», «Camisa y Chaleco», «POS en venta…»): no son de demostración y no se borran con ellas
-- [ ] Antes de abrir, borrar las cuentas de demostración (D-047): son las de `user_metadata.demo = true` en Supabase Auth; al borrarlas desaparecen sus anuncios, y sus fotos hay que quitarlas de Storage (si se borran desde el panel de Supabase, el cron las quita al día siguiente, D-073; como son muchas, puede saltar el freno y habrá que borrarlas a mano)
+- [ ] Antes de abrir, borrar las cuentas de demostración (D-047): son las de `user_metadata.demo = true` en Supabase Auth (y `profiles.is_demo`, D-081); al borrarlas desaparecen sus anuncios, y sus fotos hay que quitarlas de Storage (si se borran desde el panel de Supabase, el cron las quita al día siguiente, D-073; como son muchas, puede saltar el freno y habrá que borrarlas a mano)
 - [ ] Supabase Pro en el proyecto actual y Vercel Pro, antes de abrir (D-067). Con Vercel Pro, programar el cron de mensajes sin leer (D-076). Antes, mover el proyecto de la web de BKLN a una organización gratuita: en Pro, cada proyecto de la organización paga su cómputo
 - [x] Proyecto de Supabase de desarrollo (2026-11-05, D-067): «BKLNMarketplace-dev» (`ioqnwiuuquekpybpwvlt`), en Irlanda y gratis, con todas las migraciones. Sus claves están en `.env.dev`. En el plan gratuito solo caben 2 proyectos activos: para usarlo hay que pausar «Bkln-software» (el formulario de la web), y al terminar, al revés
   - [ ] Copiar a desarrollo el catálogo de producción (categorías cambiadas a mano: Oficina y papelería, Alimentación…): sin eso, `catalog-check` da 6 fallos allí
-- [ ] Abrir la indexación: `SITE_INDEXABLE=true` en las variables de producción de Vercel (D-043)
+- [ ] Abrir la indexación: `SITE_INDEXABLE=true` en las variables de producción de Vercel (D-043). Hasta entonces solo se indexan las tiendas reales y sus anuncios (D-081); al ponerla, todo el sitio y el sitemap completo
 - [ ] Despliegue en producción
 
 ### En paralelo: proveedores de pago (prepara la fase 3)

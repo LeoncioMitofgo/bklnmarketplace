@@ -29,6 +29,7 @@ import { imageUrl } from "@/lib/listings/images";
 import { listingPath, parseListingCode } from "@/lib/listings/paths";
 import { priceLabel } from "@/lib/listings/price";
 import { getPublicListing, getSimilarListings, type PublicListing } from "@/lib/listings/public";
+import { isIndexedBeforeLaunch, prelaunchRobots } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 
 // Ficha de anuncio (wireframe 04), a pantalla completa con la barra de contacto abajo.
@@ -62,10 +63,14 @@ export async function generateMetadata({
   const description = `${price} · ${place}. ${listing.description ?? ""}`.slice(0, 200);
   const cover = listing.images[0];
 
+  const { seller } = listing;
   return {
     title,
     description,
     alternates: { canonical: path },
+    ...prelaunchRobots(
+      listing.status === "active" && isIndexedBeforeLaunch(seller, seller.store !== null),
+    ),
     openGraph: {
       type: "website",
       url: path,
@@ -273,7 +278,12 @@ async function ListingContent({ params }: Pick<PageProps<"/anuncio/[slug]">, "pa
       {listing.status === "active" ? (
         <>
           <ViewTracker listingId={listing.id} />
-          <ContactBar listingId={listing.id} code={listing.code} sellerId={listing.user_id} />
+          <ContactBar
+            listingId={listing.id}
+            code={listing.code}
+            sellerId={listing.user_id}
+            callPhone={listing.seller.store?.call_phone ?? null}
+          />
         </>
       ) : null}
       <ProductJsonLd listing={listing} url={url} categoryName={category?.name} />

@@ -14,9 +14,13 @@ type Values = {
   description: string;
   address: string;
   openingHours: string;
+  callPhone: string;
 };
 
-/** Datos de la tienda (wireframe 05): nombre, dirección web, descripción, dirección y horario. */
+/**
+ * Datos de la tienda (wireframe 05): nombre, dirección web, descripción, dirección, horario y
+ * teléfono para llamadas (D-081).
+ */
 export function StoreForm({ initial, isNew }: { initial: Values; isNew: boolean }) {
   const t = useTranslations("store.form");
   const tErrors = useTranslations("store.errors");
@@ -81,6 +85,19 @@ export function StoreForm({ initial, isNew }: { initial: Values; isNew: boolean 
         error={error("openingHours")}
         maxLength={120}
         defaultValue={values.openingHours}
+      />
+      <TextField
+        id="store-call-phone"
+        name="callPhone"
+        type="tel"
+        inputMode="tel"
+        prefix="+240"
+        label={t("callPhone")}
+        hint={t("callPhoneHint")}
+        placeholder="222 123 456"
+        autoComplete="tel-national"
+        error={error("callPhone")}
+        defaultValue={values.callPhone}
       />
       <SubmitButton
         label={isNew ? t("create") : t("save")}

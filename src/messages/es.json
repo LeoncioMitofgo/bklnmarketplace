@@ -602,6 +602,7 @@
     "whatsappText": "Hola, te escribo por tu anuncio en BKLN Marketplace: {title} {url}",
     "contact": {
       "chat": "Chatear",
+      "call": "Llamar",
       "whatsapp": "WhatsApp",
       "opening": "Abriendo…",
       "edit": "Editar mi anuncio"
@@ -955,8 +956,8 @@
       "premium": "Premium activos",
       "validation": "Validación del mercado",
       "validationHint": "Las métricas de ALCANCE §9, de los últimos 30 días salvo que se diga otra cosa.",
-      "withMessage": "Anuncios con mensajes",
-      "withMessageDetail": "{with} de {total} publicados en 30 días",
+      "withMessage": "Anuncios con contacto",
+      "withMessageDetail": "Por chat o llamada: {with} de {total} publicados en 30 días · {calls, plural, =0 {sin llamadas} one {# llamada} other {# llamadas}}",
       "percent": "{value} %",
       "responseTime": "Tiempo de respuesta",
       "responseTimeDetail": "{count, plural, =0 {Aún sin datos} one {Mediana de # vendedor} other {Mediana de # vendedores}}",
@@ -1352,6 +1353,8 @@
       "addressHint": "Calle, barrio o una referencia para encontrarte.",
       "openingHours": "Horario",
       "openingHoursHint": "Por ejemplo: L–V 8:00–18:00 · S 9:00–14:00",
+      "callPhone": "Teléfono para llamadas",
+      "callPhoneHint": "Opcional. Se verá en tu tienda y en tus anuncios, también sin cuenta y en Google. Puede ser el de tus carteles.",
       "create": "Crear mi tienda",
       "save": "Guardar cambios",
       "saving": "Guardando…"
@@ -1394,6 +1397,9 @@
       "openingHours": {
         "length": "Como mucho 120 caracteres."
       },
+      "callPhone": {
+        "format": "Escribe un teléfono de Guinea Ecuatorial de 9 cifras, o déjalo vacío."
+      },
       "premium_required": "Tu plan Premium no está activo: renuévalo para editar la tienda.",
       "unexpected": "Algo ha fallado. Inténtalo de nuevo."
     },
@@ -1403,6 +1409,7 @@
     },
     "page": {
       "metaDescription": "Tienda de {name} en BKLN Marketplace: todos sus anuncios en un solo sitio.",
+      "metaTitle": "{name}, tienda en {city}",
       "premium": "PREMIUM",
       "by": "de {name} (@{username})",
       "responds": "Suele responder en {time}",
@@ -1412,6 +1419,7 @@
         "days": "{count, plural, one {# día} other {# días}}"
       },
       "memberSince": "En BKLN Marketplace desde {date}",
+      "call": "Llamar",
       "share": "Compartir la tienda",
       "shareText": "Mira la tienda {name} en BKLN Marketplace:",
       "tabs": "Anuncios de la tienda",

@@ -7,6 +7,7 @@ import { z } from "zod";
 import type { FormState } from "@/lib/auth/form-state";
 import { fieldErrorsOf } from "@/lib/auth/schemas";
 import { getSessionUser } from "@/lib/auth/session";
+import { normalizeGqPhone } from "@/lib/format";
 import type { ImageFormat } from "@/lib/listings/images";
 import { LISTINGS_TAG } from "@/lib/listings/tags";
 import { PROFILE_MEDIA_BUCKET } from "@/lib/profile-media";
@@ -59,6 +60,16 @@ const storeSchema = z.object({
   description: z.string().trim().max(1000, { error: "description.length" }),
   address: z.string().trim().max(200, { error: "address.length" }),
   openingHours: z.string().trim().max(120, { error: "openingHours.length" }),
+  // Teléfono para llamadas (D-081): opcional y público. Vacío → null.
+  callPhone: z.string().transform((value, ctx) => {
+    if (value.trim() === "") return null;
+    const phone = normalizeGqPhone(value);
+    if (!phone) {
+      ctx.addIssue({ code: "custom", message: "callPhone.format" });
+      return z.NEVER;
+    }
+    return phone;
+  }),
 });
 
 /** Crea la tienda o guarda los cambios. */
@@ -70,6 +81,7 @@ export async function saveStore(_prev: FormState, formData: FormData): Promise<F
     description: text(formData, "description"),
     address: text(formData, "address"),
     openingHours: text(formData, "openingHours"),
+    callPhone: text(formData, "callPhone"),
   };
   const parsed = storeSchema.safeParse(values);
   if (!parsed.success) return { status: "error", fieldErrors: fieldErrorsOf(parsed.error), values };
@@ -99,6 +111,7 @@ export async function saveStore(_prev: FormState, formData: FormData): Promise<F
     description: input.description || null,
     address: input.address || null,
     opening_hours: input.openingHours || null,
+    call_phone: input.callPhone,
   };
   const { error } = current
     ? await supabase.from("stores").update(row).eq("user_id", user.id)

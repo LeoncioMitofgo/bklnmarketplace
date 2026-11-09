@@ -165,6 +165,49 @@ export type Database = {
           },
         ]
       }
+      call_clicks: {
+        Row: {
+          created_at: string
+          id: number
+          listing_id: string | null
+          store_user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: never
+          listing_id?: string | null
+          store_user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: never
+          listing_id?: string | null
+          store_user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "call_clicks_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "call_clicks_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listing_cards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "call_clicks_store_user_id_fkey"
+            columns: ["store_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cities: {
         Row: {
           id: number
@@ -846,6 +889,7 @@ export type Database = {
           created_at: string
           display_name: string
           id: string
+          is_demo: boolean
           premium_until: string | null
           response_time_minutes: number | null
           status: Database["public"]["Enums"]["account_status"]
@@ -859,6 +903,7 @@ export type Database = {
           created_at?: string
           display_name: string
           id: string
+          is_demo?: boolean
           premium_until?: string | null
           response_time_minutes?: number | null
           status?: Database["public"]["Enums"]["account_status"]
@@ -872,6 +917,7 @@ export type Database = {
           created_at?: string
           display_name?: string
           id?: string
+          is_demo?: boolean
           premium_until?: string | null
           response_time_minutes?: number | null
           status?: Database["public"]["Enums"]["account_status"]
@@ -1038,6 +1084,7 @@ export type Database = {
       stores: {
         Row: {
           address: string | null
+          call_phone: string | null
           cover_path: string | null
           created_at: string
           description: string | null
@@ -1050,6 +1097,7 @@ export type Database = {
         }
         Insert: {
           address?: string | null
+          call_phone?: string | null
           cover_path?: string | null
           created_at?: string
           description?: string | null
@@ -1062,6 +1110,7 @@ export type Database = {
         }
         Update: {
           address?: string | null
+          call_phone?: string | null
           cover_path?: string | null
           created_at?: string
           description?: string | null
@@ -1357,6 +1406,10 @@ export type Database = {
         Returns: boolean
       }
       reactivate_listing: { Args: { p_listing_id: string }; Returns: undefined }
+      register_call: {
+        Args: { p_listing_id?: string; p_store_user_id: string }
+        Returns: undefined
+      }
       register_listing_view: {
         Args: { p_listing_id: string }
         Returns: undefined

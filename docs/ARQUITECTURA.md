@@ -188,7 +188,7 @@ Las rutas de cron se protegen con `CRON_SECRET`: Vercel lo manda como `Authoriza
 - Next 16 no deja leer la hora al prerenderizar (D-052). `getSessionUser` empieza con `await io()`, así que lo de la sesión queda fuera de la precarga. Los "hace 2 h" de las páginas públicas se calculan con `fetchedAt`, la hora guardada junto a los datos cacheados.
 - `generateMetadata` genera el Open Graph con la foto grande, el título, el precio y la ciudad. También hay `sitemap.ts` dinámico y JSON‑LD de tipo `Product`/`Offer`.
 - El teléfono y el email nunca aparecen en el HTML.
-- Hasta el lanzamiento no se indexa nada: sin `SITE_INDEXABLE=true`, robots.txt lo bloquea todo y las páginas llevan `noindex` (D-043).
+- Hasta el lanzamiento (sin `SITE_INDEXABLE=true`) solo se indexan las tiendas reales y sus anuncios (D-043, D-081): robots.txt deja pasar `/t/`, `/anuncio/`, `/_next/` y el sitemap, que solo los trae a ellos; esas páginas llevan `index, follow` (`isIndexedBeforeLaunch` en `lib/seo.ts`) y todo lo demás, también lo de las cuentas de demostración (`profiles.is_demo`), `noindex`.
 - Compartir: el menú nativo del móvil (`navigator.share`) o, si no existe, un enlace de WhatsApp con el texto y la URL.
 
 ## 6. Entornos

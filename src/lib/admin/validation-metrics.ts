@@ -14,35 +14,46 @@ export async function getValidationMetrics(now = Date.now()): Promise<Validation
   const db = createAdminClient();
   const since30 = new Date(now - 30 * DAY).toISOString();
   const since7 = new Date(now - 7 * DAY).toISOString();
-  const [published, conversations, sellers, senders, publishers, newUsers, requests, activations] =
-    await Promise.all([
-      db.from("listings").select("id").gte("first_published_at", since30).limit(LIMIT),
-      db
-        .from("conversations")
-        .select("listing_id")
-        .gte("created_at", since30)
-        .not("last_message_at", "is", null)
-        .limit(LIMIT),
-      db
-        .from("profiles")
-        .select("response_time_minutes")
-        .not("response_time_minutes", "is", null)
-        .limit(LIMIT),
-      db.from("messages").select("sender_id").gte("created_at", since7).limit(LIMIT),
-      db.from("listings").select("user_id").gte("published_at", since7).limit(LIMIT),
-      db.from("profiles").select("id").gte("created_at", since7).limit(LIMIT),
-      db
-        .from("premium_requests")
-        .select("id", { count: "exact", head: true })
-        .gte("created_at", since30),
-      db
-        .from("premium_activations")
-        .select("id", { count: "exact", head: true })
-        .gte("created_at", since30),
-    ]);
+  const [
+    published,
+    conversations,
+    calls,
+    sellers,
+    senders,
+    publishers,
+    newUsers,
+    requests,
+    activations,
+  ] = await Promise.all([
+    db.from("listings").select("id").gte("first_published_at", since30).limit(LIMIT),
+    db
+      .from("conversations")
+      .select("listing_id")
+      .gte("created_at", since30)
+      .not("last_message_at", "is", null)
+      .limit(LIMIT),
+    db.from("call_clicks").select("listing_id").gte("created_at", since30).limit(LIMIT),
+    db
+      .from("profiles")
+      .select("response_time_minutes")
+      .not("response_time_minutes", "is", null)
+      .limit(LIMIT),
+    db.from("messages").select("sender_id").gte("created_at", since7).limit(LIMIT),
+    db.from("listings").select("user_id").gte("published_at", since7).limit(LIMIT),
+    db.from("profiles").select("id").gte("created_at", since7).limit(LIMIT),
+    db
+      .from("premium_requests")
+      .select("id", { count: "exact", head: true })
+      .gte("created_at", since30),
+    db
+      .from("premium_activations")
+      .select("id", { count: "exact", head: true })
+      .gte("created_at", since30),
+  ]);
   const failed = [
     published,
     conversations,
+    calls,
     sellers,
     senders,
     publishers,
@@ -55,6 +66,7 @@ export async function getValidationMetrics(now = Date.now()): Promise<Validation
   return summarizeValidation({
     publishedIds: (published.data ?? []).map((l) => l.id),
     conversationListingIds: (conversations.data ?? []).map((c) => c.listing_id),
+    callListingIds: (calls.data ?? []).map((c) => c.listing_id),
     responseTimes: (sellers.data ?? []).flatMap((p) =>
       p.response_time_minutes === null ? [] : [p.response_time_minutes],
     ),

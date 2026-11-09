@@ -4,25 +4,29 @@ import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Suspense } from "react";
-import { ClockIcon, MapPinIcon } from "@/components/icons";
+import { ClockIcon, MapPinIcon, PhoneIcon } from "@/components/icons";
+import { CallLink } from "@/components/listings/call-link";
 import { ListingCard } from "@/components/listings/listing-card";
 import { ShareButton } from "@/components/listings/share-button";
 import { WhatsAppButton } from "@/components/listings/whatsapp-button";
+import { buttonClasses } from "@/components/ui/button";
 import { pickMessages } from "@/i18n/client-messages";
 import { getSessionUser } from "@/lib/auth/session";
 import { getCatalog } from "@/lib/catalog";
-import { responseTimeParts } from "@/lib/format";
+import { formatGqPhone, responseTimeParts } from "@/lib/format";
 import { getProfileListings } from "@/lib/listings/public";
 import { profileMediaUrl } from "@/lib/profile-media";
 import { MAX_PAGES, PAGE_SIZE } from "@/lib/search/params";
+import { isIndexedBeforeLaunch, prelaunchRobots } from "@/lib/seo";
 import { siteUrl } from "@/lib/site";
 import { openStoreWhatsApp } from "@/lib/stores/actions";
 import { getPublicStore, type PublicStore } from "@/lib/stores/public";
 import { STORE_SLUG_PATTERN } from "@/lib/stores/slug";
 import { createClient } from "@/lib/supabase/server";
 
-// Tienda Premium (wireframe 05, ALCANCE §4.8): portada, logo, horario, dirección y pestañas
-// "En venta" / "Vendidos". Pública, cacheada e indexable; el WhatsApp va en su <Suspense>.
+// Tienda Premium (wireframe 05, ALCANCE §4.8): portada, logo, horario, dirección, teléfono para
+// llamadas (D-081) y pestañas "En venta" / "Vendidos". Pública, cacheada e indexable (las reales,
+// también antes del lanzamiento); el WhatsApp va en su <Suspense>.
 
 async function load(slug: string) {
   return STORE_SLUG_PATTERN.test(slug) ? getPublicStore(slug) : null;
@@ -35,14 +39,17 @@ export async function generateMetadata({ params }: PageProps<"/t/[slug]">): Prom
   const description =
     store.description?.slice(0, 200) ?? t("metaDescription", { name: store.name });
   const image = store.cover_path ?? store.logo_path;
+  const city = store.owner.city?.name;
+  const title = city ? t("metaTitle", { name: store.name, city }) : store.name;
   return {
-    title: store.name,
+    title,
     description,
     alternates: { canonical: `/t/${store.slug}` },
+    ...prelaunchRobots(isIndexedBeforeLaunch(store.owner, true)),
     openGraph: {
       type: "website",
       url: `/t/${store.slug}`,
-      title: store.name,
+      title,
       description,
       images: image ? [{ url: profileMediaUrl(image), alt: store.name }] : undefined,
     },
@@ -148,6 +155,12 @@ async function StoreContent({
                 {store.opening_hours}
               </li>
             ) : null}
+            {store.call_phone ? (
+              <li className="flex items-start gap-1.5">
+                <PhoneIcon className="mt-0.5 size-4 shrink-0" />
+                {formatGqPhone(store.call_phone)}
+              </li>
+            ) : null}
             {response ? (
               <li>
                 {t("responds", {
@@ -172,9 +185,20 @@ async function StoreContent({
           </p>
         ) : null}
 
-        <Suspense fallback={null}>
-          <StoreWhatsApp store={store} />
-        </Suspense>
+        {/* Vacío (sin teléfono para llamadas ni WhatsApp) no ocupa sitio. */}
+        <div className="flex gap-3 empty:hidden">
+          {store.call_phone ? (
+            <CallLink
+              phone={store.call_phone}
+              storeUserId={store.user_id}
+              label={t("call")}
+              className={buttonClasses("primary", "flex-1")}
+            />
+          ) : null}
+          <Suspense fallback={null}>
+            <StoreWhatsApp store={store} />
+          </Suspense>
+        </div>
 
         <nav aria-label={t("tabs")} className="flex border-b border-border">
           <Tab
@@ -212,7 +236,39 @@ async function StoreContent({
           </Link>
         ) : null}
       </div>
+      <StoreJsonLd store={store} />
     </>
+  );
+}
+
+/**
+ * Datos estructurados del negocio (Store) para Google y los asistentes (D-081). El teléfono es el de
+ * llamadas, que el dueño publica; nunca el de la cuenta. El horario no va: es texto libre.
+ */
+function StoreJsonLd({ store }: { store: PublicStore }) {
+  const url = `${siteUrl()}/t/${store.slug}`;
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    name: store.name,
+    url,
+    description: store.description ?? undefined,
+    image: store.cover_path ? profileMediaUrl(store.cover_path) : undefined,
+    logo: store.logo_path ? profileMediaUrl(store.logo_path) : undefined,
+    telephone: store.call_phone ?? undefined,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: store.address ?? undefined,
+      addressLocality: store.owner.city?.name,
+      addressCountry: "GQ",
+    },
+  };
+  return (
+    <script
+      type="application/ld+json"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD escapado (sin "<").
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
+    />
   );
 }
 
@@ -243,10 +299,8 @@ async function StoreWhatsApp({ store }: { store: PublicStore }) {
   ]);
   if (!enabled) return null;
   return (
-    <div className="flex">
-      <NextIntlClientProvider messages={messages}>
-        <WhatsAppButton action={openStoreWhatsApp} fields={{ slug: store.slug }} />
-      </NextIntlClientProvider>
-    </div>
+    <NextIntlClientProvider messages={messages}>
+      <WhatsAppButton action={openStoreWhatsApp} fields={{ slug: store.slug }} />
+    </NextIntlClientProvider>
   );
 }

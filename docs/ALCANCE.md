@@ -1,6 +1,6 @@
 # BKLN Marketplace — Documento de alcance
 
-> **Fuente de verdad del producto.** Versión 1.12 — 2026-11-05 (1.1: registro e inicio de sesión · 1.2–1.4: precios y pago de Premium, nombre y dominio · 1.5: ajustes del modelo de datos · 1.6: ajustes de los wireframes · 1.7: candidatos de pago para la fase 3 · 1.8: la web se puede instalar desde el MVP · 1.9: logos de los patrocinadores del lanzamiento en el pie · 1.10: categoría Oficina y papelería · 1.11: Alimentación separada de Agricultura · 1.12: anuncios por encargo).
+> **Fuente de verdad del producto.** Versión 1.13 — 2026-11-09 (1.1: registro e inicio de sesión · 1.2–1.4: precios y pago de Premium, nombre y dominio · 1.5: ajustes del modelo de datos · 1.6: ajustes de los wireframes · 1.7: candidatos de pago para la fase 3 · 1.8: la web se puede instalar desde el MVP · 1.9: logos de los patrocinadores del lanzamiento en el pie · 1.10: categoría Oficina y papelería · 1.11: Alimentación separada de Agricultura · 1.12: anuncios por encargo · 1.13: teléfono para llamadas de las tiendas y tiendas reales en Google antes de abrir).
 > Cualquier cambio de alcance se refleja aquí y se registra en [DECISIONES.md](DECISIONES.md).
 
 ---
@@ -31,9 +31,10 @@ Propuesta de valor:
 | Compartir anuncio o tienda | ✅ | ✅ | ✅ | ✅ |
 | Chatear con un vendedor | ❌ → se le pide registro | ✅ | ✅ | ✅ |
 | Ver botón WhatsApp/llamar (si el vendedor lo activa) | ❌ | ✅ | ✅ | ✅ |
+| Ver el teléfono para llamadas de una tienda y llamar (si la tienda lo pone) | ✅ | ✅ | ✅ | ✅ |
 | Guardar favoritos | ❌ → se le pide registro | ✅ | ✅ | ✅ |
 | Publicar anuncios | ❌ → se le pide registro | ✅ límites Normal | ✅ límites Premium | ✅ |
-| Tienda personalizada (logo, portada, URL propia…) | ❌ | ❌ | ✅ | — |
+| Tienda personalizada (logo, portada, URL propia, teléfono para llamadas…) | ❌ | ❌ | ✅ | — |
 | Reportar anuncio o usuario, bloquear usuario | ❌ | ✅ | ✅ | ✅ |
 | Moderar, gestionar categorías y usuarios, activar Premium | ❌ | ❌ | ❌ | ✅ |
 
@@ -90,6 +91,8 @@ Una sola cuenta sirve para comprar y vender. "Vendedor" no es un tipo de cuenta:
 ### 4.8 Perfil público y tienda
 - **Perfil (Normal)**: foto, nombre, ciudad, miembro desde, tiempo de respuesta y catálogo de anuncios activos (más los vendidos recientes, marcados como tales).
 - **Tienda (Premium)**: lo anterior, más logo, portada, descripción, horario, dirección, enlace de WhatsApp de la tienda e **URL propia `/t/<slug>`**, compartible e indexable.
+- **Teléfono para llamadas (tienda Premium, opcional, D-081)**: un número público, por ejemplo el de los carteles. Puede ser el de la cuenta o no. Se ve sin sesión en la tienda, con «Llamar», y como botón «Llamar» en todos sus anuncios. También lo ven Google y los asistentes. Cada pulsación de «Llamar» cuenta como un contacto en las métricas (§9).
+- **Las tiendas en Google:** la tienda lleva sus datos de negocio (nombre, dirección, ciudad, teléfono para llamadas) y en el título la ciudad («Casa Mercedes, tienda en Malabo»). Las tiendas reales y sus anuncios se dejan indexar ya antes del lanzamiento; las de demostración y el resto del sitio, no (D-081).
 
 ### 4.9 Premium
 Ver reglas en §5.3. En el MVP: solicitud desde la app, pago en efectivo en la oficina, activación manual por admin, límites ampliados, insignia, tienda, prioridad en resultados y presencia en "Destacados".
@@ -172,7 +175,8 @@ Estos valores viven en **una única configuración de planes** y el código nunc
 ### 5.4 Contacto
 - El chat requiere cuenta. El visitante que pulsa "Chatear" pasa por registro o inicio de sesión y vuelve al chat de ese anuncio.
 - El botón de WhatsApp/llamar es **opcional por vendedor** (desactivado por defecto) y **solo visible con sesión iniciada**. Usa `wa.me` con un mensaje prellenado con el título y el enlace del anuncio.
-- El teléfono y el email **nunca** aparecen en páginas públicas, en HTML indexable ni en metadatos.
+- El teléfono y el email **de la cuenta nunca** aparecen en páginas públicas, en HTML indexable ni en metadatos.
+- **Excepción:** el teléfono para llamadas que una tienda Premium decide publicar (§4.8, D-081). Es otro campo, se publica a propósito y se avisa al ponerlo de que lo verá cualquiera, también en Google.
 - Un vendedor no puede chatear consigo mismo en su propio anuncio.
 
 ### 5.5 Moderación
@@ -256,10 +260,10 @@ Todos los anuncios tienen además: estado (nuevo/usado, cuando aplique), precio,
 - **Mobile first**: diseño base a 360 px, zonas táctiles de al menos 44 px y barra inferior (Inicio · Buscar · **Publicar** · Mensajes · Perfil).
 - **Rendimiento con conexión lenta**: páginas públicas renderizadas en servidor y con poco JavaScript. La primera carga tiene que ser usable en 3G y en Android de gama baja. Las imágenes van en WebP, con un máximo de ~1600 px en el lado largo, miniaturas generadas y carga diferida.
 - **Robustez**: subidas con reintento, borradores guardados, estados claros de carga, error y sin conexión. El usuario nunca pierde lo que ha escrito.
-- **SEO**: URLs legibles (`/anuncio/iphone-13-128gb-malabo-a1b2c3`), metadatos, sitemap, datos estructurados (Product/Offer) y tiendas indexables.
+- **SEO**: URLs legibles (`/anuncio/iphone-13-128gb-malabo-a1b2c3`), metadatos, sitemap, datos estructurados (Product/Offer en los anuncios, Store en las tiendas) y tiendas indexables.
 - **Compartir**: Open Graph con foto, título, precio y ciudad, para que la vista previa en WhatsApp y Facebook se vea bien.
 - **i18n**: todos los textos de la interfaz en ficheros de traducción (`es`) desde el día 1.
-- **Privacidad**: teléfono y email nunca públicos, EXIF eliminado, posibilidad de borrar la cuenta, términos de uso y política de privacidad.
+- **Privacidad**: el teléfono y el email de la cuenta nunca son públicos (salvo el teléfono para llamadas que una tienda decide publicar, D-081), EXIF eliminado, posibilidad de borrar la cuenta, términos de uso y política de privacidad.
 - **Seguridad**: validación en el servidor, cada usuario solo puede modificar lo suyo (permisos por fila), subidas validadas por tipo y tamaño, límites de ritmo.
 - **Medición**: analítica básica (vistas, búsquedas, anuncios publicados, conversaciones iniciadas, tiempo de respuesta) y monitorización de errores. Hace falta para validar el mercado.
 - **Accesibilidad básica**: contraste, etiquetas en los formularios y textos alternativos.

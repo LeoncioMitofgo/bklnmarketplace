@@ -77,8 +77,12 @@ async function AdminHome() {
     {
       label: t("withMessage"),
       value:
-        v.listingsWithMessagePct === null ? "—" : t("percent", { value: v.listingsWithMessagePct }),
-      detail: t("withMessageDetail", { with: v.listingsWithMessage, total: v.listingsPublished }),
+        v.listingsContactedPct === null ? "—" : t("percent", { value: v.listingsContactedPct }),
+      detail: t("withMessageDetail", {
+        with: v.listingsContacted,
+        total: v.listingsPublished,
+        calls: v.calls,
+      }),
     },
     {
       label: t("responseTime"),

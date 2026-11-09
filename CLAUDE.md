@@ -54,7 +54,7 @@ Las pruebas en el móvil que quedan pendientes del usuario son las casillas sin 
 1. **Mobile first y baja conectividad**: diseño a 360 px; rendimiento e imágenes ligeras son requisito, no mejora.
 2. **Sin pagos ni entregas en la plataforma** (v1). Nada de carrito, checkout ni pedidos. La unidad es el *anuncio* + la *conversación*.
 3. **Una sola cuenta compra y vende.** Ver todo sin cuenta; chatear, publicar y favoritos requieren cuenta. Registro: nombre, usuario, teléfono, email y contraseña. Login: usuario/email/teléfono + contraseña. Sin SMS en el MVP. Publicar requiere el email confirmado (ALCANCE §5.7).
-4. **Contacto**: chat interno siempre + botón WhatsApp/llamar opcional por vendedor, visible solo con sesión. El teléfono nunca es público ni indexable.
+4. **Contacto**: chat interno siempre + botón WhatsApp/llamar opcional por vendedor, visible solo con sesión. El teléfono de la cuenta nunca es público ni indexable. Excepción: el teléfono para llamadas que una tienda Premium decide publicar (D-081).
 5. **Dos planes: Normal y Premium** (plan único de 1, 3, 6 o 12 meses, pagado en la oficina o, fuera de Malabo, por agencia de envío con el código por WhatsApp, y activado a mano por el admin con fecha de fin; precios en D-022, pagos en D-025). Los límites viven en una configuración de planes, nunca como números mágicos repartidos por el código.
 6. **Solo Guinea Ecuatorial**: XAF entero ("150.000 FCFA"), teléfonos +240, zona horaria Africa/Malabo, español con i18n desde el día 1 (francés más adelante).
 7. Lo que está fuera del MVP (ALCANCE §8) no se implementa sin preguntar, pero el diseño no debe impedirlo (sobre todo pagos in-app).

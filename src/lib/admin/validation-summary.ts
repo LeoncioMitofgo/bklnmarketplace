@@ -6,6 +6,8 @@ export type ValidationRows = {
   publishedIds: string[];
   /** Anuncio de cada conversación con mensajes empezada en los últimos 30 días. */
   conversationListingIds: (string | null)[];
+  /** Anuncio de cada pulsación de «Llamar» de los últimos 30 días; null si fue desde la tienda (D-081). */
+  callListingIds: (string | null)[];
   /** Tiempo de respuesta de cada vendedor que lo tiene calculado (cron diario). */
   responseTimes: number[];
   /** Quien escribió un mensaje o publicó en los últimos 7 días (con repeticiones). */
@@ -18,9 +20,12 @@ export type ValidationRows = {
 
 export type ValidationMetrics = {
   listingsPublished: number;
-  listingsWithMessage: number;
+  /** Con al menos un mensaje o una llamada. */
+  listingsContacted: number;
   /** Porcentaje entero; null si no se ha publicado nada. */
-  listingsWithMessagePct: number | null;
+  listingsContactedPct: number | null;
+  /** Pulsaciones de «Llamar» en 30 días, desde la ficha o la tienda. */
+  calls: number;
   medianResponseMinutes: number | null;
   sellersWithResponseTime: number;
   activeUsers: number;
@@ -38,17 +43,20 @@ export function median(values: number[]): number | null {
 
 export function summarizeValidation(rows: ValidationRows): ValidationMetrics {
   const published = new Set(rows.publishedIds);
-  const withMessage = new Set(
-    rows.conversationListingIds.filter((id): id is string => id !== null && published.has(id)),
+  const contacted = new Set(
+    [...rows.conversationListingIds, ...rows.callListingIds].filter(
+      (id): id is string => id !== null && published.has(id),
+    ),
   );
   const active = new Set(rows.activeUserIds.filter((id): id is string => id !== null));
   const newUsers = new Set(rows.newUserIds);
   const returning = [...active].filter((id) => !newUsers.has(id)).length;
   return {
     listingsPublished: published.size,
-    listingsWithMessage: withMessage.size,
-    listingsWithMessagePct:
-      published.size === 0 ? null : Math.round((withMessage.size / published.size) * 100),
+    listingsContacted: contacted.size,
+    listingsContactedPct:
+      published.size === 0 ? null : Math.round((contacted.size / published.size) * 100),
+    calls: rows.callListingIds.length,
     medianResponseMinutes: median(rows.responseTimes),
     sellersWithResponseTime: rows.responseTimes.length,
     activeUsers: active.size,

@@ -108,7 +108,7 @@ export async function getPublicListing(code: string) {
   const { data: listing, error } = await supabase
     .from("listings")
     .select(
-      "id, code, user_id, status, title, description, price_xaf, is_negotiable, condition, order_lead_time, category_id, city_id, neighborhood, attributes, view_count, published_at, sold_at, updated_at, listing_images(storage_path, format, width, height, position), seller:profiles!listings_user_id_fkey(username, display_name, avatar_path, created_at, premium_until, response_time_minutes, city:cities(name), store:stores(slug))",
+      "id, code, user_id, status, title, description, price_xaf, is_negotiable, condition, order_lead_time, category_id, city_id, neighborhood, attributes, view_count, published_at, sold_at, updated_at, listing_images(storage_path, format, width, height, position), seller:profiles!listings_user_id_fkey(username, display_name, avatar_path, created_at, premium_until, response_time_minutes, is_demo, city:cities(name), store:stores(slug, call_phone))",
     )
     .eq("code", code)
     .in("status", ["active", "sold"])
@@ -196,7 +196,9 @@ export async function getSitemapListings() {
 
   const { data, error } = await createPublicClient()
     .from("listings")
-    .select("code, title, city_id, updated_at, seller:profiles!listings_user_id_fkey(username)")
+    .select(
+      "code, title, city_id, updated_at, user_id, seller:profiles!listings_user_id_fkey(username)",
+    )
     .eq("status", "active")
     .order("published_at", { ascending: false })
     .limit(5000);

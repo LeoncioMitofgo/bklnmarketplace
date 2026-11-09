@@ -17,7 +17,7 @@ export async function getPublicStore(slug: string) {
   const { data, error } = await createPublicClient()
     .from("stores")
     .select(
-      "user_id, slug, name, description, logo_path, cover_path, address, opening_hours, updated_at, owner:profiles!stores_user_id_fkey(username, display_name, avatar_path, created_at, premium_until, response_time_minutes, city:cities(name))",
+      "user_id, slug, name, description, logo_path, cover_path, address, opening_hours, call_phone, updated_at, owner:profiles!stores_user_id_fkey(username, display_name, avatar_path, created_at, premium_until, response_time_minutes, is_demo, city:cities(name))",
     )
     .eq("slug", slug)
     .maybeSingle();
@@ -30,12 +30,14 @@ export async function getPublicStore(slug: string) {
 
 export type PublicStore = NonNullable<Awaited<ReturnType<typeof getPublicStore>>>;
 
-/** Tiendas visibles, para el sitemap. */
+/** Tiendas visibles, para el sitemap. `is_demo`: antes del lanzamiento solo van las reales (D-081). */
 export async function getSitemapStores() {
   "use cache";
   cacheTag("stores");
   cacheLife("hours");
 
-  const { data } = await createPublicClient().from("stores").select("slug, updated_at");
-  return data ?? [];
+  const { data } = await createPublicClient()
+    .from("stores")
+    .select("user_id, slug, updated_at, owner:profiles!stores_user_id_fkey(is_demo)");
+  return (data ?? []).map(({ owner, ...store }) => ({ ...store, isDemo: owner?.is_demo ?? true }));
 }

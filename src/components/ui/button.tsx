@@ -11,9 +11,15 @@ const VARIANTS: Record<ButtonVariant, string> = {
   danger: "bg-danger text-white",
 };
 
-export function buttonClasses(variant: ButtonVariant = "primary", className = ""): string {
+/** `compact`: menos relleno lateral, para tres botones en una fila de 360 px (barra de la ficha). */
+export function buttonClasses(
+  variant: ButtonVariant = "primary",
+  className = "",
+  compact = false,
+): string {
   return [
-    "inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-control px-5",
+    "inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-control",
+    compact ? "px-3" : "px-5",
     "text-base font-bold transition-colors disabled:cursor-not-allowed disabled:opacity-60",
     "focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-primary",
     VARIANTS[variant],

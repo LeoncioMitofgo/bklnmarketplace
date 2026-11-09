@@ -4,6 +4,7 @@ import { median, summarizeValidation } from "./validation-summary";
 const empty = {
   publishedIds: [],
   conversationListingIds: [],
+  callListingIds: [],
   responseTimes: [],
   activeUserIds: [],
   newUserIds: [],
@@ -20,7 +21,8 @@ describe("median", () => {
 describe("summarizeValidation", () => {
   it("sin datos no divide por cero", () => {
     const m = summarizeValidation(empty);
-    expect(m.listingsWithMessagePct).toBeNull();
+    expect(m.listingsContactedPct).toBeNull();
+    expect(m.calls).toBe(0);
     expect(m.medianResponseMinutes).toBeNull();
     expect(m.activeUsers).toBe(0);
   });
@@ -32,8 +34,21 @@ describe("summarizeValidation", () => {
       // Dos conversaciones del mismo anuncio, una sin anuncio y otra de un anuncio más antiguo.
       conversationListingIds: ["a", "a", "b", null, "viejo"],
     });
-    expect(m.listingsWithMessage).toBe(2);
-    expect(m.listingsWithMessagePct).toBe(50);
+    expect(m.listingsContacted).toBe(2);
+    expect(m.listingsContactedPct).toBe(50);
+  });
+
+  it("una llamada cuenta como contacto; las de la tienda solo suman llamadas (D-081)", () => {
+    const m = summarizeValidation({
+      ...empty,
+      publishedIds: ["a", "b", "c", "d"],
+      conversationListingIds: ["a"],
+      // Una llamada a un anuncio que ya tenía mensaje, otra a uno sin mensajes y otra desde la tienda.
+      callListingIds: ["a", "c", null],
+    });
+    expect(m.listingsContacted).toBe(2);
+    expect(m.listingsContactedPct).toBe(50);
+    expect(m.calls).toBe(3);
   });
 
   it("los que vuelven son los activos que no se registraron esta semana", () => {
