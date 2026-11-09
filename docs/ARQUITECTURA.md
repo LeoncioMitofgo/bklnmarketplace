@@ -196,14 +196,15 @@ Las rutas de cron se protegen con `CRON_SECRET`: Vercel lo manda como `Authoriza
 | | Desarrollo | Previews (Vercel) | Producción |
 |---|---|---|---|
 | Next.js | Local (`pnpm dev`) | Vercel Preview | Vercel Production, funciones en `dub1` |
-| Supabase | Proyecto aparte, **por crear** (Irlanda), antes de la próxima migración. Hasta entonces, el de producción | El de producción, hasta que exista el de desarrollo | Proyecto `xujlsrezhctlovncsywu` (Irlanda `eu-west-1`, D-067). Free hasta el lanzamiento, Pro antes de abrir |
+| Supabase | Proyecto `ioqnwiuuquekpybpwvlt` (Irlanda, Free), creado el 2026-11-05, con las claves en `.env.dev`. Sin cargarlo, el de producción | El de producción | Proyecto `xujlsrezhctlovncsywu` (Irlanda `eu-west-1`, D-067). Free hasta el lanzamiento, Pro antes de abrir |
 | Email | Resend (modo de prueba) | Resend | Resend con `bklnmarketplace.com` verificado (DNS en Hostinger) |
 
 - **En local las páginas irán más lentas que en producción**, porque el servidor de desarrollo está en Malabo y la base de datos en Irlanda. Las conclusiones de rendimiento se sacan en las previews, no en local.
-- **Mientras no exista el proyecto de desarrollo, todo usa la base de datos de producción:** lo que se pruebe en local, en las previews o con `e2e/` escribe en ella.
+- **En local, por defecto se usa la base de datos de producción** (`.env.local`). Para usar la de desarrollo hay que cargar `.env.dev` en la terminal (`set -a; . ./.env.dev; set +a`) antes de `pnpm build`, `pnpm start` o `pnpm e2e`. Las previews usan producción.
+- En el plan gratuito solo caben 2 proyectos activos: para usar el de desarrollo hay que pausar «Bkln-software» (el formulario de bklnsoftware.tech) y, al terminar, al revés.
 - Los proyectos Free se pausan tras 7 días sin actividad; se reactivan desde el panel de Supabase.
 - **Migraciones:**
-  - Se escriben a mano en `supabase/migrations/` y se aplican con `supabase db push`: primero en el proyecto de desarrollo y en producción solo después de probarlas. Por eso hay que crear el de desarrollo antes de la próxima migración (D-067).
+  - Se escriben a mano en `supabase/migrations/` y se aplican con `supabase db push`: primero en el proyecto de desarrollo y en producción solo después de probarlas (D-067). Para el de desarrollo se usa una copia de `supabase/` en otra carpeta (`supabase --workdir <copia> link --project-ref ioqnwiuuquekpybpwvlt` y `db push`), para no cambiar el enlace del repo, que es el de producción.
   - `supabase db diff` necesita Docker, así que no se usa.
   - Los tipos se generan con `supabase gen types typescript --linked`.
 - **Secretos** en `.env.local` (nunca en el repo) y en las variables de entorno de Vercel. El repo lleva un `.env.example` sin valores.
