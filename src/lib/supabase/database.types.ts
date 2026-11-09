@@ -71,6 +71,49 @@ export type Database = {
           },
         ]
       }
+      call_clicks: {
+        Row: {
+          created_at: string
+          id: number
+          listing_id: string | null
+          store_user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: never
+          listing_id?: string | null
+          store_user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: never
+          listing_id?: string | null
+          store_user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "call_clicks_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listing_cards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "call_clicks_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "call_clicks_store_user_id_fkey"
+            columns: ["store_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       categories: {
         Row: {
           has_condition: boolean
@@ -161,49 +204,6 @@ export type Database = {
             columns: ["category_id"]
             isOneToOne: false
             referencedRelation: "categories"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      call_clicks: {
-        Row: {
-          created_at: string
-          id: number
-          listing_id: string | null
-          store_user_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: never
-          listing_id?: string | null
-          store_user_id: string
-        }
-        Update: {
-          created_at?: string
-          id?: never
-          listing_id?: string | null
-          store_user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "call_clicks_listing_id_fkey"
-            columns: ["listing_id"]
-            isOneToOne: false
-            referencedRelation: "listings"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "call_clicks_listing_id_fkey"
-            columns: ["listing_id"]
-            isOneToOne: false
-            referencedRelation: "listing_cards"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "call_clicks_store_user_id_fkey"
-            columns: ["store_user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
         ]

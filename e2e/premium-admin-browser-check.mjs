@@ -235,8 +235,8 @@ try {
   await waitText(ap, "Validación del mercado");
   const home = await text(ap);
   ok(
-    "métricas de validación: mensajes, respuesta, activos y Premium (D-072)",
-    ["Anuncios con mensajes", "Tiempo de respuesta", "Usuarios activos (7 días)"].every((s) =>
+    "métricas de validación: contacto, respuesta, activos y Premium (D-072, D-081)",
+    ["Anuncios con contacto", "Tiempo de respuesta", "Usuarios activos (7 días)"].every((s) =>
       home.includes(s),
     ) && /\d+ solicitud(es)?/.test(home),
     home.slice(-400),
