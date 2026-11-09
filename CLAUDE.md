@@ -24,6 +24,7 @@ Las pruebas en el móvil que quedan pendientes del usuario son las casillas sin 
 - 1.7, preparar el lanzamiento (2026-11-04): empresas y correos en `docs/LANZAMIENTO-CONTACTOS.md`, tiendas fundadoras con 6 meses de Premium y propuestas personalizadas (D-065), aviso de versión previa (D-066) y **el proyecto de Supabase actual es el de producción** (D-067).
 
 - 1.7, 2026-11-05: «Todas las categorías» (D-077), Alimentación separada de Agricultura (D-078), **anuncios por encargo** (D-079) y el proyecto de Supabase de desarrollo.
+- 1.7, 2026-11-09: valoraciones al principio de la fase 2 y sin comentarios públicos (D-080), y **teléfono para llamadas de las tiendas Premium**, con las tiendas reales en Google ya antes de abrir (D-081).
 
 **Siguiente:** 1.7, lanzamiento, previsto para **enero de 2027** (D-068). Pendiente (ROADMAP): lo que falta antes de abrir. La analítica y los errores están desde el 2026-11-04 (D-072), con Sentry en marcha (proyecto `bkln-marketplace`, `SENTRY_DSN` en Vercel).
 
