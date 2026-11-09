@@ -171,7 +171,7 @@ Previsto para **enero de 2027** (D-068).
   - [x] Probarlo en el móvil (2026-11-05, el usuario): publicó un anuncio por encargo y todo bien
 - [x] Teléfono para llamadas de las tiendas y tiendas reales en Google antes de abrir (2026-11-09, D-081): campo opcional en `/cuenta/tienda`, el número y «Llamar» en la tienda, «Llamar» en la barra de sus anuncios, llamadas contadas como contacto en el panel, datos de negocio (Store) y título con la ciudad. Antes del lanzamiento, robots.txt y el sitemap dejan pasar solo las tiendas reales y sus anuncios. Migración `20261109120000_store_call_phone.sql`. Prueba: `store-call-check`
   - [x] Migración probada en desarrollo y aplicada en producción el 2026-11-09; los tipos de los dos coinciden
-  - [x] Tienda de pruebas «Farmacia Mama Candy» (`@mama_candy`, de demostración) en desarrollo, como admin y Premium; las credenciales están en `.env.dev`
+  - [x] Tienda de pruebas «Farmacia Mama Candy» (`@mama_candy`, de demostración, `/t/farmacia-mama-candy`), con 5 anuncios de parafarmacia. En desarrollo es admin y Premium (credenciales en `.env.dev`); en producción, solo Premium (credenciales en `.env.cuentas-prueba`). Su teléfono para llamadas es el de BKLN. Se borra antes de abrir con las demás cuentas de demostración
   - [ ] Probarlo en el móvil (lo hace el usuario)
   - [ ] Dar de alta bklnmarketplace.com en Google Search Console y en Bing Webmaster Tools (se verifica con un registro TXT en el DNS de Hostinger) y enviarles el sitemap, en cuanto publique la primera tienda fundadora
   - [ ] Venderlo: «Tu tienda en Google» como primera ventaja en `/premium` y un mensaje de seguimiento a las tiendas fundadoras con ese argumento
